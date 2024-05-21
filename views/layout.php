@@ -29,7 +29,7 @@
                     <a class="nav-link" href="clases.php">Clases</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tareas</a>
+                    <a class="nav-link" href="tareas.php">Tareas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Calendario</a>
