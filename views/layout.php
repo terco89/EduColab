@@ -32,7 +32,7 @@
                     <a class="nav-link" href="tareas.php">Tareas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Calendario</a>
+                    <a class="nav-link" href="calendario.php">Calendario</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -41,13 +41,14 @@
             </form>
         </div>
     </nav>
+    
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <?php
 require_once $view . ".php";
 ?>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 
