@@ -24,8 +24,8 @@
             <?php if (isset($_SESSION['usuario'])) {?><img src="img/<?php echo $_SESSION['usuario']['img']; ?>"style="border-radius:50%; width:3rem; height:3rem;  object-fit: cover;" >
                 <button class="btn btn-light my-2 my-sm-0" type="button"><a href="logout.php">Logout</a></button>
             <?php } else if (!isset($_SSESIOB['usuario'])){?>
-            <button class="btn btn-outline-light my-2 my-sm-0 mr-2" type="button"><a href="login.php" style="color:white">Iniciar sesión</a></button>
-            <button class="btn btn-light my-2 my-sm-0" type="button"><a href="register.php">Registrate</a></button>
+            <a href="login.php" style="color:white"><button class="btn btn-outline-light my-2 my-sm-0 mr-2" type="button">Iniciar sesión</button></a>
+            <a href="register.php"><button class="btn btn-light my-2 my-sm-0" type="button">Registrate</button></a>
             <?php } ?>
         </form>
         </div>
