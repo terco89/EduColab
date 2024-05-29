@@ -11,7 +11,7 @@
                     <hr>
                     <p class="card-text">Esta clase cubrirá temas avanzados de álgebra y cálculo.</p>
                     <p class="card-text">Fecha y hora: Martes y Jueves, 10:00 AM - 12:00 PM</p>
-                    <a href="#" class="btn btn-primary">Ir a la clase</a>
+                    <a href="#" class="btn btn-primary disabled">Ir a la clase</a>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
                     <hr>
                     <p class="card-text">Analisis de las obras literarias más destacadas de la historia.</p>
                     <p class="card-text">Fecha y hora: Martes y Jueves, 11:00 AM - 1:00 PM</p>
-                    <a href="#" class="btn btn-primary">Ir a la clase</a>
+                    <a href="clase.php" class="btn btn-primary">Ir a la clase</a>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                     <hr>
                     <p class="card-text">Explora los principios fundamentales de la química y las reacciones químicas.</p>
                     <p class="card-text">Fecha y hora: Lunes y Miércoles, 9:00 AM - 11:00 AM</p>
-                    <a href="#" class="btn btn-primary">Ir a la clase</a>
+                    <a href="#" class="btn btn-primary disabled">Ir a la clase</a>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                     <hr>
                     <p class="card-text">Explora los diferentes aspectos de la geografía mundial, desde la cartografía hasta el clima y la demografía.</p>
                     <p class="card-text">Fecha y hora: Miércoles y Viernes, 10:00 AM - 12:00 PM</p>
-                    <a href="#" class="btn btn-primary">Ir a la clase</a>
+                    <a href="#" class="btn btn-primary disabled">Ir a la clase</a>
                 </div>
             </div>
         </div>
