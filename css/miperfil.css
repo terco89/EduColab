@@ -13,6 +13,7 @@ body {
     border: none;
     cursor: pointer;
     transition: all 0.5s;
+    border-radius: 20px;
 }
 
 .image img {
@@ -86,3 +87,4 @@ hr .new1 {
 .date {
     background-color: #ccc
 }
+
