@@ -1,6 +1,9 @@
 <?php
 require_once "includes/config.php";
 session_start();
+if(isset($_SESSION["usuario"])){
+    header("Location: clases.php");
+}
 if (isset($_POST['name']) && isset($_POST['password'])) {
     $name = $_POST['name'];
     $pass = md5($_POST['password']);
