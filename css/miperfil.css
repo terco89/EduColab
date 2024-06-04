@@ -24,12 +24,6 @@ body {
     transform: scale(1.5)
 }
 
-.btn {
-    height: 140px;
-    width: 140px;
-    border-radius: 50%
-}
-
 .name {
     font-size: 22px;
     font-weight: bold
@@ -60,8 +54,7 @@ body {
     width: 150px;
     border: none;
     background-color: #000;
-    color: #aeaeae;
-    font-size: 15px
+    font-size: 15px;
 }
 
 .text span {
@@ -88,3 +81,30 @@ hr .new1 {
     background-color: #ccc
 }
 
+.profile{
+    position: relative;
+    transition: 0.3s filter ease-in-out;
+    transition: all 0.5s
+}
+.cont:hover .profile{
+    background-color: rgba(33, 33, 33, 0);
+    filter: brightness(40%);
+    transform: scale(1.2)
+}
+.cont:hover .cent_tex{
+    opacity: 1;
+}
+.cont{
+    position: relative;
+  text-align: center;
+}
+.cent_tex{
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: 0.3s filter ease-in-out;
+    transition: all 0.5s
+}
