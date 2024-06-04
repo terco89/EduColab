@@ -6,20 +6,20 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <?php if (isset($_SESSION["usuario"])) { ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="clases.php">Clases</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="espacios.php">Espacios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="tareas.php">Tareas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="calendario.php">Calendario</a>
-                </li>
-            <?php } else { ?>
+            <?php if(isset($_SESSION["usuario"])){?>
+            <li class="nav-item">
+                <a class="nav-link" href="clases.php">Clases</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="espacios.php">Espacios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="tareas.php">Tareas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="calendario.php">Calendario</a>
+            </li>
+            <?php } else {?>
                 <li class="nav-item active">
                     <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
                 </li>
