@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-05-2024 a las 21:57:40
+-- Tiempo de generación: 04-06-2024 a las 21:23:13
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -32,6 +32,29 @@ CREATE TABLE `asignaciones` (
   `descripcion` varchar(400) NOT NULL,
   `fecha_entrega` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clases`
+--
+
+CREATE TABLE `clases` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `seccion` varchar(255) NOT NULL,
+  `asignatura` varchar(255) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `descripcion` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `clases`
+--
+
+INSERT INTO `clases` (`id`, `nombre`, `seccion`, `asignatura`, `id_usuario`, `descripcion`) VALUES
+(19, 'Matematica', '2°10°', 'Ingles', 3, 'Hola soy el profe'),
+(20, 'Matematica', '2°10°', 'Ingles', 3, 'Hola soy el profe');
 
 -- --------------------------------------------------------
 
@@ -93,7 +116,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `name`, `password`, `email`, `rol`, `img`) VALUES
 (1, 'LucaOshiro', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'alumno', ''),
-(2, 'Santiago', '04217c4d7e246e38b0d7014ee109755b', 'sdmatayoshi@gmail.com', 'alumno', 'Profesor.jpg');
+(2, 'Santiago', '04217c4d7e246e38b0d7014ee109755b', 'sdmatayoshi@gmail.com', 'alumno', 'Profesor.jpg'),
+(3, 'Luh9090', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'profesor', 'Profesor.jpg');
 
 -- --------------------------------------------------------
 
@@ -113,6 +137,12 @@ CREATE TABLE `usuarios_cursos` (
 --
 
 --
+-- Indices de la tabla `clases`
+--
+ALTER TABLE `clases`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -123,10 +153,16 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `clases`
+--
+ALTER TABLE `clases`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

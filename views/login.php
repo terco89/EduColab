@@ -10,7 +10,7 @@
                 <input type="password" placeholder="Contraseña" name="password" required>
             </div>
             <div class="row button">
-                <input type="submit" value="Login">
+                <input type="submit" value="Iniciar Sesión">
             </div>
             <p class="message">No tienes cuenta? <a href="register.php">Registrate</a></p>
         </form>
