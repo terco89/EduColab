@@ -8,7 +8,7 @@
     }
   </style>
 <div class="container">
-<h1>Mis Clases
+<h1>Espacios
     <a href="espacio_unirse.php" class="btn btn-secondary">Unirse a un espacio</a>
     <a href="espacio_crear.php" class="btn btn-secondary">Crear un espacio</a>
     </h1>
@@ -18,7 +18,7 @@
           <div class="card-body">
             <h5 class="card-title">6°10</h5>
             <p class="card-text">Confederación Suiza</p>
-            <a href="#" class="btn btn-primary">Ver Clases</a>
+            <a href="espacio.php" class="btn btn-primary">Ver Clases</a>
           </div>
         </div>
       </div>

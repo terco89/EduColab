@@ -4,10 +4,10 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title text-center">Unirse a Clase</h5>
-            <form>
+            <form method="POST" >
               <div class="form-group">
                 <label for="codigoClase">Código de la Clase:</label>
-                <input type="text" class="form-control" id="codigoClase" placeholder="Introduce el código de la clase">
+                <input type="text" class="form-control" id="codigoClase" name="codigoClase" placeholder="Introduce el código de la clase">
               </div>
               <button type="submit" class="btn btn-primary btn-block">Unirse</button>
             </form>
