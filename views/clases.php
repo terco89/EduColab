@@ -16,22 +16,22 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
-                                    <label for="taskTitle">Nombre de la clase</label>
+                                    <h4>Nombre de la clase</h4>
                                     <input type="text" class="form-control" id="taskTitle" name="nombre" placeholder="Nombre de la clase">
                                 </div>
                                 <div class="form-group">
-                                    <label for="taskTitle">Seccion</label>
+                                    <h4>Seccion</h4>
                                     <input type="text" class="form-control" id="taskTitle" name="seccion" placeholder="Seccion">
                                 </div>
                                 <div class="form-group">
-                                    <label for="taskTitle">Asignatura</label>
+                                    <h4>Asignatura</h4>
                                     <input type="text" class="form-control" id="taskTitle" name="asignatura" placeholder="Asignatura">
                                 </div>
                                 <div class="form-group">
-                                    <label for="taskTitle">Descripcion</label>
+                                    <h4>Descripcion</h4>
                                     <input type="text" class="form-control" id="taskTitle" name="descripcion" placeholder="Descripcion">
                                 </div>
-                                <input type="submit" value="subir">
+                                <input type="submit" class="btn btn-success" value="subir">
                             </form>
                         </div>
                     </div>
