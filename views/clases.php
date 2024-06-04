@@ -1,6 +1,10 @@
 <link rel="stylesheet" href="./css/clases.css">
 <div class="container mt-4">
-    <h1>Mis Clases</h1>
+    <h1>Mis Clases
+    <a href="clase_unirse.php" class="btn btn-secondary">Unirse a una clase</a>
+    <a href="clase2.php" class="btn btn-secondary">Crear una clase</a>
+    </h1>
+    
     <br>
     <div class="row">
         <div class="col-md-4 mb-4">

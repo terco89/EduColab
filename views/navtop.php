@@ -11,7 +11,10 @@
                 <a class="nav-link <?php if($view=="clases")echo"active"?>" href="clases.php"><i class="fa fa-th-large"></i> Clases</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <?php if($view=="tareas")echo"active"?>" href="tareas.php"><i class="fa fa-list-ul"></i> Tareas</a>
+                <a class="nav-link <?php if($view=="espacios")echo"active"?>" href="espacios.php">Espacios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <?php if($view=="tareas")echo"active"?>" href="tareas.php">Tareas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link <?php if($view=="calendario")echo"active"?>" href="calendario.php"><i class="fa fa-calendar"></i> Calendario</a>
