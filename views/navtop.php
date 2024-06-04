@@ -8,13 +8,13 @@
         <ul class="navbar-nav mr-auto">
             <?php if(isset($_SESSION["usuario"])){?>
             <li class="nav-item">
-                <a class="nav-link" href="clases.php">Clases</a>
+                <a class="nav-link <?php if($view=="clases")echo"active"?>" href="clases.php"><i class="fa fa-th-large"></i> Clases</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="tareas.php">Tareas</a>
+                <a class="nav-link <?php if($view=="tareas")echo"active"?>" href="tareas.php"><i class="fa fa-list-ul"></i> Tareas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="calendario.php">Calendario</a>
+                <a class="nav-link <?php if($view=="calendario")echo"active"?>" href="calendario.php"><i class="fa fa-calendar"></i> Calendario</a>
             </li>
             <?php } else {?>
                 <li class="nav-item active">
@@ -57,13 +57,11 @@
         </div>
         </form>
         <?php } ?>
-        <form class="form-inline my-2 my-lg-0">
-            <img src="img/<?php echo $_SESSION['usuario']['img']; ?>" style="border-radius:50%; width:3rem; height:3rem;  object-fit: cover;">
-                <button class="btn btn-light my-2 my-sm-0" type="button"><a href="logout.php">Logout</a></button>
+            <a href="miperfil.php"><img src="img/<?php echo $_SESSION['usuario']['img']; ?>" style="border-radius:50%; width:3rem; height:3rem;  object-fit: cover;" class="profile"></a>
+                &nbsp;&nbsp;<button class="btn btn-light my-2 my-sm-0" type="button"><a href="logout.php">Logout</a></button>
             <?php } else if (!isset($_SSESIOB['usuario'])) { ?>
                 <a href="login.php" style="color:white"><button class="btn btn-outline-light my-2 my-sm-0 mr-2" type="button">Iniciar sesión</button></a>
                 <a href="register.php"><button class="btn btn-light my-2 my-sm-0" type="button">Registrate</button></a>
             <?php } ?>
-        </form>
     </div>
 </nav>

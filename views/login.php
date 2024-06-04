@@ -15,3 +15,4 @@
             <p class="message">No tienes cuenta? <a href="register.php">Registrate</a></p>
         </form>
     </div>
+</form>
