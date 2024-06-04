@@ -11,6 +11,9 @@
                 <a class="nav-link" href="clases.php">Clases</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="espacios.php">Espacios</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="tareas.php">Tareas</a>
             </li>
             <li class="nav-item">
