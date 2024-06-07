@@ -17,19 +17,11 @@
                             <form>
                                 <div class="form-group">
                                     <h4>Nombre de la clase</h4>
-                                    <input type="text" class="form-control" id="taskTitle" name="nombre" placeholder="Nombre de la clase">
+                                    <input type="text" class="form-control" id="taskTitle" name="nombre" placeholder="Nombre de la clase" required>
                                 </div>
                                 <div class="form-group">
-                                    <h4>Seccion</h4>
-                                    <input type="text" class="form-control" id="taskTitle" name="seccion" placeholder="Seccion">
-                                </div>
-                                <div class="form-group">
-                                    <h4>Asignatura</h4>
-                                    <input type="text" class="form-control" id="taskTitle" name="asignatura" placeholder="Asignatura">
-                                </div>
-                                <div class="form-group">
-                                    <h4>Descripcion</h4>
-                                    <input type="text" class="form-control" id="taskTitle" name="descripcion" placeholder="Descripcion">
+                                    <h4>Horarios</h4>
+                                    <input type="text" class="form-control" id="taskTitle" name="horarios" placeholder="Horarios">
                                 </div>
                                 <input type="submit" class="btn btn-success" value="subir">
                             </form>
