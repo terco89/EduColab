@@ -49,7 +49,7 @@
                             <hr>
                             <p class="card-text"><?php echo $clases[$i]["descripcion"]; ?></p>
                             <p class="card-text">Fecha y hora: <?php echo $clases[$i]["fecha_horario"]; ?></p>
-                            <a href="clase2.php" class="btn btn-primary">Ir a la clase</a>
+                            <a href="clase.php?id=<?php echo $clases[$i]["id"] ?>" class="btn btn-primary">Ir a la clase</a>
                         </div>
                     </div>
                 </div>

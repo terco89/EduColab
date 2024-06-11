@@ -12,30 +12,20 @@
         <!-- Lista de Tareas -->
         <div class="card mb-4">
             <div class="card-header">
-                Tareas Asignadas
+                Lista
             </div>
             <div class="card-body">
-                <!-- Tarea 1 -->
+                <?php for($i = 0; $i < count($tareas); $i++){ ?>                
                 <div class="media mb-3">
                     <img src="https://via.placeholder.com/64" class="mr-3" alt="User Avatar">
                     <div class="media-body">
-                        <h5 class="mt-0">Análisis de un Poema</h5>
-                        <p>Escribir un análisis detallado del poema "La canción del pirata".</p>
-                        <p>Fecha de entrega: 30 de mayo, 2024</p>
+                        <h5 class="mt-0"><?php echo $tareas[$i]["nombre"]?></h5>
+                        <p><?php echo $tareas[$i]["descripcion"]; ?></p>
+                        <p>Fecha de entrega: <?php echo date('j \d\e F, Y', strtotime($tareas[$i]["fecha_entrega"])); ?></p>
                         <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#submitModal">Enviar Tarea</a>
                     </div>
                 </div>
-                <!-- Tarea 2 -->
-                <div class="media mb-3">
-                    <img src="https://via.placeholder.com/64" class="mr-3" alt="User Avatar">
-                    <div class="media-body">
-                        <h5 class="mt-0">Ensayo sobre el Romanticismo</h5>
-                        <p>Escribir un ensayo sobre la influencia del romanticismo en la literatura moderna.</p>
-                        <p>Fecha de entrega: 5 de junio, 2024</p>
-                        <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#submitModal">Enviar Tarea</a>
-                    </div>
-                </div>
-                <!-- Más tareas pueden ser añadidas aquí -->
+                <?php } ?>
             </div>
         </div>
     </div>
