@@ -5,10 +5,11 @@
     <div class="container mt-5">
         <!-- Header -->
         <div class="jumbotron">
-            <h1 class="display-4">Lengua y Literatura</h1>
-            <p class="lead">Bienvenidos a la clase de Lengua y Literatura. Aquí encontrarán todos los materiales y actividades.</p>
+            <h1 class="display-4"><?php echo $result["nombre"] ?></h1>
+            <p class="lead"><?php echo $result["descripcion"]?></p>
+            <p class="lead">Horario: <?php echo $result["fecha_horario"]?></p>
             <hr class="my-4">
-            <p>Profesor: David Martinez</p>
+            <p>Profesor: <?php echo $result["name"]; ?></p>
         </div>
 
         <!-- Anuncios -->
