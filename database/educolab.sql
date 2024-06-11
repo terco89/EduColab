@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2024 a las 21:23:13
+-- Tiempo de generación: 11-06-2024 a las 19:03:54
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -36,25 +36,43 @@ CREATE TABLE `asignaciones` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `clases`
+-- Estructura de tabla para la tabla `clasesescolares`
 --
 
-CREATE TABLE `clases` (
+CREATE TABLE `clasesescolares` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(255) NOT NULL,
-  `seccion` varchar(255) NOT NULL,
-  `asignatura` varchar(255) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `descripcion` varchar(255) NOT NULL
+  `nombre` varchar(30) NOT NULL,
+  `descripcion` varchar(50) NOT NULL,
+  `fecha_horario` varchar(50) NOT NULL,
+  `codigo` varchar(6) NOT NULL,
+  `id_usuario_creador` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `clases`
+-- Volcado de datos para la tabla `clasesescolares`
 --
 
-INSERT INTO `clases` (`id`, `nombre`, `seccion`, `asignatura`, `id_usuario`, `descripcion`) VALUES
-(19, 'Matematica', '2°10°', 'Ingles', 3, 'Hola soy el profe'),
-(20, 'Matematica', '2°10°', 'Ingles', 3, 'Hola soy el profe');
+INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `fecha_horario`, `codigo`, `id_usuario_creador`) VALUES
+(1, 'Ingles', '', 'Miercoles 18:30-20:00', '5ZjmJW', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clase_usuario`
+--
+
+CREATE TABLE `clase_usuario` (
+  `id_usuario` int(11) NOT NULL,
+  `id_clase` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `clase_usuario`
+--
+
+INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`) VALUES
+(3, 1),
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -137,9 +155,9 @@ CREATE TABLE `usuarios_cursos` (
 --
 
 --
--- Indices de la tabla `clases`
+-- Indices de la tabla `clasesescolares`
 --
-ALTER TABLE `clases`
+ALTER TABLE `clasesescolares`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -153,10 +171,10 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `clases`
+-- AUTO_INCREMENT de la tabla `clasesescolares`
 --
-ALTER TABLE `clases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `clasesescolares`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
