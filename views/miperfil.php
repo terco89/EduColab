@@ -65,7 +65,7 @@
             </div>
             <span class="name mt-3"><?php echo $_SESSION['usuario']['name']; ?></span>
             <span class="idd"><?php echo $_SESSION['usuario']['email']; ?></span>
-            <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span> </div>
+            <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1"><?php echo $codigo; ?></span> <span><i class="fa fa-copy"></i></span> </div>
             <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">5 <span class="follow">Clases</span></span> </div>
             <div class=" d-flex mt-2"> <button class="btn1 btn-dark" style="border-radius: 10px 20px;">Editar Perfil</button> </div>
             <div class="text mt-3"> <span>Eleanor Pena is a creator of minimalistic x bold graphics and digital

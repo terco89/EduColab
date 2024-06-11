@@ -5,6 +5,18 @@ if(!isset($_SESSION["usuario"])){
     header("Location: index.php");
 }
 
+function generarCodigo($longitud = 16) {
+    $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ____';
+    $codigo = '';
+    $maxCaracteres = strlen($caracteres) - 1;
+
+    for ($i = 0; $i < $longitud; $i++) {
+        $codigo .= $caracteres[mt_rand(0, $maxCaracteres)];
+    }
+
+    return $codigo;
+}
+$codigo = generarCodigo();
 
 if (isset($_POST['alumno'])) {
     $img = $_POST['alumno'];
