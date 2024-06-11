@@ -34,27 +34,28 @@
 
     <br>
     <div class="row">
-    <?php 
-    if(count($clases) == 0){
-        ?>
-        <h2 class="text-center">Aún no tienes clases</h2>
-    <?php }else{
-    for($i =0; $i < count($clases); $i++){
-    ?>
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title"><?php echo $clases[$i]["nombre"] ?></h3>
-                    <h6 class="card-subtitle mb-2 text-muted">Profesor: X</h6>
-                    <hr>
-                    <p class="card-text"><?php echo $clases[$i]["descripcion"]; ?></p>
-                    <p class="card-text">Fecha y hora: <?php echo $clases[$i]["fecha_horario"]; ?></p>
-                    <a href="clase2.php" class="btn btn-primary">Ir a la clase</a>
+        <?php if (count($clases) == 0) { ?>
+            <h2 class="text-center">Aún no tienes clases</h2>
+            <?php } else {
+            for ($i = 0; $i < count($clases); $i++) {
+                $query = "SELECT name FROM usuarios LEFT JOIN clasesescolares ON clasesescolares.id_usuario_creador = usuarios.id WHERE clasesescolares.id='" . $clases[$i]['id'] . "'";
+                $query = mysqli_query($link, $query);
+                $usudata = mysqli_fetch_assoc($query); ?>
+                <div class="col-md-4 mb-4" >
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><?php echo $clases[$i]["nombre"] ?></h3>
+                            <h6 class="card-subtitle mb-2 text-muted">Profesor: <?php echo $usudata['name'] ?></h6>
+                            <hr>
+                            <p class="card-text"><?php echo $clases[$i]["descripcion"]; ?></p>
+                            <p class="card-text">Fecha y hora: <?php echo $clases[$i]["fecha_horario"]; ?></p>
+                            <a href="clase2.php" class="btn btn-primary">Ir a la clase</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Agregar más tarjetas según sea necesario -->
+                <!-- Agregar más tarjetas según sea necesario -->
+
+        <?php }
+        } ?>
     </div>
-    <?php } }?>
 </div>

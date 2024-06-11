@@ -4,6 +4,7 @@ session_start();
 if (!isset($_SESSION["usuario"])) {
     header("Location: index.php");
 }
+
 if (isset($_POST['nombre'])) {
     function generarCodigo($longitud = 6) {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

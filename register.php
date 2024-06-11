@@ -13,7 +13,21 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])
         echo "Fallo consulta: " . mysqli_error($link);
         exit();
     }else{
-        header("Location: login.php");
+        $name = $_POST['name'];
+    $pass = md5($_POST['password']);
+    $sql = "SELECT * FROM usuarios 
+            WHERE name = '" . $name . "'
+            AND password = '" . $pass . "'";
+    $result = mysqli_query($link, $sql);
+    
+    if (!$result) {
+        echo "Fallo consulta: " . mysqli_error($link);
+        exit();
+    }
+    if (mysqli_num_rows($result) == 1) {
+        $_SESSION['usuario'] = mysqli_fetch_assoc($result);
+        header('Location: index.php');
+    }
     }
 }
 $section = "signup";

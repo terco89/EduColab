@@ -1,12 +1,12 @@
-hr{
-    background-color: rgb(14, 129, 133);
-    border-width: 3px;
+hr {
+  background-color: rgb(14, 129, 133);
+  border-width: 3px;
 }
 
-h3{
-    color:rgb(14, 129, 133);
+h3 {
+  color: rgb(14, 129, 133);
 }
 
-.card-title{
-    text-overflow: ellipsis;
+.card-title {
+  text-overflow: ellipsis;
 }
