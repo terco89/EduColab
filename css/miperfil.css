@@ -8,7 +8,9 @@ body {
 }
 
 .card {
-    width: 350px;
+    top: 50px ;
+    width: 1000px;
+    height: 500px;
     background-color: #efefef;
     border: none;
     cursor: pointer;
@@ -109,3 +111,20 @@ hr .new1 {
     transition: all 0.5s
 }
 
+
+
+.fff{
+    position:relative;
+        top: 100px;         /* 100px para top en relacion con su position antigua*/
+      left: -300px;
+      text-align:center;
+    }
+   
+   
+    .ff3{
+        position: relative;  /* Ahora estamos listos para mover el element*/
+      top: -180px;         /* 100px para top en relacion con su position antigua*/
+      left: 160px;
+   
+   
+    }
