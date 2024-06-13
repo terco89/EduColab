@@ -59,9 +59,24 @@
 <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
     <div class="card p-4" style="cursor:default;">
         <div class="d-flex flex-column justify-content-center align-items-center">
-            <div class="cont" style="cursor:pointer;">
-                <div><img href="#" data-toggle="modal" data-target="#editPhoto" class="profile" src="img/foto_perfil/<?php echo $_SESSION['usuario']['img']; ?>" height="100" width="100" style="object-fit: cover;" /></div>
-                <div class="cent_tex" href="#" data-toggle="modal" data-target="#editPhoto"><i class="fa fa-pencil-square-o"></i></div>
+            
+            <div class="fff">
+                <div class="cont" style="cursor:pointer;">
+                    <div><img href="#" data-toggle="modal" data-target="#editPhoto" class="profile" src="img/foto_perfil/<?php echo $_SESSION['usuario']['img']; ?>" height="150" width="150" style="object-fit: cover;" /></div>
+                    <div class="cent_tex" href="#" data-toggle="modal" data-target="#editPhoto"><i class="fa fa-pencil-square-o"></i></div>
+                </div>
+                <span class="name mt-3" style="font-size:25px;"><?php echo $_SESSION['usuario']['name']; ?></span><br>
+                <span class="idd"><?php echo $_SESSION['usuario']['email']; ?></span>
+                <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span> </div>
+            </div>
+            <div class="ff3">
+                <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">Datos personales:</span> </div>
+                <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">Clases inscriptas: 5 <span class="follow">Clases</span></span> </div>
+                <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number">Clases creadas: 0 <span class="follow">Clases</span></span> </div>
+                <div class="text mt-3"> <span>Eleanor Pena is a creator of minimalistic x bold graphics and digital
+                        artwork.<br><br> Artist/ Creative Director by Day #NFT minting@ with FND night. </span> </div>
+                <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span><i class="fa fa-whatsapp"></i> </div>
+                <div class=" px-2 rounded mt-4 date " style="text-align:center;">Cuenta creada el: May,2021 </div>
             </div>
             <span class="name mt-3"><?php echo $_SESSION['usuario']['name']; ?></span>
             <span class="idd"><?php echo $_SESSION['usuario']['email']; ?></span>
