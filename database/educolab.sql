@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-06-2024 a las 20:53:43
+-- Tiempo de generación: 18-06-2024 a las 22:48:19
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -64,31 +64,6 @@ INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `fecha_horario`, `
 (9, 'Inglés', 'Desarrollo de habilidades en conversación y compre', 'Jueves 18:00-19:30', 'VWX234', 2),
 (10, 'Programación', 'Introducción a la programación utilizando el lengu', 'Lunes 16:30-18:00', 'YZA567', 3),
 (11, 'Química', 'Estudio de las propiedades y transformaciones de l', 'Viernes 14:00-15:30', 'BCD890', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `clase_tarea`
---
-
-CREATE TABLE `clase_tarea` (
-  `clase_id` int(11) NOT NULL,
-  `tarea_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `clase_tarea`
---
-
-INSERT INTO `clase_tarea` (`clase_id`, `tarea_id`) VALUES
-(1, 2),
-(2, 3),
-(1, 4),
-(1, 5),
-(1, 28),
-(2, 32),
-(1, 30),
-(1, 29);
 
 -- --------------------------------------------------------
 
@@ -195,6 +170,44 @@ INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_subida`, `fecha_entr
 (48, 'Dramatización Shakespeare', 'Preparar una dramatización de una escena de una obra de Shakespeare', '2024-06-23 08:45:00', '2024-07-07 10:45:00', 1),
 (49, 'Vocabulario Tecnología', 'Estudiar vocabulario relacionado con la tecnología moderna', '2024-06-24 12:00:00', '2024-07-08 14:00:00', 1),
 (50, 'Comprensión Lectora', 'Resolver los ejercicios de comprensión lectora del libro de texto', '2024-06-25 14:30:00', '2024-07-09 16:30:00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tarea_usuario`
+--
+
+CREATE TABLE `tarea_usuario` (
+  `tarea_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tarea_usuario`
+--
+
+INSERT INTO `tarea_usuario` (`tarea_id`, `usuario_id`, `estado`) VALUES
+(23, 7, 3),
+(7, 3, 1),
+(14, 8, 2),
+(32, 4, 4),
+(10, 6, 1),
+(41, 1, 3),
+(18, 9, 2),
+(29, 2, 4),
+(5, 10, 3),
+(37, 5, 1),
+(12, 7, 2),
+(3, 2, 4),
+(28, 4, 1),
+(9, 1, 3),
+(20, 8, 2),
+(16, 3, 4),
+(8, 6, 1),
+(25, 10, 2),
+(48, 5, 3),
+(2, 9, 4);
 
 -- --------------------------------------------------------
 
