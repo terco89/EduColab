@@ -18,7 +18,7 @@
           <div class="card-body">
             <h5 class="card-title">6°10</h5>
             <p class="card-text">Confederación Suiza</p>
-            <a href="espacio.php" class="btn btn-primary">Ver Clases</a>
+            <a href="espacio.php" class="btn btn-primary" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ver Clases</a>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
           <div class="card-body">
             <h5 class="card-title">Taller de primero</h5>
             <p class="card-text">Confederación Suiza</p>
-            <a href="#" class="btn btn-primary">Ver Clases</a>
+            <a href="#" class="btn btn-primary"style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ver Clases</a>
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
           <div class="card-body">
             <h5 class="card-title">Espacio personalizado</h5>
             <p class="card-text">Tu</p>
-            <a href="#" class="btn btn-primary">Ver Clases</a>
+            <a href="#" class="btn btn-primary"style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ver Clases</a>
           </div>
         </div>
       </div>

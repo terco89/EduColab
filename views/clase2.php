@@ -31,7 +31,7 @@
             <div class="card-body">
                 <h5 class="card-title">Tarea: Resolver Limites Indeterminados</h5>
                 <p class="card-text">Fecha de entrega: 30 de mayo, 2024</p>
-                <a href="#" class="btn btn-primary">Ver Tarea</a>
+                <a href="#" class="btn btn-primary"style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ver Tarea</a>
             </div>
         </div>
 
@@ -43,7 +43,7 @@
             <div class="card-body">
                 <h5 class="card-title">Actividades</h5>
                 <p class="card-text">Pueden encontrar las Actividades del tema actual en el siguiente enlace.</p>
-                <a href="#" class="btn btn-primary">Ver Actividades</a>
+                <a href="#" class="btn btn-primary"style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ver Actividades</a>
             </div>
         </div>
 
@@ -55,7 +55,7 @@
             <div class="card-body">
                 <h5 class="card-title">Archivos de Enseñanza</h5>
                 <p class="card-text">Lean los archivos acerca de Integrales y Derivadas</p>
-                <a href="#" class="btn btn-primary">Archivos</a>
+                <a href="#" class="btn btn-primary" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Archivos</a>
             </div>
         </div>
 
@@ -67,7 +67,7 @@
             <div class="card-body">
                 <h5 class="card-title">Calificaciones Recientes</h5>
                 <p class="card-text">Consulta tus últimas calificaciones en el siguiente enlace.</p>
-                <a href="#" class="btn btn-primary">Ver Notas</a>
+                <a href="#" class="btn btn-primary" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ver Notas</a>
             </div>
         </div>
     </div>

@@ -4,8 +4,9 @@
 ">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js
 ">
-
 <link rel="stylesheet" href="css/miperfil.css">
+
+
 <style>
     .option-form {
         width: 8rem;
@@ -56,10 +57,17 @@
     }
 </style>
 <br>
+<nav style="--bs-breadcrumb-divider: '>'; margin-left:50px;margin-right:1610px;" aria-label="breadcrumb">
+    <ol class="breadcrumb" style="background-color:#10b5c1f7">
+        <li class="breadcrumb-item"><a href="index.php" style="color:black">Mis Clases</a></li>
+        <li class="breadcrumb-item active" style="color:white" aria-current="page">Mi perfil</li>
+    </ol>
+</nav>
+
 <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
     <div class="card p-4" style="cursor:default;">
         <div class="d-flex flex-column justify-content-center align-items-center">
-            
+
             <div class="fff">
                 <div class="cont" style="cursor:pointer;">
                     <div><img href="#" data-toggle="modal" data-target="#editPhoto" class="profile" src="img/foto_perfil/<?php echo $_SESSION['usuario']['img']; ?>" height="150" width="150" style="object-fit: cover;" /></div>
@@ -78,7 +86,7 @@
                 <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span><i class="fa fa-whatsapp"></i> </div>
                 <div class=" px-2 rounded mt-4 date " style="text-align:center;">Cuenta creada el: May,2021 </div>
             </div>
-            
+
 
 
 
@@ -145,5 +153,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

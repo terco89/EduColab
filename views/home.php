@@ -4,11 +4,11 @@
         <p class="lead">Aquí podrás gestionar tus clases, asignar tareas, organizar tu calendario y más.</p>
         <hr class="my-4">
         <p>¿Listo para empezar?</p>
-        <a class="btn btn-primary btn-lg" href="clases.php">Ir a mis clases</a>
+        <a class="btn btn-primary btn-lg" href="clases.php" style=" background-color: #56c6b7; border-color:#56c6b7;">Ir a mis clases</a>
     </div>
     <div class="row">
     <div class="col-md-6">
-        <div class="testimonial">
+        <div class="testimonial" style=" border-color:#56c6b7;">
             <p>"EduCollab ha transformado la forma en que administro mis clases. ¡Es increíblemente fácil de usar y mis estudiantes adoran la plataforma!"</p>
             <p><strong>Profesor X</strong></p>
         </div>
@@ -16,7 +16,7 @@
     <div class="col-md-6">
         <h2>Tutorial rápido</h2>
         <p>Aprende cómo empezar a usar EduCollab con nuestro tutorial paso a paso. ¡Es fácil y rápido!</p>
-        <a class="btn btn-outline-primary" href="#">Ver tutorial</a>
+        <a class="btn btn-primary" style=" background-color: #56c6b7;border-color:#56c6b7;color:white;"href="#">Ver tutorial</a>
     </div>
 </div>
 </div>
