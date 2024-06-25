@@ -6,8 +6,8 @@ if(!isset($_SESSION["usuario"])){
 
 require_once "includes/config.php";
 
-$sql = "select tareas.nombre as n, date(tareas.fecha_entrega) as fecha from clase_usuario inner join clase_tarea on clase_tarea.clase_id = clase_usuario.id_clase 
-inner join tareas on tareas.clase_id = clase_tarea.tarea_id where clase_usuario.id_usuario = ".$_SESSION["usuario"]["id"]."";
+$sql = "select tareas.nombre as n, date(tareas.fecha_entrega) as fecha from clase_usuario 
+inner join tareas on tareas.clase_id = clase_usuario.id_clase where clase_usuario.id_usuario = ".$_SESSION["usuario"]["id"]."";
 $result2 = mysqli_query($link, $sql);
 $tareas = array();
 // Verificar si se encontraron resultados
