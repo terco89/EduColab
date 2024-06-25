@@ -1,10 +1,32 @@
 <?php ?>
 
+<div><a href="#" data-toggle="modal" data-target="#editPhoto">Config</a></div>
+<div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editPhotoLabel">Editar foto</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post">
+                            <input type="text" name="bg" placeholder="bgX X=1~10">
+                            <input type="submit" name="sub" value="Guardar">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <!-- Main Container -->
+
+
+
+<!-- Main Container -->
     <div class="container mt-5">
         <!-- Header -->
-        <div class="jumbotron">
+        <div class="jumbotron" style="background-image:url(img/fondos/<?php echo $fondo['fondo'] ?>);">
             <h1 class="display-4">Matematica</h1>
             <p class="lead">Bienvenidos a la clase de Matematica. Aquí encontrarán todos los materiales y actividades.</p>
             <hr class="my-4">

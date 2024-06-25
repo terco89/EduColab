@@ -53,6 +53,9 @@
         border: 0px solid #333;
         background-color: rgba(33, 33, 33, 0);
         filter: brightness(40%);
+        @media only screen and  (max-width:1200px) {
+            
+        }
     }
 </style>
 <br>
