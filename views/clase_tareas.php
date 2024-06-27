@@ -21,7 +21,7 @@
                     <div class="media-body">
                         <h5 class="mt-0"><?php echo $tareas[$i]["nombre"]?></h5>
                         <p><?php echo $tareas[$i]["descripcion"]; ?></p>
-                        <p>Fecha de entrega: <?php echo date('j \d\e F, Y', strtotime($tareas[$i]["fecha_horario"])); ?></p>
+                        <p>Fecha de entrega: <?php echo date('j \d\e F, Y', strtotime($tareas[$i]["fecha_entrega"])); ?></p>
                         <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#submitModal">Enviar Tarea</a>
                     </div>
                 </div>
