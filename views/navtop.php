@@ -26,7 +26,7 @@
             <?php } ?>
         </ul>
         <?php if (isset($_SESSION['usuario'])) { ?>
-            <a href="miperfil.php"><img src="img/foto_perfil/<?php echo $_SESSION['usuario']['img']; ?>" style="border-radius:50%; width:3rem; height:3rem;  object-fit: cover;" class="profile"></a>
+            <a href="miperfil.php"><img src="img/foto_perfil/<?php echo $_SESSION['usuario']['img']; ?>" style="border-radius:50%; width:3rem; height:3rem;  object-fit: cover; background-color:white;" class="profile"></a>
             &nbsp;&nbsp;<button class="btn btn-light my-2 my-sm-0" type="button"><a href="logout.php">Logout</a></button>
         <?php } else if (!isset($_SSESIOB['usuario'])) { ?>
             <a href="login.php" style="color:white"><button class="btn btn-outline-light my-2 my-sm-0 mr-2" type="button">Iniciar sesión</button></a>
