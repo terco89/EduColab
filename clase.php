@@ -10,6 +10,13 @@ if(!isset($_GET["id"])){
 require_once "includes/config.php";
 
 
+if(isset($_POST['bg'])){
+    $bg=$_POST['bg'].".jpg";
+    $sql="UPDATE clase_usuario SET fondo='".$bg."' WHERE id_usuario='".$_SESSION['usuario']['id']."'";
+    $query=mysqli_query($link,$sql);
+}
+$sql="SELECT fondo FROM clase_usuario WHERE id_usuario='".$_SESSION['usuario']['id']."'";
+
 $sql = "select ClasesEscolares.id,nombre,descripcion,fecha_horario,name from ClasesEscolares inner join usuarios on ClasesEscolares.id_usuario_creador = usuarios.id where ClasesEscolares.id = ".$_GET["id"];
 $result = mysqli_fetch_assoc(mysqli_query($link, $sql));
 

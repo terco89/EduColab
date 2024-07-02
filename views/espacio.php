@@ -27,7 +27,7 @@
                     <hr>
                     <p class="card-text">Esta clase cubrirá temas avanzados de álgebra y cálculo.</p>
                     <p class="card-text">Fecha y hora: Martes y Jueves, 10:00 AM - 12:00 PM</p>
-                    <a href="clase2.php" class="btn btn-primary" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ir a la clase</a>
+                    <a href="clase.php" class="btn btn-primary" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ir a la clase</a>
                 </div>
             </div>
         </div>
