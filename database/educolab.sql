@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-06-2024 a las 21:17:46
+-- Tiempo de generación: 18-06-2024 a las 22:48:19
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -53,7 +53,17 @@ CREATE TABLE `clasesescolares` (
 --
 
 INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `fecha_horario`, `codigo`, `id_usuario_creador`) VALUES
-(1, 'Ingles', '', 'Miercoles 18:30-20:00', '5ZjmJW', 3);
+(1, 'Ingles', '', 'Miercoles 18:30-20:00', '5ZjmJW', 3),
+(2, 'Matemáticas', 'Introducción a conceptos fundamentales como álgebr', 'Miércoles 18:30-20:00', 'ABC123', 1),
+(3, 'Historia', 'Exploración de eventos clave en la historia mundia', 'Lunes 14:00-15:30', 'DEF456', 2),
+(4, 'Ciencias Naturales', 'Estudio de organismos vivos y sus interacciones co', 'Viernes 10:00-11:30', 'GHI789', 3),
+(5, 'Literatura', 'Análisis de obras literarias destacadas y estilos ', 'Martes 16:00-17:30', 'JKL012', 1),
+(6, 'Física', 'Estudio de las leyes fundamentales del movimiento ', 'Jueves 13:00-14:30', 'MNO345', 2),
+(7, 'Educación Física', 'Promoción de la actividad física y la salud median', 'Miércoles 15:00-16:30', 'PQR678', 3),
+(8, 'Arte', 'Exploración de diferentes formas de expresión artí', 'Martes 11:00-12:30', 'STU901', 1),
+(9, 'Inglés', 'Desarrollo de habilidades en conversación y compre', 'Jueves 18:00-19:30', 'VWX234', 2),
+(10, 'Programación', 'Introducción a la programación utilizando el lengu', 'Lunes 16:30-18:00', 'YZA567', 3),
+(11, 'Química', 'Estudio de las propiedades y transformaciones de l', 'Viernes 14:00-15:30', 'BCD890', 1);
 
 -- --------------------------------------------------------
 
@@ -72,7 +82,9 @@ CREATE TABLE `clase_usuario` (
 
 INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`) VALUES
 (3, 1),
-(2, 1);
+(2, 1),
+(4, 1),
+(4, 6);
 
 -- --------------------------------------------------------
 
@@ -121,9 +133,10 @@ CREATE TABLE `materiales` (
 
 CREATE TABLE `tareas` (
   `id` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `descripcion` varchar(50) NOT NULL,
-  `fecha_horario` datetime NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `descripcion` varchar(1000) NOT NULL,
+  `fecha_subida` datetime NOT NULL,
+  `fecha_entrega` datetime NOT NULL,
   `clase_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -131,27 +144,70 @@ CREATE TABLE `tareas` (
 -- Volcado de datos para la tabla `tareas`
 --
 
-INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_horario`, `clase_id`) VALUES
-(1, 'Tarea 1', 'Hacer un ensayo sobre la Revolución Industrial', '2024-06-15 10:00:00', 1),
-(2, 'Tarea 2', 'Resolver los problemas del capítulo 5', '2024-06-14 15:30:00', 2),
-(3, 'Tarea 3', 'Investigar sobre la célula animal', '2024-06-16 09:00:00', 3),
-(4, 'Tarea 4', 'Preparar una presentación sobre la ecología', '2024-06-18 14:00:00', 4),
-(5, 'Tarea 5', 'Entregar el proyecto final de matemáticas', '2024-06-20 17:00:00', 5),
-(6, 'Tarea 6', 'Leer los capítulos 3 y 4 del libro de literatura', '2024-06-15 12:30:00', 6),
-(7, 'Tarea 7', 'Practicar conjugaciones verbales en francés', '2024-06-17 11:00:00', 7),
-(8, 'Tarea 8', 'Resolver los ejercicios de programación en Python', '2024-06-19 16:00:00', 8),
-(9, 'Tarea 9', 'Hacer un análisis de mercado para el proyecto de e', '2024-06-21 09:30:00', 9),
-(10, 'Tarea 10', 'Preparar la exposición sobre la Segunda Guerra Mun', '2024-06-14 13:00:00', 10),
-(11, 'Tarea 11', 'Estudiar para el examen de química', '2024-06-16 10:30:00', 11),
-(12, 'Tarea 12', 'Hacer un resumen del artículo científico asignado', '2024-06-18 15:45:00', 12),
-(13, 'Tarea 13', 'Resolver los problemas de geometría', '2024-06-22 11:15:00', 13),
-(14, 'Tarea 14', 'Preparar una presentación sobre la música clásica', '2024-06-23 14:30:00', 14),
-(15, 'Tarea 15', 'Practicar la pronunciación en alemán', '2024-06-24 10:00:00', 15),
-(16, 'Tarea 16', 'Entregar el informe de historia del arte', '2024-06-17 16:45:00', 16),
-(17, 'Tarea 17', 'Hacer un análisis financiero para el proyecto de f', '2024-06-19 13:00:00', 17),
-(18, 'Tarea 18', 'Resolver los ejercicios de estadística', '2024-06-21 15:30:00', 18),
-(19, 'Tarea 19', 'Estudiar para el examen de biología celular', '2024-06-25 09:00:00', 19),
-(20, 'Tarea 20', 'Investigar sobre las corrientes literarias del sig', '2024-06-26 11:30:00', 20);
+INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_subida`, `fecha_entrega`, `clase_id`) VALUES
+(26, 'Ensayo Revolución Industrial', 'Realizar un ensayo sobre la Revolución Industrial', '2024-06-01 08:00:00', '2024-06-15 23:59:59', 1),
+(27, 'Ejercicios Matemáticas', 'Resolver los ejercicios del capítulo 5 de Matemáticas', '2024-06-02 10:30:00', '2024-06-09 18:00:00', 2),
+(28, 'Presentación Sistema Solar', 'Preparar una presentación sobre el sistema solar', '2024-06-03 14:00:00', '2024-06-17 12:00:00', 3),
+(29, 'Examen Historia del Arte', 'Estudiar para el examen de Historia del arte', '2024-06-04 09:00:00', '2024-06-10 09:00:00', 4),
+(30, 'Investigación Guerra Fría', 'Realizar una investigación sobre la Guerra Fría', '2024-06-05 11:30:00', '2024-06-19 15:30:00', 5),
+(31, 'Química Laboratorio', 'Resolver los problemas de química del laboratorio', '2024-06-06 13:45:00', '2024-06-12 16:45:00', 6),
+(32, 'Leer Libro Literatura', 'Leer el libro asignado para literatura', '2024-06-07 07:00:00', '2024-06-14 23:00:00', 7),
+(33, 'Conjugación Francés', 'Practicar la conjugación de los verbos en francés', '2024-06-08 16:30:00', '2024-06-18 19:30:00', 8),
+(34, 'Investigación Albert Einstein', 'Investigar sobre la biografía de Albert Einstein', '2024-06-09 12:15:00', '2024-06-20 10:15:00', 9),
+(35, 'Física Cuaderno', 'Resolver los problemas de física del cuaderno', '2024-06-10 10:00:00', '2024-06-16 14:00:00', 10),
+(36, 'Dibujo Flora y Fauna', 'Realizar un dibujo sobre la flora y fauna local', '2024-06-11 15:00:00', '2024-06-25 08:00:00', 11),
+(37, 'Examen Geografía Mundial', 'Estudiar para el examen de geografía mundial', '2024-06-12 11:00:00', '2024-06-23 16:00:00', 12),
+(38, 'Programación Python', 'Resolver los ejercicios de programación en Python', '2024-06-13 09:30:00', '2024-06-21 11:30:00', 13),
+(39, 'Presentación Primera Guerra Mu', 'Realizar una presentación oral sobre la Primera Guerra Mundial', '2024-06-14 08:45:00', '2024-06-22 13:45:00', 14),
+(40, 'Vida de Miguel de Cervantes', 'Investigar sobre la vida y obra de Miguel de Cervantes', '2024-06-15 12:00:00', '2024-06-24 15:00:00', 15),
+(41, 'Álgebra Libro', 'Resolver los problemas de álgebra del libro', '2024-06-16 14:30:00', '2024-06-26 17:30:00', 16),
+(42, 'Experimento Ley de la Conserva', 'Realizar un experimento sobre la ley de la conservación de la energía', '2024-06-17 10:00:00', '2024-06-28 12:00:00', 17),
+(43, 'Dramatización Edad Media', 'Preparar una dramatización sobre la vida en la Edad Media', '2024-06-18 13:20:00', '2024-06-29 15:20:00', 18),
+(44, 'Trigonometría Cuaderno', 'Resolver los ejercicios de trigonometría del cuaderno', '2024-06-19 09:15:00', '2024-06-27 11:15:00', 19),
+(45, 'Ensayo Globalización', 'Realizar un ensayo sobre el impacto de la globalización', '2024-06-20 08:30:00', '2024-07-03 10:30:00', 20),
+(46, 'Ensayo Influencia del Cine', 'Escribir un ensayo sobre la influencia del cine en la cultura popular', '2024-06-21 10:00:00', '2024-07-05 12:00:00', 1),
+(47, 'Presentación Gramática Pasado ', 'Realizar una presentación sobre la gramática del pasado simple', '2024-06-22 09:30:00', '2024-07-06 11:30:00', 1),
+(48, 'Dramatización Shakespeare', 'Preparar una dramatización de una escena de una obra de Shakespeare', '2024-06-23 08:45:00', '2024-07-07 10:45:00', 1),
+(49, 'Vocabulario Tecnología', 'Estudiar vocabulario relacionado con la tecnología moderna', '2024-06-24 12:00:00', '2024-07-08 14:00:00', 1),
+(50, 'Comprensión Lectora', 'Resolver los ejercicios de comprensión lectora del libro de texto', '2024-06-25 14:30:00', '2024-07-09 16:30:00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tarea_usuario`
+--
+
+CREATE TABLE `tarea_usuario` (
+  `tarea_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tarea_usuario`
+--
+
+INSERT INTO `tarea_usuario` (`tarea_id`, `usuario_id`, `estado`) VALUES
+(23, 7, 3),
+(7, 3, 1),
+(14, 8, 2),
+(32, 4, 4),
+(10, 6, 1),
+(41, 1, 3),
+(18, 9, 2),
+(29, 2, 4),
+(5, 10, 3),
+(37, 5, 1),
+(12, 7, 2),
+(3, 2, 4),
+(28, 4, 1),
+(9, 1, 3),
+(20, 8, 2),
+(16, 3, 4),
+(8, 6, 1),
+(25, 10, 2),
+(48, 5, 3),
+(2, 9, 4);
 
 -- --------------------------------------------------------
 
@@ -175,7 +231,8 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `name`, `password`, `email`, `rol`, `img`) VALUES
 (1, 'LucaOshiro', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'alumno', ''),
 (2, 'Santiago', '04217c4d7e246e38b0d7014ee109755b', 'sdmatayoshi@gmail.com', 'alumno', 'Profesor.jpg'),
-(3, 'Luh9090', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'profesor', 'Profesor.jpg');
+(3, 'Luh9090', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'profesor', 'Profesor.jpg'),
+(4, 'elgabo', '38b1afebce3ecc702e3e04071ec2b94f', 'elgabo@gmail.com', 'alumno', 'alumno.jpg');
 
 -- --------------------------------------------------------
 
@@ -220,19 +277,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clasesescolares`
 --
 ALTER TABLE `clasesescolares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

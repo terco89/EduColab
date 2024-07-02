@@ -10,9 +10,10 @@
         </div>
         <div class="card-body">
           <ul class="list-group">
-            <li class="list-group-item tarea">Tarea 1</li>
-            <li class="list-group-item tarea">Tarea 2</li>
-            <li class="list-group-item tarea">Tarea 3</li>
+            <?php for($i = 0; $i < count($tareas); $i++){ 
+              if(intval($tareas[$i]["est"]) == 1){?>
+            <li class="list-group-item tarea"><?php echo $tareas[$i]["n"] ?></li>
+            <?php } } ?>
           </ul>
         </div>
       </div>
@@ -25,9 +26,10 @@
         </div>
         <div class="card-body">
           <ul class="list-group">
-            <li class="list-group-item tarea">Tarea 4</li>
-            <li class="list-group-item tarea">Tarea 5</li>
-            <li class="list-group-item tarea">Tarea 6</li>
+          <?php for($i = 0; $i < count($tareas); $i++){ 
+              if(intval($tareas[$i]["est"]) == 2){?>
+            <li class="list-group-item tarea"><?php echo $tareas[$i]["n"] ?></li>
+            <?php } } ?>
           </ul>
         </div>
       </div>
@@ -39,9 +41,10 @@
         </div>
         <div class="card-body">
           <ul class="list-group">
-            <li class="list-group-item tarea">Tarea 4</li>
-            <li class="list-group-item tarea">Tarea 5</li>
-            <li class="list-group-item tarea">Tarea 6</li>
+          <?php for($i = 0; $i < count($tareas); $i++){ 
+              if(intval($tareas[$i]["est"]) == 3){?>
+            <li class="list-group-item tarea"><?php echo $tareas[$i]["n"] ?></li>
+            <?php } } ?>
           </ul>
         </div>
       </div>
@@ -53,9 +56,10 @@
         </div>
         <div class="card-body">
           <ul class="list-group">
-            <li class="list-group-item tarea">Tarea 4</li>
-            <li class="list-group-item tarea">Tarea 5</li>
-            <li class="list-group-item tarea">Tarea 6</li>
+          <?php for($i = 0; $i < count($tareas); $i++){ 
+              if(intval($tareas[$i]["est"]) == 4){?>
+            <li class="list-group-item tarea"><?php echo $tareas[$i]["n"] ?></li>
+            <?php } } ?>
           </ul>
         </div>
       </div>
