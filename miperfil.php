@@ -55,7 +55,13 @@ if (isset($_POST['alumno'])) {
     }
     $_SESSION['usuario']['img'] = $img;
 }
+$sql = "SELECT COUNT(id_clase) AS cic FROM clase_usuario WHERE id_usuario='".$_SESSION['usuario']['id']."'";
+$query=mysqli_query($link,$sql);
+$clses=mysqli_fetch_assoc($query);
 
+$sql = "SELECT COUNT(id) AS ce FROM clasesescolares WHERE id_usuario_creador='".$_SESSION['usuario']['id']."'";
+$query=mysqli_query($link,$sql);
+$clses2=mysqli_fetch_assoc($query);
 
 $view = "miperfil";
 require_once "views/layout.php";

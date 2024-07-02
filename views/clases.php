@@ -23,7 +23,7 @@
                                     <h4>Horarios</h4>
                                     <input type="text" class="form-control" id="taskTitle" name="horarios" placeholder="Horarios">
                                 </div>
-                                <input type="submit" class="btn btn-success" value="subir">
+                                <input type="submit" class="btn btn-success" value="subir"style="background-color:#10b5c1f7;border-color:#10b5c1f7;">
                             </form>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                             <hr>
                             <p class="card-text"><?php echo $clases[$i]["descripcion"]; ?></p>
                             <p class="card-text">Fecha y hora: <?php echo $clases[$i]["fecha_horario"]; ?></p>
-                            <a href="clase.php?id=<?php echo $clases[$i]["id"] ?>" class="btn btn-primary">Ir a la clase</a>
+                            <a href="clase.php?id=<?php echo $clases[$i]["id"] ?>" class="btn btn-primary" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ir a la clase</a>
                         </div>
                     </div>
                 </div>
