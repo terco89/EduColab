@@ -23,7 +23,7 @@ if((!isset($_GET["id"]) || !isset($_GET['did']))){
     header("Location: clases.php");
 }
 
-$sql = "select ClasesEscolares.id,nombre,descripcion,fecha_horario,name from ClasesEscolares inner join usuarios on ClasesEscolares.id_usuario_creador = usuarios.id where ClasesEscolares.id = ".$_GET["id"];
+$sql = "select ClasesEscolares.id,nombre,descripcion,name from ClasesEscolares inner join usuarios on ClasesEscolares.id_usuario_creador = usuarios.id where ClasesEscolares.id = ".$_GET["id"];
 $result = mysqli_fetch_assoc(mysqli_query($link, $sql));
 
 if(!isset($result)){

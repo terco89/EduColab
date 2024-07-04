@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-07-2024 a las 20:49:44
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 04-07-2024 a las 21:22:41
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -53,7 +53,8 @@ CREATE TABLE `clasesescolares` (
 
 INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `codigo`, `id_usuario_creador`) VALUES
 (33, 'Lengua', 'Es lengua no vas a sumar ', 'rDONwY', 5),
-(34, 'weqw', 'qweqwe', 'YTP5oJ', 5);
+(34, 'weqw', 'qweqwe', 'YTP5oJ', 5),
+(35, 'mate', '', '7W8zIu', 3);
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,8 @@ INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`) VALUES
 (5, 31),
 (5, 32),
 (5, 33),
-(5, 34);
+(5, 34),
+(3, 35);
 
 -- --------------------------------------------------------
 
@@ -108,6 +110,29 @@ CREATE TABLE `cursos` (
   `descripcion` varchar(400) DEFAULT NULL,
   `codigo` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `discusiones`
+--
+
+CREATE TABLE `discusiones` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_alumno` int(11) NOT NULL,
+  `id_clase` int(11) NOT NULL,
+  `tema` varchar(30) NOT NULL,
+  `contenido` varchar(300) NOT NULL,
+  `fecha_creacion` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `discusiones`
+--
+
+INSERT INTO `discusiones` (`id`, `id_alumno`, `id_clase`, `tema`, `contenido`, `fecha_creacion`) VALUES
+(1, 4, 1, 'Duda sobre el uso de \"used to\"', 'Tengo una pregunta sobre el uso de \"used to\" y \"would\" en inglés para hablar sobre hábitos pasados. He leído algunas explicaciones, pero aún no estoy seguro de cuándo debería usar uno u otro. ¿Podrían explicarme las diferencias y darme ejemplos para cada uno?', '2024-07-04 12:40:42'),
+(2, 3, 35, 'trtdftg', 'gfdydytdydtyt', '2024-07-04 16:18:52');
 
 -- --------------------------------------------------------
 
@@ -143,7 +168,9 @@ CREATE TABLE `horarios` (
 
 INSERT INTO `horarios` (`id_horario`, `id_clase`, `nombre_clase`, `dia_semana`, `hora_inicio`, `hora_fin`) VALUES
 (20, 33, 'Lengua', 'Lunes', '18:51:00', '21:51:00'),
-(21, 34, 'weqw', 'Viernes', '17:34:00', '19:34:00');
+(21, 34, 'weqw', 'Viernes', '17:34:00', '19:34:00'),
+(22, 35, 'mate', 'Lunes', '10:00:00', '12:00:00'),
+(23, 35, 'mate', 'Martes', '10:00:00', '17:04:00');
 
 -- --------------------------------------------------------
 
@@ -157,6 +184,30 @@ CREATE TABLE `materiales` (
   `tipo_material` varchar(50) NOT NULL,
   `enlace_archivo` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mensajes`
+--
+
+CREATE TABLE `mensajes` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_discusion` int(11) NOT NULL,
+  `mensaje` varchar(300) NOT NULL,
+  `fecha_creacion` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `mensajes`
+--
+
+INSERT INTO `mensajes` (`id`, `id_usuario`, `id_discusion`, `mensaje`, `fecha_creacion`) VALUES
+(1, 4, 1, 'nose', '2024-07-04 13:09:30'),
+(2, 4, 1, 'a', '2024-07-04 13:26:43'),
+(3, 4, 1, 'xd', '2024-07-04 13:26:52'),
+(4, 3, 2, 'gsgsgdsdg', '2024-07-04 16:20:41');
 
 -- --------------------------------------------------------
 
@@ -203,7 +254,8 @@ INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_subida`, `fecha_entr
 (48, 'Dramatización Shakespeare', 'Preparar una dramatización de una escena de una obra de Shakespeare', '2024-06-23 08:45:00', '2024-07-07 10:45:00', 1),
 (49, 'Vocabulario Tecnología', 'Estudiar vocabulario relacionado con la tecnología moderna', '2024-06-24 12:00:00', '2024-07-08 14:00:00', 1),
 (50, 'Comprensión Lectora', 'Resolver los ejercicios de comprensión lectora del libro de texto', '2024-06-25 14:30:00', '2024-07-09 16:30:00', 1),
-(51, 'wefwefwefef', 'fwef', '2024-07-04 15:34:37', '2024-07-04 17:34:00', 33);
+(51, 'wefwefwefef', 'fwef', '2024-07-04 15:34:37', '2024-07-04 17:34:00', 33),
+(52, 'xdddddddd', 'tfgfgfgdrhfghfhfhd', '2024-07-04 16:21:05', '2024-07-04 16:21:00', 35);
 
 -- --------------------------------------------------------
 
@@ -295,11 +347,23 @@ ALTER TABLE `clasesescolares`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `discusiones`
+--
+ALTER TABLE `discusiones`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `horarios`
 --
 ALTER TABLE `horarios`
   ADD PRIMARY KEY (`id_horario`),
   ADD KEY `id_clase` (`id_clase`);
+
+--
+-- Indices de la tabla `mensajes`
+--
+ALTER TABLE `mensajes`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tareas`
@@ -321,19 +385,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clasesescolares`
 --
 ALTER TABLE `clasesescolares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT de la tabla `discusiones`
+--
+ALTER TABLE `discusiones`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT de la tabla `mensajes`
+--
+ALTER TABLE `mensajes`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
