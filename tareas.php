@@ -10,7 +10,6 @@ $sql = "select tareas.nombre as n, tarea_usuario.estado as est from tarea_usuari
 inner join tareas on tareas.id = tarea_usuario.tarea_id where tarea_usuario.usuario_id = ".$_SESSION["usuario"]["id"]."";
 $result2 = mysqli_query($link, $sql);
 $tareas = array();
-// Verificar si se encontraron resultados
 if (mysqli_num_rows($result2) > 0) {
     while ($row = mysqli_fetch_assoc($result2)) {
         $tareas[] = $row;

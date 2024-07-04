@@ -1,6 +1,5 @@
 <?php require_once "views/clase_navbar.php"; ?>
 
-
 <!-- Main Container -->
 <div class="container mt-5">
     <!-- Header -->
@@ -38,7 +37,8 @@
                                 <button type="submit" class="btn btn-secondary">Crear Tarea</button>
                                 <!-- Controlador aca porque sino no funciona-->
                                 <?php if (isset($_POST['titulo'])) {
-                                    $sql = "INSERT INTO tareas (id,nombre,descripcion,fecha_subida,fecha_entrega,clase_id) VALUES (null,'" . $_POST['titulo'] . "','" . $_POST['instruccion'] . "',NOW(),'" . $_POST['fecha_limite'] . "', '" . $result["id"] . "' )";
+                                    $sql = "INSERT INTO tareas (id, nombre, descripcion, fecha_subida, fecha_entrega, clase_id) 
+                                            VALUES (null, '" . $_POST['titulo'] . "', '" . $_POST['instruccion'] . "', NOW(), '" . $_POST['fecha_limite'] . "', '" . $result["id"] . "')";
                                     $query = mysqli_query($link, $sql);
                                     if (!$query) {
                                         echo "Fallo consulta: " . mysqli_error($link);
@@ -57,7 +57,7 @@
                                         }
                                     }
                                     echo '<script>window.location.href = "clases.php";</script>';
-                                exit();
+                                    exit();
                                 }
                                 ?>
                                 <!-- Controlador -->
@@ -67,6 +67,23 @@
                 </div>
             </div>
         <?php } ?>
+    </div>
+
+    <!-- Horarios de la Clase -->
+    <div class="card mb-4">
+        <div class="card-header">
+            Horarios de la Clase
+        </div>
+        <div class="card-body">
+            <ul class="list-unstyled">
+                <?php foreach ($horarios as $horario) {
+                    $hora_inicio = date('H:i', strtotime($horario["hora_inicio"]));
+                    $hora_fin = date('H:i', strtotime($horario["hora_fin"]));
+                ?>
+                    <li><?php echo $horario["dia_semana"] . " de " . $hora_inicio . " a " . $hora_fin; ?></li>
+                <?php } ?>
+            </ul>
+        </div>
     </div>
 
     <!-- Lista de Tareas -->
