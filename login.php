@@ -1,25 +1,43 @@
 <?php
 require_once "includes/config.php";
 session_start();
-if(isset($_SESSION["usuario"])){
+
+if (isset($_SESSION["usuario"])) {
     header("Location: clases.php");
+    exit();
 }
-if (isset($_POST['name']) && isset($_POST['password'])) {
-    $name = $_POST['name'];
-    $pass = md5($_POST['password']);
-    $sql = "SELECT * FROM usuarios 
-            WHERE name = '" . $name . "'
-            AND password = '" . $pass . "'";
-    $result = mysqli_query($link, $sql);
-    
-    if (!$result) {
-        echo "Fallo consulta: " . mysqli_error($link);
-        exit();
-    }
-    if (mysqli_num_rows($result) == 1) {
-        $_SESSION['usuario'] = mysqli_fetch_assoc($result);
-        header('Location: index.php');
+
+$errors = [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST['name']) || empty($_POST['password'])) {
+        $errors[] = "Todos los campos son obligatorios.";
+    } else {
+        $name = $_POST['name'];
+        $password = $_POST['password'];
+        
+        $sql = "SELECT * FROM usuarios WHERE name = '" . mysqli_real_escape_string($link, $name) . "'";
+        $result = mysqli_query($link, $sql);
+        
+        if (!$result) {
+            $errors[] = "Fallo consulta: " . mysqli_error($link);
+        } else {
+            if (mysqli_num_rows($result) == 0) {
+                $errors[] = "El nombre de usuario no existe.";
+            } else {
+                $user = mysqli_fetch_assoc($result);
+                if (md5($password) != $user['password']) {
+                    $errors[] = "La contraseña es incorrecta.";
+                } else {
+                    $_SESSION['usuario'] = $user;
+                    header('Location: index.php');
+                    exit();
+                }
+            }
+        }
     }
 }
+
 $section = "login";
 require_once "views/login.php";
+?>
