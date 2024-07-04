@@ -31,7 +31,7 @@
                         <h5 class="card-title"><?php echo $tarea["nombre"] ?></h5>
                         <p class="card-text"><?php echo $tarea["descripcion"] ?></p>
                         <p class="card-text"><strong>Fecha límite:</strong> <?php echo $tarea["fecha_entrega"] ?></p>
-                        <?php if (isset($recursos) &&  count($recursos) > 0) {
+                        <?php if (isset($recursos) && count($recursos) > 0) {
                             for ($i = 0; $i < count($recursos); $i += 2) { ?>
                                 <div class="resource-card">
                                     <div class="card">
@@ -43,15 +43,14 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <!-- Puedes agregar más recursos aquí -->
                                 </div>
                         <?php }
                         } ?>
 
                         <!-- Botones de acción -->
-                        <?php if ($result["id_usuario_creador"] != $_SESSION["usuario"]["id"]) { ?>
+                        <?php if ($clase["id_usuario_creador"] != $_SESSION["usuario"]["id"]) { ?>
                             <div class="mt-4">
-                                <a href="#" class="btn btn-primary mr-2"><i class="fas fa-cloud-upload-alt"></i> Subir</a>o
+                                <a href="#" class="btn btn-primary mr-2"><i class="fas fa-cloud-upload-alt"></i> Subir</a>
                                 <a href="#" class="btn btn-success mr-2"><i class="fas fa-check"></i> Marcar como Completada</a>
                             </div>
                         <?php } else { ?>
@@ -66,17 +65,11 @@
         </div>
 
         <!-- Columna para la sección de comentarios -->
-        <?php if ($result["id_usuario_creador"] != $_SESSION["usuario"]["id"]) { ?>
+        <?php if ($clase["id_usuario_creador"] != $_SESSION["usuario"]["id"]) { ?>
 
             <div class="col-md-6">
                 <div class="comments-section">
                     <h2 class="mb-4">Comentarios</h2>
-
-                    <!-- Lista de Comentarios -->
-                    <!--<div class="comment">
-          <strong>José Martínez:</strong>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam suscipit metus at aliquet efficitur.</p>
-        </div>-->
 
                     <!-- Formulario para Agregar Comentario -->
                     <form>
