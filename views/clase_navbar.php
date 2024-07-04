@@ -9,7 +9,7 @@
                     <a class="nav-link" href="clase.php?id=<?php echo $_GET['id']?>">Tablero</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="clase_temas.php?id=<?php echo $_GET['id']?>">Temas</a>
+                    <a class="nav-link" href="temas.php?id=<?php echo $_GET['id']?>">Temas</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="clase_tareas.php?id=<?php echo $_GET['id']?>">Tareas</a>
