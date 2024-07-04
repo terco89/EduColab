@@ -17,6 +17,7 @@ if(isset($_POST['bg'])){
     $sql="UPDATE clase_usuario SET fondo='".$bg."' WHERE id_usuario='".$_SESSION['usuario']['id']."'";
     $query=mysqli_query($link,$sql);
 }
+
 // Obtener información de la clase
 $sql = "SELECT ClasesEscolares.id, nombre, descripcion, name 
         FROM ClasesEscolares 

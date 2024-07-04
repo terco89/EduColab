@@ -24,10 +24,12 @@
         </div>
     </div>
 
+
     <!-- Anuncios Recientes -->
     <div class="card mb-4">
         <div class="card-header">
             Anuncios Recientes
+
         </div>
         <div class="card-body">
             <h5 class="card-title">Nuevo Examen</h5>

@@ -4,7 +4,7 @@
         <p class="lead">Aquí podrás gestionar tus clases, asignar tareas, organizar tu calendario y más.</p>
         <hr class="my-4">
         <p>¿Listo para empezar?</p>
-        <a class="btn btn-primary btn-lg" href="clases.php" style=" background-color: #56c6b7; border-color:#56c6b7;">Ir a mis clases</a>
+        <a class="btn btn-primary btn-lg" href="login.php" style=" background-color: #56c6b7; border-color:#56c6b7;">Inicia sesion</a>
     </div>
     <div class="row">
     <div class="col-md-6">
