@@ -47,7 +47,7 @@
                             <h3 class="card-title"><?php echo $clases[$i]["nombre"] ?></h3>
                             <h6 class="card-subtitle mb-2 text-muted">Profesor: <?php if($clases[$i]['id_usuario_creador']!=$_SESSION['usuario']['id']){echo $clases[$i]["nombre"];}else{ echo "tu"; } ?></h6>
                             <hr>
-                            <p class="card-text"><?php echo $clases[$i]["descripcion"]; ?></p>
+                           
                             <p class="card-text">Fecha y hora: <?php echo $clases[$i]["fecha_horario"]; ?></p>
                             <a href="clase.php?id=<?php echo $clases[$i]["id"] ?>" class="btn btn-primary" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ir a la clase</a>
                         </div>

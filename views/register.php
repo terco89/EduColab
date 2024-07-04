@@ -15,6 +15,6 @@
             <div class="row button">
                 <input type="submit" value="Registrarse">
             </div>
-            <p class="message">Ya estas registrado? <a href="login.php">Inicia Sesión</a></p>
+            <p class="message">¿Ya estas registrado? <a href="login.php">Inicia Sesión</a></p>
         </form>
     </div>

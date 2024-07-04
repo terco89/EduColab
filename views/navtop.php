@@ -20,9 +20,9 @@
                     <a class="nav-link <?php if ($view == "calendario") echo "active" ?>" href="calendario.php"><i class="fa fa-calendar"></i> Calendario</a>
                 </li>
             <?php } else { ?>
-                <li class="nav-item active">
+                <!---li class="nav-item active">
                     <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
-                </li>
+                </li--->
             <?php } ?>
         </ul>
         <?php if (isset($_SESSION['usuario'])) { ?>
