@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-07-2024 a las 21:22:41
+-- Tiempo de generación: 04-07-2024 a las 21:15:36
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -54,7 +54,7 @@ CREATE TABLE `clasesescolares` (
 INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `codigo`, `id_usuario_creador`) VALUES
 (33, 'Lengua', 'Es lengua no vas a sumar ', 'rDONwY', 5),
 (34, 'weqw', 'qweqwe', 'YTP5oJ', 5),
-(35, 'mate', '', '7W8zIu', 3);
+(35, 'Ingles', '3123123123', 'JUzzj8', 3);
 
 -- --------------------------------------------------------
 
@@ -64,39 +64,40 @@ INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `codigo`, `id_usua
 
 CREATE TABLE `clase_usuario` (
   `id_usuario` int(11) NOT NULL,
-  `id_clase` int(11) NOT NULL
+  `id_clase` int(11) NOT NULL,
+  `fondo` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `clase_usuario`
 --
 
-INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`) VALUES
-(3, 1),
-(2, 1),
-(4, 1),
-(4, 6),
-(5, 12),
-(5, 13),
-(5, 14),
-(5, 16),
-(5, 18),
-(5, 20),
-(5, 22),
-(5, 0),
-(5, 0),
-(5, 0),
-(5, 27),
-(5, 0),
-(5, 0),
-(5, 28),
-(5, 29),
-(5, 30),
-(5, 31),
-(5, 32),
-(5, 33),
-(5, 34),
-(3, 35);
+INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`) VALUES
+(3, 1, 'bg2.jpg'),
+(2, 1, ''),
+(4, 1, ''),
+(4, 6, ''),
+(5, 12, ''),
+(5, 13, ''),
+(5, 14, ''),
+(5, 16, ''),
+(5, 18, ''),
+(5, 20, ''),
+(5, 22, ''),
+(5, 0, ''),
+(5, 0, ''),
+(5, 0, ''),
+(5, 27, ''),
+(5, 0, ''),
+(5, 0, ''),
+(5, 28, ''),
+(5, 29, ''),
+(5, 30, ''),
+(5, 31, ''),
+(5, 32, ''),
+(5, 33, ''),
+(5, 34, ''),
+(3, 35, 'bg2.jpg');
 
 -- --------------------------------------------------------
 
@@ -169,8 +170,7 @@ CREATE TABLE `horarios` (
 INSERT INTO `horarios` (`id_horario`, `id_clase`, `nombre_clase`, `dia_semana`, `hora_inicio`, `hora_fin`) VALUES
 (20, 33, 'Lengua', 'Lunes', '18:51:00', '21:51:00'),
 (21, 34, 'weqw', 'Viernes', '17:34:00', '19:34:00'),
-(22, 35, 'mate', 'Lunes', '10:00:00', '12:00:00'),
-(23, 35, 'mate', 'Martes', '10:00:00', '17:04:00');
+(22, 35, 'Ingles', 'Miércoles', '16:57:00', '17:59:00');
 
 -- --------------------------------------------------------
 
@@ -255,7 +255,7 @@ INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_subida`, `fecha_entr
 (49, 'Vocabulario Tecnología', 'Estudiar vocabulario relacionado con la tecnología moderna', '2024-06-24 12:00:00', '2024-07-08 14:00:00', 1),
 (50, 'Comprensión Lectora', 'Resolver los ejercicios de comprensión lectora del libro de texto', '2024-06-25 14:30:00', '2024-07-09 16:30:00', 1),
 (51, 'wefwefwefef', 'fwef', '2024-07-04 15:34:37', '2024-07-04 17:34:00', 33),
-(52, 'xdddddddd', 'tfgfgfgdrhfghfhfhd', '2024-07-04 16:21:05', '2024-07-04 16:21:00', 35);
+(52, 'ososjdfosdf', 'gdsfgsdfgsdf', '2024-07-04 15:57:04', '2024-07-10 17:59:00', 35);
 
 -- --------------------------------------------------------
 
