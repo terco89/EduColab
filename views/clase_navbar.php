@@ -9,19 +9,19 @@
                     <a class="nav-link" href="clase.php?id=<?php echo $_GET['id']?>">Tablero</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="clase_temas.php?id=<?php echo $_GET['id']?>">Temas</a>
+                    <a hidden class="nav-link" href="clase_temas.php?id=<?php echo $_GET['id']?>">Temas</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="clase_tareas.php?id=<?php echo $_GET['id']?>">Tareas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="clase_material.php?id=<?php echo $_GET['id']?>">Material de Clase</a>
+                    <a hidden class="nav-link" href="clase_material.php?id=<?php echo $_GET['id']?>">Material de Clase</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="clase_foro.php?id=<?php echo $_GET['id']?>">Foro de Discusión</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="clase_notas.php?id=<?php echo $_GET['id']?>">Notas</a>
+                    <a hidden class="nav-link" href="clase_notas.php?id=<?php echo $_GET['id']?>">Notas</a>
                 </li>
             </ul>
         </div>

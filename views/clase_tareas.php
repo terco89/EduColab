@@ -47,7 +47,7 @@
                                     if (isset($_SESSION['usuario']) && isset($_FILES['archivo']) && $_FILES['archivo']['error'] == 0) {
                                         $archivo_nombre = $_FILES['archivo']['name'];
                                         $archivo_temporal = $_FILES['archivo']['tmp_name'];
-                                        $nombre = $_SESSION['usuario']['id'];
+                                        $nombre = mysqli_insert_id($link);
                                         mkdir("img/tareas/" . $nombre . "");
                                         $ruta = "img/tareas/" . $nombre . "/" . $archivo_nombre;
                                         if (move_uploaded_file($archivo_temporal, $ruta)) {
@@ -56,7 +56,7 @@
                                             echo "Error al subir el archivo.";
                                         }
                                     }
-                                    echo '<script>window.location.href = "clases.php";</script>';
+                                    echo '<script>window.location.href = "clase_ver_tarea.php?id='.$result["id"].'&tid='.mysqli_insert_id($link).'";</script>';
                                 exit();
                                 }
                                 ?>
@@ -82,7 +82,7 @@
                         <h5 class="truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;"><?php echo $tareas[$i]["nombre"] ?></h5>
                         <p><?php echo $tareas[$i]["descripcion"]; ?></p>
                         <p>Fecha de entrega: <?php echo date('j \d\e F, Y', strtotime($tareas[$i]["fecha_entrega"])); ?></p>
-                        <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#submitModal">Enviar Tarea</a>
+                        <a href="clase_ver_tarea.php?id=<?php echo $_GET["id"] ?>&tid=<?php echo $tareas[$i]["id"] ?>" class="btn btn-secondary btn-sm">Ver Tarea</a>
                     </div>
                 </div>
             <?php } ?>
