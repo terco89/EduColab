@@ -8,9 +8,10 @@ body {
 }
 
 .card {
-    top: 50px ;
-    width: 900px;
-    height: 500px;
+    top:20px;
+    text-align:center;
+    width: 600px;
+    height: 400px;
     background-color: #efefef;
     border: none;
     cursor: pointer;
@@ -103,28 +104,10 @@ hr .new1 {
 .cent_tex{
     color: white;
     position: absolute;
-    top: 50%;
-    left: 50%;
+   height: 20px;
+   width: 40px;
     opacity: 0;
     transform: translate(-50%, -50%);
     transition: 0.3s filter ease-in-out;
     transition: all 0.5s
 }
-
-
-
-.fff{
-    position:relative;
-        top: 100px;         /* 100px para top en relacion con su position antigua*/
-      left: -300px;
-      text-align:center;
-    }
-   
-   
-    .ff3{
-        position: relative;  /* Ahora estamos listos para mover el element*/
-      top: -180px;         /* 100px para top en relacion con su position antigua*/
-      left: 160px;
-   
-   
-    }

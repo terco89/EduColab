@@ -54,9 +54,8 @@
         border: 0px solid #333;
         background-color: rgba(33, 33, 33, 0);
         filter: brightness(40%);
-        @media only screen and  (max-width:1200px) {
-            
-        }
+
+        @media only screen and (max-width:1200px) {}
     }
 </style>
 <br>
@@ -79,86 +78,80 @@
                 <span class="name mt-3" style="font-size:25px;"><?php echo $_SESSION['usuario']['name']; ?></span><br>
                 <span class="idd"><?php echo $_SESSION['usuario']['email']; ?></span>
                 <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span> </div>
-                <div class="d-flex flex-row justify-content-center align-items-center gap-2 rounded mt-4 date " style="text-align:center;display: inline-block">Cuenta creada el: Pongan fecha alta en la db </div>
-            </div>
-            <div class="ff3" style="border-left:1px solid #333; padding-left:75px; margin-left:-100px;">
-                <div class="d-flex flex-row align-items-center mt-3"> <span class="number">Mis datos:</span> </div>
-                <table>
-                    <tr>
-                        <th>
-                            <div class="d-flex flex-row mt-3" style="margin-left:70px;"> <span class="number">▸ Clases inscriptas: </div>
-                        </th>
-                        <th>
-                            <div class="d-flex flex-row mt-3" style="margin-left:30px;"><span class="number"><?php echo $clses['cic']; ?></span></div>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <div class="d-flex flex-row mt-3" style="margin-left:70px;"> <span class="number">▸ Clases creadas: </span></div>
-                        </th>
-                        <th>
-                            <div class="d-flex flex-row mt-3" style="margin-left:30px;"><span class="number"><?php echo $clses2['ce']; ?></span></div>
-                        </th>
-                    </tr>
-                </table>
-                <div class="d-flex flex-row align-items-center mt-3"> <span class="number">Descripción:</span> </div>
-                <div class="text mt-3"><span>DescripciónDescripciónDescripciónDescripciónDescripciónDescripción<br>DescripciónDescripciónDescripciónDescripciónDescripciónDescripción</span></div>
-                <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span><i class="fa fa-whatsapp"></i> </div>
-
+                <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span><span><i class="fa fa-instagram"></i></span> <i class="fa fa-whatsapp"></i> </div>
+    
+        
             </div>
 
+        </div>
 
 
-
-            <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editPhotoLabel">Editar foto</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div style="border-bottom: 1px solid black; border-top: 1px solid black;">
-                    <div class="Height">
-                        <form method="post" class="option-form" style="user-select:none">
-                            <br>
-                            <input type="image" src="img/foto-perfil/blank.png" class="void" disabled>
-                            <label class="lbl">Useless</label>
-                        </form>
+        <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editPhotoLabel">Editar foto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                    <div class="modal-body">
+                        <div style="border-bottom: 1px solid black;border-top: 1px solid black;">
+                            <div>
+                                <div class="Height">
+                                    <form method="post" class="option-form" style="user-select:none">
+                                        <br>
+                                        <input type="image" src="img/foto-perfil/blank.png" class="void" disabled>
+                                        <label class="lbl">Useless</label>
+                                    </form>
+                                </div>
+                                <div style="display: inline-block;">
+                                    <form method="post" class="option-form">
+                                        
+                                    <input type="hidden" name="alumno3" value="alumno3.png" class="Height">
+                                            <input title="Set this image as profile photo" type="image" id="alumno3" class="option-photo" name="alumno3" value="alumno3.png" alt="Login" src="img/foto_perfil/alumno3.png">
+                                            <label style="display: block; text-align: center;">Alumno 3</label>
+                                        </form>
+                                    </div>
+                            <div class="Height">
+                            <form method="post" class="option-form">
+                                        <input type="hidden" name="eve" value="eve.jpg" class="Height">
+                                        <input title="Set this image as profile photo" type="image" id="eve" class="option-photo" name="eve" value="eve.jpg" alt="Login" src="img/foto_perfil/eve.jpg">
+                                        <label style="display: block; text-align: center;">Alumno 4</label>
+                                    </form>
+                                </form>
+                            </div>
 
-                    <?php
-                    $images = [
-                        ["alumno", "alumno.jpg", "Alumno 1"],
-                        ["alumno2", "alumno2.png", "Alumno 2"],
-                        ["alumno3", "alumno3.png", "Alumno 3"],
-                        ["eve", "eve.jpg", "Alumno 4"],
-                        ["yo", "mvp.jpg", "Alumno 5"]
-                    ];
-                    foreach ($images as $image) {
-                        echo '<div style="display: inline-block;">
+                            <?php
+                            $images = [
+                                ["alumno", "alumno.jpg", "Alumno 1"],
+                                ["alumno2", "alumno2.png", "Alumno 2"],
+                                ["alumno3", "alumno3.png", "Alumno 3"],
+                                ["eve", "eve.jpg", "Alumno 4"],
+                                ["yo", "mvp.jpg", "Alumno 5"]
+                            ];
+                            foreach ($images as $image) {
+                                echo '<div style="display: inline-block;">
                                 <form method="post" class="option-form">
-                                    <input type="hidden" name="'.$image[0].'" value="'.$image[1].'" class="Height">
-                                    <input title="Set this image as profile photo" type="image" id="'.$image[0].'" class="option-photo" name="'.$image[0].'" value="'.$image[1].'" alt="Login" src="img/foto_perfil/'.$image[1].'">
-                                    <label style="display: block; text-align: center;">'.$image[2].'</label>
+                                    <input type="hidden" name="' . $image[0] . '" value="' . $image[1] . '" class="Height">
+                                    <input title="Set this image as profile photo" type="image" id="' . $image[0] . '" class="option-photo" name="' . $image[0] . '" value="' . $image[1] . '" alt="Login" src="img/foto_perfil/' . $image[1] . '">
+                                    <label style="display: block; text-align: center;">' . $image[2] . '</label>
                                 </form>
                               </div>';
-                    }
-                    ?>
-                    <div class="Height">
-                        <form method="post" class="option-form" style="user-select:none">
-                            <br>
-                            <input type="image" src="img/foto_perfil/blank.png" class="void" disabled>
-                            <label class="lbl">Useless</label>
-                        </form>
+                            }
+                            ?>
+                            <div class="Height">
+                                <form method="post" class="option-form" style="user-select:none">
+                                    <br>
+                                    <input type="image" src="img/foto_perfil/blank.png" class="void" disabled>
+                                    <label class="lbl">Useless</label>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-        </div>
-    </div>
 </div>
