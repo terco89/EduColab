@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-07-2024 a las 18:28:00
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.0.19
+-- Tiempo de generación: 04-07-2024 a las 20:49:44
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `asignaciones` (
   `titulo_asignacion` varchar(50) NOT NULL,
   `descripcion` varchar(400) NOT NULL,
   `fecha_entrega` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -43,27 +43,17 @@ CREATE TABLE `clasesescolares` (
   `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
-  `fecha_horario` varchar(50) NOT NULL,
   `codigo` varchar(6) NOT NULL,
   `id_usuario_creador` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `clasesescolares`
 --
 
-INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `fecha_horario`, `codigo`, `id_usuario_creador`) VALUES
-(1, 'Ingles', '', 'Miercoles 18:30-20:00', '5ZjmJW', 3),
-(2, 'Matemáticas', 'Introducción a conceptos fundamentales como álgebr', 'Miércoles 18:30-20:00', 'ABC123', 1),
-(3, 'Historia', 'Exploración de eventos clave en la historia mundia', 'Lunes 14:00-15:30', 'DEF456', 2),
-(4, 'Ciencias Naturales', 'Estudio de organismos vivos y sus interacciones co', 'Viernes 10:00-11:30', 'GHI789', 3),
-(5, 'Literatura', 'Análisis de obras literarias destacadas y estilos ', 'Martes 16:00-17:30', 'JKL012', 1),
-(6, 'Física', 'Estudio de las leyes fundamentales del movimiento ', 'Jueves 13:00-14:30', 'MNO345', 2),
-(7, 'Educación Física', 'Promoción de la actividad física y la salud median', 'Miércoles 15:00-16:30', 'PQR678', 3),
-(8, 'Arte', 'Exploración de diferentes formas de expresión artí', 'Martes 11:00-12:30', 'STU901', 1),
-(9, 'Inglés', 'Desarrollo de habilidades en conversación y compre', 'Jueves 18:00-19:30', 'VWX234', 2),
-(10, 'Programación', 'Introducción a la programación utilizando el lengu', 'Lunes 16:30-18:00', 'YZA567', 3),
-(11, 'Química', 'Estudio de las propiedades y transformaciones de l', 'Viernes 14:00-15:30', 'BCD890', 1);
+INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `codigo`, `id_usuario_creador`) VALUES
+(33, 'Lengua', 'Es lengua no vas a sumar ', 'rDONwY', 5),
+(34, 'weqw', 'qweqwe', 'YTP5oJ', 5);
 
 -- --------------------------------------------------------
 
@@ -73,20 +63,38 @@ INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `fecha_horario`, `
 
 CREATE TABLE `clase_usuario` (
   `id_usuario` int(11) NOT NULL,
-  `id_clase` int(11) NOT NULL,
-  `fondo` varchar(35) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id_clase` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `clase_usuario`
 --
 
-INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`) VALUES
-(3, 1, 'bg5.jpg'),
-(2, 1, ''),
-(4, 1, ''),
-(4, 6, ''),
-(3, 2, '');
+INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`) VALUES
+(3, 1),
+(2, 1),
+(4, 1),
+(4, 6),
+(5, 12),
+(5, 13),
+(5, 14),
+(5, 16),
+(5, 18),
+(5, 20),
+(5, 22),
+(5, 0),
+(5, 0),
+(5, 0),
+(5, 27),
+(5, 0),
+(5, 0),
+(5, 28),
+(5, 29),
+(5, 30),
+(5, 31),
+(5, 32),
+(5, 33),
+(5, 34);
 
 -- --------------------------------------------------------
 
@@ -99,29 +107,7 @@ CREATE TABLE `cursos` (
   `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(400) DEFAULT NULL,
   `codigo` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `discusiones`
---
-
-CREATE TABLE `discusiones` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `id_alumno` int(11) NOT NULL,
-  `id_clase` int(11) NOT NULL,
-  `tema` varchar(30) NOT NULL,
-  `contenido` varchar(300) NOT NULL,
-  `fecha_creacion` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `discusiones`
---
-
-INSERT INTO `discusiones` (`id`, `id_alumno`, `id_clase`, `tema`, `contenido`, `fecha_creacion`) VALUES
-(1, 4, 1, 'Duda sobre el uso de \"used to\"', 'Tengo una pregunta sobre el uso de \"used to\" y \"would\" en inglés para hablar sobre hábitos pasados. He leído algunas explicaciones, pero aún no estoy seguro de cuándo debería usar uno u otro. ¿Podrían explicarme las diferencias y darme ejemplos para cada uno?', '2024-07-04 12:40:42');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -134,7 +120,30 @@ CREATE TABLE `entregas` (
   `enlace` varchar(50) NOT NULL,
   `calificacion` int(11) NOT NULL,
   `estado` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `horarios`
+--
+
+CREATE TABLE `horarios` (
+  `id_horario` int(11) NOT NULL,
+  `id_clase` int(11) NOT NULL,
+  `nombre_clase` varchar(100) NOT NULL,
+  `dia_semana` varchar(20) NOT NULL,
+  `hora_inicio` time NOT NULL,
+  `hora_fin` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `horarios`
+--
+
+INSERT INTO `horarios` (`id_horario`, `id_clase`, `nombre_clase`, `dia_semana`, `hora_inicio`, `hora_fin`) VALUES
+(20, 33, 'Lengua', 'Lunes', '18:51:00', '21:51:00'),
+(21, 34, 'weqw', 'Viernes', '17:34:00', '19:34:00');
 
 -- --------------------------------------------------------
 
@@ -147,30 +156,7 @@ CREATE TABLE `materiales` (
   `descripcion` varchar(400) NOT NULL,
   `tipo_material` varchar(50) NOT NULL,
   `enlace_archivo` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mensajes`
---
-
-CREATE TABLE `mensajes` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `id_discusion` int(11) NOT NULL,
-  `mensaje` varchar(300) NOT NULL,
-  `fecha_creacion` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `mensajes`
---
-
-INSERT INTO `mensajes` (`id`, `id_usuario`, `id_discusion`, `mensaje`, `fecha_creacion`) VALUES
-(1, 4, 1, 'nose', '2024-07-04 13:09:30'),
-(2, 4, 1, 'a', '2024-07-04 13:26:43'),
-(3, 4, 1, 'xd', '2024-07-04 13:26:52');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -180,12 +166,12 @@ INSERT INTO `mensajes` (`id`, `id_usuario`, `id_discusion`, `mensaje`, `fecha_cr
 
 CREATE TABLE `tareas` (
   `id` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(50) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
   `descripcion` varchar(1000) NOT NULL,
   `fecha_subida` datetime NOT NULL,
   `fecha_entrega` datetime NOT NULL,
   `clase_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tareas`
@@ -212,16 +198,12 @@ INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_subida`, `fecha_entr
 (43, 'Dramatización Edad Media', 'Preparar una dramatización sobre la vida en la Edad Media', '2024-06-18 13:20:00', '2024-06-29 15:20:00', 18),
 (44, 'Trigonometría Cuaderno', 'Resolver los ejercicios de trigonometría del cuaderno', '2024-06-19 09:15:00', '2024-06-27 11:15:00', 19),
 (45, 'Ensayo Globalización', 'Realizar un ensayo sobre el impacto de la globalización', '2024-06-20 08:30:00', '2024-07-03 10:30:00', 20),
-(60, 'No rompan las bolas pendejos de mierda', 'No rompan las bolas pendejos de mierda', '2024-07-04 02:47:18', '2024-07-05 03:50:00', 1),
-(64, 'Hola', 'Hola', '2024-07-04 03:05:24', '2024-07-12 05:07:00', 1),
-(68, 'UwU', 'UwU', '2024-07-04 03:19:24', '2024-07-10 06:22:00', 1),
-(69, 'Hola', 'Hola', '2024-07-04 03:20:26', '2024-07-08 06:23:00', 1),
-(70, 'sdsdsdsd', 'dssdsds', '2024-07-04 03:29:59', '2024-07-09 06:32:00', 1),
-(71, 'Porfa 1', 'Porfa 1', '2024-07-04 03:36:48', '2024-07-11 06:39:00', 1),
-(72, 'Porfa2', 'Porfa2', '2024-07-04 03:37:51', '2024-07-05 05:39:00', 1),
-(73, 'ewjefss', 'sldkfmd', '2024-07-04 03:44:24', '2024-07-12 05:46:00', 1),
-(74, 'aijsdkmasd', 'aksmdasd', '2024-07-04 03:48:45', '2024-07-15 06:48:00', 1),
-(75, 'porfavor dale', 'PORFAVOR DALEE', '2024-07-04 03:54:22', '2024-07-18 06:57:00', 1);
+(46, 'Ensayo Influencia del Cine', 'Escribir un ensayo sobre la influencia del cine en la cultura popular', '2024-06-21 10:00:00', '2024-07-05 12:00:00', 1),
+(47, 'Presentación Gramática Pasado ', 'Realizar una presentación sobre la gramática del pasado simple', '2024-06-22 09:30:00', '2024-07-06 11:30:00', 1),
+(48, 'Dramatización Shakespeare', 'Preparar una dramatización de una escena de una obra de Shakespeare', '2024-06-23 08:45:00', '2024-07-07 10:45:00', 1),
+(49, 'Vocabulario Tecnología', 'Estudiar vocabulario relacionado con la tecnología moderna', '2024-06-24 12:00:00', '2024-07-08 14:00:00', 1),
+(50, 'Comprensión Lectora', 'Resolver los ejercicios de comprensión lectora del libro de texto', '2024-06-25 14:30:00', '2024-07-09 16:30:00', 1),
+(51, 'wefwefwefef', 'fwef', '2024-07-04 15:34:37', '2024-07-04 17:34:00', 33);
 
 -- --------------------------------------------------------
 
@@ -233,7 +215,7 @@ CREATE TABLE `tarea_usuario` (
   `tarea_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `estado` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tarea_usuario`
@@ -272,19 +254,22 @@ CREATE TABLE `usuarios` (
   `name` varchar(150) NOT NULL,
   `password` varchar(150) NOT NULL,
   `email` varchar(150) NOT NULL,
+  `rol` varchar(30) NOT NULL,
   `img` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `name`, `password`, `email`, `img`) VALUES
-(1, 'LucaOshiro', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', ''),
-(2, 'Santiago', '04217c4d7e246e38b0d7014ee109755b', 'sdmatayoshi@gmail.com', 'Profesor.jpg'),
-(3, 'Luh9090', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'alumno.jpg'),
-(4, 'elgabo', '38b1afebce3ecc702e3e04071ec2b94f', 'elgabo@gmail.com', 'alumno.jpg'),
-(5, 'nose', '41d1de28e96dc1cde568d3b068fa17bb', 'nose@nose.com', 'alumno.jpg');
+INSERT INTO `usuarios` (`id`, `name`, `password`, `email`, `rol`, `img`) VALUES
+(1, 'LucaOshiro', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'alumno', ''),
+(2, 'Santiago', '04217c4d7e246e38b0d7014ee109755b', 'sdmatayoshi@gmail.com', 'alumno', 'Profesor.jpg'),
+(3, 'Luh9090', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'profesor', 'Profesor.jpg'),
+(4, 'elgabo', '38b1afebce3ecc702e3e04071ec2b94f', 'elgabo@gmail.com', 'alumno', 'alumno.jpg'),
+(5, 'lol', '202cb962ac59075b964b07152d234b70', 'lol@gmail.com', 'alumno', 'alumno.jpg'),
+(6, 'qwe', '202cb962ac59075b964b07152d234b70', 'qwe@gmail.com', 'alumno', 'alumno.jpg'),
+(7, 'qwe', '76d80224611fc919a5d54f0ff9fba446', 'wqe', 'alumno', 'alumno.jpg');
 
 -- --------------------------------------------------------
 
@@ -297,7 +282,7 @@ CREATE TABLE `usuarios_cursos` (
   `id_curso` int(11) NOT NULL,
   `fecha_inscripcion` date NOT NULL,
   `estado_inscripcion` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tablas volcadas
@@ -310,16 +295,11 @@ ALTER TABLE `clasesescolares`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `discusiones`
+-- Indices de la tabla `horarios`
 --
-ALTER TABLE `discusiones`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `mensajes`
---
-ALTER TABLE `mensajes`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `horarios`
+  ADD PRIMARY KEY (`id_horario`),
+  ADD KEY `id_clase` (`id_clase`);
 
 --
 -- Indices de la tabla `tareas`
@@ -341,31 +321,35 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clasesescolares`
 --
 ALTER TABLE `clasesescolares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
--- AUTO_INCREMENT de la tabla `discusiones`
+-- AUTO_INCREMENT de la tabla `horarios`
 --
-ALTER TABLE `discusiones`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `mensajes`
---
-ALTER TABLE `mensajes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `horarios`
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `horarios`
+--
+ALTER TABLE `horarios`
+  ADD CONSTRAINT `horarios_ibfk_1` FOREIGN KEY (`id_clase`) REFERENCES `clasesescolares` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
