@@ -1,22 +1,46 @@
 <?php
 require_once "includes/config.php";
+
+$view = "clases";
 session_start();
 if (!isset($_SESSION["usuario"])) {
     header("Location: index.php");
+    exit();
 }
-$view = "clases";
+
 $id_usuario = $_SESSION["usuario"]["id"];
-$sql = "SELECT ClasesEscolares.* FROM ClasesEscolares 
-            INNER JOIN clase_usuario ON ClasesEscolares.id = clase_usuario.id_clase 
-            WHERE clase_usuario.id_usuario = $id_usuario";
+$sql = "SELECT c.*, h.dia_semana, h.hora_inicio, h.hora_fin 
+        FROM clasesescolares c
+        INNER JOIN horarios h ON c.id = h.id_clase
+        INNER JOIN clase_usuario cu ON c.id = cu.id_clase
+        WHERE cu.id_usuario = $id_usuario";
 
 $result = mysqli_query($link, $sql);
-$clases = array();
-
-if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $clases[] = $row;
-    }
+if (!$result) {
+    echo "Fallo consulta: " . mysqli_error($link);
+    exit();
 }
 
+$clases = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    $clase_id = $row['id'];
+    if (!isset($clases[$clase_id])) {
+        $clases[$clase_id] = [
+            'id' => $row['id'],
+            'nombre' => $row['nombre'],
+            'descripcion' => $row['descripcion'],
+            'codigo' => $row['codigo'],
+            'id_usuario_creador' => $row['id_usuario_creador'],
+            'horarios' => []
+        ];
+    }
+    $clases[$clase_id]['horarios'][] = [
+        'dia_semana' => $row['dia_semana'],
+        'hora_inicio' => $row['hora_inicio'],
+        'hora_fin' => $row['hora_fin']
+    ];
+}
+
+
 require_once "views/layout.php";
+?>

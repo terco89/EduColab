@@ -9,7 +9,11 @@
                     <a class="nav-link" href="clase.php?id=<?php echo $_GET['id']?>">Tablero</a>
                 </li>
                 <li class="nav-item">
+<<<<<<< HEAD
                     <a hidden class="nav-link" href="clase_temas.php?id=<?php echo $_GET['id']?>">Temas</a>
+=======
+                    <a class="nav-link" href="temas.php?id=<?php echo $_GET['id']?>">Temas</a>
+>>>>>>> 86305dc5ce32d0f1c76179996cb4b06f069bb6c0
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="clase_tareas.php?id=<?php echo $_GET['id']?>">Tareas</a>
