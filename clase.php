@@ -12,12 +12,14 @@ if (!isset($_GET["id"])) {
 
 require_once "includes/config.php";
 
-if(isset($_POST['bg'])){
-    $bg=$_POST['bg'].".jpg";
-    $sql="UPDATE clase_usuario SET fondo='".$bg."' WHERE id_usuario='".$_SESSION['usuario']['id']."'";
-    $query=mysqli_query($link,$sql);
+if (isset($_POST['bg'])) {
+    $bg = $_POST['bg'] . ".jpg";
+    $sql = "UPDATE clase_usuario SET fondo='" . $bg . "' WHERE id_usuario='" . $_SESSION['usuario']['id'] . "'";
+    $result = mysqli_query($link, $sql);
 }
-
+$sql = "SELECT fondo FROM clase_usuario WHERE id_usuario='" . $_SESSION['usuario']['id'] . "'";
+$query = mysqli_query($link, $sql);
+$fondo = mysqli_fetch_assoc($query);
 // Obtener información de la clase
 $sql = "SELECT ClasesEscolares.id, nombre, descripcion, name 
         FROM ClasesEscolares 
@@ -38,4 +40,3 @@ $horarios = mysqli_query($link, $sql);
 
 $view = "clase";
 require_once "views/layout.php";
-?>
