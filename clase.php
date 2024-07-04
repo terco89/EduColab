@@ -16,6 +16,8 @@ if(isset($_POST['bg'])){
     $query=mysqli_query($link,$sql);
 }
 $sql="SELECT fondo FROM clase_usuario WHERE id_usuario='".$_SESSION['usuario']['id']."'";
+$query=mysqli_query($link,$sql);
+$fondo=mysqli_fetch_assoc($query);
 
 $sql = "select ClasesEscolares.id,nombre,descripcion,fecha_horario,name from ClasesEscolares inner join usuarios on ClasesEscolares.id_usuario_creador = usuarios.id where ClasesEscolares.id = ".$_GET["id"];
 $result = mysqli_fetch_assoc(mysqli_query($link, $sql));

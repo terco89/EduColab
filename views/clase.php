@@ -25,7 +25,7 @@
     <!-- Main Container -->
     <div class="container mt-5">
         <!-- Header -->
-        <div class="jumbotron">
+        <div class="jumbotron" style="background-image:url(img/fondos/<?php echo $fondo['fondo'] ?>);">
             <h1 class="display-4"><?php echo $result["nombre"] ?></h1>
             <p class="lead"><?php echo $result["descripcion"]?></p>
             <p class="lead">Horario: <?php echo $result["fecha_horario"]?></p>

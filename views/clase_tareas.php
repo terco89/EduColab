@@ -1,62 +1,122 @@
 <?php require_once "views/clase_navbar.php"; ?>
 
 
-    <!-- Main Container -->
-    <div class="container mt-5">
-        <!-- Header -->
-        <div class="jumbotron">
-            <h1 class="display-4">Tareas</h1>
-            <p class="lead">Aquí encontrarás todas las tareas asignadas y podrás enviar tus trabajos.</p>
-        </div>
-
-        <!-- Lista de Tareas -->
-        <div class="card mb-4">
-            <div class="card-header">
-                Lista
+<!-- Main Container -->
+<div class="container mt-5">
+    <!-- Header -->
+    <div class="jumbotron">
+        <h1 class="display-4">Tareas</h1>
+        <p class="lead">Aquí encontrarás todas las tareas asignadas y podrás enviar tus trabajos.</p>
+        <?php if ($_SESSION['usuario']['id'] == $result["id_usuario_creador"]) { ?>
+            <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#submitModal">Crear tarea</a>
+            <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <h4>Titulo</h4>
+                                    <input type="text" class="form-control" name="titulo" maxlength="50" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="instruccion">Instrucciones</label>
+                                    <textarea class="form-control" name="instruccion" rows="4" maxlength="250" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="archivo">Selecciona un archivo:</label>
+                                    <input type="file" id="archivo" name="archivo" accept=".pdf, .doc, .docx, .txt" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fecha_limite">Fecha límite</label>
+                                    <input type="datetime-local" class="form-control" name="fecha_limite" required>
+                                </div>
+                                <button type="submit" class="btn btn-secondary">Crear Tarea</button>
+                                <!-- Controlador aca porque sino no funciona-->
+                                <?php if (isset($_POST['titulo'])) {
+                                    $sql = "INSERT INTO tareas (id,nombre,descripcion,fecha_subida,fecha_entrega,clase_id) VALUES (null,'" . $_POST['titulo'] . "','" . $_POST['instruccion'] . "',NOW(),'" . $_POST['fecha_limite'] . "', '" . $result["id"] . "' )";
+                                    $query = mysqli_query($link, $sql);
+                                    if (!$query) {
+                                        echo "Fallo consulta: " . mysqli_error($link);
+                                        exit();
+                                    }
+                                    if (isset($_SESSION['usuario']) && isset($_FILES['archivo']) && $_FILES['archivo']['error'] == 0) {
+                                        $archivo_nombre = $_FILES['archivo']['name'];
+                                        $archivo_temporal = $_FILES['archivo']['tmp_name'];
+                                        $nombre = $_SESSION['usuario']['id'];
+                                        mkdir("img/tareas/" . $nombre . "");
+                                        $ruta = "img/tareas/" . $nombre . "/" . $archivo_nombre;
+                                        if (move_uploaded_file($archivo_temporal, $ruta)) {
+                                            echo "El archivo se ha subido correctamente.";
+                                        } else {
+                                            echo "Error al subir el archivo.";
+                                        }
+                                    }
+                                    echo '<script>window.location.href = "clases.php";</script>';
+                                exit();
+                                }
+                                ?>
+                                <!-- Controlador -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <?php for($i = 0; $i < count($tareas); $i++){ ?>                
+        <?php } ?>
+    </div>
+
+    <!-- Lista de Tareas -->
+    <div class="card mb-4">
+        <div class="card-header">
+            Lista
+        </div>
+        <div class="card-body">
+            <?php for ($i = 0; $i < count($tareas); $i++) { ?>
                 <div class="media mb-3">
                     <img src="https://via.placeholder.com/64" class="mr-3" alt="User Avatar">
                     <div class="media-body">
-                        <h5 class="mt-0"><?php echo $tareas[$i]["nombre"]?></h5>
+                        <h5 class="truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;"><?php echo $tareas[$i]["nombre"] ?></h5>
                         <p><?php echo $tareas[$i]["descripcion"]; ?></p>
                         <p>Fecha de entrega: <?php echo date('j \d\e F, Y', strtotime($tareas[$i]["fecha_entrega"])); ?></p>
                         <a href="#" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#submitModal">Enviar Tarea</a>
                     </div>
                 </div>
-                <?php } ?>
-            </div>
+            <?php } ?>
         </div>
     </div>
+</div>
 
-    <!-- Modal para Enviar Tarea -->
-    <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="submitModalLabel">Enviar Tarea</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="taskTitle">Título de la Tarea</label>
-                            <input type="text" class="form-control" id="taskTitle" placeholder="Ingresa el título de la tarea">
-                        </div>
-                        <div class="form-group">
-                            <label for="taskFile">Subir Archivo</label>
-                            <input type="file" class="form-control-file" id="taskFile">
-                        </div>
-                        <div class="form-group">
-                            <label for="taskComments">Comentarios</label>
-                            <textarea class="form-control" id="taskComments" rows="3" placeholder="Agrega algún comentario (opcional)"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enviar Tarea</button>
-                    </form>
-                </div>
+<!-- Modal para Enviar Tarea -->
+<div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="submitModalLabel">Enviar Tarea</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="taskTitle">Título de la Tarea</label>
+                        <input type="text" class="form-control" id="taskTitle" placeholder="Ingresa el título de la tarea">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskFile">Subir Archivo</label>
+                        <input type="file" class="form-control-file" id="taskFile">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskComments">Comentarios</label>
+                        <textarea class="form-control" id="taskComments" rows="3" placeholder="Agrega algún comentario (opcional)"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Tarea</button>
+                </form>
             </div>
         </div>
     </div>
+</div>

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-06-2024 a las 22:48:19
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 04-07-2024 a las 12:59:20
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -73,18 +73,20 @@ INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `fecha_horario`, `
 
 CREATE TABLE `clase_usuario` (
   `id_usuario` int(11) NOT NULL,
-  `id_clase` int(11) NOT NULL
+  `id_clase` int(11) NOT NULL,
+  `fondo` varchar(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `clase_usuario`
 --
 
-INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`) VALUES
-(3, 1),
-(2, 1),
-(4, 1),
-(4, 6);
+INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`) VALUES
+(3, 1, 'bg5.jpg'),
+(2, 1, ''),
+(4, 1, ''),
+(4, 6, ''),
+(3, 2, '');
 
 -- --------------------------------------------------------
 
@@ -133,7 +135,7 @@ CREATE TABLE `materiales` (
 
 CREATE TABLE `tareas` (
   `id` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(30) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(1000) NOT NULL,
   `fecha_subida` datetime NOT NULL,
   `fecha_entrega` datetime NOT NULL,
@@ -165,11 +167,16 @@ INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_subida`, `fecha_entr
 (43, 'Dramatización Edad Media', 'Preparar una dramatización sobre la vida en la Edad Media', '2024-06-18 13:20:00', '2024-06-29 15:20:00', 18),
 (44, 'Trigonometría Cuaderno', 'Resolver los ejercicios de trigonometría del cuaderno', '2024-06-19 09:15:00', '2024-06-27 11:15:00', 19),
 (45, 'Ensayo Globalización', 'Realizar un ensayo sobre el impacto de la globalización', '2024-06-20 08:30:00', '2024-07-03 10:30:00', 20),
-(46, 'Ensayo Influencia del Cine', 'Escribir un ensayo sobre la influencia del cine en la cultura popular', '2024-06-21 10:00:00', '2024-07-05 12:00:00', 1),
-(47, 'Presentación Gramática Pasado ', 'Realizar una presentación sobre la gramática del pasado simple', '2024-06-22 09:30:00', '2024-07-06 11:30:00', 1),
-(48, 'Dramatización Shakespeare', 'Preparar una dramatización de una escena de una obra de Shakespeare', '2024-06-23 08:45:00', '2024-07-07 10:45:00', 1),
-(49, 'Vocabulario Tecnología', 'Estudiar vocabulario relacionado con la tecnología moderna', '2024-06-24 12:00:00', '2024-07-08 14:00:00', 1),
-(50, 'Comprensión Lectora', 'Resolver los ejercicios de comprensión lectora del libro de texto', '2024-06-25 14:30:00', '2024-07-09 16:30:00', 1);
+(60, 'No rompan las bolas pendejos de mierda', 'No rompan las bolas pendejos de mierda', '2024-07-04 02:47:18', '2024-07-05 03:50:00', 1),
+(64, 'Hola', 'Hola', '2024-07-04 03:05:24', '2024-07-12 05:07:00', 1),
+(68, 'UwU', 'UwU', '2024-07-04 03:19:24', '2024-07-10 06:22:00', 1),
+(69, 'Hola', 'Hola', '2024-07-04 03:20:26', '2024-07-08 06:23:00', 1),
+(70, 'sdsdsdsd', 'dssdsds', '2024-07-04 03:29:59', '2024-07-09 06:32:00', 1),
+(71, 'Porfa 1', 'Porfa 1', '2024-07-04 03:36:48', '2024-07-11 06:39:00', 1),
+(72, 'Porfa2', 'Porfa2', '2024-07-04 03:37:51', '2024-07-05 05:39:00', 1),
+(73, 'ewjefss', 'sldkfmd', '2024-07-04 03:44:24', '2024-07-12 05:46:00', 1),
+(74, 'aijsdkmasd', 'aksmdasd', '2024-07-04 03:48:45', '2024-07-15 06:48:00', 1),
+(75, 'porfavor dale', 'PORFAVOR DALEE', '2024-07-04 03:54:22', '2024-07-18 06:57:00', 1);
 
 -- --------------------------------------------------------
 
@@ -231,7 +238,7 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `name`, `password`, `email`, `rol`, `img`) VALUES
 (1, 'LucaOshiro', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'alumno', ''),
 (2, 'Santiago', '04217c4d7e246e38b0d7014ee109755b', 'sdmatayoshi@gmail.com', 'alumno', 'Profesor.jpg'),
-(3, 'Luh9090', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'profesor', 'Profesor.jpg'),
+(3, 'Luh9090', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'profesor', 'alumno.jpg'),
 (4, 'elgabo', '38b1afebce3ecc702e3e04071ec2b94f', 'elgabo@gmail.com', 'alumno', 'alumno.jpg');
 
 -- --------------------------------------------------------
@@ -283,7 +290,7 @@ ALTER TABLE `clasesescolares`
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
