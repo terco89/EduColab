@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-07-2024 a las 17:10:43
+-- Tiempo de generación: 04-07-2024 a las 18:28:00
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.0.19
 
@@ -104,6 +104,28 @@ CREATE TABLE `cursos` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `discusiones`
+--
+
+CREATE TABLE `discusiones` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_alumno` int(11) NOT NULL,
+  `id_clase` int(11) NOT NULL,
+  `tema` varchar(30) NOT NULL,
+  `contenido` varchar(300) NOT NULL,
+  `fecha_creacion` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `discusiones`
+--
+
+INSERT INTO `discusiones` (`id`, `id_alumno`, `id_clase`, `tema`, `contenido`, `fecha_creacion`) VALUES
+(1, 4, 1, 'Duda sobre el uso de \"used to\"', 'Tengo una pregunta sobre el uso de \"used to\" y \"would\" en inglés para hablar sobre hábitos pasados. He leído algunas explicaciones, pero aún no estoy seguro de cuándo debería usar uno u otro. ¿Podrían explicarme las diferencias y darme ejemplos para cada uno?', '2024-07-04 12:40:42');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `entregas`
 --
 
@@ -126,6 +148,29 @@ CREATE TABLE `materiales` (
   `tipo_material` varchar(50) NOT NULL,
   `enlace_archivo` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mensajes`
+--
+
+CREATE TABLE `mensajes` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_discusion` int(11) NOT NULL,
+  `mensaje` varchar(300) NOT NULL,
+  `fecha_creacion` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `mensajes`
+--
+
+INSERT INTO `mensajes` (`id`, `id_usuario`, `id_discusion`, `mensaje`, `fecha_creacion`) VALUES
+(1, 4, 1, 'nose', '2024-07-04 13:09:30'),
+(2, 4, 1, 'a', '2024-07-04 13:26:43'),
+(3, 4, 1, 'xd', '2024-07-04 13:26:52');
 
 -- --------------------------------------------------------
 
@@ -238,7 +283,8 @@ INSERT INTO `usuarios` (`id`, `name`, `password`, `email`, `img`) VALUES
 (1, 'LucaOshiro', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', ''),
 (2, 'Santiago', '04217c4d7e246e38b0d7014ee109755b', 'sdmatayoshi@gmail.com', 'Profesor.jpg'),
 (3, 'Luh9090', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'alumno.jpg'),
-(4, 'elgabo', '38b1afebce3ecc702e3e04071ec2b94f', 'elgabo@gmail.com', 'alumno.jpg');
+(4, 'elgabo', '38b1afebce3ecc702e3e04071ec2b94f', 'elgabo@gmail.com', 'alumno.jpg'),
+(5, 'nose', '41d1de28e96dc1cde568d3b068fa17bb', 'nose@nose.com', 'alumno.jpg');
 
 -- --------------------------------------------------------
 
@@ -264,6 +310,18 @@ ALTER TABLE `clasesescolares`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `discusiones`
+--
+ALTER TABLE `discusiones`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `mensajes`
+--
+ALTER TABLE `mensajes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `tareas`
 --
 ALTER TABLE `tareas`
@@ -286,6 +344,18 @@ ALTER TABLE `clasesescolares`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT de la tabla `discusiones`
+--
+ALTER TABLE `discusiones`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `mensajes`
+--
+ALTER TABLE `mensajes`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
@@ -295,7 +365,7 @@ ALTER TABLE `tareas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
