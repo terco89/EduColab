@@ -3,7 +3,7 @@
   <h1>Tareas</h1>
   <br>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="card">
         <div class="card-header bg-danger text-light">
           <h5 class="card-title">Tareas Pendientes</h5>
@@ -19,10 +19,10 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4 ">
       <div class="card">
-        <div class="card-header bg-warning text-light">
-          <h5 class="card-title">Tareas En Progreso</h5>
+        <div class="card-header bg-success text-light">
+          <h5 class="card-title">Tareas Completadas</h5>
         </div>
         <div class="card-body">
           <ul class="list-group">
@@ -34,22 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 mt-4">
-      <div class="card">
-        <div class="card-header bg-success text-light">
-          <h5 class="card-title">Tareas Completadas</h5>
-        </div>
-        <div class="card-body">
-          <ul class="list-group">
-          <?php for($i = 0; $i < count($tareas); $i++){ 
-              if(intval($tareas[$i]["est"]) == 3){?>
-            <li class="list-group-item tarea"><?php echo $tareas[$i]["n"] ?></li>
-            <?php } } ?>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6 mt-4">
+    <div class="col-md-4">
       <div class="card">
         <div class="card-header bg-info  text-light">
           <h5 class="card-title">Tareas Corregidas</h5>
@@ -57,7 +42,7 @@
         <div class="card-body">
           <ul class="list-group">
           <?php for($i = 0; $i < count($tareas); $i++){ 
-              if(intval($tareas[$i]["est"]) == 4){?>
+              if(intval($tareas[$i]["est"]) == 3){?>
             <li class="list-group-item tarea"><?php echo $tareas[$i]["n"] ?></li>
             <?php } } ?>
           </ul>

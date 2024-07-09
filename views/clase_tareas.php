@@ -44,6 +44,24 @@
                                         echo "Fallo consulta: " . mysqli_error($link);
                                         exit();
                                     }
+                                    $tid = mysqli_insert_id($link);
+                                    $sql = "select id_usuario from clase_usuario where id_clase = " . $result["id"];
+                                    $query = mysqli_query($link, $sql);
+                                    $ids = array();
+                                    if (mysqli_num_rows($query) > 0) {
+                                        while ($row = mysqli_fetch_assoc($query)) {
+                                            $ids[] = $row;
+                                        }
+                                    }
+                                    for ($i = 0; $i < count($ids); $i++) {
+                                        $sql = "INSERT INTO tarea_usuario(tarea_id,usuario_id,estado) VALUES($tid," . $ids[$i]["id_usuario"] . ",1)";
+                                        $query = mysqli_query($link, $sql);
+                                        if (!$query) {
+                                            echo "Fallo consulta: " . mysqli_error($link);
+                                            exit();
+                                        }
+                                    }
+
                                     if (isset($_SESSION['usuario']) && isset($_FILES['archivo']) && $_FILES['archivo']['error'] == 0) {
                                         $archivo_nombre = $_FILES['archivo']['name'];
                                         $archivo_temporal = $_FILES['archivo']['tmp_name'];
@@ -56,8 +74,8 @@
                                             echo "Error al subir el archivo.";
                                         }
                                     }
-                                    echo '<script>window.location.href = "clase_ver_tarea.php?id='.$result["id"].'&tid='.mysqli_insert_id($link).'";</script>';
-                                exit();
+                                    echo '<script>window.location.href = "clase_ver_tarea.php?id=' . $result["id"] . '&tid=' . mysqli_insert_id($link) . '";</script>';
+                                    exit();
                                 }
                                 ?>
                                 <!-- Controlador -->

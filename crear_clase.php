@@ -33,12 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nombre'])) {
     }
 
     $id_clase = mysqli_insert_id($link);
-    $sql2 = "INSERT INTO clase_usuario (id_usuario, id_clase) VALUES ('$id_usuario_creador', '$id_clase')";
-    $query2 = mysqli_query($link, $sql2);
-    if (!$query2) {
-        echo "Fallo consulta: " . mysqli_error($link);
-        exit();
-    }
 
     if (!empty($_POST['dias_semana']) && !empty($_POST['hora_inicio']) && !empty($_POST['hora_fin'])) {
         $dias_semana = $_POST['dias_semana'];
