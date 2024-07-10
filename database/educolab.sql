@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-07-2024 a las 21:15:36
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 10-07-2024 a las 15:44:09
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -73,7 +73,7 @@ CREATE TABLE `clase_usuario` (
 --
 
 INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`) VALUES
-(3, 1, 'bg2.jpg'),
+(3, 1, 'bg1.jpg'),
 (2, 1, ''),
 (4, 1, ''),
 (4, 6, ''),
@@ -97,7 +97,9 @@ INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`) VALUES
 (5, 32, ''),
 (5, 33, ''),
 (5, 34, ''),
-(3, 35, 'bg2.jpg');
+(3, 35, 'bg1.jpg'),
+(3, 33, 'bg1.jpg'),
+(1, 35, '');
 
 -- --------------------------------------------------------
 
@@ -255,7 +257,11 @@ INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_subida`, `fecha_entr
 (49, 'Vocabulario Tecnología', 'Estudiar vocabulario relacionado con la tecnología moderna', '2024-06-24 12:00:00', '2024-07-08 14:00:00', 1),
 (50, 'Comprensión Lectora', 'Resolver los ejercicios de comprensión lectora del libro de texto', '2024-06-25 14:30:00', '2024-07-09 16:30:00', 1),
 (51, 'wefwefwefef', 'fwef', '2024-07-04 15:34:37', '2024-07-04 17:34:00', 33),
-(52, 'ososjdfosdf', 'gdsfgsdfgsdf', '2024-07-04 15:57:04', '2024-07-10 17:59:00', 35);
+(52, 'ososjdfosdf', 'gdsfgsdfgsdf', '2024-07-04 15:57:04', '2024-07-10 17:59:00', 35),
+(53, 'Hola', 'Chau', '2024-07-10 03:20:43', '2024-07-19 06:20:00', 35),
+(54, 'wudised', '238e23e', '2024-07-10 04:28:41', '2024-07-05 06:30:00', 35),
+(55, 'msd', 'msd', '2024-07-10 06:15:13', '2024-07-13 09:18:00', 35),
+(56, 'Revolucion Industrial', 'hacer la tarea', '2024-07-10 06:36:04', '2024-07-11 09:39:00', 35);
 
 -- --------------------------------------------------------
 
@@ -293,7 +299,59 @@ INSERT INTO `tarea_usuario` (`tarea_id`, `usuario_id`, `estado`) VALUES
 (8, 6, 1),
 (25, 10, 2),
 (48, 5, 3),
-(2, 9, 4);
+(2, 9, 4),
+(53, 3, 1),
+(54, 3, 1),
+(55, 3, 1),
+(55, 1, 1),
+(56, 3, 1),
+(56, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temas`
+--
+
+CREATE TABLE `temas` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `descripcion` varchar(350) NOT NULL,
+  `fecha_alta` date NOT NULL,
+  `id_clase` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `temas`
+--
+
+INSERT INTO `temas` (`id`, `nombre`, `descripcion`, `fecha_alta`, `id_clase`) VALUES
+(4, 'sjdns', 'jsdnjsd', '2024-07-10', 35),
+(5, 'smds', 'mdmsds', '2024-07-10', 35),
+(6, 'Por fin carajo', 'uwu', '2024-07-10', 35);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tema_usuario`
+--
+
+CREATE TABLE `tema_usuario` (
+  `tema_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tema_usuario`
+--
+
+INSERT INTO `tema_usuario` (`tema_id`, `usuario_id`) VALUES
+(4, 3),
+(4, 1),
+(5, 3),
+(5, 1),
+(6, 3),
+(6, 1);
 
 -- --------------------------------------------------------
 
@@ -317,7 +375,7 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `name`, `password`, `email`, `rol`, `img`) VALUES
 (1, 'LucaOshiro', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'alumno', ''),
 (2, 'Santiago', '04217c4d7e246e38b0d7014ee109755b', 'sdmatayoshi@gmail.com', 'alumno', 'Profesor.jpg'),
-(3, 'Luh9090', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'profesor', 'Profesor.jpg'),
+(3, 'Luh9090', '6b17f84c3e6e074b8a8c6de69a8cf25b', 'lucaoshiro@gmail.com', 'profesor', 'eve.jpg'),
 (4, 'elgabo', '38b1afebce3ecc702e3e04071ec2b94f', 'elgabo@gmail.com', 'alumno', 'alumno.jpg'),
 (5, 'lol', '202cb962ac59075b964b07152d234b70', 'lol@gmail.com', 'alumno', 'alumno.jpg'),
 (6, 'qwe', '202cb962ac59075b964b07152d234b70', 'qwe@gmail.com', 'alumno', 'alumno.jpg'),
@@ -372,6 +430,12 @@ ALTER TABLE `tareas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `temas`
+--
+ALTER TABLE `temas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -409,7 +473,13 @@ ALTER TABLE `mensajes`
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT de la tabla `temas`
+--
+ALTER TABLE `temas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
