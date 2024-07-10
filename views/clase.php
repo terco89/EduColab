@@ -24,6 +24,9 @@
     <!-- Header -->
     <div class="jumbotron"style="background-image:url(img/fondos/<?php echo $fondo['fondo'] ?>);">
         <h1 class="display-4"><?php echo $result["nombre"]; ?></h1>
+        <?php if ($_SESSION['usuario']['id'] == $result["id_usuario_creador"]) { ?>
+            <p class="lead"> Codigo de la clase: <?php echo $result["codigo"]; ?></p>
+        <?php } ?>
         <p class="lead"><?php echo $result["descripcion"]; ?></p>
         <hr class="my-4">
         <p>Profesor: <?php echo $result["name"]; ?></p>
