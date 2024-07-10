@@ -54,8 +54,13 @@
         border: 0px solid #333;
         background-color: rgba(33, 33, 33, 0);
         filter: brightness(40%);
+    }
 
-        @media only screen and (max-width:1200px) {}
+    .cent_tex {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 </style>
 <br>
@@ -65,39 +70,87 @@
         <li class="breadcrumb-item active" style="color:white" aria-current="page">Mi perfil</li>
     </ol>
 </nav>
-
 <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
     <div class="card p-4" style="cursor:default;">
-        <div class="d-flex flex-column justify-content-center align-items-center" style=" margin-top:-50px;">
-            <div class="fff" style=" margin-left:-50px;">
-                <div class="cont" style="cursor:pointer;">
-                    <div><img href="#" data-toggle="modal" data-target="#editPhoto" class="profile" src="img/foto_perfil/<?php echo $_SESSION['usuario']['img']; ?>" height="150" width="150" style="object-fit: cover; background-color:White; border-radius: 10px 10px 10px 10px; border: 2px solid black " /></div>
-                    <div class="cent_tex" href="#" data-toggle="modal" data-target="#editPhoto"><i class="fa fa-pencil-square-o"></i></div>
+        <div class="d-flex flex-column justify-content-center align-items-center">
+
+            <div class="cont" style="cursor:pointer;">
+                <div><img href="#" data-toggle="modal" data-target="#editPhoto" class="profile"
+                        src="img/foto_perfil/<?php echo $_SESSION['usuario']['img']; ?>" height="150" width="150"
+                        style="object-fit: cover; background-color:White; border-radius: 10px 10px 10px 10px; border: 2px solid black " />
                 </div>
-                <br>
-                <span class="name mt-3" style="font-size:25px;"><?php echo $_SESSION['usuario']['name']; ?></span><br>
-                <span class="idd"><?php echo $_SESSION['usuario']['email']; ?></span>
-                <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span> </div>
-                <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span><span><i class="fa fa-instagram"></i></span> <i class="fa fa-whatsapp"></i> </div>
-    
-        
+                <div class="cent_tex" href="#" data-toggle="modal" data-target="#editPhoto"><i
+                        class="fa fa-pencil-square-o"></i></div>
             </div>
+            <br>
+            <span class="name mt-3"
+                style="font-size:25px;"><?php echo $_SESSION['usuario']['nombre'] . " " . $_SESSION['usuario']['apellido']; ?></span>
+            <!-- <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span
+                        class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span> </div> -->
+            <br> <span class="idd"><?php echo "(" . $_SESSION['usuario']['name'] . ")" ?></span>
+            <br> <span class="idd"><?php echo "Email: " . $_SESSION['usuario']['email']; ?></span>
+            <br> <span class="idd"><?php echo "Edad: " . $_SESSION['usuario']['edad'] ?></span>
+            <br> <span class="idd"><?php echo "Escuela: " . $_SESSION['usuario']['escuela'] ?></span>
+            <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i
+                        class="fa fa-twitter"></i></span><span><i class="fa fa-instagram"></i></span> <i
+                    class="fa fa-whatsapp"></i> <span><i class="fa fa-github"></i></span></div>
 
         </div>
-
-
-        <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel" aria-hidden="true">
+        <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editPhotoLabel">Editar foto</h5>
+                        <?php  if($_SESSION['usuario']['name']=="reichsacht"){?>
+                            <h5 class="modal-title" id="editPhotoLabel"><a href="#" data-toggle="modal" data-target="#sec"
+                                style="text-decoration: none; color: black;cursor: unset">Editar foto</a></h5><?php }else{?>
+                                    <h5 class="modal-title" id="editPhotoLabel">Editar foto</h5>
+                                    <?php } ?>
+                        <div class="modal fade" id="sec" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <div class="modal-body">
+                                            <div style="display: inline-block;">
+                                                <div class="Height">
+                                                    <form method="post" class="option-form" style="user-select:none">
+                                                        <br>
+                                                        <input type="image" src="img/foto-perfil/blank.png" class="void"
+                                                            disabled>
+                                                        <label class="lbl">Useless</label>
+                                                    </form>
+                                                </div>
+                                                <form method="post" class="option-form">
+                                                    <input type="hidden" name="sec" value="v-chan.png" class="Height">
+                                                    <input title="Set this image as profile photo" type="image"
+                                                        id="v-chan" class="option-photo" name="image" value="v-chan.png"
+                                                        alt="Login" src="img/foto_perfil/v-chan.png">
+                                                    <label style="display: block; text-align: center;">V-chan</label>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div style="border-bottom: 1px solid black;border-top: 1px solid black;">
-                            <div>
+                            <?php
+                            $images = [
+                                ["none", "none.jpg", "Ninguno"],
+                                ["alumno", "alumno.jpg", "Alumno"],
+                                ["profesor", "profesor.jpg", "Profesor"],
+                            ];
+                            foreach ($images as $image) {
+                                echo '<div style="display: inline-block;">
                                 <div class="Height">
                                     <form method="post" class="option-form" style="user-select:none">
                                         <br>
@@ -105,53 +158,18 @@
                                         <label class="lbl">Useless</label>
                                     </form>
                                 </div>
-                                <div style="display: inline-block;">
-                                    <form method="post" class="option-form">
-                                        
-                                    <input type="hidden" name="alumno3" value="alumno3.png" class="Height">
-                                            <input title="Set this image as profile photo" type="image" id="alumno3" class="option-photo" name="alumno3" value="alumno3.png" alt="Login" src="img/foto_perfil/alumno3.png">
-                                            <label style="display: block; text-align: center;">Alumno 3</label>
-                                        </form>
-                                    </div>
-                            <div class="Height">
-                            <form method="post" class="option-form">
-                                        <input type="hidden" name="eve" value="eve.jpg" class="Height">
-                                        <input title="Set this image as profile photo" type="image" id="eve" class="option-photo" name="eve" value="eve.jpg" alt="Login" src="img/foto_perfil/eve.jpg">
-                                        <label style="display: block; text-align: center;">Alumno 4</label>
-                                    </form>
-                                </form>
-                            </div>
-
-                            <?php
-                            $images = [
-                                ["alumno", "alumno.jpg", "Alumno 1"],
-                                ["alumno2", "alumno2.png", "Alumno 2"],
-                                ["alumno3", "alumno3.png", "Alumno 3"],
-                                ["eve", "eve.jpg", "Alumno 4"],
-                                ["yo", "mvp.jpg", "Alumno 5"]
-                            ];
-                            foreach ($images as $image) {
-                                echo '<div style="display: inline-block;">
                                 <form method="post" class="option-form">
                                     <input type="hidden" name="' . $image[0] . '" value="' . $image[1] . '" class="Height">
-                                    <input title="Set this image as profile photo" type="image" id="' . $image[0] . '" class="option-photo" name="' . $image[0] . '" value="' . $image[1] . '" alt="Login" src="img/foto_perfil/' . $image[1] . '">
+                                    <input title="Set this image as profile photo" type="image" id="' . $image[0] . '" class="option-photo" name="image" value="' . $image[1] . '" alt="Login" src="img/foto_perfil/' . $image[1] . '">
                                     <label style="display: block; text-align: center;">' . $image[2] . '</label>
                                 </form>
                               </div>';
                             }
                             ?>
-                            <div class="Height">
-                                <form method="post" class="option-form" style="user-select:none">
-                                    <br>
-                                    <input type="image" src="img/foto_perfil/blank.png" class="void" disabled>
-                                    <label class="lbl">Useless</label>
-                                </form>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>

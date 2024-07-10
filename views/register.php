@@ -16,13 +16,25 @@
             <h2>Registrate</h2>
             <form method="POST" action="register.php">
                 <div class="row">
-                    <input type="text" placeholder="Nombre" name="name">
+                    <input type="text" placeholder="Usuario" name="name">
                 </div>
                 <div class="row">
                     <input type="email" placeholder="Correo Electrónico" name="email">
                 </div>
                 <div class="row">
                     <input type="password" placeholder="Contraseña" name="password">
+                </div>
+                <div class="row">
+                    <input type="text" placeholder="Nombre" name="nombre">
+                </div>
+                <div class="row">
+                    <input type="text" placeholder="Apellido" name="apellido">
+                </div>
+                <div class="row">
+                    <input type="text" placeholder="Edad" name="edad">
+                </div>
+                <div class="row">
+                    <input type="text" placeholder="Escuela" name="escuela">
                 </div>
                 <div class="row button">
                     <input type="submit" value="Registrarse">
