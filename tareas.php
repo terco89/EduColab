@@ -6,7 +6,7 @@ if(!isset($_SESSION["usuario"])){
 
 require_once "includes/config.php";
 
-$sql = "select tareas.nombre as n, tarea_usuario.estado as est from tarea_usuario 
+$sql = "select tareas.nombre as n, tarea_usuario.estado as est, tareas.id, tareas.clase_id from tarea_usuario 
 inner join tareas on tareas.id = tarea_usuario.tarea_id where tarea_usuario.usuario_id = ".$_SESSION["usuario"]["id"]."";
 $result2 = mysqli_query($link, $sql);
 $tareas = array();

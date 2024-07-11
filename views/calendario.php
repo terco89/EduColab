@@ -27,7 +27,8 @@
                 <?php for ($i = 0; $i < count($tareas); $i++) { ?> {
                         title: 'Tarea: <?php echo $tareas[$i]["n"]; ?>',
                         start: '<?php echo $tareas[$i]["fecha"]; ?>', // Fecha de la tarea
-                        backgroundColor: 'green'
+                        backgroundColor: 'green',
+                        url: 'clase_ver_tarea.php?id=<?php echo $tareas[$i]["clase_id"]; ?>&tid=<?php echo $tareas[$i]["id"]; ?>'
                     },
                 <?php } ?>
             ]

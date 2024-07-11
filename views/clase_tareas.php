@@ -88,7 +88,7 @@
                                     if (isset($_SESSION['usuario']) && isset($_FILES['archivo']) && $_FILES['archivo']['error'] == 0) {
                                         $archivo_nombre = $_FILES['archivo']['name'];
                                         $archivo_temporal = $_FILES['archivo']['tmp_name'];
-                                        $nombre = mysqli_insert_id($link);
+                                        $nombre = $tid;
                                         mkdir("img/tareas/" . $nombre . "");
                                         $ruta = "img/tareas/" . $nombre . "/" . $archivo_nombre;
                                         if (move_uploaded_file($archivo_temporal, $ruta)) {
@@ -97,7 +97,7 @@
                                             echo "Error al subir el archivo.";
                                         }
                                     }
-                                    echo '<script>window.location.href = "clase_ver_tarea.php?id=' . $result["id"] . '&tid=' . mysqli_insert_id($link) . '";</script>';
+                                    echo '<script>window.location.href = "clase_ver_tarea.php?id=' . $result["id"] . '&tid=' . $tid . '";</script>';
                                     exit();
                                 }
                                 ?>

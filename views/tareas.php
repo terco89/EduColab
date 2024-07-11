@@ -12,7 +12,7 @@
           <ul class="list-group">
             <?php for($i = 0; $i < count($tareas); $i++){ 
               if(intval($tareas[$i]["est"]) == 1){?>
-            <li class="list-group-item tarea"><?php echo $tareas[$i]["n"] ?></li>
+            <li class="list-group-item tarea"><a href="clase_ver_tarea.php?id=<?php echo $tareas[$i]["clase_id"]; ?>&tid=<?php echo $tareas[$i]["id"]; ?>"><?php echo $tareas[$i]["n"] ?></a></li>
             <?php } } ?>
           </ul>
         </div>
