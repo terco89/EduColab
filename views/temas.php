@@ -113,7 +113,8 @@
                     <div class="media-body">
                         <h5 class="truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;"><?php echo $temas[$i]["nombre"] ?></h5>
                         <p><?php echo $temas[$i]["fecha_alta"]; ?></p>
-                        <a href="ver_temas.php?id=<?php echo $_GET["id"] ?>&tid=<?php echo $temas[$i]["id"] ?>" class="btn btn-secondary btn-sm">Ver Tarea</a>
+                        <a href="ver_temas.php?id=<?php echo $_GET["id"] ?>&tid=<?php echo $temas[$i]["id"] ?>" class="btn btn-secondary btn-sm">Ver tema</a> &nbsp;&nbsp;<a class="btn btn-danger btn-sm">Eliminar tema</a>
+
                     </div>
                 </div>
             </div>
