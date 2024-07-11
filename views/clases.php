@@ -15,11 +15,9 @@
                         </div>
                         <div class="modal-body">
                         <form method="POST" action="crear_clase.php">
-    <div class="form-group">
+    <div class="form-group" >
         <h4>Nombre de la clase</h4>
         <input type="text" class="form-control" name="nombre" placeholder="Nombre de la clase" required>
-        <h4>Descripción de la clase</h4>
-        <textarea name="descripcion" rows="5" cols="60"></textarea>
     </div>
     <div class="form-group">
         <h4>Días y Horarios</h4>
@@ -91,7 +89,6 @@ function addSchedule() {
                             Profesor: <?php echo ($clase['id_usuario_creador'] != $_SESSION['usuario']['id']) ? $clase["nombre"] : "tú"; ?>
                         </h6>
                         <hr>
-                        <p class="card-text"><?php echo $clase["descripcion"]; ?></p>
                         <p class="card-text">Horarios:</p>
                         <ul class="list-unstyled">
                             <?php foreach ($clase['horarios'] as $horario) {
