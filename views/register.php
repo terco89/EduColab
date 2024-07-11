@@ -24,7 +24,7 @@
                 <div class="row">
                     <input type="password" placeholder="Contraseña" name="password">
                 </div>
-                <div class="row">
+                <!---div class="row">
                     <input type="text" placeholder="Nombre" name="nombre">
                 </div>
                 <div class="row">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="row">
                     <input type="text" placeholder="Escuela" name="escuela">
-                </div>
+                </div---->
                 <div class="row button">
                     <input type="submit" value="Registrarse">
                 </div>
