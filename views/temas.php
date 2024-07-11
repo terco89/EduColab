@@ -28,7 +28,7 @@
         <h1 class="display-4">Temas</h1>
         <p class="lead">Aquí encontrarás todos tus temas asignados.</p>
         <?php if ($_SESSION['usuario']['id'] == $result["id_usuario_creador"]) { ?>
-            <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#submitModal">Crear tarea</a>
+            <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#submitModal">Crear tema</a>
             <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
