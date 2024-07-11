@@ -23,7 +23,7 @@ if (!$tema) {
 }
 
 // Obtener información de la clase
-$sql_clase = "SELECT ClasesEscolares.id, nombre, descripcion, id_usuario_creador, name
+$sql_clase = "SELECT id_usuario_creador
              FROM ClasesEscolares 
              INNER JOIN usuarios ON ClasesEscolares.id_usuario_creador = usuarios.id 
              WHERE ClasesEscolares.id = ".$_GET["id"];
