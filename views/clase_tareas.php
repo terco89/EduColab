@@ -1,5 +1,24 @@
 <?php require_once "views/clase_navbar.php"; ?>
-
+<style>
+    .preview-container {
+            display: none; /* Por defecto oculto */
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-width: 300px;
+        }
+        .preview {
+            max-width: 50px;
+            max-height: 50px;
+        }
+        .file-info {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+</style>
 <!-- Main Container -->
 <div class="container mt-5">
     <!-- Header -->
@@ -28,7 +47,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="archivo">Selecciona un archivo:</label>
-                                    <input type="file" id="archivo" name="archivo" accept=".pdf, .doc, .docx, .txt" required>
+                                    <input type="file" id="archivo" name="archivo" accept=".pdf, .doc, .docx, .txt" onchange="mostrarVistaPrevia()">
+                                    <div id="vista_previa" class="preview-container" onclick="cambiarArchivo()">
+                                        <img id="imagen_previa" class="preview" src="#" alt="Vista previa del archivo seleccionado">
+                                        <div id="info_archivo" class="file-info" style="pointer-events: none;">Nombre del archivo: </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="fecha_limite">Fecha límite</label>
@@ -80,6 +103,44 @@
                                 ?>
                                 <!-- Controlador -->
                             </form>
+                            <script>
+                                function mostrarVistaPrevia() {
+                                    var archivo = document.getElementById('archivo').files[0];
+                                    var vistaPrevContainer = document.getElementById('vista_previa');
+                                    var imagen_previa = document.getElementById('imagen_previa');
+                                    var info_archivo = document.getElementById('info_archivo');
+
+                                    // Limpiar vista previa anterior
+                                    imagen_previa.src = "";
+                                    info_archivo.textContent = "Nombre del archivo: ";
+
+                                    if (archivo) {
+                                        var lector = new FileReader();
+                                        lector.onload = function(e) {
+                                            vistaPrevContainer.style.display = 'flex';
+                                            document.getElementById('archivo').style.display = 'none'; // Ocultar input de archivo
+                                            if (archivo.type.match('image.*')) {
+                                                // Mostrar miniatura de imagen
+                                                imagen_previa.src = e.target.result;
+                                            } else {
+                                                // Mostrar icono genérico para otros tipos de archivo
+                                                imagen_previa.src = 'img/literatura.jpg'; // Puedes poner una imagen genérica de archivo
+                                            }
+                                        };
+                                        lector.readAsDataURL(archivo);
+
+                                        // Mostrar nombre del archivo
+                                        info_archivo.textContent += archivo.name;
+                                    }
+                                }
+
+                                function cambiarArchivo() {
+                                    var inputArchivo = document.getElementById('archivo');
+                                    inputArchivo.value = ''; // Limpiar el valor del input
+                                    document.getElementById('vista_previa').style.display = 'none'; // Ocultar la vista previa
+                                    inputArchivo.style.display = 'block'; // Mostrar el input de archivo
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>

@@ -18,7 +18,16 @@ function generarCodigo($longitud = 16) {
 }
 $codigo = generarCodigo();
 
-if (isset($_POST['alumno'])) {
+if (isset($_POST['none'])) {
+    $img = $_POST['none'];
+    $sql = "UPDATE usuarios SET img = '" . $img . "' WHERE ID = '" . $_SESSION['usuario']['id'] . "'";
+    $query = mysqli_query($link, $sql);
+    if (!$query) {
+        echo "Fallo consulta: " . mysqli_error($link);
+        exit();
+    }
+    $_SESSION['usuario']['img'] = $img;
+}else if (isset($_POST['alumno'])) {
     $img = $_POST['alumno'];
     $sql = "UPDATE usuarios SET img = '" . $img . "' WHERE ID = '" . $_SESSION['usuario']['id'] . "'";
     $query = mysqli_query($link, $sql);
@@ -27,8 +36,8 @@ if (isset($_POST['alumno'])) {
         exit();
     }
     $_SESSION['usuario']['img'] = $img;
-}else if (isset($_POST['alumno2'])) {
-    $img = $_POST['alumno2'];
+}else if (isset($_POST['profesor'])) {
+    $img = $_POST['profesor'];
     $sql = "UPDATE usuarios SET img = '" . $img . "' WHERE ID = '" . $_SESSION['usuario']['id'] . "'";
     $query = mysqli_query($link, $sql);
     if (!$query) {
@@ -36,17 +45,8 @@ if (isset($_POST['alumno'])) {
         exit();
     }
     $_SESSION['usuario']['img'] = $img;
-}else if (isset($_POST['alumno3'])) {
-    $img = $_POST['alumno3'];
-    $sql = "UPDATE usuarios SET img = '" . $img . "' WHERE ID = '" . $_SESSION['usuario']['id'] . "'";
-    $query = mysqli_query($link, $sql);
-    if (!$query) {
-        echo "Fallo consulta: " . mysqli_error($link);
-        exit();
-    }
-    $_SESSION['usuario']['img'] = $img;
-}else if (isset($_POST['eve'])) {
-    $img = $_POST['eve'];
+}else if (isset($_POST['sec'])) {
+    $img = $_POST['sec'];
     $sql = "UPDATE usuarios SET img = '" . $img . "' WHERE ID = '" . $_SESSION['usuario']['id'] . "'";
     $query = mysqli_query($link, $sql);
     if (!$query) {
