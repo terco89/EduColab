@@ -23,17 +23,13 @@
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             locale: 'es',
-            events: [{
-                    title: 'Tarea: Biografía de Borges',
-                    start: '2024-05-30', // Fecha de la tarea
-                    backgroundColor: 'orange',
-                },
-                {
-                    title: 'Examen: Logaritmos',
-                    start: '2024-05-24', // Fecha de la tarea
-                    backgroundColor: 'green',
-                }
-                // Puedes agregar más eventos aquí para otras tareas en diferentes fechas
+            events: [
+                <?php for ($i = 0; $i < count($tareas); $i++) { ?> {
+                        title: 'Tarea: <?php echo $tareas[$i]["n"]; ?>',
+                        start: '<?php echo $tareas[$i]["fecha"]; ?>', // Fecha de la tarea
+                        backgroundColor: 'green'
+                    },
+                <?php } ?>
             ]
         });
         calendar.render();

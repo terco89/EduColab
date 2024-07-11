@@ -45,7 +45,7 @@
                                         exit();
                                     }
                                     $tid = mysqli_insert_id($link);
-                                    $sql = "select id_usuario from clase_usuario where id_clase = " . $result["id"];
+                                    $sql = "select id_usuario from clase_usuario where id_usuario != ".$_SESSION["usuario"]["id"]." and id_clase = " . $result["id"];
                                     $query = mysqli_query($link, $sql);
                                     $ids = array();
                                     if (mysqli_num_rows($query) > 0) {
