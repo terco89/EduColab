@@ -21,9 +21,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "El correo electrónico no es válido.";
     }
-    if (!preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{8,})/', $password)) {
-        $errors[] = "La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial.";
-    }
+    
     $sql_email = "SELECT id FROM usuarios WHERE email = '$email'";
     $result_email = mysqli_query($link, $sql_email);
     if (mysqli_num_rows($result_email) > 0) {
