@@ -27,8 +27,6 @@ if (isset($_POST["codigoClase"])) {
                     $tareas[] = $row;
                 }
             } else {
-                echo "aca";
-                die();
                 header("Location: clase.php?id=$id_clase");
             }
             $sql = "INSERT INTO tarea_usuario(tarea_id,usuario_id,estado) VALUES ";
