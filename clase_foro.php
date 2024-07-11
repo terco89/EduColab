@@ -16,7 +16,7 @@ if(isset($_POST["tema"]) && $_POST["contenido"] && $_POST["id"]){
     header("Location: clase_discusion.php?id=".$_POST["id"]."&did=".mysqli_insert_id($link));
 }
 
-$sql = "select ClasesEscolares.id,nombre,descripcion,name from ClasesEscolares inner join usuarios on ClasesEscolares.id_usuario_creador = usuarios.id where ClasesEscolares.id = ".$_GET["id"];
+$sql = "select ClasesEscolares.id,ClasesEscolares.nombre,descripcion,name from ClasesEscolares inner join usuarios on ClasesEscolares.id_usuario_creador = usuarios.id where ClasesEscolares.id = ".$_GET["id"];
 $result = mysqli_fetch_assoc(mysqli_query($link, $sql));
 
 if(!isset($result)){
