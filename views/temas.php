@@ -55,7 +55,7 @@
                                         <div id="info_archivo" class="file-info" style="pointer-events: none;">Nombre del archivo: </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-secondary">Crear Tarea</button>
+                                <button type="submit" class="btn btn-secondary">Crear Tema</button>
                             </form>
                             <script>
                                 function mostrarVistaPrevia() {
