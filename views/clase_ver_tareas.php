@@ -1,3 +1,5 @@
+<iframe src="clases.php" style="display:none;" width="100%" height="1000px"></iframe>
+<button id="close-button" style="display:none;">Cerrar</button>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome (para los iconos) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -18,6 +20,29 @@
         margin: auto;
         padding: 20px;
     }
+    iframe{
+        position: fixed; /* Fija el iframe a la ventana del navegador */
+            top: 0;
+            left: 0;
+            width: 100vw; /* 100% del ancho de la ventana del navegador */
+            height: 100vh; /* 100% de la altura de la ventana del navegador */
+            border: none; /* Opcional: quita el borde del iframe */
+            z-index: 9999;
+    }
+    #close-button {
+            position: absolute; /* Posiciona el botón en relación al iframe */
+            top: 90%;
+            right: 5%;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 10%;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 10000; /* Asegura que el botón esté encima del iframe */
+        }
 </style>
 <div class="container mt-4">
     <div class="row">
@@ -37,7 +62,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h6 class="card-subtitle mb-2 text-muted">Archivo Adjunto</h6>
-                                            <p class="card-text">Nombre del archivo: <a href="#"><?php echo $recursos[$i] . $recursos[$i+1] ?></a></p>
+                                            <p class="card-text">Nombre del archivo: <a href="#" onclick="cargarPdf('<?php echo $recursos[$i] .'.'. $recursos[$i+1] ?>')"><?php echo $recursos[$i] .".". $recursos[$i+1] ?></a></p>
                                             <p class="card-text">
                                                 <i class="far fa-file-pdf fa-2x"></i> <!-- Icono de archivo PDF -->
                                             </p>
@@ -84,3 +109,14 @@
         <?php } ?>
     </div>
 </div>
+<script>
+    function cargarPdf(nom) {
+        document.querySelector("iframe").src="xd.php?tid=<?php echo $tarea["id"]; ?>&nom="+nom;
+        document.querySelector("iframe").style.display="block";
+        document.querySelector("#close-button").style.display="block";
+    }
+    document.getElementById('close-button').addEventListener('click', function() {
+            document.querySelector("iframe").style.display = 'none';
+            this.style.display = 'none'; // Oculta el botón también
+        });
+</script>
