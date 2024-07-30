@@ -166,12 +166,13 @@
     </div>
 
     <!-- Lista de Tareas -->
+    <?php for ($i = 0; $i < count($tareas); $i++) { ?>
+
     <div class="card mb-4">
         <div class="card-header">
-            Lista
+            Tarea <!-- si se puede hacer que aparesca el numero de la tarea subi rj: tarea 1; tarea 2 y achi ....-->
         </div>
         <div class="card-body">
-            <?php for ($i = 0; $i < count($tareas); $i++) { ?>
                 <div class="media mb-3">
                     <img src="https://via.placeholder.com/64" class="mr-3" alt="User Avatar">
                     <div class="media-body">
@@ -181,9 +182,10 @@
                         <a href="clase_ver_tarea.php?id=<?php echo $_GET["id"] ?>&tid=<?php echo $tareas[$i]["id"] ?>" class="btn btn-secondary btn-sm">Ver Tarea</a>
                     </div>
                 </div>
-            <?php } ?>
         </div>
     </div>
+    <?php } ?>
+
 </div>
 
 <!-- Modal para Enviar Tarea -->
