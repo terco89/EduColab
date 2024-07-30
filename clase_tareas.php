@@ -44,4 +44,3 @@ if (mysqli_num_rows($result3) > 0) {
 
 $view = "clase_tareas";
 require_once "views/layout.php";
-?>

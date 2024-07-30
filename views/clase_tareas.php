@@ -1,23 +1,26 @@
 <?php require_once "views/clase_navbar.php"; ?>
 <style>
     .preview-container {
-            display: none; /* Por defecto oculto */
-            align-items: center;
-            gap: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            max-width: 300px;
-        }
-        .preview {
-            max-width: 50px;
-            max-height: 50px;
-        }
-        .file-info {
-            flex: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        display: none;
+        /* Por defecto oculto */
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        max-width: 300px;
+    }
+
+    .preview {
+        max-width: 50px;
+        max-height: 50px;
+    }
+
+    .file-info {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 </style>
 <!-- Main Container -->
 <div class="container mt-5">
@@ -26,7 +29,7 @@
         <h1 class="display-4">Tareas</h1>
         <p class="lead">Aquí encontrarás todas las tareas asignadas y podrás enviar tus trabajos.</p>
         <?php if ($_SESSION['usuario']['id'] == $result["id_usuario_creador"]) { ?>
-            <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#submitModal">Crear tarea</a>
+            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#submitModal">Crear tarea</a>
             <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -68,7 +71,7 @@
                                         exit();
                                     }
                                     $tid = mysqli_insert_id($link);
-                                    $sql = "select id_usuario from clase_usuario where id_usuario != ".$_SESSION["usuario"]["id"]." and id_clase = " . $result["id"];
+                                    $sql = "select id_usuario from clase_usuario where id_usuario != " . $_SESSION["usuario"]["id"] . " and id_clase = " . $result["id"];
                                     $query = mysqli_query($link, $sql);
                                     $ids = array();
                                     if (mysqli_num_rows($query) > 0) {
@@ -148,42 +151,25 @@
         <?php } ?>
     </div>
 
-    <!-- Horarios de la Clase -->
-    <div class="card mb-4">
-        <div class="card-header">
-            Horarios de la Clase
-        </div>
-        <div class="card-body">
-            <ul class="list-unstyled">
-                <?php foreach ($horarios as $horario) {
-                    $hora_inicio = date('H:i', strtotime($horario["hora_inicio"]));
-                    $hora_fin = date('H:i', strtotime($horario["hora_fin"]));
-                ?>
-                    <li><?php echo $horario["dia_semana"] . " de " . $hora_inicio . " a " . $hora_fin; ?></li>
-                <?php } ?>
-            </ul>
-        </div>
-    </div>
-
     <!-- Lista de Tareas -->
-    <div class="card mb-4">
+
+    <?php for ($i = 0; $i < count($tareas); $i++) { ?>
+        <div class="card mb-4">
         <div class="card-header">
-            Lista
-        </div>
-        <div class="card-body">
-            <?php for ($i = 0; $i < count($tareas); $i++) { ?>
+                Tarea
+            </div>
+            <div class="card-body">
                 <div class="media mb-3">
-                    <img src="https://via.placeholder.com/64" class="mr-3" alt="User Avatar">
+                    <img src="img/EduCollab.jpg" style="width: 4rem; border-radius:50%;" class="mr-3" alt="User Avatar">
                     <div class="media-body">
                         <h5 class="truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;"><?php echo $tareas[$i]["nombre"] ?></h5>
-                        <p><?php echo $tareas[$i]["descripcion"]; ?></p>
                         <p>Fecha de entrega: <?php echo date('j \d\e F, Y', strtotime($tareas[$i]["fecha_entrega"])); ?></p>
                         <a href="clase_ver_tarea.php?id=<?php echo $_GET["id"] ?>&tid=<?php echo $tareas[$i]["id"] ?>" class="btn btn-secondary btn-sm">Ver Tarea</a>
                     </div>
                 </div>
-            <?php } ?>
+            </div>
         </div>
-    </div>
+    <?php } ?>
 </div>
 
 <!-- Modal para Enviar Tarea -->

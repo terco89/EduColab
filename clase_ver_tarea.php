@@ -53,4 +53,3 @@ if (file_exists("img/tareas/".$_GET["tid"]) && is_dir("img/tareas/".$_GET["tid"]
 
 $view = "clase_ver_tareas";
 require_once "views/layout.php";
-?>

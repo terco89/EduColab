@@ -28,7 +28,7 @@
         <h1 class="display-4">Temas</h1>
         <p class="lead">Aquí encontrarás todos tus temas asignados.</p>
         <?php if ($_SESSION['usuario']['id'] == $result["id_usuario_creador"]) { ?>
-            <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#submitModal">Crear tema</a>
+            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#submitModal">Crear tema</a>
             <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -109,12 +109,11 @@
             </div>
             <div class="card-body">
                 <div class="media mb-3">
-                    <img src="https://via.placeholder.com/64" class="mr-3" alt="User Avatar">
+                    <img src="img/EduCollab.jpg" style="width: 4rem; border-radius:50%;" class="mr-3" alt="User Avatar">
                     <div class="media-body">
                         <h5 class="truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;"><?php echo $temas[$i]["nombre"] ?></h5>
                         <p><?php echo $temas[$i]["fecha_alta"]; ?></p>
                         <a href="ver_temas.php?id=<?php echo $_GET["id"] ?>&tid=<?php echo $temas[$i]["id"] ?>" class="btn btn-secondary btn-sm">Ver tema</a> <!--&nbsp;&nbsp;<a class="btn btn-danger btn-sm">Eliminar tema</a----->
-
                     </div>
                 </div>
             </div>
