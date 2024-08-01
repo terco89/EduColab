@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-07-2024 a las 21:25:01
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Tiempo de generación: 01-08-2024 a las 20:57:27
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `asignaciones` (
   `titulo_asignacion` varchar(50) NOT NULL,
   `descripcion` varchar(400) NOT NULL,
   `fecha_entrega` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -45,7 +45,7 @@ CREATE TABLE `clasesescolares` (
   `descripcion` varchar(50) NOT NULL,
   `codigo` varchar(6) NOT NULL,
   `id_usuario_creador` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `clasesescolares`
@@ -54,7 +54,8 @@ CREATE TABLE `clasesescolares` (
 INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `codigo`, `id_usuario_creador`) VALUES
 (33, 'Lengua', 'Es lengua no vas a sumar ', 'rDONwY', 5),
 (34, 'weqw', 'qweqwe', 'YTP5oJ', 5),
-(35, 'Ingles', '3123123123', 'JUzzj8', 3);
+(35, 'Ingles', '3123123123', 'JUzzj8', 3),
+(36, 'nose', '', 'R1jhQb', 10);
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,7 @@ CREATE TABLE `clase_usuario` (
   `id_usuario` int(11) NOT NULL,
   `id_clase` int(11) NOT NULL,
   `fondo` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `clase_usuario`
@@ -99,7 +100,9 @@ INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`) VALUES
 (5, 34, ''),
 (3, 35, 'bg1.jpg'),
 (3, 33, 'bg1.jpg'),
-(1, 35, '');
+(1, 35, ''),
+(10, 36, ''),
+(4, 36, '');
 
 -- --------------------------------------------------------
 
@@ -112,7 +115,7 @@ CREATE TABLE `cursos` (
   `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(400) DEFAULT NULL,
   `codigo` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -127,7 +130,7 @@ CREATE TABLE `discusiones` (
   `tema` varchar(30) NOT NULL,
   `contenido` varchar(300) NOT NULL,
   `fecha_creacion` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `discusiones`
@@ -144,11 +147,18 @@ INSERT INTO `discusiones` (`id`, `id_alumno`, `id_clase`, `tema`, `contenido`, `
 --
 
 CREATE TABLE `entregas` (
-  `fecha_entrega` date NOT NULL,
-  `enlace` varchar(50) NOT NULL,
-  `calificacion` int(11) NOT NULL,
-  `estado` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `tarea_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha_entrega` datetime NOT NULL,
+  `calificacion` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `entregas`
+--
+
+INSERT INTO `entregas` (`tarea_id`, `usuario_id`, `fecha_entrega`, `calificacion`) VALUES
+(59, 4, '2024-08-01 15:56:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -163,7 +173,7 @@ CREATE TABLE `horarios` (
   `dia_semana` varchar(20) NOT NULL,
   `hora_inicio` time NOT NULL,
   `hora_fin` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `horarios`
@@ -172,7 +182,8 @@ CREATE TABLE `horarios` (
 INSERT INTO `horarios` (`id_horario`, `id_clase`, `nombre_clase`, `dia_semana`, `hora_inicio`, `hora_fin`) VALUES
 (20, 33, 'Lengua', 'Lunes', '18:51:00', '21:51:00'),
 (21, 34, 'weqw', 'Viernes', '17:34:00', '19:34:00'),
-(22, 35, 'Ingles', 'Miércoles', '16:57:00', '17:59:00');
+(22, 35, 'Ingles', 'Miércoles', '16:57:00', '17:59:00'),
+(24, 36, 'nose', 'Lunes', '15:31:00', '14:28:00');
 
 -- --------------------------------------------------------
 
@@ -185,7 +196,7 @@ CREATE TABLE `materiales` (
   `descripcion` varchar(400) NOT NULL,
   `tipo_material` varchar(50) NOT NULL,
   `enlace_archivo` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -199,7 +210,7 @@ CREATE TABLE `mensajes` (
   `id_discusion` int(11) NOT NULL,
   `mensaje` varchar(300) NOT NULL,
   `fecha_creacion` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `mensajes`
@@ -224,7 +235,7 @@ CREATE TABLE `tareas` (
   `fecha_subida` datetime NOT NULL,
   `fecha_entrega` datetime NOT NULL,
   `clase_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tareas`
@@ -261,7 +272,8 @@ INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_subida`, `fecha_entr
 (53, 'Hola', 'Chau', '2024-07-10 03:20:43', '2024-07-19 06:20:00', 35),
 (54, 'wudised', '238e23e', '2024-07-10 04:28:41', '2024-07-05 06:30:00', 35),
 (55, 'msd', 'msd', '2024-07-10 06:15:13', '2024-07-13 09:18:00', 35),
-(56, 'Revolucion Industrial', 'hacer la tarea', '2024-07-10 06:36:04', '2024-07-11 09:39:00', 35);
+(56, 'Revolucion Industrial', 'hacer la tarea', '2024-07-10 06:36:04', '2024-07-11 09:39:00', 35),
+(59, 'xd', 'xd', '2024-08-01 14:36:58', '2024-08-28 14:36:00', 36);
 
 -- --------------------------------------------------------
 
@@ -273,7 +285,7 @@ CREATE TABLE `tarea_usuario` (
   `tarea_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `estado` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tarea_usuario`
@@ -305,7 +317,11 @@ INSERT INTO `tarea_usuario` (`tarea_id`, `usuario_id`, `estado`) VALUES
 (55, 3, 1),
 (55, 1, 1),
 (56, 3, 1),
-(56, 1, 1);
+(56, 1, 1),
+(57, 4, 1),
+(58, 4, 1),
+(59, 4, 1),
+(0, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -319,7 +335,7 @@ CREATE TABLE `temas` (
   `descripcion` varchar(350) NOT NULL,
   `fecha_alta` date NOT NULL,
   `id_clase` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `temas`
@@ -339,7 +355,7 @@ INSERT INTO `temas` (`id`, `nombre`, `descripcion`, `fecha_alta`, `id_clase`) VA
 CREATE TABLE `tema_usuario` (
   `tema_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tema_usuario`
@@ -371,7 +387,7 @@ CREATE TABLE `usuarios` (
   `apellido` varchar(32) NOT NULL,
   `escuela` varchar(64) NOT NULL,
   `github` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -385,7 +401,8 @@ INSERT INTO `usuarios` (`id`, `name`, `password`, `email`, `rol`, `img`, `edad`,
 (5, 'lol', '202cb962ac59075b964b07152d234b70', 'lol@gmail.com', 'alumno', 'alumno.jpg', 0, '', '', '', ''),
 (6, 'qwe', '202cb962ac59075b964b07152d234b70', 'qwe@gmail.com', 'alumno', 'alumno.jpg', 0, '', '', '', ''),
 (7, 'qwe', '76d80224611fc919a5d54f0ff9fba446', 'wqe', 'alumno', 'alumno.jpg', 0, '', '', '', ''),
-(8, 'reichsacht', '5eb3c70fb1c47a19a7b6674092c19fc0', 'rechenbann@gmail.com', 'alumno', 'v-chan.png', 18, 'Santiago Daniel', 'Matayoshi', 'E.T.N°26 Confederación Suiza', 'sdmatayoshi');
+(8, 'reichsacht', '5eb3c70fb1c47a19a7b6674092c19fc0', 'rechenbann@gmail.com', 'alumno', 'v-chan.png', 18, 'Santiago Daniel', 'Matayoshi', 'E.T.N°26 Confederación Suiza', 'sdmatayoshi'),
+(10, 'nose', '9de355443f2000d9e076248b317f73b8', 'nose@nose.nose', 'alumno', 'alumno.jpg', 66, 'nose', 'nose', 'nose', '');
 
 -- --------------------------------------------------------
 
@@ -398,7 +415,7 @@ CREATE TABLE `usuarios_cursos` (
   `id_curso` int(11) NOT NULL,
   `fecha_inscripcion` date NOT NULL,
   `estado_inscripcion` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tablas volcadas
@@ -455,7 +472,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clasesescolares`
 --
 ALTER TABLE `clasesescolares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `discusiones`
@@ -467,7 +484,7 @@ ALTER TABLE `discusiones`
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes`
@@ -479,7 +496,7 @@ ALTER TABLE `mensajes`
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de la tabla `temas`
@@ -491,7 +508,7 @@ ALTER TABLE `temas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas

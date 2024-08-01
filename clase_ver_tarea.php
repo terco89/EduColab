@@ -13,7 +13,7 @@ if (!isset($_GET["id"]) || !isset($_GET["tid"])) {
 }
 
 // Obtener información de la tarea
-$sql = "SELECT * FROM tareas WHERE id = ".$_GET["tid"];
+$sql = "SELECT * FROM tareas WHERE id = " . $_GET["tid"];
 $resultado_tarea = mysqli_query($link, $sql);
 $tarea = mysqli_fetch_assoc($resultado_tarea);
 
@@ -21,12 +21,14 @@ if (!$tarea) {
     header("Location: clases.php");
     exit();
 }
-
+$sql = "SELECT * FROM entregas WHERE tarea_id = " . $_GET["tid"]." AND usuario_id = ".$_SESSION["usuario"]["id"]." ";
+$resultado_entrega = mysqli_query($link, $sql);
+$entrega = mysqli_fetch_assoc($resultado_entrega);
 // Obtener información de la clase
 $sql_clase = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, descripcion, id_usuario_creador, name
              FROM ClasesEscolares 
              INNER JOIN usuarios ON ClasesEscolares.id_usuario_creador = usuarios.id 
-             WHERE ClasesEscolares.id = ".$_GET["id"];
+             WHERE ClasesEscolares.id = " . $_GET["id"];
 $resultado_clase = mysqli_query($link, $sql_clase);
 $clase = mysqli_fetch_assoc($resultado_clase);
 
@@ -37,8 +39,8 @@ if (!$clase) {
 
 // Obtener los recursos adjuntos de la tarea
 $recursos = array();
-if (file_exists("img/tareas/".$_GET["tid"]) && is_dir("img/tareas/".$_GET["tid"])) {
-    $archivos = scandir("img/tareas/".$_GET["tid"]);
+if (file_exists("img/tareas/" . $_GET["tid"]) && is_dir("img/tareas/" . $_GET["tid"])) {
+    $archivos = scandir("img/tareas/" . $_GET["tid"]);
 
     foreach ($archivos as $archivo) {
         if ($archivo != '.' && $archivo != '..') {
@@ -52,7 +54,7 @@ if (file_exists("img/tareas/".$_GET["tid"]) && is_dir("img/tareas/".$_GET["tid"]
 }
 
 if (isset($_POST['titulo'])) {
-    $sql = "UPDATE tareas SET nombre = '" . $_POST['titulo'] . "', descripcion = '" . $_POST['instruccion'] . "', fecha_subida = NOW(), fecha_entrega = '" . $_POST['fecha_limite'] . "', clase_id = '" . $clase["id"] . "' WHERE id = ".$_GET["tid"];
+    $sql = "UPDATE tareas SET nombre = '" . $_POST['titulo'] . "', descripcion = '" . $_POST['instruccion'] . "', fecha_subida = NOW(), fecha_entrega = '" . $_POST['fecha_limite'] . "', clase_id = '" . $clase["id"] . "' WHERE id = " . $_GET["tid"];
     $query = mysqli_query($link, $sql);
     if (!$query) {
         echo "Fallo consulta: " . mysqli_error($link);
@@ -91,14 +93,33 @@ if (isset($_POST['titulo'])) {
     echo '<script>window.location.href = "clase_ver_tarea.php?id=' . $result["id"] . '&tid=' . $tid . '";</script>';
     exit();
 }
-if(isset($_POST['eliminar'])){
-    $sql = "DELETE FROM tareas WHERE id = ".$_GET["tid"];
+if (isset($_POST['eliminar'])) {
+    $sql = "DELETE FROM tareas WHERE id = " . $_GET["tid"];
     $query = mysqli_query($link, $sql);
     if (!$query) {
         echo "Fallo consulta: " . mysqli_error($link);
         exit();
     }
     header('Location: clases.php');
+}
+if (isset($_FILES["archivoEntrega"])) {
+    $sql = "INSERT INTO entregas(tarea_id,usuario_id,fecha_entrega) VALUES(" . $_GET["tid"] . "," . $_SESSION['usuario']['id'] . ",NOW())";
+    $query = mysqli_query($link, $sql);
+    if (!$query) {
+        echo "Fallo consulta: " . mysqli_error($link);
+        exit();
+    }
+    $archivo_nombre = $_FILES['archivoEntrega']['name'];
+    $archivo_temporal = $_FILES['archivoEntrega']['tmp_name'];
+    $nombre = $_GET["tid"]."&".$_SESSION["usuario"]["id"];
+    mkdir("img/entregas/" . $nombre . "");
+    $ruta = "img/entregas/" . $nombre . "/" . $archivo_nombre;
+    if (move_uploaded_file($archivo_temporal, $ruta)) {
+        echo "El archivo se ha subido correctamente.";
+    } else {
+        echo "Error al subir el archivo.";
+    }
+    header('Location: clase_ver_tarea.php?id='.$_GET["id"].'&tid='.$_GET["tid"]);
 }
 
 $view = "clase_ver_tareas";

@@ -104,9 +104,74 @@
 
                         <!-- Botones de acción -->
                         <?php if ($clase["id_usuario_creador"] != $_SESSION["usuario"]["id"]) { ?>
-                            <div class="mt-4">
-                                <a href="#" class="btn btn-primary mr-2"><i class="fas fa-cloud-upload-alt"></i> Subir</a>
+                            <div class="mt-4 d-flex justify-content-start">
+                                <?php if(!isset($entrega)) {?><a href="#" class="btn btn-primary mr-2" data-toggle="modal" data-target="#submitModal"><i class="fas fa-cloud-upload-alt"></i> Subir</a>
                                 <a href="#" class="btn btn-success mr-2"><i class="fas fa-check"></i> Marcar como Completada</a>
+                                <?php } else{ ?>
+                                    <p>La tarea fue enviada</p>
+                                    <?php } ?>
+                                <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="subFmitModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="clase_ver_tarea.php?id=<?php echo $_GET["id"]; ?>&tid=<?php echo $_GET["tid"]; ?>" method="POST" enctype="multipart/form-data">
+                                                    <div class="form-group">
+                                                        <label for="archivo">Selecciona un archivo:</label>
+                                                        <input type="file" id="archivoEntrega" name="archivoEntrega" accept=".pdf, .doc, .docx, .txt" onchange="VistaPrevia()">
+                                                        <div id="vista" class="preview-container" onclick="cambiar()">
+                                                            <img id="imagen" class="preview" src="#" alt="Vista previa del archivo seleccionado">
+                                                            <div id="info" class="file-info" style="pointer-events: none;">Nombre del archivo: </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-secondary">Listo!</button>
+                                                </form>
+                                                <script>
+                                                    function VistaPrevia() {
+                                                        var archivo = document.getElementById('archivo').files[0];
+                                                        var vistaPrevContainer = document.getElementById('vista');
+                                                        var imagen_previa = document.getElementById('imagen');
+                                                        var info_archivo = document.getElementById('info');
+
+                                                        // Limpiar vista previa anterior
+                                                        imagen_previa.src = "";
+                                                        info_archivo.textContent = "Nombre del archivo: ";
+
+                                                        if (archivo) {
+                                                            var lector = new FileReader();
+                                                            lector.onload = function(e) {
+                                                                vistaPrevContainer.style.display = 'flex';
+                                                                document.getElementById('archivo').style.display = 'none'; // Ocultar input de archivo
+                                                                if (archivo.type.match('image.*')) {
+                                                                    // Mostrar miniatura de imagen
+                                                                    imagen_previa.src = e.target.result;
+                                                                } else {
+                                                                    // Mostrar icono genérico para otros tipos de archivo
+                                                                    imagen_previa.src = 'img/literatura.jpg'; // Puedes poner una imagen genérica de archivo
+                                                                }
+                                                            };
+                                                            lector.readAsDataURL(archivo);
+
+                                                            // Mostrar nombre del archivo
+                                                            info_archivo.textContent += archivo.name;
+                                                        }
+                                                    }
+
+                                                    function cambiar() {
+                                                        var inputArchivo = document.getElementById('archivo');
+                                                        inputArchivo.value = ''; // Limpiar el valor del input
+                                                        document.getElementById('vista').style.display = 'none'; // Ocultar la vista previa
+                                                        inputArchivo.style.display = 'block'; // Mostrar el input de archivo
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         <?php } else { ?>
                             <div class="mt-4 d-flex justify-content-start">
@@ -123,11 +188,11 @@
                                                 <form method="POST" enctype="multipart/form-data">
                                                     <div class="form-group">
                                                         <label for="titulo">Titulo</label>
-                                                        <input type="text" class="form-control" name="titulo" maxlength="50" required>
+                                                        <input type="text" value="<?php echo $tarea["nombre"] ?>" class="form-control" name="titulo" maxlength="50" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="instruccion">Instrucciones</label>
-                                                        <textarea class="form-control" name="instruccion" rows="4" maxlength="250" required></textarea>
+                                                        <textarea class="form-control" value="<?php echo  $tarea["descripcion"]; ?>" name="instruccion" rows="4" maxlength="250" required></textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="archivo">Selecciona un archivo:</label>
@@ -139,7 +204,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="fecha_limite">Fecha límite</label>
-                                                        <input type="datetime-local" class="form-control" name="fecha_limite" required>
+                                                        <input type="datetime-local" class="form-control" name="fecha_limite" value="<?php echo $tarea["fecha_entrega"]; ?>" required>
                                                     </div>
                                                     <button type="submit" class="btn btn-secondary">Editar</button>
                                                 </form>
@@ -196,23 +261,21 @@
         </div>
 
         <!-- Columna para la sección de comentarios -->
-        <?php if ($clase["id_usuario_creador"] != $_SESSION["usuario"]["id"]) { ?>
 
-            <div class="col-md-6">
-                <div class="comments-section">
-                    <h2 class="mb-4">Comentarios</h2>
+        <div class="col-md-6">
+            <div class="comments-section">
+                <h2 class="mb-4">Comentarios</h2>
 
-                    <!-- Formulario para Agregar Comentario -->
-                    <form>
-                        <div class="form-group">
-                            <label for="commentContent">Comentario:</label>
-                            <textarea class="form-control" id="commentContent" rows="3" placeholder="Escribe tu comentario"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-comment"></i> Añadir Comentario</button>
-                    </form>
-                </div>
+                <!-- Formulario para Agregar Comentario -->
+                <form>
+                    <div class="form-group">
+                        <label for="commentContent">Comentario:</label>
+                        <textarea class="form-control" id="commentContent" rows="3" placeholder="Escribe tu comentario"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-comment"></i> Añadir Comentario</button>
+                </form>
             </div>
-        <?php } ?>
+        </div>
     </div>
 </div>
 <script>
