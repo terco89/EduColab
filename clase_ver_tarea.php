@@ -51,5 +51,55 @@ if (file_exists("img/tareas/".$_GET["tid"]) && is_dir("img/tareas/".$_GET["tid"]
     }
 }
 
+if (isset($_POST['titulo'])) {
+    $sql = "UPDATE tareas SET nombre = '" . $_POST['titulo'] . "', descripcion = '" . $_POST['instruccion'] . "', fecha_subida = NOW(), fecha_entrega = '" . $_POST['fecha_limite'] . "', clase_id = '" . $clase["id"] . "' WHERE id = ".$_GET["tid"];
+    $query = mysqli_query($link, $sql);
+    if (!$query) {
+        echo "Fallo consulta: " . mysqli_error($link);
+        exit();
+    }
+    $tid = mysqli_insert_id($link);
+    $sql = "select id_usuario from clase_usuario where id_usuario != " . $_SESSION["usuario"]["id"] . " and id_clase = " . $clase["id"];
+    $query = mysqli_query($link, $sql);
+    $ids = array();
+    if (mysqli_num_rows($query) > 0) {
+        while ($row = mysqli_fetch_assoc($query)) {
+            $ids[] = $row;
+        }
+    }
+    for ($i = 0; $i < count($ids); $i++) {
+        $sql = "INSERT INTO tarea_usuario(tarea_id,usuario_id,estado) VALUES($tid," . $ids[$i]["id_usuario"] . ",1)";
+        $query = mysqli_query($link, $sql);
+        if (!$query) {
+            echo "Fallo consulta: " . mysqli_error($link);
+            exit();
+        }
+    }
+
+    if (isset($_SESSION['usuario']) && isset($_FILES['archivo']) && $_FILES['archivo']['error'] == 0) {
+        $archivo_nombre = $_FILES['archivo']['name'];
+        $archivo_temporal = $_FILES['archivo']['tmp_name'];
+        $nombre = $tid;
+        mkdir("img/tareas/" . $nombre . "");
+        $ruta = "img/tareas/" . $nombre . "/" . $archivo_nombre;
+        if (move_uploaded_file($archivo_temporal, $ruta)) {
+            echo "El archivo se ha subido correctamente.";
+        } else {
+            echo "Error al subir el archivo.";
+        }
+    }
+    echo '<script>window.location.href = "clase_ver_tarea.php?id=' . $result["id"] . '&tid=' . $tid . '";</script>';
+    exit();
+}
+if(isset($_POST['eliminar'])){
+    $sql = "DELETE FROM tareas WHERE id = ".$_GET["tid"];
+    $query = mysqli_query($link, $sql);
+    if (!$query) {
+        echo "Fallo consulta: " . mysqli_error($link);
+        exit();
+    }
+    header('Location: clases.php');
+}
+
 $view = "clase_ver_tareas";
 require_once "views/layout.php";
