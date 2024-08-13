@@ -32,10 +32,7 @@
                 </div>
                 <div class="row">
                     <input type="text" placeholder="Edad" name="edad">
-                </div>
-                <div class="row">
-                    <input type="text" placeholder="Escuela" name="escuela">
-                </div>
+                </div>+
                 <div class="row button">
                     <input type="submit" value="Registrarse">
                 </div>

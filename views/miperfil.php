@@ -89,7 +89,6 @@
             <span class="idd"><?php echo "(" . $_SESSION['usuario']['name'] . ")" ?></span>
             <br><span class="idd"><?php echo "Email: " . $_SESSION['usuario']['email']; ?></span>
             <span class="idd"><?php echo "Edad: " . $_SESSION['usuario']['edad'] ?></span>
-            <span class="idd"><?php echo "Escuela: " . $_SESSION['usuario']['escuela'] ?></span>
             <span class="idd"> <i class="fa fa-github"></i><?php echo " ".$_SESSION['usuario']['github'] ?></span>
         </div>
     </div>

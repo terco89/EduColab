@@ -21,7 +21,7 @@ if (!$tarea) {
     header("Location: clases.php");
     exit();
 }
-$sql = "SELECT * FROM entregas WHERE tarea_id = " . $_GET["tid"]." AND usuario_id = ".$_SESSION["usuario"]["id"]." ";
+$sql = "SELECT * FROM entregas WHERE tarea_id = " . $_GET["tid"] . " AND usuario_id = " . $_SESSION["usuario"]["id"] . " ";
 $resultado_entrega = mysqli_query($link, $sql);
 $entrega = mysqli_fetch_assoc($resultado_entrega);
 // Obtener información de la clase
@@ -32,6 +32,21 @@ $sql_clase = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, descripcion, id
 $resultado_clase = mysqli_query($link, $sql_clase);
 $clase = mysqli_fetch_assoc($resultado_clase);
 
+if (!$clase) {
+    header("Location: clases.php");
+    exit();
+}
+// Obtener información de los usuarios
+$sql_clase = "SELECT DISTINCT tarea_usuario.estado, usuarios.nombre, usuarios.apellido, usuarios.img 
+             FROM tarea_usuario INNER JOIN usuarios ON tarea_usuario.usuario_id = usuarios.id
+             INNER JOIN clase_usuario ON usuarios.id = clase_usuario.id_usuario INNER JOIN clasesescolares ON clase_usuario.id_clase = clasesescolares.id
+             WHERE tarea_id = " . $_GET["tid"];
+$resultado_clase = mysqli_query($link, $sql_clase);
+
+$usuarios = [];
+while ($usuario = mysqli_fetch_assoc($resultado_clase)) {
+    $usuarios[] = $usuario;
+}
 if (!$clase) {
     header("Location: clases.php");
     exit();
@@ -111,7 +126,7 @@ if (isset($_FILES["archivoEntrega"])) {
     }
     $archivo_nombre = $_FILES['archivoEntrega']['name'];
     $archivo_temporal = $_FILES['archivoEntrega']['tmp_name'];
-    $nombre = $_GET["tid"]."&".$_SESSION["usuario"]["id"];
+    $nombre = $_GET["tid"] . "&" . $_SESSION["usuario"]["id"];
     mkdir("img/entregas/" . $nombre . "");
     $ruta = "img/entregas/" . $nombre . "/" . $archivo_nombre;
     if (move_uploaded_file($archivo_temporal, $ruta)) {
@@ -119,7 +134,7 @@ if (isset($_FILES["archivoEntrega"])) {
     } else {
         echo "Error al subir el archivo.";
     }
-    header('Location: clase_ver_tarea.php?id='.$_GET["id"].'&tid='.$_GET["tid"]);
+    header('Location: clase_ver_tarea.php?id=' . $_GET["id"] . '&tid=' . $_GET["tid"]);
 }
 
 $view = "clase_ver_tareas";

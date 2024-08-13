@@ -8,7 +8,7 @@ if (isset($_SESSION["usuario"])) {
 
 $errors = array();
 
-if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])&&isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['edad']) && isset($_POST['escuela'])) {
+if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])&&isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['edad'])) {
 
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -16,7 +16,6 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $edad = $_POST['edad'];
-    $escuela = $_POST['escuela'];
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "El correo electrónico no es válido.";
@@ -35,7 +34,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])
 
     if (empty($errors)) {
         $pass = md5($password);
-        $sql = "INSERT INTO usuarios (id, name, password, email, rol, img, nombre, apellido, edad, escuela) VALUES (null, '$name', '$pass', '$email', 'alumno', 'alumno.jpg', '$nombre', '$apellido', '$edad', '$escuela')";
+        $sql = "INSERT INTO usuarios (id, name, password, email, rol, img, nombre, apellido, edad) VALUES (null, '$name', '$pass', '$email', 'alumno', 'alumno.jpg', '$nombre', '$apellido', '$edad')";
         $query = mysqli_query($link, $sql);
 
         if (!$query) {
