@@ -96,6 +96,7 @@
         display: none;
     }
 </style>
+<?php if ($clase["id_usuario_creador"] == $_SESSION["usuario"]["id"]) { ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
@@ -114,6 +115,7 @@
         <?php } ?>
     </div>
 </nav>
+<?php } ?>
 <script>
     // Función para mostrar el contenido seleccionado
     function showContent(contentId) {
@@ -201,7 +203,7 @@
                                                                     style="pointer-events: none;">Nombre del archivo: </div>
                                                             </div>
                                                         </div>
-                                                        <button type="submit" class="btn btn-secondary">Listo!</button>
+                                                        <button type="submit" name="submit" class="btn btn-secondary">Listo!</button>
                                                     </form>
                                                     <script>
                                                         function VistaPrevia() {

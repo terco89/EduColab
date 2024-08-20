@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-08-2024 a las 22:41:10
+-- Tiempo de generación: 20-08-2024 a las 22:09:04
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -161,6 +161,64 @@ CREATE TABLE `entregas` (
 INSERT INTO `entregas` (`tarea_id`, `usuario_id`, `fecha_entrega`, `calificacion`) VALUES
 (59, 4, '2024-08-01 15:56:15', NULL),
 (60, 4, '2024-08-20 14:43:16', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `espacios`
+--
+
+CREATE TABLE `espacios` (
+  `id` int(255) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `curso_division` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `espacios`
+--
+
+INSERT INTO `espacios` (`id`, `nombre`, `curso_division`) VALUES
+(1, '[value-2]', '[value-3]'),
+(2, 'asda', 'asd'),
+(3, 'asda', 'asd'),
+(4, 'asda', 'asd'),
+(5, 'asda', 'asd'),
+(6, 'asd', 'sadsa'),
+(7, 'asdasdsadsad', 'aadasdasdadasd'),
+(8, 'sss', '2222');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `espacios_clases`
+--
+
+CREATE TABLE `espacios_clases` (
+  `id_espacio` int(11) NOT NULL,
+  `id_clase` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `espacios_clases`
+--
+
+INSERT INTO `espacios_clases` (`id_espacio`, `id_clase`) VALUES
+(2, 33),
+(2, 34),
+(3, 33),
+(3, 34),
+(4, 33),
+(4, 34),
+(5, 33),
+(5, 34),
+(6, 33),
+(6, 34),
+(7, 33),
+(7, 34),
+(8, 33),
+(8, 34),
+(8, 35);
 
 -- --------------------------------------------------------
 
@@ -468,6 +526,12 @@ ALTER TABLE `discusiones`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `espacios`
+--
+ALTER TABLE `espacios`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `horarios`
 --
 ALTER TABLE `horarios`
@@ -519,6 +583,12 @@ ALTER TABLE `clasesescolares`
 --
 ALTER TABLE `discusiones`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `espacios`
+--
+ALTER TABLE `espacios`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`

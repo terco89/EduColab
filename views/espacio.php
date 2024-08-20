@@ -1,84 +1,53 @@
 <style>
-    /* Estilos personalizados pueden ir aquí */
-    body {
-        background-color: #f8f9fa;
-    }
+        body {
+            background-color: #f8f9fa;
+        }
 
-    .container {
-        margin-top: 50px;
-    }
+        .container {
+            margin-top: 50px;
+        }
 
-    hr {
-        background-color: rgb(14, 129, 133);
-        border-width: 3px;
-    }
+        hr {
+            background-color: rgb(14, 129, 133);
+            border-width: 3px;
+        }
 
-    h3 {
-        color: rgb(14, 129, 133);
-    }
+        h3 {
+            color: rgb(14, 129, 133);
+        }
 
-    .card-title {
-        text-overflow: ellipsis;
-    }
-</style>
-<link rel="stylesheet" href="espacio.css">
-</head>
-
+        .card-title {
+            text-overflow: ellipsis;
+        }
+    </style>
+    <link rel="stylesheet" href="espacio.css">
 <body>
     <div class="container">
-        <h2 class="text-center">Espacio de 6°10</h2>
+        <h2 class="text-center">Espacio: <?php echo htmlspecialchars($espacio['nombre']); ?></h2>
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title">Información del Espacio</h5>
-                <p class="card-text">Este espacio está dedicado al curso de 6°10. Aquí encontrarás todas las aulas de tu división.</p>
+                <p class="card-text">Este espacio está dedicado al curso de <?php echo htmlspecialchars($espacio['curso_division']); ?>. Aquí encontrarás todas las aulas de tu división.</p>
             </div>
         </div>
-        <h3 class="mt-5"style="color:black;">Clases en este Espacio</h3>
+        <h3 class="mt-5" style="color:black;">Clases en este Espacio</h3>
         <div class="row mt-4">
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Clase de Matemáticas</h3>
-                        <h6 class="card-subtitle mb-2 text-muted">Profesor: Gabriel Valera</h6>
-                        <hr>
-                        <p class="card-text">Fecha y hora: Martes y Jueves, 10:00 AM - 12:00 PM</p>
-                        <a href="clase.php" class="btn btn-primary" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ir a la clase</a>
+            <?php while ($rowClase = $resultClases->fetch_assoc()): ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title"><?php echo htmlspecialchars($rowClase['nombre']); ?></h3>
+                            <hr>
+                            <p class="card-text">Día de la semana: <?php echo htmlspecialchars($rowClase['dia_semana']); ?></p>
+                            <p class="card-text">Horario: <?php echo htmlspecialchars($rowClase['hora_inicio']); ?> - <?php echo htmlspecialchars($rowClase['hora_fin']); ?></p>
+                            <a href="clase.php?id=<?php echo htmlspecialchars($rowClase['id']); ?>" class="btn btn-primary" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ir a la clase</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Clase de Literatura</h3>
-                        <h6 class="card-subtitle mb-2 text-muted">Profesor: David Martínez</h6>
-                        <hr>
-                        <p class="card-text">Fecha y hora: Martes y Jueves, 11:00 AM - 1:00 PM</p>
-                        <a href="clase.php" class="btn btn-primary" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ir a la clase</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Clase de Química</h3>
-                        <h6 class="card-subtitle mb-2 text-muted">Profesor: Ana García</h6>
-                        <hr>
-                        <p class="card-text">Fecha y hora: Lunes y Miércoles, 9:00 AM - 11:00 AM</p>
-                        <a href="#" class="btn btn-primary disabled" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ir a la clase</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Clase de Geografía</h3>
-                        <h6 class="card-subtitle mb-2 text-muted">Profesor: Laura Sánchez</h6>
-                        <hr>
-                        <p class="card-text">Fecha y hora: Miércoles y Viernes, 10:00 AM - 12:00 PM</p>
-                        <a href="#" class="btn btn-primary disabled" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">Ir a la clase</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Agregar más tarjetas según sea necesario -->
+            <?php endwhile; ?>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

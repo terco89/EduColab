@@ -45,14 +45,14 @@ if (!$clase) {
     exit();
 }
 // Obtener información de los usuarios
-$sql_clase = "SELECT DISTINCT tarea_usuario.estado, usuarios.nombre, usuarios.apellido, usuarios.img 
+$sql_clases = "SELECT DISTINCT tarea_usuario.estado, usuarios.nombre, usuarios.apellido, usuarios.img 
              FROM tarea_usuario INNER JOIN usuarios ON tarea_usuario.usuario_id = usuarios.id
              INNER JOIN clase_usuario ON usuarios.id = clase_usuario.id_usuario INNER JOIN clasesescolares ON clase_usuario.id_clase = clasesescolares.id
              WHERE tarea_id = " . $_GET["tid"];
-$resultado_clase = mysqli_query($link, $sql_clase);
+$resultado_clases = mysqli_query($link, $sql_clases);
 
 $usuarios = [];
-while ($usuario = mysqli_fetch_assoc($resultado_clase)) {
+while ($usuario = mysqli_fetch_assoc($resultado_clases)) {
     $usuarios[] = $usuario;
 }
 if (!$clase) {
@@ -60,6 +60,14 @@ if (!$clase) {
     exit();
 }
 
+if (isset($_POST['submit'])){
+    $sqlll="UPDATE tarea_usuario SET estado = '2' WHERE usuario_id = ".$_SESSION["usuario"]["id"]; " AND tarea_id = ". $_GET["tid"];  ;
+    $quuery = mysqli_query($link, $sqlll);
+    if (!$quuery) {
+        echo "Fallo consulta: " . mysqli_error($link);
+        exit();
+    }
+}
 // Obtener los recursos adjuntos de la tarea
 $recursos = array();
 if (file_exists("img/tareas/" . $_GET["tid"]) && is_dir("img/tareas/" . $_GET["tid"])) {
