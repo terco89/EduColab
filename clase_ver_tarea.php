@@ -12,6 +12,14 @@ if (!isset($_GET["id"]) || !isset($_GET["tid"])) {
     exit();
 }
 
+if(isset($_POST["comentario"]) && strlen($_POST["comentario"]) > 0){
+    $sql = "INSERT INTo mensajes_privado(tarea_id,usuario_id,mensaje,fecha_creacion,bandera) VALUES(".$_GET["tid"].",".$_SESSION["usuario"]["id"].",'".$_POST["comentario"]."',NOW(),true)";
+    $result = mysqli_query($link,$sql);
+    if($result){
+        header("Location: clase_ver_tarea.php?id=".$_GET["id"]."&tid=".$_GET["tid"]);
+    }
+}
+
 // Obtener información de la tarea
 $sql = "SELECT * FROM tareas WHERE id = " . $_GET["tid"];
 $resultado_tarea = mysqli_query($link, $sql);
@@ -67,6 +75,16 @@ if (file_exists("img/tareas/" . $_GET["tid"]) && is_dir("img/tareas/" . $_GET["t
         }
     }
 }
+
+
+if($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"] && isset($_POST["nmensaje"]) && isset($_POST["id"])){
+    $sql = "INSERT INto mensajes_privado(tarea_id,usuario_id,mensaje,fecha_creacion,bandera) VALUES(".$_GET["tid"].",".$_POST["id"].",'".$_POST["nmensaje"]."',NOW(),false)";
+    $result = mysqli_query($link,$sql);
+    if($result){
+        echo "exito pe";
+    }
+}
+
 
 if (isset($_POST['titulo'])) {
     $sql = "UPDATE tareas SET nombre = '" . $_POST['titulo'] . "', descripcion = '" . $_POST['instruccion'] . "', fecha_subida = NOW(), fecha_entrega = '" . $_POST['fecha_limite'] . "', clase_id = '" . $clase["id"] . "' WHERE id = " . $_GET["tid"];
@@ -135,6 +153,17 @@ if (isset($_FILES["archivoEntrega"])) {
         echo "Error al subir el archivo.";
     }
     header('Location: clase_ver_tarea.php?id=' . $_GET["id"] . '&tid=' . $_GET["tid"]);
+}
+
+if($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]){
+    $sql = "SELECT usuarios.id, name, mensaje,bandera FROM mensajes_privado INNER JOIN usuarios ON mensajes_privado.usuario_id = usuarios.id WHERE tarea_id = ".$_GET["tid"];
+    $query = mysqli_query($link, $sql);
+    $general = array();
+    if (mysqli_num_rows($query) > 0) {
+        while ($row = mysqli_fetch_assoc($query)) {
+            $general[] = $row;
+        }
+    }
 }
 
 $view = "clase_ver_tareas";
