@@ -25,7 +25,7 @@ $sql = "SELECT * FROM entregas WHERE tarea_id = " . $_GET["tid"] . " AND usuario
 $resultado_entrega = mysqli_query($link, $sql);
 $entrega = mysqli_fetch_assoc($resultado_entrega);
 // Obtener información de la clase
-$sql_clase = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, descripcion, id_usuario_creador, name
+$sql_clase = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, id_usuario_creador, name
              FROM ClasesEscolares 
              INNER JOIN usuarios ON ClasesEscolares.id_usuario_creador = usuarios.id 
              WHERE ClasesEscolares.id = " . $_GET["id"];

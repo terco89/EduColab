@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nombre'])) {
     $descripcion = mysqli_real_escape_string($link, $_POST['descripcion']);
     $id_usuario_creador = $_SESSION["usuario"]['id'];
 
-    $sql = "INSERT INTO clasesescolares (nombre, descripcion, codigo, id_usuario_creador) VALUES ('$nombre', '$descripcion', '$codigo', '$id_usuario_creador')";
+    $sql = "INSERT INTO clasesescolares (nombre, codigo, id_usuario_creador) VALUES ('$nombre', '$codigo', '$id_usuario_creador')";
     $query = mysqli_query($link, $sql);
     if (!$query) {
         echo "Fallo consulta: " . mysqli_error($link);
