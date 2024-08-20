@@ -106,8 +106,13 @@
             <li class="nav-item">
                 <button onclick="showContent('content2')">Trabajo del estudiante</button>
             </li>
-            </li>
-        </ul>
+            <?php if ($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]) { ?>
+
+                <li class="nav-item">
+                    <button onclick="showContent('content3')">Comentarios del estudiante</button>
+                </li>
+            </ul>
+        <?php } ?>
     </div>
 </nav>
 <?php } ?>
@@ -116,7 +121,7 @@
     function showContent(contentId) {
         // Ocultar todos los contenidos
         var contents = document.querySelectorAll('.content');
-        contents.forEach(function(content) {
+        contents.forEach(function (content) {
             content.classList.add('hidden');
         });
 
@@ -126,7 +131,7 @@
     }
 
     // Mostrar el primer contenido por defecto
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         showContent('content1'); // Aquí defines cuál contenido mostrar por defecto
     });
 </script>
@@ -142,47 +147,60 @@
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $tarea["nombre"] ?></h5>
                             <p class="card-text"><?php echo $tarea["descripcion"] ?></p>
-                            <p class="card-text"><strong>Fecha límite:</strong> <?php echo $tarea["fecha_entrega"] ?></p>
+                            <p class="card-text"><strong>Fecha límite:</strong> <?php echo $tarea["fecha_entrega"] ?>
+                            </p>
                             <?php if (isset($recursos) && count($recursos) > 0) {
                                 for ($i = 0; $i < count($recursos); $i += 2) { ?>
                                     <div class="resource-card">
                                         <div class="card">
                                             <div class="card-body">
                                                 <h6 class="card-subtitle mb-2 text-muted">Archivo Adjunto</h6>
-                                                <p class="card-text">Nombre del archivo: <a href="#" onclick="cargarPdf('<?php echo $recursos[$i] . '.' . $recursos[$i + 1] ?>')"><?php echo $recursos[$i] . "." . $recursos[$i + 1] ?></a></p>
+                                                <p class="card-text">Nombre del archivo: <a href="#"
+                                                        onclick="cargarPdf('<?php echo $recursos[$i] . '.' . $recursos[$i + 1] ?>')"><?php echo $recursos[$i] . "." . $recursos[$i + 1] ?></a>
+                                                </p>
                                                 <p class="card-text">
                                                     <i class="far fa-file-pdf fa-2x"></i> <!-- Icono de archivo PDF -->
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
-                            <?php }
+                                <?php }
                             } ?>
 
                             <!-- Botones de acción -->
                             <?php if ($clase["id_usuario_creador"] != $_SESSION["usuario"]["id"]) { ?>
                                 <div class="mt-4 d-flex justify-content-start">
-                                    <?php if (!isset($entrega)) { ?><a href="#" class="btn btn-primary mr-2" data-toggle="modal" data-target="#submitModal"><i class="fas fa-cloud-upload-alt"></i> Subir</a>
-                                        <a href="#" class="btn btn-success mr-2"><i class="fas fa-check"></i> Marcar como Completada</a>
+                                    <?php if (!isset($entrega)) { ?><a href="#" class="btn btn-primary mr-2"
+                                            data-toggle="modal" data-target="#submitModal"><i
+                                                class="fas fa-cloud-upload-alt"></i> Subir</a>
+                                        <a href="#" class="btn btn-success mr-2"><i class="fas fa-check"></i> Marcar como
+                                            Completada</a>
                                     <?php } else { ?>
                                         <p>La tarea fue enviada</p>
                                     <?php } ?>
-                                    <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="subFmitModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="submitModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="subFmitModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="clase_ver_tarea.php?id=<?php echo $_GET["id"]; ?>&tid=<?php echo $_GET["tid"]; ?>" method="POST" enctype="multipart/form-data">
+                                                    <form
+                                                        action="clase_ver_tarea.php?id=<?php echo $_GET["id"]; ?>&tid=<?php echo $_GET["tid"]; ?>"
+                                                        method="POST" enctype="multipart/form-data">
                                                         <div class="form-group">
                                                             <label for="archivo">Selecciona un archivo:</label>
-                                                            <input type="file" id="archivoEntrega" name="archivoEntrega" accept=".pdf, .doc, .docx, .txt" onchange="VistaPrevia()">
+                                                            <input type="file" id="archivoEntrega" name="archivoEntrega"
+                                                                accept=".pdf, .doc, .docx, .txt" onchange="VistaPrevia()">
                                                             <div id="vista" class="preview-container" onclick="cambiar()">
-                                                                <img id="imagen" class="preview" src="#" alt="Vista previa del archivo seleccionado">
-                                                                <div id="info" class="file-info" style="pointer-events: none;">Nombre del archivo: </div>
+                                                                <img id="imagen" class="preview" src="#"
+                                                                    alt="Vista previa del archivo seleccionado">
+                                                                <div id="info" class="file-info"
+                                                                    style="pointer-events: none;">Nombre del archivo: </div>
                                                             </div>
                                                         </div>
                                                         <button type="submit" name="submit" class="btn btn-secondary">Listo!</button>
@@ -200,7 +218,7 @@
 
                                                             if (archivo) {
                                                                 var lector = new FileReader();
-                                                                lector.onload = function(e) {
+                                                                lector.onload = function (e) {
                                                                     vistaPrevContainer.style.display = 'flex';
                                                                     document.getElementById('archivo').style.display = 'none'; // Ocultar input de archivo
                                                                     if (archivo.type.match('image.*')) {
@@ -232,12 +250,15 @@
                                 </div>
                             <?php } else { ?>
                                 <div class="mt-4 d-flex justify-content-start">
-                                    <a href="#" class="btn btn-primary mr-2" data-toggle="modal" data-target="#submitModal"><i class="fas fa-edit"></i>Editar</a>
-                                    <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="subFmitModalLabel" aria-hidden="true">
+                                    <a href="#" class="btn btn-primary mr-2" data-toggle="modal"
+                                        data-target="#submitModal"><i class="fas fa-edit"></i>Editar</a>
+                                    <div class="modal fade" id="submitModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="subFmitModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
@@ -245,23 +266,32 @@
                                                     <form method="POST" enctype="multipart/form-data">
                                                         <div class="form-group">
                                                             <label for="titulo">Titulo</label>
-                                                            <input type="text" value="<?php echo $tarea["nombre"] ?>" class="form-control" name="titulo" maxlength="50" required>
+                                                            <input type="text" value="<?php echo $tarea["nombre"] ?>"
+                                                                class="form-control" name="titulo" maxlength="50" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="instruccion">Instrucciones</label>
-                                                            <textarea class="form-control" value="<?php echo  $tarea["descripcion"]; ?>" name="instruccion" rows="4" maxlength="250" required></textarea>
+                                                            <textarea class="form-control"
+                                                                value="<?php echo $tarea["descripcion"]; ?>"
+                                                                name="instruccion" rows="4" maxlength="250"
+                                                                required></textarea>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="archivo">Selecciona un archivo:</label>
-                                                            <input type="file" id="archivo" name="archivo" accept=".pdf, .doc, .docx, .txt" onchange="VistaPrevia()">
+                                                            <input type="file" id="archivo" name="archivo"
+                                                                accept=".pdf, .doc, .docx, .txt" onchange="VistaPrevia()">
                                                             <div id="vista" class="preview-container" onclick="cambiar()">
-                                                                <img id="imagen" class="preview" src="#" alt="Vista previa del archivo seleccionado">
-                                                                <div id="info" class="file-info" style="pointer-events: none;">Nombre del archivo: </div>
+                                                                <img id="imagen" class="preview" src="#"
+                                                                    alt="Vista previa del archivo seleccionado">
+                                                                <div id="info" class="file-info"
+                                                                    style="pointer-events: none;">Nombre del archivo: </div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="fecha_limite">Fecha límite</label>
-                                                            <input type="datetime-local" class="form-control" name="fecha_limite" value="<?php echo $tarea["fecha_entrega"]; ?>" required>
+                                                            <input type="datetime-local" class="form-control"
+                                                                name="fecha_limite"
+                                                                value="<?php echo $tarea["fecha_entrega"]; ?>" required>
                                                         </div>
                                                         <button type="submit" class="btn btn-secondary">Editar</button>
                                                     </form>
@@ -278,7 +308,7 @@
 
                                                             if (archivo) {
                                                                 var lector = new FileReader();
-                                                                lector.onload = function(e) {
+                                                                lector.onload = function (e) {
                                                                     vistaPrevContainer.style.display = 'flex';
                                                                     document.getElementById('archivo').style.display = 'none'; // Ocultar input de archivo
                                                                     if (archivo.type.match('image.*')) {
@@ -308,7 +338,8 @@
                                         </div>
                                     </div>
                                     <form method="POST">
-                                        <button type="submit" name="eliminar" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                        <button type="submit" name="eliminar" class="btn btn-danger"><i
+                                                class="fas fa-trash-alt"></i> Eliminar</button>
                                     </form>
                                 </div>
                             <?php } ?>
@@ -324,13 +355,42 @@
                     <h2 class="mb-4">Comentarios</h2>
 
                     <!-- Formulario para Agregar Comentario -->
-                    <form>
+                    <form method="POST"
+                        action="clase_ver_tarea.php?id=<?php echo $_GET["id"]; ?>&tid=<?php echo $_GET["tid"]; ?>">
                         <div class="form-group">
                             <label for="commentContent">Comentario:</label>
-                            <textarea class="form-control" id="commentContent" rows="3" placeholder="Escribe tu comentario"></textarea>
+                            <textarea class="form-control" name="comentario" id="commentContent" rows="3"
+                                placeholder="Escribe tu comentario" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-comment"></i> Añadir Comentario</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-comment"></i> Añadir
+                            Comentario</button>
                     </form>
+                </div>
+                <div class="comment-box border p-3 mb-3">
+                    <?php
+
+                    $query = "SELECT * FROM mensajes_privado WHERE tarea_id = " . $_GET["tid"] . " AND (usuario_id = " . $_SESSION["usuario"]["id"] . " OR usuario_id = " . $clase["id_usuario_creador"] . ") ORDER BY fecha_creacion ASC";
+                    $result = mysqli_query($link, $query);
+                    $nombre = mysqli_fetch_assoc(mysqli_query($link, "SELECT name FROM usuarios WHere id = " . $clase["id_usuario_creador"]));
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            // Determinar la clase basada en el usuario
+                            $user_class = ($row['bandera'] == false) ? 'left' : 'right';
+                            $container_class = ($row['bandera'] == false) ? 'left' : 'right';
+                            $nombre_class = ($row['bandera'] == true) ? $_SESSION["usuario"]["name"] : $nombre["name"];
+
+                            echo '<div class="comment-container ' . $container_class . '" style="text-align:'.$container_class.';" >';
+                            echo '<div class="comment ' . $user_class . '">';
+                            echo '<strong>' . htmlspecialchars($nombre_class) . '</strong> ';
+                            echo '<p>' . htmlspecialchars($row['mensaje']) . '</p>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo '<p>No hay comentarios aún.</p>';
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -339,11 +399,20 @@
         <div class="row" style="display: flex; flex-direction: column; gap: 1rem;">
             <?php foreach ($usuarios as $usuario) { ?>
                 <div class="card mb-4">
-                    <div class="card-body" style="width: 100%; border: 1px solid #ddd; border-radius: 0.25rem; box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); padding: 1rem; display: flex; flex-direction: column;">
+                    <div class="card-body"
+                        style="width: 100%; border: 1px solid #ddd; border-radius: 0.25rem; box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); padding: 1rem; display: flex; flex-direction: column;">
                         <div class="media mb-3" style="display: flex; align-items: center;">
-                            <img src="img/foto_perfil/<?php echo $usuario['img']; ?>" style="margin-right: 1.5rem; border-radius:50%; width:2rem; height:2rem;  object-fit: cover; background-color:white;" class="profile">
+                            <img src="img/foto_perfil/<?php echo $usuario['img']; ?>"
+                                style="margin-right: 1.5rem; border-radius:50%; width:2rem; height:2rem;  object-fit: cover; background-color:white;"
+                                class="profile">
                             <div class="media-body">
-                                <h5 class="truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;"><?php echo $usuario["nombre"] ?> <?php echo $usuario["apellido"] ?></h5><h5 style="color: red"><?php if ($usuario["estado"] == 1){ echo "Sin entregar";}?></h5><h5 style="color:green"><?php if ($usuario["estado"] == 2){ echo "Entregado";} ?></h5>
+                                <h5 class="truncate"
+                                    style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;">
+                                    <?php echo $usuario["nombre"] ?>     <?php echo $usuario["apellido"] ?>
+                                </h5>
+                                <h5 style="color: red"><?php if ($usuario["estado"] == 1) {
+                                    echo "Sin entregar";
+                                } ?></h5>
                             </div>
                         </div>
                     </div>
@@ -351,7 +420,141 @@
             <?php } ?>
         </div>
     </div>
+    <?php if ($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]) { ?>
+        <div class="content hidden" id="content3">
+            <style>
+                .list-group-item {
+                    cursor: pointer;
+                }
 
+                .comment-box {
+                    border: 1px solid #ddd;
+                    padding: 15px;
+                    background-color: #f9f9f9;
+                }
+
+                .comment-item {
+                    border-bottom: 1px solid #ddd;
+                    padding: 5px 0;
+                }
+
+                .comment-item:last-child {
+                    border-bottom: none;
+                }
+            </style>
+            <div class="container mt-5">
+                <div class="row">
+                    <!-- Lista de Alumnos -->
+                    <div class="col-md-4">
+                        <h4>Lista de Alumnos</h4>
+                        <ul class="list-group">
+                            <?php
+                            $usados = array();
+                            for ($i = 0; $i < count($general); $i++) {
+                                if (!in_array($general[$i]["id"], $usados)) { ?>
+                                    <li class="list-group-item" data-id="<?php echo $general[$i]["id"]; ?>"
+                                        data-person="<?php echo $general[$i]["name"]; ?>">
+                                        <?php echo $general[$i]["name"]; ?>
+                                    </li>
+                                    <?php
+                                    $usados[] = $general[$i]["id"];
+                                }
+                            } ?>
+                        </ul>
+                    </div>
+
+                    <!-- Caja de Comentarios -->
+                    <div class="col-md-8">
+                        <h4>Comentarios</h4>
+                        <div class="comment-box" id="commentBox">
+                            <div id="personName">Selecciona un alumno para ver los comentarios.</div>
+                            <div id="commentsList" class="mt-3">
+                                <!-- Comentarios aparecerán aquí -->
+                            </div>
+                            <textarea id="newComment" class="form-control mt-3" rows="3"
+                                placeholder="Escribe un nuevo comentario..."></textarea>
+                            <button id="addComment" class="btn btn-primary mt-2">Agregar Comentario</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                actual = 0;
+                let comments = {
+                    <?php
+                    $usados = array();
+                    for ($i = 0; $i < count($general); $i++) {
+                        if (!in_array($general[$i]["id"], $usados)) { ?>
+                                                                                    "<?php echo $general[$i]["name"] ?>": [
+                                <?php
+                                echo $general[$i]["bandera"].",";
+                                for ($j = 0; $j < count($general); $j++) {
+                                    if ($general[$j]["id"] == $general[$i]["id"]) { ?>
+                                                                                                                    '<?php echo $general[$j]["mensaje"]; ?>',
+                                    <?php } ?>
+                                                        
+                                                                                        <?php } ?>
+                            ],
+                            <?php
+                            $usados[] = $general[$i]["id"];
+                        }
+                    } ?>
+                };
+
+                $('.list-group-item').on('click', function () {
+                    let personName = $(this).data('person');
+                    actual = $(this).data('id');
+                    $('#personName').text('Comentarios para ' + personName );
+                    $('#commentsList').empty();
+
+                    if (comments[personName].length > 0) {
+                        bandera = true;
+                        comments[personName].forEach(comment => {
+                            if(bandera == true){
+                                bandera = false;
+                                continue
+                            }
+                            opcion = "right"
+                            if(comments[personName][0] == true){
+                                opcion = "left"
+                            }
+                            $('#commentsList').append(`<div class="comment-item" style="text-align:`+opcion+`;" >${comment}</div>`);
+                        });
+                    } else {
+                        $('#commentsList').append('<div class="comment-item">No hay comentarios.</div>');
+                    }
+                });
+
+                $('#addComment').on('click', function () {
+                    let personName = $('#personName').text().replace('Comentarios para ', '');
+                    let newComment = $('#newComment').val();
+
+                    if (personName && newComment && actual != 0) {
+                        console.log("enviandoooo")
+                        $.ajax({
+                            type: 'POST',
+                            url: 'clase_ver_tarea.php?id=<?php echo $_GET["id"]; ?>&tid=<?php echo $_GET["tid"]; ?>', // Cambia esto a la URL de tu script PHP
+                            data: {
+                                'nmensaje': newComment,
+                                'id': actual
+                            },
+                            success: function (response) {
+                                console.log("exito pe: "+personName);
+                                console.log(comments[personName]);
+                                comments[personName].push(newComment);
+                                $('#commentsList').append(`<div class="comment-item">${newComment}</div>`);
+                                $('#newComment').val('');
+                            },
+                            error: function (xhr, status, error) {
+                                $('#response').html('<div class="alert alert-danger">Error: ' + error + '</div>');
+                            }
+                        });
+                    }
+                });
+            </script>
+        </div>
+    <?php } ?>
 </div>
 <script>
     function cargarPdf(nom) {
@@ -359,7 +562,7 @@
         document.querySelector("iframe").style.display = "block";
         document.querySelector("#close-button").style.display = "block";
     }
-    document.getElementById('close-button').addEventListener('click', function() {
+    document.getElementById('close-button').addEventListener('click', function () {
         document.querySelector("iframe").style.display = 'none';
         this.style.display = 'none'; // Oculta el botón también
     });

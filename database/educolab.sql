@@ -102,7 +102,8 @@ INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`) VALUES
 (3, 33, 'bg1.jpg'),
 (1, 35, ''),
 (10, 36, ''),
-(4, 36, '');
+(4, 36, ''),
+(11, 36, '');
 
 -- --------------------------------------------------------
 
@@ -158,7 +159,8 @@ CREATE TABLE `entregas` (
 --
 
 INSERT INTO `entregas` (`tarea_id`, `usuario_id`, `fecha_entrega`, `calificacion`) VALUES
-(59, 4, '2024-08-01 15:56:15', NULL);
+(59, 4, '2024-08-01 15:56:15', NULL),
+(60, 4, '2024-08-20 14:43:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -283,6 +285,34 @@ INSERT INTO `mensajes` (`id`, `id_usuario`, `id_discusion`, `mensaje`, `fecha_cr
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `mensajes_privado`
+--
+
+CREATE TABLE `mensajes_privado` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `tarea_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `mensaje` varchar(1000) NOT NULL,
+  `fecha_creacion` datetime NOT NULL,
+  `bandera` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `mensajes_privado`
+--
+
+INSERT INTO `mensajes_privado` (`id`, `tarea_id`, `usuario_id`, `mensaje`, `fecha_creacion`, `bandera`) VALUES
+(9, 60, 11, 'fsafsdafda', '2024-08-20 17:01:51', 1),
+(10, 60, 11, 'ggggg', '2024-08-20 17:04:17', 0),
+(11, 60, 11, 'noooooo', '2024-08-20 17:04:38', 0),
+(12, 60, 11, 'fdssfdgsd', '2024-08-20 17:09:17', 0),
+(13, 60, 11, 'jkllkñ{{kl', '2024-08-20 17:10:34', 0),
+(14, 60, 11, 'dfghgjkhh', '2024-08-20 17:11:21', 0),
+(15, 60, 11, 'fdsfdsfdsdsfg', '2024-08-20 17:21:00', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tareas`
 --
 
@@ -331,7 +361,8 @@ INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_subida`, `fecha_entr
 (54, 'wudised', '238e23e', '2024-07-10 04:28:41', '2024-07-05 06:30:00', 35),
 (55, 'msd', 'msd', '2024-07-10 06:15:13', '2024-07-13 09:18:00', 35),
 (56, 'Revolucion Industrial', 'hacer la tarea', '2024-07-10 06:36:04', '2024-07-11 09:39:00', 35),
-(59, 'xd', 'xd', '2024-08-01 14:36:58', '2024-08-28 14:36:00', 36);
+(59, 'xd', 'xd', '2024-08-01 14:36:58', '2024-08-28 14:36:00', 36),
+(60, 'tarea', 'tarea', '2024-08-20 14:42:51', '2024-08-02 14:42:00', 36);
 
 -- --------------------------------------------------------
 
@@ -379,7 +410,9 @@ INSERT INTO `tarea_usuario` (`tarea_id`, `usuario_id`, `estado`) VALUES
 (57, 4, 1),
 (58, 4, 1),
 (59, 4, 1),
-(0, 4, 1);
+(0, 4, 1),
+(60, 4, 1),
+(59, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -461,8 +494,7 @@ INSERT INTO `usuarios` (`id`, `name`, `password`, `email`, `rol`, `img`, `edad`,
 (7, 'qwe', '76d80224611fc919a5d54f0ff9fba446', 'wqe', 'alumno', 'alumno.jpg', 0, '', '', '', ''),
 (8, 'reichsacht', '5eb3c70fb1c47a19a7b6674092c19fc0', 'rechenbann@gmail.com', 'alumno', 'v-chan.png', 18, 'Santiago Daniel', 'Matayoshi', 'E.T.N°26 Confederación Suiza', 'sdmatayoshi'),
 (10, 'nose', '9de355443f2000d9e076248b317f73b8', 'nose@nose.nose', 'alumno', 'alumno.jpg', 66, 'nose', 'nose', 'nose', ''),
-(11, 'lolololololo', '202cb962ac59075b964b07152d234b70', 'lllololo@gmail.com', 'alumno', 'alumno.jpg', 17, '123qwe', 'qwe123', '', ''),
-(12, 'qwer', '202cb962ac59075b964b07152d234b70', 'qwr@gmail.com', 'alumno', 'alumno.jpg', 12, '123', '123', '', '');
+(11, 'xd', '9de355443f2000d9e076248b317f73b8', 'xd@xd.xd', 'alumno', 'alumno.jpg', 19, 'xd', 'xd', '', '');
 
 -- --------------------------------------------------------
 
@@ -510,6 +542,12 @@ ALTER TABLE `horarios`
 -- Indices de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `mensajes_privado`
+--
+ALTER TABLE `mensajes_privado`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -565,10 +603,16 @@ ALTER TABLE `mensajes`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `mensajes_privado`
+--
+ALTER TABLE `mensajes_privado`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `temas`
@@ -580,7 +624,7 @@ ALTER TABLE `temas`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas
