@@ -17,6 +17,9 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])
     $apellido = $_POST['apellido'];
     $edad = $_POST['edad'];
 
+    $nombre = ucwords(strtolower($nombre));
+    $apellido = ucwords(strtolower($apellido));
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "El correo electrónico no es válido.";
     }
