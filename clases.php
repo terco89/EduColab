@@ -24,16 +24,23 @@ if (!$result) {
 $clases = array();
 while ($row = mysqli_fetch_assoc($result)) {
     $clase_id = $row['id'];
+
+    $nombre_clase = ucfirst(strtolower($row['nombre']));
+
+
     if (!isset($clases[$clase_id])) {
         $clases[$clase_id] = [
             'id' => $row['id'],
-            'nombre' => $row['nombre'],
+            'nombre' => $nombre_clase,
             'descripcion' => $row['descripcion'],
             'codigo' => $row['codigo'],
             'id_usuario_creador' => $row['id_usuario_creador'],
             'horarios' => []
         ];
+       
+
     }
+
     $clases[$clase_id]['horarios'][] = [
         'dia_semana' => $row['dia_semana'],
         'hora_inicio' => $row['hora_inicio'],
