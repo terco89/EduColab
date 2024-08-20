@@ -22,7 +22,7 @@ if ($resultEspacio->num_rows == 0) {
 
 $espacio = $resultEspacio->fetch_assoc();
 
-$sqlClases = "SELECT c.id, c.nombre, c.descripcion, h.dia_semana, h.hora_inicio, h.hora_fin
+$sqlClases = "SELECT c.id, c.nombre, h.dia_semana, h.hora_inicio, h.hora_fin
               FROM clasesescolares c
               JOIN espacios_clases ec ON c.id = ec.id_clase
               JOIN horarios h ON c.id = h.id_clase

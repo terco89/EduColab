@@ -37,7 +37,6 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title"><?php echo htmlspecialchars($rowClase['nombre']); ?></h3>
-                            <p class="card-text"><?php echo htmlspecialchars($rowClase['descripcion']); ?></p>
                             <hr>
                             <p class="card-text">Día de la semana: <?php echo htmlspecialchars($rowClase['dia_semana']); ?></p>
                             <p class="card-text">Horario: <?php echo htmlspecialchars($rowClase['hora_inicio']); ?> - <?php echo htmlspecialchars($rowClase['hora_fin']); ?></p>

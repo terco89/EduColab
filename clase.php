@@ -21,7 +21,7 @@ $sql = "SELECT fondo FROM clase_usuario WHERE id_usuario='" . $_SESSION['usuario
 $query = mysqli_query($link, $sql);
 $fondo = mysqli_fetch_assoc($query);
 // Obtener información de la clase
-$sql = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, descripcion, codigo, id_usuario_creador, name 
+$sql = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, codigo, id_usuario_creador, name 
         FROM ClasesEscolares 
         INNER JOIN usuarios ON ClasesEscolares.id_usuario_creador = usuarios.id 
         WHERE ClasesEscolares.id = " . $_GET["id"];

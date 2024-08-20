@@ -32,7 +32,6 @@ while ($row = mysqli_fetch_assoc($result)) {
         $clases[$clase_id] = [
             'id' => $row['id'],
             'nombre' => $nombre_clase,
-            'descripcion' => $row['descripcion'],
             'codigo' => $row['codigo'],
             'id_usuario_creador' => $row['id_usuario_creador'],
             'horarios' => []
