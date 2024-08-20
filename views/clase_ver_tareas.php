@@ -96,6 +96,7 @@
         display: none;
     }
 </style>
+<?php if ($clase["id_usuario_creador"] == $_SESSION["usuario"]["id"]) { ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
@@ -109,6 +110,7 @@
         </ul>
     </div>
 </nav>
+<?php } ?>
 <script>
     // Función para mostrar el contenido seleccionado
     function showContent(contentId) {
@@ -183,7 +185,7 @@
                                                                 <div id="info" class="file-info" style="pointer-events: none;">Nombre del archivo: </div>
                                                             </div>
                                                         </div>
-                                                        <button type="submit" class="btn btn-secondary">Listo!</button>
+                                                        <button type="submit" name="submit" class="btn btn-secondary">Listo!</button>
                                                     </form>
                                                     <script>
                                                         function VistaPrevia() {
@@ -341,7 +343,7 @@
                         <div class="media mb-3" style="display: flex; align-items: center;">
                             <img src="img/foto_perfil/<?php echo $usuario['img']; ?>" style="margin-right: 1.5rem; border-radius:50%; width:2rem; height:2rem;  object-fit: cover; background-color:white;" class="profile">
                             <div class="media-body">
-                                <h5 class="truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;"><?php echo $usuario["nombre"] ?> <?php echo $usuario["apellido"] ?></h5><h5 style="color: red"><?php if ($usuario["estado"] == 1){ echo "Sin entregar";}  ?></h5>
+                                <h5 class="truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;"><?php echo $usuario["nombre"] ?> <?php echo $usuario["apellido"] ?></h5><h5 style="color: red"><?php if ($usuario["estado"] == 1){ echo "Sin entregar";}?></h5><h5 style="color:green"><?php if ($usuario["estado"] == 2){ echo "Entregado";} ?></h5>
                             </div>
                         </div>
                     </div>
