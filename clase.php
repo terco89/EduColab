@@ -27,11 +27,11 @@ $sql = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, descripcion, codigo, 
         WHERE ClasesEscolares.id = " . $_GET["id"];
 $result = mysqli_fetch_assoc(mysqli_query($link, $sql));
 
+
 if (!$result) {
     header("Location: clases.php");
     exit();
 }
-
 // Obtener horarios de la clase
 $sql = "SELECT dia_semana, hora_inicio, hora_fin 
         FROM horarios 

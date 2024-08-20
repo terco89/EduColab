@@ -3,7 +3,7 @@
 <div class="container mt-5">
     <!-- Header -->
     <div class="jumbotron" style="background-image:url(img/fondos/<?php echo $fondo['fondo'] ?>);">
-        <div><button href="#" class="btn btn-primary" data-toggle="modal" data-target="#editPhoto">Config</button></div>
+        <button href="#" style="margin-left:950px; margin-top: 0px;" class="btn btn-primary" data-toggle="modal" data-target="#editPhoto">Config</button>
         <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
