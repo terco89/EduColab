@@ -51,8 +51,8 @@
                         <div class="card-body">
                             <h5 class="card-title"><?php echo htmlspecialchars($row['nombre']); ?></h5>
                             <p class="card-text"><?php echo htmlspecialchars($row['curso_division']); ?></p>
-                            <a href="#" class="btn btn-primary">Ver Clases</a>
-                        </div>
+                            <a href="espacio.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary">Ver Espacio</a>
+                            </div>
                     </div>
                 </div>
             <?php endwhile; ?>
