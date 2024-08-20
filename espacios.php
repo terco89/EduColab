@@ -8,13 +8,14 @@ if (!isset($_SESSION["usuario"])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre']) && isset($_POST['curso_division'])) {
-    $nombre = $_POST['nombre'];
-    $cursoDivision = $_POST['curso_division'];
-    $sqlClases = "SELECT * FROM clasesescolares";
-    $clases = $link->query($sqlClases);
+    $nombre = $link->real_escape_string($_POST['nombre']);
+    $cursoDivision = $link->real_escape_string($_POST['curso_division']);
+    $clases = isset($_POST['clases']) ? $_POST['clases'] : [];
+
+   
     $sql = "INSERT INTO espacios (nombre, curso_division) VALUES ('$nombre', '$cursoDivision')";
     if ($link->query($sql) === TRUE) {
-        $idEspacio = $link->insert_id; 
+        $idEspacio = $link->insert_id;
 
         if (!empty($clases)) {
             foreach ($clases as $idClase) {
@@ -34,18 +35,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre']) && isset($_P
 
 $sql = "SELECT * FROM espacios";
 $result = $link->query($sql);
-
 if (!$result) {
-    echo "Fallo consulta 3: " . $link->error;
-    exit();
+    die("Fallo consulta 3: " . $link->error);
 }
+
 $sqlClases = "SELECT * FROM clasesescolares";
 $resultClases = $link->query($sqlClases);
-
 if (!$resultClases) {
-    echo "Fallo consulta 4: " . $link->error;
-    exit();
+    die("Fallo consulta 4: " . $link->error);
 }
+
 $view = "espacios";
 require_once "views/layout.php";
 ?>
