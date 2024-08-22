@@ -154,8 +154,12 @@
         dropdown.appendChild(option);
     });
     
+    // Guardar la imagen seleccionada
+    let imagenSeleccionada = '';
+
     dropdown.addEventListener('change', function() {
         const archivoSeleccionado = this.value;
+        imagenSeleccionada = archivoSeleccionado; // Actualizar la imagen seleccionada
         preview.style.backgroundImage = `url('img/fondos/${archivoSeleccionado}')`;
         preview.style.backgroundSize = 'cover';
     });
@@ -168,8 +172,14 @@
         }
     });
     
+    // Eliminar el evento 'mouseout'
     dropdown.addEventListener('mouseout', function() {
-        preview.style.backgroundImage = '';
+        if (imagenSeleccionada) {
+            preview.style.backgroundImage = `url('img/fondos/${imagenSeleccionada}')`;
+            preview.style.backgroundSize = 'cover';
+        } else {
+            preview.style.backgroundImage = '';
+        }
     });
 });
 
