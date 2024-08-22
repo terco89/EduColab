@@ -507,7 +507,7 @@
                         comments[personName].forEach(comment => {
                             if(bandera == true){
                                 bandera = false;
-                                continue
+                                return
                             }
                             opcion = "right"
                             if(comments[personName][0] == true){
