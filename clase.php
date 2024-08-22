@@ -13,13 +13,21 @@ if (!isset($_GET["id"])) {
 require_once "includes/config.php";
 
 if (isset($_POST['bg'])) {
-    $bg = $_POST['bg'] . ".jpg";
-    $sql = "UPDATE clase_usuario SET fondo='" . $bg . "' WHERE id_usuario='" . $_SESSION['usuario']['id'] . "'";
-    $result = mysqli_query($link, $sql);
+    $bg = $_POST['bg'];
+    
+    $allowed_backgrounds = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg','bg4.jpg','bg5.jpg','bg6.jpg','bg7.jpg','bg8.jpg','bg9.jpg','bg10.jpg']; 
+    if (in_array($bg, $allowed_backgrounds)) {
+        $stmt = $link->prepare("UPDATE clase_usuario SET fondo=? WHERE id_usuario=?");
+        $stmt->bind_param("si", $bg, $_SESSION['usuario']['id']);
+        $stmt->execute();
+    }
 }
-$sql = "SELECT fondo FROM clase_usuario WHERE id_usuario='" . $_SESSION['usuario']['id'] . "'";
-$query = mysqli_query($link, $sql);
-$fondo = mysqli_fetch_assoc($query);
+$stmt = $link->prepare("SELECT fondo FROM clase_usuario WHERE id_usuario=?");
+$stmt->bind_param("i", $_SESSION['usuario']['id']);
+$stmt->execute();
+$result = $stmt->get_result();
+$fondo = $result->fetch_assoc();
+
 // Obtener información de la clase
 $sql = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, codigo, id_usuario_creador, name 
         FROM ClasesEscolares 

@@ -4,6 +4,7 @@
     <!-- Header -->
     <div class="jumbotron" style="background-image:url(img/fondos/<?php echo $fondo['fondo'] ?>);">
         <button href="#" style="margin-left:950px; margin-top: 0px;" class="btn btn-primary" data-toggle="modal" data-target="#editPhoto">Config</button>
+
         <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -14,8 +15,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="post">
-                            <input type="text" name="bg" placeholder="bgX X=1~10">
+                        <form method="post" id="bgForm">
+                            <select id="bgDropdown" name="bg">
+                            </select>
+                            <div id="bgPreview" style="margin-top: 10px; width: 100%; height: 200px; border: 1px solid #ccc;"></div>
                             <input type="submit" name="sub" value="Guardar">
                         </form>
                     </div>
@@ -106,6 +109,7 @@
         </div>
     </div>
 </div>
+<div class="jumbotron" style="background-image:url(img/fondos/<?php echo $fondo['fondo'] ?>);">
 
 <div><a href="#" data-toggle="modal" data-target="#editPhoto">Config</a></div>
 <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel" aria-hidden="true">
@@ -126,3 +130,47 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const imagenes = [
+        { nombre: "Fondo 1", archivo: "bg1.jpg" },
+        { nombre: "Fondo 2", archivo: "bg2.jpg" },
+        { nombre: "Fondo 3", archivo: "bg3.jpg" },
+        { nombre: "Fondo 4", archivo: "bg4.jpg" },
+        { nombre: "Fondo 5", archivo: "bg5.jpg" },
+        { nombre: "Fondo 6", archivo: "bg6.jpg" },
+        { nombre: "Fondo 7", archivo: "bg7.jpg" },
+        { nombre: "Fondo 8", archivo: "bg8.jpg" },
+        { nombre: "Fondo 9", archivo: "bg9.jpg" },
+        { nombre: "Fondo 10", archivo: "bg10.jpg" },
+    ];
+    const dropdown = document.getElementById('bgDropdown');
+    const preview = document.getElementById('bgPreview');
+    
+    imagenes.forEach((imagen) => {
+        const option = document.createElement('option');
+        option.value = imagen.archivo;
+        option.textContent = imagen.nombre;
+        dropdown.appendChild(option);
+    });
+    
+    dropdown.addEventListener('change', function() {
+        const archivoSeleccionado = this.value;
+        preview.style.backgroundImage = `url('img/fondos/${archivoSeleccionado}')`;
+        preview.style.backgroundSize = 'cover';
+    });
+    
+    dropdown.addEventListener('mouseover', function(event) {
+        const archivoSeleccionado = event.target.value;
+        if (archivoSeleccionado) {
+            preview.style.backgroundImage = `url('img/fondos/${archivoSeleccionado}')`;
+            preview.style.backgroundSize = 'cover';
+        }
+    });
+    
+    dropdown.addEventListener('mouseout', function() {
+        preview.style.backgroundImage = '';
+    });
+});
+
+</script>
