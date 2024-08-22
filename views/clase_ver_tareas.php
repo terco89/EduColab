@@ -406,13 +406,7 @@
                                 style="margin-right: 1.5rem; border-radius:50%; width:2rem; height:2rem;  object-fit: cover; background-color:white;"
                                 class="profile">
                             <div class="media-body">
-                                <h5 class="truncate"
-                                    style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;">
-                                    <?php echo $usuario["nombre"] ?>     <?php echo $usuario["apellido"] ?>
-                                </h5>
-                                <h5 style="color: red"><?php if ($usuario["estado"] == 1) {
-                                    echo "Sin entregar";
-                                } ?></h5>
+                            <h5 class="truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;"><?php echo $usuario["nombre"] ?> <?php echo $usuario["apellido"] ?></h5><h5 style="color: red"><?php if ($usuario["estado"] == 1){ echo "Sin entregar";}?></h5><h5 style="color:green"><?php if ($usuario["estado"] == 2){ echo "Entregado";} ?></h5>
                             </div>
                         </div>
                     </div>
