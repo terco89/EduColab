@@ -86,7 +86,7 @@ function addSchedule() {
                     <div class="card-body">
                         <h3 class="card-title"><?php echo $clase["nombre"] ?></h3>
                         <h6 class="card-subtitle mb-2 text-muted">
-                            Profesor: <?php echo ($clase['id_usuario_creador'] != $_SESSION['usuario']['id']) ? $clase["nombre"] : "tú"; ?>
+Profesor: <?php echo ($clase['id_usuario_creador'] != $_SESSION['usuario']['id']) ? $clase["nombre_profesor"] . " " . $clase["apellido_profesor"] : "tú"; ?>
                         </h6>
                         <hr>
                         <p class="card-text">Horarios:</p>
