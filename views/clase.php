@@ -1,10 +1,17 @@
 <?php require_once "views/clase_navbar.php"; ?>
 <!-- Main Container -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <div class="container mt-5">
     <!-- Header -->
-    <div class="jumbotron" style="background-image:url(img/fondos/<?php echo $fondo['fondo'] ?>);">
-        <button href="#" style="margin-left:950px; margin-top: 0px;" class="btn btn-primary" data-toggle="modal" data-target="#editPhoto">Config</button>
+    <div class="jumbotron" style="background-image: url('img/fondos/<?php echo $fondo['fondo']; ?>'); position: relative;">
+        <!-- <div class="jumbotron" style="background-image: url('img/fondos/<?php //echo $fondo['fondo']; 
+        ?>'); background-size: contain; background-position: center; background-repeat: no-repeat; position: relative;">-->
+        <!-- para que lo arregle deje lo de arriba que soluciona la muestra de algunos banner pero el problema o busque otra manera-->
 
+        <button href="#" class="btn btn-primary" data-toggle="modal" data-target="#editPhoto" style="position: absolute; top: 10px; right: 10px;">
+            <i class="fa-solid fa-pen-to-square"></i>
+        </button>
         <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -25,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <h1 class="display-4"><?php echo $result["nombre"]; ?></h1>
+        <h1 class="display-4"><strong><?php echo $result["nombre"]; ?></strong></h1>
         <?php if ($_SESSION['usuario']['id'] == $result["id_usuario_creador"]) { ?>
             <p class="lead"> Codigo de la clase: <?php echo $result["codigo"]; ?></p>
         <?php } ?>
@@ -109,78 +116,86 @@
         </div>
     </div>
 </div>
-<div class="jumbotron" style="background-image:url(img/fondos/<?php echo $fondo['fondo'] ?>);">
 
-<div><a href="#" data-toggle="modal" data-target="#editPhoto">Config</a></div>
-<div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editPhotoLabel">Editar foto</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="post">
-                    <input type="text" name="bg" placeholder="bgX X=1~10">
-                    <input type="submit" name="sub" value="Guardar">
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    const imagenes = [
-        { nombre: "Fondo 1", archivo: "bg1.jpg" },
-        { nombre: "Fondo 2", archivo: "bg2.jpg" },
-        { nombre: "Fondo 3", archivo: "bg3.jpg" },
-        { nombre: "Fondo 4", archivo: "bg4.jpg" },
-        { nombre: "Fondo 5", archivo: "bg5.jpg" },
-        { nombre: "Fondo 6", archivo: "bg6.jpg" },
-        { nombre: "Fondo 7", archivo: "bg7.jpg" },
-        { nombre: "Fondo 8", archivo: "bg8.jpg" },
-        { nombre: "Fondo 9", archivo: "bg9.jpg" },
-        { nombre: "Fondo 10", archivo: "bg10.jpg" },
-    ];
-    const dropdown = document.getElementById('bgDropdown');
-    const preview = document.getElementById('bgPreview');
-    
-    imagenes.forEach((imagen) => {
-        const option = document.createElement('option');
-        option.value = imagen.archivo;
-        option.textContent = imagen.nombre;
-        dropdown.appendChild(option);
-    });
-    
-    // Guardar la imagen seleccionada
-    let imagenSeleccionada = '';
+        const imagenes = [{
+                nombre: "Fondo 1",
+                archivo: "bg1.jpg"
+            },
+            {
+                nombre: "Fondo 2",
+                archivo: "bg2.jpg"
+            },
+            {
+                nombre: "Fondo 3",
+                archivo: "bg3.jpg"
+            },
+            {
+                nombre: "Fondo 4",
+                archivo: "bg4.jpg"
+            },
+            {
+                nombre: "Fondo 5",
+                archivo: "bg5.jpg"
+            },
+            {
+                nombre: "Fondo 6",
+                archivo: "bg6.jpg"
+            },
+            {
+                nombre: "Fondo 7",
+                archivo: "bg7.jpg"
+            },
+            {
+                nombre: "Fondo 8",
+                archivo: "bg8.jpg"
+            },
+            {
+                nombre: "Fondo 9",
+                archivo: "bg9.jpg"
+            },
+            {
+                nombre: "Fondo 10",
+                archivo: "bg10.jpg"
+            },
+        ];
+        const dropdown = document.getElementById('bgDropdown');
+        const preview = document.getElementById('bgPreview');
 
-    dropdown.addEventListener('change', function() {
-        const archivoSeleccionado = this.value;
-        imagenSeleccionada = archivoSeleccionado; // Actualizar la imagen seleccionada
-        preview.style.backgroundImage = `url('img/fondos/${archivoSeleccionado}')`;
-        preview.style.backgroundSize = 'cover';
-    });
-    
-    dropdown.addEventListener('mouseover', function(event) {
-        const archivoSeleccionado = event.target.value;
-        if (archivoSeleccionado) {
+        imagenes.forEach((imagen) => {
+            const option = document.createElement('option');
+            option.value = imagen.archivo;
+            option.textContent = imagen.nombre;
+            dropdown.appendChild(option);
+        });
+
+        // Guardar la imagen seleccionada
+        let imagenSeleccionada = '';
+
+        dropdown.addEventListener('change', function() {
+            const archivoSeleccionado = this.value;
+            imagenSeleccionada = archivoSeleccionado; // Actualizar la imagen seleccionada
             preview.style.backgroundImage = `url('img/fondos/${archivoSeleccionado}')`;
             preview.style.backgroundSize = 'cover';
-        }
-    });
-    
-    // Eliminar el evento 'mouseout'
-    dropdown.addEventListener('mouseout', function() {
-        if (imagenSeleccionada) {
-            preview.style.backgroundImage = `url('img/fondos/${imagenSeleccionada}')`;
-            preview.style.backgroundSize = 'cover';
-        } else {
-            preview.style.backgroundImage = '';
-        }
-    });
-});
+        });
 
+        dropdown.addEventListener('mouseover', function(event) {
+            const archivoSeleccionado = event.target.value;
+            if (archivoSeleccionado) {
+                preview.style.backgroundImage = `url('img/fondos/${archivoSeleccionado}')`;
+                preview.style.backgroundSize = 'cover';
+            }
+        });
+
+        // Eliminar el evento 'mouseout'
+        dropdown.addEventListener('mouseout', function() {
+            if (imagenSeleccionada) {
+                preview.style.backgroundImage = `url('img/fondos/${imagenSeleccionada}')`;
+                preview.style.backgroundSize = 'cover';
+            } else {
+                preview.style.backgroundImage = '';
+            }
+        });
+    });
 </script>

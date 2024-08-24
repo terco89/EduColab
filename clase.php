@@ -14,16 +14,17 @@ require_once "includes/config.php";
 
 if (isset($_POST['bg'])) {
     $bg = $_POST['bg'];
+    $id_clase=$_GET['id'];
     
     $allowed_backgrounds = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg','bg4.jpg','bg5.jpg','bg6.jpg','bg7.jpg','bg8.jpg','bg9.jpg','bg10.jpg']; 
     if (in_array($bg, $allowed_backgrounds)) {
-        $stmt = $link->prepare("UPDATE clase_usuario SET fondo=? WHERE id_usuario=?");
-        $stmt->bind_param("si", $bg, $_SESSION['usuario']['id']);
+        $stmt = $link->prepare("UPDATE clase_usuario SET fondo=? WHERE id_usuario=? AND id_clase=?");
+        $stmt->bind_param("ssi", $bg, $_SESSION['usuario']['id'],$id_clase);
         $stmt->execute();
     }
 }
-$stmt = $link->prepare("SELECT fondo FROM clase_usuario WHERE id_usuario=?");
-$stmt->bind_param("i", $_SESSION['usuario']['id']);
+$stmt = $link->prepare("SELECT fondo FROM clase_usuario WHERE id_usuario=? AND id_clase=?");
+$stmt->bind_param("si", $_SESSION['usuario']['id'], $_GET['id']);
 $stmt->execute();
 $result = $stmt->get_result();
 $fondo = $result->fetch_assoc();

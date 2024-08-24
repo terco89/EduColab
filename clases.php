@@ -9,7 +9,7 @@ if (!isset($_SESSION["usuario"])) {
 }
 
 $id_usuario = $_SESSION["usuario"]["id"];
-$sql = "SELECT c.id, c.nombre AS nombre_clase, c.codigo, c.id_usuario_creador, h.dia_semana, h.hora_inicio, h.hora_fin, u.nombre AS nombre_profesor, u.apellido AS apellido_profesor 
+$sql = "SELECT c.id, c.nombre AS nombre_clase, c.codigo, c.id_usuario_creador, h.dia_semana, h.hora_inicio, h.hora_fin, u.nombre AS nombre_profesor, u.apellido AS apellido_profesor, cu.fondo
         FROM clasesescolares c
         INNER JOIN horarios h ON c.id = h.id_clase
         INNER JOIN clase_usuario cu ON c.id = cu.id_clase
@@ -35,6 +35,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             'id_usuario_creador' => $row['id_usuario_creador'],
             'nombre_profesor' => $row['nombre_profesor'],
             'apellido_profesor' => $row['apellido_profesor'],
+            'fondo'=>$row['fondo'],
             'horarios' => []
         ];
     }

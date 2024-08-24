@@ -27,7 +27,7 @@
         </ul>
         <?php if (isset($_SESSION['usuario'])) { ?>
             <a href="miperfil.php"><img src="img/foto_perfil/<?php echo $_SESSION['usuario']['img']; ?>" style="border-radius:50%; width:3rem; height:3rem;  object-fit: cover; background-color:white;" class="profile"></a>
-            &nbsp;&nbsp;<button class="btn btn-light my-2 my-sm-0" type="button"><a href="logout.php">Logout</a></button>
+            <a href="logout.php" style="margin-left: 5px;"><button class="btn btn-light my-2 my-sm-0" type="button">Logout</button></a>
         <?php } else if (!isset($_SSESIOB['usuario'])) { ?>
             <a href="login.php" style="color:white"><button class="btn btn-outline-light my-2 my-sm-0 mr-2" type="button">Iniciar sesión</button></a>
             <a href="register.php"><button class="btn btn-light my-2 my-sm-0" type="button">Registrate</button></a>

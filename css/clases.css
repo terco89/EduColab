@@ -10,4 +10,11 @@ h3 {
 .card-title {
   text-overflow: ellipsis;
 }
-
+.card-banner
+{
+  background-size: cover;
+  background-position: center; 
+  position: relative; 
+  padding: 20px; 
+  height: 100%;
+}
