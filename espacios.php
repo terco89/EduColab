@@ -6,6 +6,7 @@ if (!isset($_SESSION["usuario"])) {
     header("Location: index.php");
     exit();
 }
+$id_usuario  = $_SESSION["usuario"]["id"];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre']) && isset($_POST['curso_division'])) {
     $nombre = $link->real_escape_string($_POST['nombre']);
@@ -13,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre']) && isset($_P
     $clases = isset($_POST['clases']) ? $_POST['clases'] : [];
 
    
-    $sql = "INSERT INTO espacios (nombre, curso_division) VALUES ('$nombre', '$cursoDivision')";
+    $sql = "INSERT INTO espacios (nombre, curso_division,id_usuario) VALUES ('$nombre', '$cursoDivision','$id_usuario')";
     if ($link->query($sql) === TRUE) {
         $idEspacio = $link->insert_id;
 
@@ -33,13 +34,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre']) && isset($_P
     }
 }
 
-$sql = "SELECT * FROM espacios";
+$sql = "SELECT * FROM espacios WHERE id_usuario=$id_usuario";
 $result = $link->query($sql);
 if (!$result) {
     die("Fallo consulta 3: " . $link->error);
 }
 
-$sqlClases = "SELECT * FROM clasesescolares";
+$sqlClases = "SELECT * FROM clasesescolares WHERE id_usuario_creador= $id_usuario";
 $resultClases = $link->query($sqlClases);
 if (!$resultClases) {
     die("Fallo consulta 4: " . $link->error);

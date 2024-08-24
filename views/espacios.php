@@ -25,14 +25,20 @@
                         <div class="form-group">
                             <label for="clases">Clases a agrupar</label>
                             <div id="clases">
-                                <?php while ($rowClase = $resultClases->fetch_assoc()): ?>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="clase<?php echo htmlspecialchars($rowClase['id']); ?>" name="clases[]" value="<?php echo htmlspecialchars($rowClase['id']); ?>">
-                                        <label class="form-check-label" for="clase<?php echo htmlspecialchars($rowClase['id']); ?>">
-                                            <?php echo htmlspecialchars($rowClase['nombre']); ?>
-                                        </label>
-                                    </div>
-                                <?php endwhile; ?>
+                                <?php
+                                if ($resultClases->num_rows <= 0) { ?>
+                                    <p>No hay espacios disponibles.</p>
+                                    <?php
+                                } else {
+                                    while ($rowClase = $resultClases->fetch_assoc()): ?>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="clase<?php echo htmlspecialchars($rowClase['id']); ?>" name="clases[]" value="<?php echo htmlspecialchars($rowClase['id']); ?>">
+                                            <label class="form-check-label" for="clase<?php echo htmlspecialchars($rowClase['id']); ?>">
+                                                <?php echo htmlspecialchars($rowClase['nombre']); ?>
+                                            </label>
+                                        </div>
+                                <?php endwhile;
+                                } ?>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success">Subir</button>
@@ -52,7 +58,7 @@
                             <h5 class="card-title"><?php echo htmlspecialchars($row['nombre']); ?></h5>
                             <p class="card-text"><?php echo htmlspecialchars($row['curso_division']); ?></p>
                             <a href="espacio.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary">Ver Espacio</a>
-                            </div>
+                        </div>
                     </div>
                 </div>
             <?php endwhile; ?>
