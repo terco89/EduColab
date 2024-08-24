@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group">
                             <label for="cursoDivision">Curso y división</label>
-                            <input type="text" class="form-control" id="cursoDivision" name="curso_division" placeholder="Curso y división">
+                            <input type="text" class="form-control" id="cursoDivision" name="curso_division" placeholder="Curso y división"required>
                         </div>
                         <div class="form-group">
                             <label for="clases">Clases a agrupar</label>

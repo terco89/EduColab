@@ -28,13 +28,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre']) && isset($_P
                 }
             }
         }
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit();
     } else {
         echo "Fallo consulta 1: " . $link->error;
         exit();
     }
 }
 
-$sql = "SELECT * FROM espacios WHERE id_usuario=$id_usuario";
+$sql = "SELECT * FROM espacios WHERE id_usuario=$id_usuario ORDER BY id DESC" ;
 $result = $link->query($sql);
 if (!$result) {
     die("Fallo consulta 3: " . $link->error);
