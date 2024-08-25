@@ -1,6 +1,7 @@
 <?php
 require_once "includes/config.php";
 
+session_start();
 
 if (!isset($_SESSION["usuario"]) || !isset($_GET['id']) || !is_numeric($_GET['id'])) {// matenme por favor
     header("Location: index.php");

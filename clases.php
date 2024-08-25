@@ -1,6 +1,6 @@
 <?php
 require_once "includes/config.php";
-
+session_start();
 $view = "clases";
 if (!isset($_SESSION["usuario"])) {
     header("Location: index.php");

@@ -22,6 +22,7 @@
     </style>
     <link rel="stylesheet" href="espacio.css">
 <body>
+    
     <div class="container">
         <h2 class="text-center">Espacio: <?php echo htmlspecialchars($espacio['nombre']); ?></h2>
         <div class="card mb-4">

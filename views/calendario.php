@@ -1,4 +1,17 @@
 <br>
+<nav aria-label="breadcrumb">
+    <?php if (isset($breadcrumbs) && !empty($breadcrumbs)): ?>
+        <ol class="breadcrumb">
+            <?php foreach ($breadcrumbs as $index => $crumb): ?>
+                <?php if ($index < count($breadcrumbs) - 1): ?>
+                    <li class="breadcrumb-item"><a href="<?php echo htmlspecialchars($crumb['url']); ?>"><?php echo htmlspecialchars($crumb['label']); ?></a></li>
+                <?php else: ?>
+                    <li class="breadcrumb-item active" aria-current="page"><?php echo htmlspecialchars($crumb['label']); ?></li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </ol>
+    <?php endif; ?>
+</nav>
 <div class="container">
     <div class="row">
         <div class="col">

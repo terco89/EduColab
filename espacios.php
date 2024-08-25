@@ -28,8 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre']) && isset($_P
                 }
             }
         }
-        header('Location: ' . $_SERVER['PHP_SELF']);
-        exit();
+        
     } else {
         echo "Fallo consulta 1: " . $link->error;
         exit();
