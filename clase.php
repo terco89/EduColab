@@ -1,51 +1,76 @@
 <?php
-session_start();
-if (!isset($_SESSION["usuario"])) {
+require_once "includes/config.php";
+
+
+if (!isset($_SESSION["usuario"]) || !isset($_GET['id']) || !is_numeric($_GET['id'])) {// matenme por favor
     header("Location: index.php");
     exit();
 }
 
-if (!isset($_GET["id"])) {
-    header("Location: clases.php");
-    exit();
-}
+$id_clase = intval($_GET['id']); 
 
-require_once "includes/config.php";
-
+// actualizar fondo
 if (isset($_POST['bg'])) {
     $bg = $_POST['bg'];
-    $id_clase=$_GET['id'];
-    
-    $allowed_backgrounds = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg','bg4.jpg','bg5.jpg','bg6.jpg','bg7.jpg','bg8.jpg','bg9.jpg','bg10.jpg']; 
+
+    $allowed_backgrounds = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg', 'bg5.jpg', 'bg6.jpg', 'bg7.jpg', 'bg8.jpg', 'bg9.jpg', 'bg10.jpg'];
     if (in_array($bg, $allowed_backgrounds)) {
         $stmt = $link->prepare("UPDATE clase_usuario SET fondo=? WHERE id_usuario=? AND id_clase=?");
-        $stmt->bind_param("ssi", $bg, $_SESSION['usuario']['id'],$id_clase);
-        $stmt->execute();
+        $stmt->bind_param("ssi", $bg, $_SESSION['usuario']['id'], $id_clase);
+        if (!$stmt->execute()) {
+            echo "ERROR al cambiar el ofndo: " . $stmt->error;
+        }
     }
 }
+
+// Mostrar Fondo
 $stmt = $link->prepare("SELECT fondo FROM clase_usuario WHERE id_usuario=? AND id_clase=?");
-$stmt->bind_param("si", $_SESSION['usuario']['id'], $_GET['id']);
+$stmt->bind_param("ii", $_SESSION['usuario']['id'], $id_clase);
 $stmt->execute();
 $result = $stmt->get_result();
 $fondo = $result->fetch_assoc();
 
-// Obtener información de la clase
-$sql = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, codigo, id_usuario_creador, name 
+// Get class information
+$sql = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, codigo, id_usuario_creador, usuarios.apellido as profe_apellido, usuarios.nombre as profe_nombre
         FROM ClasesEscolares 
         INNER JOIN usuarios ON ClasesEscolares.id_usuario_creador = usuarios.id 
-        WHERE ClasesEscolares.id = " . $_GET["id"];
-$result = mysqli_fetch_assoc(mysqli_query($link, $sql));
-
+        WHERE ClasesEscolares.id = ?";
+$stmt = $link->prepare($sql);
+$stmt->bind_param("i", $id_clase);
+$stmt->execute();
+$result = $stmt->get_result()->fetch_assoc();
 
 if (!$result) {
     header("Location: clases.php");
     exit();
 }
-// Obtener horarios de la clase
+
+// Obtener los horarrios 
 $sql = "SELECT dia_semana, hora_inicio, hora_fin 
         FROM horarios 
-        WHERE id_clase = " . $result["id"];
-$horarios = mysqli_query($link, $sql);
+        WHERE id_clase = ?";
+$stmt = $link->prepare($sql);
+$stmt->bind_param("i", $result["id"]);
+$stmt->execute();
+$horarios = $stmt->get_result();
+
+// Borrar la classe
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_clase_eliminar"])) {
+    $id_clase_eliminar = intval($_POST["id_clase_eliminar"]);
+    $stmt = $link->prepare("DELETE FROM horarios WHERE id_clase = ?");
+    $stmt->bind_param("i", $id_clase_eliminar);
+    $stmt->execute();
+    $stmt = $link->prepare("DELETE FROM ClasesEscolares WHERE id = ?");
+    $stmt->bind_param("i", $id_clase_eliminar);
+    if ($stmt->execute()) {
+        header("Location: clases.php");
+        exit();
+    } else {
+        echo "Error al eliminar la clase: " . $stmt->error;
+    }
+}
+
 
 $view = "clase";
 require_once "views/layout.php";
+?>

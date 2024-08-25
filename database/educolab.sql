@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-08-2024 a las 19:59:16
+-- Tiempo de generación: 25-08-2024 a las 03:25:38
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -60,7 +60,12 @@ INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `codigo`, `id_usua
 (38, 'Suicidarse', '', '5E6luw', 12),
 (39, 'clase1', '', 'mISmp3', 14),
 (40, 'clase2', '', 'FCxrFB', 14),
-(41, 'clase3', '', 'eQtG29', 14);
+(41, 'clase3', '', 'eQtG29', 14),
+(42, 'Sebastian', '', 'yhM8SF', 14),
+(43, 'clase1', '', 'Q9veft', 14),
+(44, 'clase2', '', 'wKOLGC', 14),
+(45, 'clase2', '', 'dKxqhf', 13),
+(46, 'clase3', '', 'Y4RiML', 13);
 
 -- --------------------------------------------------------
 
@@ -79,46 +84,12 @@ CREATE TABLE `clase_usuario` (
 --
 
 INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`) VALUES
-(3, 1, 'bg1.jpg'),
-(2, 1, ''),
-(4, 1, ''),
-(4, 6, ''),
-(5, 12, ''),
-(5, 13, ''),
-(5, 14, ''),
-(5, 16, ''),
-(5, 18, ''),
-(5, 20, ''),
-(5, 22, ''),
-(5, 0, ''),
-(5, 0, ''),
-(5, 0, ''),
-(5, 27, ''),
-(5, 0, ''),
-(5, 0, ''),
-(5, 28, ''),
-(5, 29, ''),
-(5, 30, ''),
-(5, 31, ''),
-(5, 32, ''),
-(5, 33, ''),
-(5, 34, ''),
-(3, 35, 'bg1.jpg'),
-(3, 33, 'bg1.jpg'),
-(1, 35, ''),
-(10, 36, ''),
-(4, 36, ''),
-(11, 36, ''),
-(12, 33, 'bg4.jpg'),
-(12, 37, ''),
-(12, 34, ''),
-(12, 38, ''),
-(14, 39, ''),
-(14, 40, ''),
-(14, 41, ''),
-(13, 41, ''),
-(13, 40, ''),
-(13, 39, '');
+(14, 43, 'bg5.jpg'),
+(14, 44, 'bg2.jpg'),
+(13, 43, 'bg3.jpg'),
+(13, 45, 'bg4.jpg'),
+(13, 46, ''),
+(13, 47, '');
 
 -- --------------------------------------------------------
 
@@ -187,22 +158,17 @@ INSERT INTO `entregas` (`tarea_id`, `usuario_id`, `fecha_entrega`, `calificacion
 CREATE TABLE `espacios` (
   `id` int(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
-  `curso_division` varchar(255) NOT NULL
+  `curso_division` varchar(255) NOT NULL,
+  `id_usuario` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `espacios`
 --
 
-INSERT INTO `espacios` (`id`, `nombre`, `curso_division`) VALUES
-(1, '[value-2]', '[value-3]'),
-(2, 'asda', 'asd'),
-(3, 'asda', 'asd'),
-(4, 'asda', 'asd'),
-(5, 'asda', 'asd'),
-(6, 'asd', 'sadsa'),
-(7, 'asdasdsadsad', 'aadasdasdadasd'),
-(8, 'sss', '2222');
+INSERT INTO `espacios` (`id`, `nombre`, `curso_division`, `id_usuario`) VALUES
+(1, 'espacio1', '1°2°', 14),
+(2, 'TCI', '3°', 14);
 
 -- --------------------------------------------------------
 
@@ -220,21 +186,11 @@ CREATE TABLE `espacios_clases` (
 --
 
 INSERT INTO `espacios_clases` (`id_espacio`, `id_clase`) VALUES
-(2, 33),
-(2, 34),
-(3, 33),
-(3, 34),
-(4, 33),
-(4, 34),
-(5, 33),
-(5, 34),
-(6, 33),
-(6, 34),
-(7, 33),
-(7, 34),
-(8, 33),
-(8, 34),
-(8, 35);
+(1, 39),
+(1, 40),
+(2, 39),
+(2, 40),
+(2, 41);
 
 -- --------------------------------------------------------
 
@@ -264,7 +220,17 @@ INSERT INTO `horarios` (`id_horario`, `id_clase`, `nombre_clase`, `dia_semana`, 
 (26, 38, 'Suicidarse', 'Lunes', '14:51:00', '15:51:00'),
 (27, 39, 'clase1', 'Lunes', '15:53:00', '16:53:00'),
 (28, 40, 'clase2', 'Miércoles', '15:53:00', '15:53:00'),
-(29, 41, 'clase3', 'Sábado', '15:53:00', '17:53:00');
+(29, 41, 'clase3', 'Sábado', '15:53:00', '17:53:00'),
+(30, 42, 'Sebastian', 'Martes', '13:39:00', '14:38:00'),
+(31, 43, 'clase1', 'Lunes', '14:57:00', '14:57:00'),
+(32, 44, 'clase2', 'Lunes', '14:57:00', '16:57:00'),
+(33, 45, 'clase2', 'Miércoles', '19:22:00', '18:22:00'),
+(34, 45, 'clase2', 'Miércoles', '18:23:00', '16:27:00'),
+(35, 45, 'clase2', 'Viernes', '16:25:00', '17:23:00'),
+(36, 46, 'clase3', 'Lunes', '17:46:00', '18:46:00'),
+(37, 46, 'clase3', 'Martes', '17:46:00', '18:46:00'),
+(38, 46, 'clase3', 'Miércoles', '18:46:00', '19:46:00'),
+(39, 46, 'clase3', 'Lunes', '16:46:00', '18:46:00');
 
 -- --------------------------------------------------------
 
@@ -386,7 +352,8 @@ INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_subida`, `fecha_entr
 (55, 'msd', 'msd', '2024-07-10 06:15:13', '2024-07-13 09:18:00', 35),
 (56, 'Revolucion Industrial', 'hacer la tarea', '2024-07-10 06:36:04', '2024-07-11 09:39:00', 35),
 (59, 'xd', 'xd', '2024-08-01 14:36:58', '2024-08-28 14:36:00', 36),
-(60, 'tarea', 'tarea', '2024-08-20 14:42:51', '2024-08-02 14:42:00', 36);
+(60, 'tarea', 'tarea', '2024-08-20 14:42:51', '2024-08-02 14:42:00', 36),
+(63, 'sadsad', 'asdsadasd', '2024-08-24 20:52:47', '2024-08-20 20:52:00', 45);
 
 -- --------------------------------------------------------
 
@@ -459,7 +426,8 @@ CREATE TABLE `temas` (
 INSERT INTO `temas` (`id`, `nombre`, `descripcion`, `fecha_alta`, `id_clase`) VALUES
 (4, 'sjdns', 'jsdnjsd', '2024-07-10', 35),
 (5, 'smds', 'mdmsds', '2024-07-10', 35),
-(6, 'Por fin carajo', 'uwu', '2024-07-10', 35);
+(6, 'Por fin carajo', 'uwu', '2024-07-10', 35),
+(7, 'sd', 'asda', '2024-08-24', 45);
 
 -- --------------------------------------------------------
 
@@ -482,7 +450,8 @@ INSERT INTO `tema_usuario` (`tema_id`, `usuario_id`) VALUES
 (5, 3),
 (5, 1),
 (6, 3),
-(6, 1);
+(6, 1),
+(7, 13);
 
 -- --------------------------------------------------------
 
@@ -521,7 +490,7 @@ INSERT INTO `usuarios` (`id`, `name`, `password`, `email`, `rol`, `img`, `edad`,
 (11, 'xd', '9de355443f2000d9e076248b317f73b8', 'xd@xd.xd', 'alumno', 'alumno.jpg', 19, 'xd', 'xd', '', ''),
 (12, 'laydo', '202cb962ac59075b964b07152d234b70', 'sebastian.pardo.scp@gmail.com', 'alumno', 'alumno.jpg', 17, 'Sebastian', 'Pardo', '', ''),
 (13, 'Alumno_usuario', '202cb962ac59075b964b07152d234b70', 'alumno@gmail.com', 'alumno', 'alumno.jpg', 16, 'Alumno_nombre', 'Alumno_apellido', '', ''),
-(14, 'Profesor_usuario', '202cb962ac59075b964b07152d234b70', 'profesor@gmail.com', 'alumno', 'alumno.jpg', 44, 'Profesor_nombre', 'Profesor_apellido', '', '');
+(14, 'Profesor_usuario', '202cb962ac59075b964b07152d234b70', 'profesor@gmail.com', 'profesor', 'alumno.jpg', 44, 'Profesor_nombre', 'Profesor_apellido', '', '');
 
 -- --------------------------------------------------------
 
@@ -603,7 +572,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clasesescolares`
 --
 ALTER TABLE `clasesescolares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `discusiones`
@@ -615,13 +584,13 @@ ALTER TABLE `discusiones`
 -- AUTO_INCREMENT de la tabla `espacios`
 --
 ALTER TABLE `espacios`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes`
@@ -639,13 +608,13 @@ ALTER TABLE `mensajes_privado`
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `temas`
 --
 ALTER TABLE `temas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

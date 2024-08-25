@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="./css/clases.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <div class="container mt-4">
     <form method="POST" action="crear_clase.php">
         <h1>Mis Clases</h1>
@@ -84,7 +86,9 @@
                     <div class="col-md-4 mb-4">
                         <a href="clase.php?id=<?php echo $clase['id']; ?>" class="card-link">
                             <div class="card" style="height: 200px;">
+                         
                                 <div class="card-body card-banner" style="background-image: url('img/fondos/<?php echo $clase['fondo']; ?>');">
+                                    
                                     <h3 class="card-title"><?php echo $clase["nombre"] ?></h3>
                                     <h6 class="card-subtitle mb-2 text-muted">
                                         Profesor: <?php echo ($clase['id_usuario_creador'] != $_SESSION['usuario']['id']) ? $clase["nombre_profesor"] . " " . $clase["apellido_profesor"] : "tú"; ?>
