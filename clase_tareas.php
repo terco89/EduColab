@@ -8,6 +8,7 @@ if (!isset($_SESSION["usuario"])) {
 if (!isset($_GET["id"])) {
     header("Location: clases.php");
 }
+$idEspacio = isset($_GET['espacio']) ? intval($_GET['espacio']) : null;
 
 // Obtener información de la clase
 $sql = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, id_usuario_creador, name 
@@ -41,6 +42,10 @@ if (mysqli_num_rows($result3) > 0) {
         $horarios[] = $row;
     }
 }
-
+$espacio = null;
+if ($idEspacio) {
+    $sqlEspacio = "SELECT nombre FROM Espacios WHERE id = $idEspacio";
+    $espacio = mysqli_fetch_assoc(mysqli_query($link, $sqlEspacio));
+}
 $view = "clase_tareas";
 require_once "views/layout.php";

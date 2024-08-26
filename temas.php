@@ -22,7 +22,11 @@ if (mysqli_num_rows($result2) > 0) {
         $temas[] = $row;
     }
 }
+$idEspacio = isset($_GET['espacio']) ? intval($_GET['espacio']) : null;
 
+if ($idEspacio === null) {
+    die("ID de espacio no válido.");
+}
 if (isset($_POST['titulo'])) {
     $sql = "INSERT INTO temas (id, nombre, descripcion, fecha_alta, id_clase) 
             VALUES (null, '" . $_POST['titulo'] . "', '" . $_POST['instruccion'] . "', NOW(), '" . $result["id"] . "')";
@@ -63,6 +67,12 @@ if (isset($_POST['titulo'])) {
     
     echo '<script>window.location.href = "ver_temas.php?id=' . $result["id"] . '&tid=' . mysqli_insert_id($link) . '";</script>';
     exit();
+}
+$id_clase = $_GET["id"]; 
+$espacio = null;
+if ($idEspacio) {
+    $sqlEspacio = "SELECT nombre FROM Espacios WHERE id = $idEspacio";
+    $espacio = mysqli_fetch_assoc(mysqli_query($link, $sqlEspacio));
 }
 $view = "temas";
 require_once "views/layout.php";

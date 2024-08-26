@@ -1,3 +1,16 @@
+<ul class="breadcrumb">
+    <li><a href="index.php">Home</a></li>
+    <?php if ($espacio): ?>
+        <li><a href="espacios.php">Espacios</a></li>
+        <li><a href="espacio.php?id=<?php echo $idEspacio; ?>">"<?php echo $espacio['nombre']; ?>"</a></li>
+
+    <?php else: ?>
+        <li><a href="clases.php">Clases</a></li>
+    <?php endif; ?>
+    <li><a  href="clase.php?id=<?php echo $result['id']; ?>"><?php echo $result['nombre']; ?></a></li>
+    <li><a class="active"href="clase_foro.php?id=<?php echo $result['id']; ?>">Foro</a></li>
+
+</ul>
 <?php require_once "views/clase_navbar.php"; ?>
 
     <!-- Main Container -->

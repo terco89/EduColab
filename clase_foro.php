@@ -7,7 +7,7 @@ if(!isset($_SESSION["usuario"])){
 if(!isset($_GET["id"])){
     header("Location: clases.php");
 }
-
+$idEspacio = isset($_GET['espacio']) ? intval($_GET['espacio']) : null;
 require_once "includes/config.php";
 
 if(isset($_POST["tema"]) && $_POST["contenido"] && $_POST["id"]){
@@ -32,6 +32,10 @@ if (mysqli_num_rows($query) > 0) {
         $discusiones[] = $row;
     }
 }
-
+$espacio = null;
+if ($idEspacio) {
+    $sqlEspacio = "SELECT nombre FROM Espacios WHERE id = $idEspacio";
+    $espacio = mysqli_fetch_assoc(mysqli_query($link, $sqlEspacio));
+}
 $view = "clase_foro";
 require_once "views/layout.php";

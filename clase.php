@@ -55,7 +55,6 @@ if (!$result) {
     header("Location: clases.php");
     exit();
 }
-
 // Obtener los horarrios 
 $sql = "SELECT dia_semana, hora_inicio, hora_fin 
         FROM horarios 
