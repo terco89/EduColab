@@ -8,6 +8,7 @@
     <form method="POST" action="crear_clase.php">
         <h1>Mis Clases</h1>
         <a href="clase_unirse.php" class="btn btn-secondary">Unirse a una clase</a>
+        <a href="clase_archivada.php" class="btn btn-secondary">Clase Archivada</a>
         <a href="#" class="btn btn-secondary" data-toggle="modal" data-target="#submitModal">Crear una clase</a>
         <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

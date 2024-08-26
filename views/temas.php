@@ -7,7 +7,7 @@
     <?php else: ?>
         <li><a href="clases.php">Clases</a></li>
     <?php endif; ?>
-    <li><a  href="clase.php?id=<?php echo $result["id"] ?>"><?php echo $result['nombre']; ?></a></li>
+    <li><a  href="clase.php?id=<?php echo $result["id"] ?>">"<?php echo $result['nombre']; ?>"</a></li>
     <li><a class="active"href="temas.php?id=<?php echo $result["id"] ?>">Temas</a></li>
 
 </ul>

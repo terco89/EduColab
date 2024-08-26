@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ///mostrar dondo
-$stmt = $link->prepare("SELECT fondo FROM clase_usuario WHERE id_usuario=? AND id_clase=?");
+$stmt = $link->prepare("SELECT fondo, estado FROM clase_usuario WHERE id_usuario=? AND id_clase=?");
 $stmt->bind_param("ii", $_SESSION['usuario']['id'], $id_clase);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -72,6 +72,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_clase_eliminar"])) 
     $stmt->execute();
     $stmt = $link->prepare("DELETE FROM ClasesEscolares WHERE id = ?");
     $stmt->bind_param("i", $id_clase_eliminar);
+    if ($stmt->execute()) {
+        header("Location: clases.php");
+        exit();
+    } else {
+        echo "Error al eliminar la clase: " . $stmt->error;
+    }
+}
+// Archivar la classe
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_clase_archivar"])) {
+    $id_clase_archivar = intval($_POST["id_clase_archivar"]);
+    $stmt = $link->prepare("UPDATE `clase_usuario` SET `estado`='archivada' WHERE clase_usuario.id_clase=?");
+    $stmt->bind_param("i", $id_clase_archivar);
+    $stmt->execute();
+    if ($stmt->execute()) {
+        header("Location: clases.php");
+        exit();
+    } else {
+        echo "Error al eliminar la clase: " . $stmt->error;
+    }
+}
+// desArchivar la classe
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_clase_desarchivar"])) {
+    $id_clase_desarchivar = intval($_POST["id_clase_desarchivar"]);
+    $stmt = $link->prepare("UPDATE `clase_usuario` SET `estado`='activa' WHERE clase_usuario.id_clase=?");
+    $stmt->bind_param("i", $id_clase_desarchivar);
+    $stmt->execute();
     if ($stmt->execute()) {
         header("Location: clases.php");
         exit();

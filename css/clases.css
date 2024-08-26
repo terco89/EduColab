@@ -18,3 +18,21 @@ h3 {
   padding: 20px; 
   height: 100%;
 }
+.image-striped {
+  position: relative;
+  display: inline-block;
+}
+
+
+
+.image-striped::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.5) 75%, transparent 75%, transparent);
+  background-size: 10px 10px;
+  pointer-events: none;
+}

@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nombre'])) {
 
     $id_clase = mysqli_insert_id($link);
 
-    $sql2 = "INSERT INTO clase_usuario (id_usuario, id_clase) VALUES ('$id_usuario_creador', '$id_clase')";
+    $sql2 = "INSERT INTO clase_usuario (id_usuario, id_clase,estado) VALUES ('$id_usuario_creador', '$id_clase', 'activa')";
     $query2 = mysqli_query($link, $sql2);
     if (!$query2) {
         echo "Fallo consulta: " . mysqli_error($link);

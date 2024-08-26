@@ -7,7 +7,7 @@
     <?php else: ?>
         <li><a href="clases.php">Clases</a></li>
     <?php endif; ?>
-    <li><a  href="clase.php?id=<?php echo $result['id']; ?>"><?php echo $result['nombre']; ?></a></li>
+    <li><a  href="clase.php?id=<?php echo $result['id']; ?>">"<?php echo $result['nombre']; ?>""</a></li>
     <li><a class="active"href="clase_foro.php?id=<?php echo $result['id']; ?>">Foro</a></li>
 
 </ul>
@@ -30,11 +30,11 @@
                 <form method="POST">
                     <div class="form-group">
                         <label for="topicTitle">Título del Tema</label>
-                        <input type="text" class="form-control" id="topicTitle" name="tema" placeholder="Ingresa el título del tema">
+                        <input type="text" class="form-control" id="topicTitle" name="tema" placeholder="Ingresa el título del tema" require>
                     </div>
                     <div class="form-group">
                         <label for="topicContent">Contenido del Tema</label>
-                        <textarea class="form-control" id="topicContent" rows="3" name="contenido" placeholder="Escribe el contenido del tema"></textarea>
+                        <textarea class="form-control" id="topicContent" rows="3" name="contenido" placeholder="Escribe el contenido del tema" require></textarea>
                     </div>
                     <input type="text" name="id" hidden value="<?php echo $_GET["id"]; ?>">
                     <button type="submit" class="btn btn-primary">Crear Tema</button>
