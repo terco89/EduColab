@@ -9,6 +9,8 @@ if (!isset($_SESSION["usuario"]) || !isset($_GET['id']) || !is_numeric($_GET['id
 }
 
 $id_clase = intval($_GET['id']); 
+$idEspacio = isset($_GET['espacio']) ? intval($_GET['espacio']) : null;
+
 ///cambiar fondo
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['bgOption'])) {
@@ -39,7 +41,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 $fondo = $result->fetch_assoc();
 
-// Get class information
+//obtebner cosas de clases
 $sql = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, codigo, id_usuario_creador, usuarios.apellido as profe_apellido, usuarios.nombre as profe_nombre
         FROM ClasesEscolares 
         INNER JOIN usuarios ON ClasesEscolares.id_usuario_creador = usuarios.id 
@@ -79,7 +81,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_clase_eliminar"])) 
     }
 }
 
-
+$espacio = null;
+if ($idEspacio) {
+    $sqlEspacio = "SELECT nombre FROM Espacios WHERE id = $idEspacio";
+    $espacio = mysqli_fetch_assoc(mysqli_query($link, $sqlEspacio));
+}
 $view = "clase";
 require_once "views/layout.php";
 ?>

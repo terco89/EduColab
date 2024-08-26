@@ -1,3 +1,4 @@
+
 <?php require_once "views/clase_navbar.php"; ?>
 <style>
     .preview-container {

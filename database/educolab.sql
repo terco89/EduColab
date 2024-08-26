@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-08-2024 a las 03:25:38
+-- Tiempo de generación: 26-08-2024 a las 18:09:30
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -52,20 +52,9 @@ CREATE TABLE `clasesescolares` (
 --
 
 INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `codigo`, `id_usuario_creador`) VALUES
-(33, 'Lengua', 'Es lengua no vas a sumar ', 'rDONwY', 5),
-(34, 'weqw', 'qweqwe', 'YTP5oJ', 5),
-(35, 'Ingles', '3123123123', 'JUzzj8', 3),
-(36, 'nose', '', 'R1jhQb', 10),
-(37, 'clase prueba', '', 'S7Ch23', 12),
-(38, 'Suicidarse', '', '5E6luw', 12),
-(39, 'clase1', '', 'mISmp3', 14),
-(40, 'clase2', '', 'FCxrFB', 14),
-(41, 'clase3', '', 'eQtG29', 14),
-(42, 'Sebastian', '', 'yhM8SF', 14),
-(43, 'clase1', '', 'Q9veft', 14),
-(44, 'clase2', '', 'wKOLGC', 14),
-(45, 'clase2', '', 'dKxqhf', 13),
-(46, 'clase3', '', 'Y4RiML', 13);
+(51, 'clase1', '', 'vuvqS6', 14),
+(52, 'clase2', '', 'oLUNHe', 14),
+(53, 'clase3', '', 'TwBhve', 13);
 
 -- --------------------------------------------------------
 
@@ -84,12 +73,12 @@ CREATE TABLE `clase_usuario` (
 --
 
 INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`) VALUES
-(14, 43, 'bg5.jpg'),
-(14, 44, 'bg2.jpg'),
-(13, 43, 'bg3.jpg'),
-(13, 45, 'bg4.jpg'),
-(13, 46, ''),
-(13, 47, '');
+(14, 48, 'bg6.jpg'),
+(14, 49, '#61e58d'),
+(14, 50, ''),
+(14, 51, 'bg4.jpg'),
+(14, 52, '#c65fe3'),
+(13, 53, '');
 
 -- --------------------------------------------------------
 
@@ -167,8 +156,7 @@ CREATE TABLE `espacios` (
 --
 
 INSERT INTO `espacios` (`id`, `nombre`, `curso_division`, `id_usuario`) VALUES
-(1, 'espacio1', '1°2°', 14),
-(2, 'TCI', '3°', 14);
+(1, 'TCI', '3°', 14);
 
 -- --------------------------------------------------------
 
@@ -186,11 +174,8 @@ CREATE TABLE `espacios_clases` (
 --
 
 INSERT INTO `espacios_clases` (`id_espacio`, `id_clase`) VALUES
-(1, 39),
-(1, 40),
-(2, 39),
-(2, 40),
-(2, 41);
+(1, 51),
+(1, 52);
 
 -- --------------------------------------------------------
 
@@ -212,25 +197,10 @@ CREATE TABLE `horarios` (
 --
 
 INSERT INTO `horarios` (`id_horario`, `id_clase`, `nombre_clase`, `dia_semana`, `hora_inicio`, `hora_fin`) VALUES
-(20, 33, 'Lengua', 'Lunes', '18:51:00', '21:51:00'),
-(21, 34, 'weqw', 'Viernes', '17:34:00', '19:34:00'),
-(22, 35, 'Ingles', 'Miércoles', '16:57:00', '17:59:00'),
-(24, 36, 'nose', 'Lunes', '15:31:00', '14:28:00'),
-(25, 37, 'clase prueba', 'Lunes', '13:39:00', '14:39:00'),
-(26, 38, 'Suicidarse', 'Lunes', '14:51:00', '15:51:00'),
-(27, 39, 'clase1', 'Lunes', '15:53:00', '16:53:00'),
-(28, 40, 'clase2', 'Miércoles', '15:53:00', '15:53:00'),
-(29, 41, 'clase3', 'Sábado', '15:53:00', '17:53:00'),
-(30, 42, 'Sebastian', 'Martes', '13:39:00', '14:38:00'),
-(31, 43, 'clase1', 'Lunes', '14:57:00', '14:57:00'),
-(32, 44, 'clase2', 'Lunes', '14:57:00', '16:57:00'),
-(33, 45, 'clase2', 'Miércoles', '19:22:00', '18:22:00'),
-(34, 45, 'clase2', 'Miércoles', '18:23:00', '16:27:00'),
-(35, 45, 'clase2', 'Viernes', '16:25:00', '17:23:00'),
-(36, 46, 'clase3', 'Lunes', '17:46:00', '18:46:00'),
-(37, 46, 'clase3', 'Martes', '17:46:00', '18:46:00'),
-(38, 46, 'clase3', 'Miércoles', '18:46:00', '19:46:00'),
-(39, 46, 'clase3', 'Lunes', '16:46:00', '18:46:00');
+(1, 51, 'clase1', 'Lunes', '13:00:00', '13:01:00'),
+(2, 52, 'clase2', 'Martes', '14:00:00', '15:00:00'),
+(3, 52, 'clase2', 'Lunes', '13:01:00', '16:00:00'),
+(4, 53, 'clase3', 'Martes', '15:01:00', '15:01:00');
 
 -- --------------------------------------------------------
 
@@ -572,7 +542,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clasesescolares`
 --
 ALTER TABLE `clasesescolares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `discusiones`
@@ -584,13 +554,13 @@ ALTER TABLE `discusiones`
 -- AUTO_INCREMENT de la tabla `espacios`
 --
 ALTER TABLE `espacios`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes`

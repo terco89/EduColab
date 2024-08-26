@@ -1,7 +1,15 @@
 <ul class="breadcrumb">
-  <li><a href="index.php">Home</a></li>
-  <li><a href="clases.php">Clases</a></li>
-  <li><a class="active" href="clase.php?id=<?php echo $result['id'];?>">"<?php echo $result['nombre'];?>"</a></li>
+    <li><a href="index.php">Home</a></li>
+    <?php if ($espacio): ?>
+        <li><a href="espacios.php">Espacios</a></li>
+        <li><a href="espacio.php?id=<?php echo $idEspacio; ?>">"<?php echo $espacio['nombre']; ?>"</a></li>
+
+    <?php else: ?>
+        <li><a href="clases.php">Clases</a></li>
+    <?php endif; ?>
+    <li><a  href="clase.php?id=<?php echo $id_Clase; ?>"><?php echo $result['nombre']; ?></a></li>
+    <li><a class="active"href="clase.php?id=<?php echo $id_Clase; ?>">Tablero</a></li>
+
 </ul>
 <?php require_once "views/clase_navbar.php"; ?>
 <!-- Main Container -->
@@ -9,8 +17,7 @@
 
 <div class="container mt-5">
     <!-- Header -->
-    <div class="jumbotron" 
-    style="<?php if (preg_match('/\.(jpg|png)$/i', $fondo['fondo'])): ?>background-image: url('img/fondos/<?php echo $fondo['fondo']; ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;<?php else: ?>background-color: <?php echo htmlspecialchars($fondo['fondo']); ?>;<?php endif; ?>width: 100%; height: auto; position: relative;">
+    <div class="jumbotron" style="<?php if (preg_match('/\.(jpg|png)$/i', $fondo['fondo'])): ?>background-image: url('img/fondos/<?php echo $fondo['fondo']; ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;<?php else: ?>background-color: <?php echo htmlspecialchars($fondo['fondo']); ?>;<?php endif; ?>width: 100%; height: auto; position: relative;">
       <div style="position: absolute; top: 10px; right: 10px; z-index: 1;">
             <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#archivarClase"><i class="fa-solid fa-box-archive"></i></button>
             <?php if($_SESSION["usuario"]['id']==$result['id_usuario_creador']){?><button class="btn btn-outline-danger" data-toggle="modal" data-target="#eliminarClase"><i class="fa-solid fa-trash"></i></button><?php }?>
