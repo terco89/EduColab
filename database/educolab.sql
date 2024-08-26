@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-08-2024 a las 18:09:30
+-- Tiempo de generación: 26-08-2024 a las 20:56:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -53,8 +53,8 @@ CREATE TABLE `clasesescolares` (
 
 INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `codigo`, `id_usuario_creador`) VALUES
 (51, 'clase1', '', 'vuvqS6', 14),
-(52, 'clase2', '', 'oLUNHe', 14),
-(53, 'clase3', '', 'TwBhve', 13);
+(53, 'clase3', '', 'TwBhve', 13),
+(54, 'lolo', '', '3ZqGRF', 14);
 
 -- --------------------------------------------------------
 
@@ -65,20 +65,22 @@ INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `codigo`, `id_usua
 CREATE TABLE `clase_usuario` (
   `id_usuario` int(11) NOT NULL,
   `id_clase` int(11) NOT NULL,
-  `fondo` varchar(25) NOT NULL
+  `fondo` varchar(25) NOT NULL,
+  `estado` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `clase_usuario`
 --
 
-INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`) VALUES
-(14, 48, 'bg6.jpg'),
-(14, 49, '#61e58d'),
-(14, 50, ''),
-(14, 51, 'bg4.jpg'),
-(14, 52, '#c65fe3'),
-(13, 53, '');
+INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`, `estado`) VALUES
+(14, 48, 'bg6.jpg', 'activa'),
+(14, 49, '#61e58d', 'activa'),
+(14, 50, '', 'activa'),
+(14, 51, 'bg3.jpg', 'activa'),
+(14, 52, 'bg5.jpg', 'archivada'),
+(13, 53, '', 'activa'),
+(14, 54, '#cd1313', 'archivada');
 
 -- --------------------------------------------------------
 
@@ -114,7 +116,9 @@ CREATE TABLE `discusiones` (
 
 INSERT INTO `discusiones` (`id`, `id_alumno`, `id_clase`, `tema`, `contenido`, `fecha_creacion`) VALUES
 (1, 4, 1, 'Duda sobre el uso de \"used to\"', 'Tengo una pregunta sobre el uso de \"used to\" y \"would\" en inglés para hablar sobre hábitos pasados. He leído algunas explicaciones, pero aún no estoy seguro de cuándo debería usar uno u otro. ¿Podrían explicarme las diferencias y darme ejemplos para cada uno?', '2024-07-04 12:40:42'),
-(2, 3, 35, 'trtdftg', 'gfdydytdydtyt', '2024-07-04 16:18:52');
+(2, 3, 35, 'trtdftg', 'gfdydytdydtyt', '2024-07-04 16:18:52'),
+(3, 14, 51, 'qw3e', 'qwe', '2024-08-26 14:37:00'),
+(4, 14, 51, '', 'asd', '2024-08-26 14:38:17');
 
 -- --------------------------------------------------------
 
@@ -198,9 +202,8 @@ CREATE TABLE `horarios` (
 
 INSERT INTO `horarios` (`id_horario`, `id_clase`, `nombre_clase`, `dia_semana`, `hora_inicio`, `hora_fin`) VALUES
 (1, 51, 'clase1', 'Lunes', '13:00:00', '13:01:00'),
-(2, 52, 'clase2', 'Martes', '14:00:00', '15:00:00'),
-(3, 52, 'clase2', 'Lunes', '13:01:00', '16:00:00'),
-(4, 53, 'clase3', 'Martes', '15:01:00', '15:01:00');
+(4, 53, 'clase3', 'Martes', '15:01:00', '15:01:00'),
+(5, 54, 'lolo', 'Lunes', '14:49:00', '16:48:00');
 
 -- --------------------------------------------------------
 
@@ -237,7 +240,10 @@ INSERT INTO `mensajes` (`id`, `id_usuario`, `id_discusion`, `mensaje`, `fecha_cr
 (1, 4, 1, 'nose', '2024-07-04 13:09:30'),
 (2, 4, 1, 'a', '2024-07-04 13:26:43'),
 (3, 4, 1, 'xd', '2024-07-04 13:26:52'),
-(4, 3, 2, 'gsgsgdsdg', '2024-07-04 16:20:41');
+(4, 3, 2, 'gsgsgdsdg', '2024-07-04 16:20:41'),
+(5, 14, 3, 'qwe', '2024-08-26 14:37:07'),
+(6, 14, 3, 'qweqwe', '2024-08-26 14:37:08'),
+(7, 14, 3, 'qweqweqwewqeqweqweqwe', '2024-08-26 14:37:10');
 
 -- --------------------------------------------------------
 
@@ -397,7 +403,8 @@ INSERT INTO `temas` (`id`, `nombre`, `descripcion`, `fecha_alta`, `id_clase`) VA
 (4, 'sjdns', 'jsdnjsd', '2024-07-10', 35),
 (5, 'smds', 'mdmsds', '2024-07-10', 35),
 (6, 'Por fin carajo', 'uwu', '2024-07-10', 35),
-(7, 'sd', 'asda', '2024-08-24', 45);
+(7, 'sd', 'asda', '2024-08-24', 45),
+(8, 'tarea prueba', 'sz', '2024-08-26', 51);
 
 -- --------------------------------------------------------
 
@@ -421,7 +428,8 @@ INSERT INTO `tema_usuario` (`tema_id`, `usuario_id`) VALUES
 (5, 1),
 (6, 3),
 (6, 1),
-(7, 13);
+(7, 13),
+(8, 14);
 
 -- --------------------------------------------------------
 
@@ -542,13 +550,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clasesescolares`
 --
 ALTER TABLE `clasesescolares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `discusiones`
 --
 ALTER TABLE `discusiones`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `espacios`
@@ -560,13 +568,13 @@ ALTER TABLE `espacios`
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes_privado`
@@ -584,7 +592,7 @@ ALTER TABLE `tareas`
 -- AUTO_INCREMENT de la tabla `temas`
 --
 ALTER TABLE `temas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
