@@ -9,22 +9,30 @@ if (!isset($_SESSION["usuario"]) || !isset($_GET['id']) || !is_numeric($_GET['id
 }
 
 $id_clase = intval($_GET['id']); 
+///cambiar fondo
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['bgOption'])) {
+        $bgOption = $_POST['bgOption'];
 
-// actualizar fondo
-if (isset($_POST['bg'])) {
-    $bg = $_POST['bg'];
+        if ($bgOption == 'background' && isset($_POST['bg'])) {
+            $bg = $_POST['bg'];
+            $allowed_backgrounds = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg', 'bg5.jpg', 'bg6.jpg', 'bg7.jpg', 'bg8.jpg', 'bg9.jpg', 'bg10.jpg'];
 
-    $allowed_backgrounds = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg', 'bg5.jpg', 'bg6.jpg', 'bg7.jpg', 'bg8.jpg', 'bg9.jpg', 'bg10.jpg'];
-    if (in_array($bg, $allowed_backgrounds)) {
-        $stmt = $link->prepare("UPDATE clase_usuario SET fondo=? WHERE id_usuario=? AND id_clase=?");
-        $stmt->bind_param("ssi", $bg, $_SESSION['usuario']['id'], $id_clase);
-        if (!$stmt->execute()) {
-            echo "ERROR al cambiar el ofndo: " . $stmt->error;
+            if (in_array($bg, $allowed_backgrounds)) {
+                $stmt = $link->prepare("UPDATE clase_usuario SET fondo=? WHERE id_usuario=? AND id_clase=?");
+                $stmt->bind_param("ssi", $bg, $_SESSION['usuario']['id'], $id_clase);
+                $stmt->execute();
+            }
+        } elseif ($bgOption == 'color' && isset($_POST['color'])) {
+            $color = $_POST['color'];
+
+            $stmt = $link->prepare("UPDATE clase_usuario SET fondo=? WHERE id_usuario=? AND id_clase=?");
+            $stmt->bind_param("ssi", $color, $_SESSION['usuario']['id'], $id_clase);
+            $stmt->execute();
         }
     }
 }
-
-// Mostrar Fondo
+///mostrar dondo
 $stmt = $link->prepare("SELECT fondo FROM clase_usuario WHERE id_usuario=? AND id_clase=?");
 $stmt->bind_param("ii", $_SESSION['usuario']['id'], $id_clase);
 $stmt->execute();

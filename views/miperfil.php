@@ -63,13 +63,11 @@
         transform: translate(-50%, -50%);
     }
 </style>
-<br>
-<nav style="--bs-breadcrumb-divider: '>'; margin-left:50px;margin-right:1610px;" aria-label="breadcrumb">
-    <ol class="breadcrumb" style="background-color:#10b5c1f7">
-        <li class="breadcrumb-item"><a href="index.php" style="color:black">Mis Clases</a></li>
-        <li class="breadcrumb-item active" style="color:white" aria-current="page">Mi perfil</li>
-    </ol>
-</nav>
+
+<ul class="breadcrumb">
+  <li><a href="index.php">Home</a></li>
+  <li><a class="active" href="miperfil.php">Mi Perfil</a></li>
+</ul>
 <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
     <div class="card p-4" style="cursor:default;">
         <div class="d-flex flex-column justify-content-center align-items-center">

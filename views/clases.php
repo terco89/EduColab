@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="./css/clases.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+<ul class="breadcrumb">
+  <li><a href="index.php">Home</a></li>
+  <li><a class="active" href="clases.php">Clases</a></li>
+</ul>
 <div class="container mt-4">
     <form method="POST" action="crear_clase.php">
         <h1>Mis Clases</h1>

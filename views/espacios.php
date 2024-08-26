@@ -1,4 +1,7 @@
-
+<ul class="breadcrumb">
+  <li><a href="index.php">Home</a></li>
+  <li><a class="active" href="espacios.php">Espacios</a></li>
+</ul>
 <div class="container">
     <h1>Espacios</h1>
     <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#submitModal">Crear un espacio</button>

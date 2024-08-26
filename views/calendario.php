@@ -1,3 +1,7 @@
+<ul class="breadcrumb">
+  <li><a href="index.php">Home</a></li>
+  <li><a class="active" href="calendario.php">Calendario</a></li>
+</ul>
 <br>
 <nav aria-label="breadcrumb">
     <?php if (isset($breadcrumbs) && !empty($breadcrumbs)): ?>

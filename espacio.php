@@ -16,6 +16,7 @@ $idEspacio = intval($_GET['id']); // Asegúrate de que el ID es un número enter
 $sqlEspacio = "SELECT * FROM espacios WHERE id = $idEspacio";
 $resultEspacio = $link->query($sqlEspacio);
 
+
 if ($resultEspacio->num_rows == 0) {
     die("Espacio no encontrado.");
 }
