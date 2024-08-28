@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_clase_archivar"])) 
     $stmt->bind_param("i", $id_clase_archivar);
     $stmt->execute();
     if ($stmt->execute()) {
-        header("Location: clases.php");
+        header("Location: clase_archivada.php");
         exit();
     } else {
         echo "Error al eliminar la clase: " . $stmt->error;

@@ -36,7 +36,7 @@ if (isset($_POST['titulo'])) {
         exit();
     }
     $tid = mysqli_insert_id($link);
-    $sql = "select id_usuario from clase_usuario where id_clase = " . $result["id"];
+    $sql = "SELECT id_usuario FROM clase_usuario WHERE id_clase = " . $result["id"];
     $query = mysqli_query($link, $sql);
     $ids = array();
     if (mysqli_num_rows($query) > 0) {
@@ -55,7 +55,7 @@ if (isset($_POST['titulo'])) {
     if (isset($_SESSION['usuario']) && isset($_FILES['archivo']) && $_FILES['archivo']['error'] == 0) {
         $archivo_nombre = $_FILES['archivo']['name'];
         $archivo_temporal = $_FILES['archivo']['tmp_name'];
-        $nombre = mysqli_insert_id($link);
+        $nombre = $tid; 
         mkdir("img/temas/" . $nombre . "");
         $ruta = "img/temas/" . $nombre . "/" . $archivo_nombre;
         if (move_uploaded_file($archivo_temporal, $ruta)) {
@@ -64,15 +64,16 @@ if (isset($_POST['titulo'])) {
             echo "Error al subir el archivo.";
         }
     }
-    
-    echo '<script>window.location.href = "ver_temas.php?id=' . $result["id"] . '&tid=' . mysqli_insert_id($link) . '";</script>';
+
+    header("Location: ver_temas.php?id=" . $_GET["id"] . "&tid=" . $tid);
     exit();
 }
-$id_clase = $_GET["id"]; 
+$id_clase = $_GET["id"];
 $espacio = null;
 if ($idEspacio) {
     $sqlEspacio = "SELECT nombre FROM Espacios WHERE id = $idEspacio";
     $espacio = mysqli_fetch_assoc(mysqli_query($link, $sqlEspacio));
 }
 $view = "temas";
+
 require_once "views/layout.php";

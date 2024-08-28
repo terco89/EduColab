@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nombre'])) {
         exit();
     }
 
-    header('Location: clases.php');
+    header('Location: clase.php?id='.$id_clase);
     exit();
 }
 
