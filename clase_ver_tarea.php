@@ -2,128 +2,130 @@
 require_once "includes/config.php";
 session_start();
 
+// Redirigir si no hay sesión activa
 if (!isset($_SESSION["usuario"])) {
     header("Location: index.php");
     exit();
 }
 
+// Redirigir si faltan parámetros
 if (!isset($_GET["id"]) || !isset($_GET["tid"])) {
     header("Location: clases.php");
     exit();
 }
 
-if(isset($_POST["comentario"]) && strlen($_POST["comentario"]) > 0){
-    $sql = "INSERT INTo mensajes_privado(tarea_id,usuario_id,mensaje,fecha_creacion,bandera) VALUES(".$_GET["tid"].",".$_SESSION["usuario"]["id"].",'".$_POST["comentario"]."',NOW(),true)";
-    $result = mysqli_query($link,$sql);
-    if($result){
-        header("Location: clase_ver_tarea.php?id=".$_GET["id"]."&tid=".$_GET["tid"]);
-    }
+// Función para manejar errores
+function handleError($link) {
+    echo "Fallo consulta: " . mysqli_error($link);
+    exit();
+}
+
+// Función para redirigir
+function redirect($url) {
+    header("Location: $url");
+    exit();
+}
+
+// Manejo de comentarios
+if (isset($_POST["comentario"]) && strlen($_POST["comentario"]) > 0) {
+    $sql = "INSERT INTO mensajes_privado(tarea_id, usuario_id, mensaje, fecha_creacion, bandera) VALUES (?, ?, ?, NOW(), true)";
+    $stmt = mysqli_prepare($link, $sql);
+    mysqli_stmt_bind_param($stmt, 'iis', $_GET["tid"], $_SESSION["usuario"]["id"], $_POST["comentario"]);
+    if (!mysqli_stmt_execute($stmt)) handleError($link);
+    redirect("clase_ver_tarea.php?id=" . $_GET["id"] . "&tid=" . $_GET["tid"]);
 }
 
 // Obtener información de la tarea
-$sql = "SELECT * FROM tareas WHERE id = " . $_GET["tid"];
-$resultado_tarea = mysqli_query($link, $sql);
+$sql = "SELECT * FROM tareas WHERE id = ?";
+$stmt = mysqli_prepare($link, $sql);
+mysqli_stmt_bind_param($stmt, 'i', $_GET["tid"]);
+mysqli_stmt_execute($stmt);
+$resultado_tarea = mysqli_stmt_get_result($stmt);
 $tarea = mysqli_fetch_assoc($resultado_tarea);
+if (!$tarea) redirect("clases.php");
 
-if (!$tarea) {
-    header("Location: clases.php");
-    exit();
-}
-$sql = "SELECT * FROM entregas WHERE tarea_id = " . $_GET["tid"] . " AND usuario_id = " . $_SESSION["usuario"]["id"] . " ";
-$resultado_entrega = mysqli_query($link, $sql);
-$entrega = mysqli_fetch_assoc($resultado_entrega);
 // Obtener información de la clase
-$sql_clase = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, id_usuario_creador, name
-             FROM ClasesEscolares 
-             INNER JOIN usuarios ON ClasesEscolares.id_usuario_creador = usuarios.id 
-             WHERE ClasesEscolares.id = " . $_GET["id"];
-$resultado_clase = mysqli_query($link, $sql_clase);
+$sql_clase = "SELECT ClasesEscolares.id, ClasesEscolares.nombre, id_usuario_creador, name FROM ClasesEscolares INNER JOIN usuarios ON ClasesEscolares.id_usuario_creador = usuarios.id WHERE ClasesEscolares.id = ?";
+$stmt = mysqli_prepare($link, $sql_clase);
+mysqli_stmt_bind_param($stmt, 'i', $_GET["id"]);
+mysqli_stmt_execute($stmt);
+$resultado_clase = mysqli_stmt_get_result($stmt);
 $clase = mysqli_fetch_assoc($resultado_clase);
+if (!$clase) redirect("clases.php");
 
-if (!$clase) {
-    header("Location: clases.php");
-    exit();
-}
 // Obtener información de los usuarios
-$sql_clases = "SELECT DISTINCT tarea_usuario.estado, usuarios.nombre, usuarios.apellido, usuarios.img 
-             FROM tarea_usuario INNER JOIN usuarios ON tarea_usuario.usuario_id = usuarios.id
-             INNER JOIN clase_usuario ON usuarios.id = clase_usuario.id_usuario INNER JOIN clasesescolares ON clase_usuario.id_clase = clasesescolares.id
-             WHERE tarea_id = " . $_GET["tid"];
-$resultado_clases = mysqli_query($link, $sql_clases);
+$sql_clases = "SELECT DISTINCT tarea_usuario.estado, usuarios.nombre, usuarios.apellido, usuarios.img,usuarios.id FROM tarea_usuario INNER JOIN usuarios ON tarea_usuario.usuario_id = usuarios.id INNER JOIN clase_usuario ON usuarios.id = clase_usuario.id_usuario INNER JOIN clasesescolares ON clase_usuario.id_clase = clasesescolares.id WHERE tarea_id = ?";
+$stmt = mysqli_prepare($link, $sql_clases);
+mysqli_stmt_bind_param($stmt, 'i', $_GET["tid"]);
+mysqli_stmt_execute($stmt);
+$resultado_clases = mysqli_stmt_get_result($stmt);
 
 $usuarios = [];
 while ($usuario = mysqli_fetch_assoc($resultado_clases)) {
     $usuarios[] = $usuario;
 }
-if (!$clase) {
-    header("Location: clases.php");
-    exit();
-}
 
-if (isset($_POST['submit'])){
-    $sqlll="UPDATE tarea_usuario SET estado = '2' WHERE usuario_id = ".$_SESSION["usuario"]["id"]; " AND tarea_id = ". $_GET["tid"];  ;
-    $quuery = mysqli_query($link, $sqlll);
-    if (!$quuery) {
-        echo "Fallo consulta: " . mysqli_error($link);
-        exit();
+// Manejo de entrega (actualización del estado de la tarea)
+if (isset($_POST['opcionEntrega'])) {
+    if ($_POST['opcionEntrega'] == 'marcar') {
+        $sql = "UPDATE tarea_usuario SET estado = '2' WHERE usuario_id = ? AND tarea_id = ?";
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, 'ii', $_SESSION["usuario"]["id"], $_GET["tid"]);
+        if (!mysqli_stmt_execute($stmt)) handleError($link);
+    } elseif ($_POST['opcionEntrega'] == 'archivo' && isset($_FILES['archivoAdjunto'])) {
+        $archivo_nombre = $_FILES['archivoAdjunto']['name'];
+        $archivo_temporal = $_FILES['archivoAdjunto']['tmp_name'];
+        $nombre = $_GET["tid"] . "_" . $_SESSION["usuario"]["id"];
+        mkdir("img/entregas/" . $nombre);
+        $ruta = "img/entregas/" . $nombre . "/" . $archivo_nombre;
+        if (move_uploaded_file($archivo_temporal, $ruta)) {
+            echo "El archivo se ha subido correctamente.";
+        } else {
+            echo "Error al subir el archivo.";
+        }
+
+        $sql = "INSERT INTO entregas(tarea_id, usuario_id, fecha_entrega) VALUES (?, ?, NOW())";
+        $stmt = mysqli_prepare($link, $sql);
+        mysqli_stmt_bind_param($stmt, 'ii', $_GET["tid"], $_SESSION['usuario']['id']);
+        if (!mysqli_stmt_execute($stmt)) handleError($link);
     }
+    redirect("clase_ver_tarea.php?id=" . $_GET["id"] . "&tid=" . $_GET["tid"]);
 }
-// Obtener los recursos adjuntos de la tarea
-$recursos = array();
-if (file_exists("img/tareas/" . $_GET["tid"]) && is_dir("img/tareas/" . $_GET["tid"])) {
-    $archivos = scandir("img/tareas/" . $_GET["tid"]);
 
+// Obtener recursos adjuntos
+$recursos = [];
+$dir = "img/tareas/" . $_GET["tid"];
+if (file_exists($dir) && is_dir($dir)) {
+    $archivos = scandir($dir);
     foreach ($archivos as $archivo) {
         if ($archivo != '.' && $archivo != '..') {
             $info_archivo = pathinfo($archivo);
-            $nombre = $info_archivo['filename'];
-            $extension = isset($info_archivo['extension']) ? $info_archivo['extension'] : '';
-            $recursos[] = $nombre;
-            $recursos[] = $extension;
+            $recursos[] = ['nombre' => $info_archivo['filename'], 'extension' => $info_archivo['extension'] ?? ''];
         }
     }
 }
 
-
-if($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"] && isset($_POST["nmensaje"]) && isset($_POST["id"])){
-    $sql = "INSERT INto mensajes_privado(tarea_id,usuario_id,mensaje,fecha_creacion,bandera) VALUES(".$_GET["tid"].",".$_POST["id"].",'".$_POST["nmensaje"]."',NOW(),false)";
-    $result = mysqli_query($link,$sql);
-    if($result){
-        echo "exito pe";
-    }
+// Manejo de mensajes privados
+if ($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"] && isset($_POST["nmensaje"]) && isset($_POST["id"])) {
+    $sql = "INSERT INTO mensajes_privado(tarea_id, usuario_id, mensaje, fecha_creacion, bandera) VALUES (?, ?, ?, NOW(), false)";
+    $stmt = mysqli_prepare($link, $sql);
+    mysqli_stmt_bind_param($stmt, 'iis', $_GET["tid"], $_POST["id"], $_POST["nmensaje"]);
+    if (!mysqli_stmt_execute($stmt)) handleError($link);
 }
 
+// Actualización de tarea
+if (isset($_POST['nombre_tarea'])) {
+    $sql = "UPDATE tareas SET nombre = ?, descripcion = ?, fecha_entrega = ?, clase_id = ? WHERE id = ?";
+    $stmt = mysqli_prepare($link, $sql);
+    mysqli_stmt_bind_param($stmt, 'sssii', $_POST['nombre_tarea'], $_POST['descripcion_tarea'], $_POST['fecha_limite'], $clase["id"], $_GET["tid"]);
+    if (!mysqli_stmt_execute($stmt)) handleError($link);
 
-if (isset($_POST['titulo'])) {
-    $sql = "UPDATE tareas SET nombre = '" . $_POST['titulo'] . "', descripcion = '" . $_POST['instruccion'] . "', fecha_subida = NOW(), fecha_entrega = '" . $_POST['fecha_limite'] . "', clase_id = '" . $clase["id"] . "' WHERE id = " . $_GET["tid"];
-    $query = mysqli_query($link, $sql);
-    if (!$query) {
-        echo "Fallo consulta: " . mysqli_error($link);
-        exit();
-    }
-    $tid = mysqli_insert_id($link);
-    $sql = "select id_usuario from clase_usuario where id_usuario != " . $_SESSION["usuario"]["id"] . " and id_clase = " . $clase["id"];
-    $query = mysqli_query($link, $sql);
-    $ids = array();
-    if (mysqli_num_rows($query) > 0) {
-        while ($row = mysqli_fetch_assoc($query)) {
-            $ids[] = $row;
-        }
-    }
-    for ($i = 0; $i < count($ids); $i++) {
-        $sql = "INSERT INTO tarea_usuario(tarea_id,usuario_id,estado) VALUES($tid," . $ids[$i]["id_usuario"] . ",1)";
-        $query = mysqli_query($link, $sql);
-        if (!$query) {
-            echo "Fallo consulta: " . mysqli_error($link);
-            exit();
-        }
-    }
-
-    if (isset($_SESSION['usuario']) && isset($_FILES['archivo']) && $_FILES['archivo']['error'] == 0) {
+    // Manejo de archivo adjunto en la edición
+    if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] == 0) {
         $archivo_nombre = $_FILES['archivo']['name'];
         $archivo_temporal = $_FILES['archivo']['tmp_name'];
-        $nombre = $tid;
-        mkdir("img/tareas/" . $nombre . "");
+        $nombre = $_GET["tid"];
+        mkdir("img/tareas/" . $nombre);
         $ruta = "img/tareas/" . $nombre . "/" . $archivo_nombre;
         if (move_uploaded_file($archivo_temporal, $ruta)) {
             echo "El archivo se ha subido correctamente.";
@@ -131,48 +133,32 @@ if (isset($_POST['titulo'])) {
             echo "Error al subir el archivo.";
         }
     }
-    echo '<script>window.location.href = "clase_ver_tarea.php?id=' . $result["id"] . '&tid=' . $tid . '";</script>';
-    exit();
+    redirect("clase_ver_tarea.php?id=" . $_GET["id"] . "&tid=" . $_GET["tid"]);
 }
+
+// Eliminación de tarea
 if (isset($_POST['eliminar'])) {
-    $sql = "DELETE FROM tareas WHERE id = " . $_GET["tid"];
-    $query = mysqli_query($link, $sql);
-    if (!$query) {
-        echo "Fallo consulta: " . mysqli_error($link);
-        exit();
-    }
-    header('Location: clases.php');
-}
-if (isset($_FILES["archivoEntrega"])) {
-    $sql = "INSERT INTO entregas(tarea_id,usuario_id,fecha_entrega) VALUES(" . $_GET["tid"] . "," . $_SESSION['usuario']['id'] . ",NOW())";
-    $query = mysqli_query($link, $sql);
-    if (!$query) {
-        echo "Fallo consulta: " . mysqli_error($link);
-        exit();
-    }
-    $archivo_nombre = $_FILES['archivoEntrega']['name'];
-    $archivo_temporal = $_FILES['archivoEntrega']['tmp_name'];
-    $nombre = $_GET["tid"] . "&" . $_SESSION["usuario"]["id"];
-    mkdir("img/entregas/" . $nombre . "");
-    $ruta = "img/entregas/" . $nombre . "/" . $archivo_nombre;
-    if (move_uploaded_file($archivo_temporal, $ruta)) {
-        echo "El archivo se ha subido correctamente.";
-    } else {
-        echo "Error al subir el archivo.";
-    }
-    header('Location: clase_ver_tarea.php?id=' . $_GET["id"] . '&tid=' . $_GET["tid"]);
+    $sql = "DELETE FROM tareas WHERE id = ?";
+    $stmt = mysqli_prepare($link, $sql);
+    mysqli_stmt_bind_param($stmt, 'i', $_GET["tid"]);
+    if (!mysqli_stmt_execute($stmt)) handleError($link);
+    redirect("clases.php");
 }
 
-if($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]){
-    $sql = "SELECT usuarios.id, name, mensaje,bandera FROM mensajes_privado INNER JOIN usuarios ON mensajes_privado.usuario_id = usuarios.id WHERE tarea_id = ".$_GET["tid"];
-    $query = mysqli_query($link, $sql);
-    $general = array();
-    if (mysqli_num_rows($query) > 0) {
-        while ($row = mysqli_fetch_assoc($query)) {
-            $general[] = $row;
-        }
+// Obtener mensajes privados
+if ($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]) {
+    $sql = "SELECT usuarios.id, name, mensaje, bandera FROM mensajes_privado INNER JOIN usuarios ON mensajes_privado.usuario_id = usuarios.id WHERE tarea_id = ?";
+    $stmt = mysqli_prepare($link, $sql);
+    mysqli_stmt_bind_param($stmt, 'i', $_GET["tid"]);
+    mysqli_stmt_execute($stmt);
+    $query = mysqli_stmt_get_result($stmt);
+
+    $general = [];
+    while ($row = mysqli_fetch_assoc($query)) {
+        $general[] = $row;
     }
 }
 
+// Cargar vista
 $view = "clase_ver_tareas";
 require_once "views/layout.php";
