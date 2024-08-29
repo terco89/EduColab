@@ -21,6 +21,9 @@
                     <a class="nav-link" href="clase_foro.php?id=<?php echo $_GET['id']?>&espacio=<?php echo $idEspacio; ?>">Foro de Discusión</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="clase_alumnos.php?id=<?php echo $_GET['id']?>&espacio=<?php echo $idEspacio; ?>">Alumnos</a>
+                </li>
+                <li class="nav-item">
                     <a hidden class="nav-link" href="clase_notas.php?id=<?php echo $_GET['id']?>"&espacio=<?php echo $idEspacio; ?>>Notas</a>
                 </li>
             </ul>
