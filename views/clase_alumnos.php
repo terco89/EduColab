@@ -4,15 +4,15 @@
   .list-group-item {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; /* Añadir un poco de margen entre los elementos */
+    margin-bottom: 10px; 
   }
 
   .list-group-item img {
     border-radius: 50%;
     margin-right: 15px;
-    width: 50px; /* Tamaño ajustado de la imagen */
+    width: 50px; 
     height: 50px;
-    object-fit: cover; /* Ajuste de la imagen para que cubra bien el espacio */
+    object-fit: cover; 
   }
 
   .list-group-item .name {
@@ -43,7 +43,7 @@
     <?php endforeach; ?>
   </ul>
 
-  <!-- Mostrar a los Alumnos y el Conteo -->
+  <!-- Mostrar a los Alumnos y la cantisad -->
   <h3 class="profe-header">Alumnos (<?php echo $total_alumnos; ?>)</h3>
   <ul class="list-group">
     <?php foreach ($solo_alumnos as $alumno): ?>

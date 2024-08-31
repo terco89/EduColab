@@ -27,9 +27,8 @@ if (!$result) {
     exit();
 }
 
-$id_profesor = $result['id_usuario_creador']; // ID del profesor para excluir
+$id_profesor = $result['id_usuario_creador']; 
 
-// Obtener todos los usuarios de la clase, incluyendo al profesor
 $sql = "SELECT usuarios.* 
         FROM clase_usuario 
         INNER JOIN usuarios ON clase_usuario.id_usuario = usuarios.id 
@@ -38,14 +37,10 @@ $stmt = $link->prepare($sql);
 $stmt->bind_param("i", $id_clase);
 $stmt->execute();
 $result1 = $stmt->get_result();
-$usuarios = $result1->fetch_all(MYSQLI_ASSOC); // Obtener todos los usuarios como un arreglo asociativo
-
-// Filtrar a los alumnos excluyendo al profesor
+$usuarios = $result1->fetch_all(MYSQLI_ASSOC); 
 $solo_alumnos = array_filter($usuarios, function($usuario) use ($id_profesor) {
     return $usuario['id'] != $id_profesor;
 });
-
-// Contar el número de alumnos
 $total_alumnos = count($solo_alumnos);
 
 // Obtener información del espacio si existe

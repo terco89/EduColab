@@ -1,21 +1,21 @@
 <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .container {
-            margin-top: 50px;
-        }
-        hr {
-            background-color: rgb(14, 129, 133);
-            border-width: 3px;
-        }
-        h3 {
-            color: rgb(14, 129, 133);
-        }
-        .card-title {
-            text-overflow: ellipsis;
-        }
-    </style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .container {
+        margin-top: 50px;
+    }
+    hr {
+        background-color: rgb(14, 129, 133);
+        border-width: 3px;
+    }
+    h3 {
+        color: rgb(14, 129, 133);
+    }
+    .card-title {
+        text-overflow: ellipsis;
+    }
+</style>
 </head>
 <body>
     <ul class="breadcrumb">
@@ -34,39 +34,37 @@
         <h3 class="mt-5" style="color:black;">Clases en este Espacio</h3>
         <div class="container">
             <div class="row">
-                <?php 
-                while ($clase = $resultClases->fetch_assoc()) {
+                <?php foreach ($clases as $clase): ?>
+                    <?php
                     // Obtener el fondo para la clase actual
                     $fondo = $fondos[$clase['id']] ?? null;
-
-                    $dias_semana = explode(',', $clase['dia_semana']);
-                    $horas_inicio = explode(',', $clase['hora_inicio']);
-                    $horas_fin = explode(',', $clase['hora_fin']);
-                ?>
+                    ?>
                     <div class="col-md-4 mb-4">
                         <a href="clase.php?id=<?php echo htmlspecialchars($clase['id']); ?>&espacio=<?php echo htmlspecialchars($idEspacio); ?>" class="card-link">
                             <div class="card" style="height: 200px;">
-                                <div class="card-body card-banner" style="<?php if ($fondo && preg_match('/\.(jpg|png)$/i', $fondo)): ?>background-image: url('img/fondos/<?php echo htmlspecialchars($fondo); ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;<?php else: ?>background-color: <?php echo htmlspecialchars($fondo ?? '#ffffff'); ?>;<?php endif; ?>;">
+                                <div class="card-body card-banner" style="
+                                    <?php if ($fondo && preg_match('/\.(jpg|png)$/i', $fondo)): ?>
+                                        background-image: url('img/fondos/<?php echo htmlspecialchars($fondo); ?>');
+                                        background-size: cover;
+                                        background-position: center;
+                                        background-repeat: no-repeat;
+                                    <?php else: ?>
+                                        background-color: <?php echo htmlspecialchars($fondo ?? '#ffffff'); ?>;
+                                    <?php endif; ?>
+                                ">
                                     <h3 class="card-title"><?php echo htmlspecialchars($clase["nombre"]); ?></h3>
-                                    <h6 class="card-subtitle mb-2 text-muted">Profesor: <?php echo htmlspecialchars($clase["nombre_profesor"]); ?></h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">Profesor: <?php echo htmlspecialchars($clase["nombre_profesor"] . ' ' . $clase["apellido_profesor"]); ?></h6>
                                     <hr>
                                     <ul>
-                                    <?php
-                                    $maxHorarios = 2;
-                                    for ($i = 0; $i < min($maxHorarios, count($dias_semana)); $i++) {
-                                        echo "<li style='color:#6c757d;'>{$dias_semana[$i]} de " . date('H:i', strtotime($horas_inicio[$i])) . " a " . date('H:i', strtotime($horas_fin[$i])) . "</li>";
-                                    }
-                                    if (count($dias_semana) > $maxHorarios) {
-                                        echo "<li style='color:#6c757d;'>...</li>";
-                                    }
-                                    ?>
+                                        <?php foreach ($clase['horarios'] as $horario): ?>
+                                            <li style='color:#6c757d;'><?php echo "{$horario['dia_semana']} de " . date('H:i', strtotime($horario['hora_inicio'])) . " a " . date('H:i', strtotime($horario['hora_fin'])); ?></li>
+                                        <?php endforeach; ?>
                                     </ul>
                                 </div>
                             </div>
                         </a>
                     </div>
-                <?php }
-                ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
