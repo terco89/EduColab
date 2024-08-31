@@ -2,21 +2,26 @@
     body {
         background-color: #f8f9fa;
     }
+
     .container {
         margin-top: 50px;
     }
+
     hr {
         background-color: rgb(14, 129, 133);
         border-width: 3px;
     }
+
     h3 {
         color: rgb(14, 129, 133);
     }
+
     .card-title {
         text-overflow: ellipsis;
     }
 </style>
 </head>
+
 <body>
     <ul class="breadcrumb">
         <li><a href="index.php">Home</a></li>
@@ -42,12 +47,7 @@
                     <div class="col-md-4 mb-4">
                         <a href="clase.php?id=<?php echo htmlspecialchars($clase['id']); ?>&espacio=<?php echo htmlspecialchars($idEspacio); ?>" class="card-link">
                             <div class="card" style="height: 200px;">
-                                <div class="card-body card-banner" style="
-                                    <?php if ($fondo && preg_match('/\.(jpg|png)$/i', $fondo)): ?>
-                                        background-image: url('img/fondos/<?php echo htmlspecialchars($fondo); ?>');
-                                        background-size: cover;
-                                        background-position: center;
-                                        background-repeat: no-repeat;
+                                <div class="card-body card-banner" style="<?php if ($fondo && preg_match('/\.(jpg|png)$/i', $fondo)): ?>background-image: url('img/fondos/<?php echo htmlspecialchars($fondo); ?>');background-size: cover;background-position: center;background-repeat: no-repeat;
                                     <?php else: ?>
                                         background-color: <?php echo htmlspecialchars($fondo ?? '#ffffff'); ?>;
                                     <?php endif; ?>
@@ -73,4 +73,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
