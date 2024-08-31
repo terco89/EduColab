@@ -9,9 +9,9 @@
     <?php foreach ($usuarios as $usuario): ?>
       <?php if ($usuario['id'] == $id_profesor): ?>
         <li class="list-group-item">
-          <img src="img/foto_perfil/<?php echo htmlspecialchars($usuario["img"]); ?>" 
-               alt="Imagen de <?php echo htmlspecialchars($usuario["nombre"]); ?>" 
-               class="img-fluid rounded-circle">
+          <img src="img/foto_perfil/<?php echo htmlspecialchars($usuario["img"]); ?>"
+            alt="Imagen de <?php echo htmlspecialchars($usuario["nombre"]); ?>"
+            class="img-fluid rounded-circle">
           <span class="name"><?php echo htmlspecialchars($usuario["nombre"]) . ' ' . htmlspecialchars($usuario["apellido"]); ?></span>
           <?php if ($usuario['id'] != $_SESSION['usuario']['id']): ?>
             <button class="btn btn-outline-primary btn-sm btn-copy" data-toggle="modal" data-target="#emailModal" data-email="<?php echo htmlspecialchars($usuario['email']); ?>"><i class="fa-solid fa-envelope"></i></button>
@@ -26,9 +26,9 @@
   <ul class="list-group">
     <?php foreach ($solo_alumnos as $alumno): ?>
       <li class="list-group-item">
-        <img src="img/foto_perfil/<?php echo htmlspecialchars($alumno["img"]); ?>" 
-             alt="Imagen de <?php echo htmlspecialchars($alumno["nombre"]); ?>" 
-             class="img-fluid rounded-circle">
+        <img src="img/foto_perfil/<?php echo htmlspecialchars($alumno["img"]); ?>"
+          alt="Imagen de <?php echo htmlspecialchars($alumno["nombre"]); ?>"
+          class="img-fluid rounded-circle">
         <span class="name"><?php echo htmlspecialchars($alumno["nombre"]) . ' ' . htmlspecialchars($alumno["apellido"]); ?></span>
         <?php if ($alumno['id'] != $_SESSION['usuario']['id']): ?>
           <button class="btn btn-outline-primary btn-sm btn-copy" data-toggle="modal" data-target="#emailModal" data-email="<?php echo htmlspecialchars($alumno['email']); ?>"><i class="fa-solid fa-envelope"></i></button>
@@ -49,23 +49,24 @@
         </button>
       </div>
       <div class="modal-body">
-        <p id="emailText"></p>
+        <div class="email-container">
+          <p id="emailText"></p>
+          <button type="button" class="btn btn-outline-secondary" id="copyEmail"><i class="fa-solid fa-copy"></i></button>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i class="fa-solid fa-xmark"></i></button>
-        <button type="button" class="btn btn-outline-secondary" id="copyEmail"><i class="fa-solid fa-copy"></i></button>
-      </div>
+     
     </div>
   </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-  $('#emailModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); 
-    var email = button.data('email'); 
+  $('#emailModal').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget);
+    var email = button.data('email');
     var modal = $(this);
     modal.find('#emailText').text(email);
     modal.find('#copyEmail').data('email', email);
