@@ -97,31 +97,31 @@
     }
 </style>
 <?php if ($clase["id_usuario_creador"] == $_SESSION["usuario"]["id"]) { ?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <button onclick="showContent('content1')">Instrucciones</button>
-            </li>
-            <li class="nav-item">
-                <button onclick="showContent('content2')">Trabajo del estudiante</button>
-            </li>
-            <?php if ($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]) { ?>
-
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
                 <li class="nav-item">
-                    <button onclick="showContent('content3')">Comentarios del estudiante</button>
+                    <button onclick="showContent('content1')">Instrucciones</button>
                 </li>
+                <li class="nav-item">
+                    <button onclick="showContent('content2')">Trabajo del estudiante</button>
+                </li>
+                <?php if ($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]) { ?>
+
+                    <li class="nav-item">
+                        <button onclick="showContent('content3')">Comentarios del estudiante</button>
+                    </li>
             </ul>
         <?php } ?>
-    </div>
-</nav>
+        </div>
+    </nav>
 <?php } ?>
 <script>
     // Función para mostrar el contenido seleccionado
     function showContent(contentId) {
         // Ocultar todos los contenidos
         var contents = document.querySelectorAll('.content');
-        contents.forEach(function (content) {
+        contents.forEach(function(content) {
             content.classList.add('hidden');
         });
 
@@ -131,7 +131,7 @@
     }
 
     // Mostrar el primer contenido por defecto
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         showContent('content1'); // Aquí defines cuál contenido mostrar por defecto
     });
 </script>
@@ -164,7 +164,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                <?php }
+                            <?php }
                             } ?>
 
                             <!-- Botones de acción -->
@@ -218,7 +218,7 @@
 
                                                             if (archivo) {
                                                                 var lector = new FileReader();
-                                                                lector.onload = function (e) {
+                                                                lector.onload = function(e) {
                                                                     vistaPrevContainer.style.display = 'flex';
                                                                     document.getElementById('archivo').style.display = 'none'; // Ocultar input de archivo
                                                                     if (archivo.type.match('image.*')) {
@@ -308,7 +308,7 @@
 
                                                             if (archivo) {
                                                                 var lector = new FileReader();
-                                                                lector.onload = function (e) {
+                                                                lector.onload = function(e) {
                                                                     vistaPrevContainer.style.display = 'flex';
                                                                     document.getElementById('archivo').style.display = 'none'; // Ocultar input de archivo
                                                                     if (archivo.type.match('image.*')) {
@@ -380,7 +380,7 @@
                             $container_class = ($row['bandera'] == false) ? 'left' : 'right';
                             $nombre_class = ($row['bandera'] == true) ? $_SESSION["usuario"]["name"] : $nombre["name"];
 
-                            echo '<div class="comment-container ' . $container_class . '" style="text-align:'.$container_class.';" >';
+                            echo '<div class="comment-container ' . $container_class . '" style="text-align:' . $container_class . ';" >';
                             echo '<div class="comment ' . $user_class . '">';
                             echo '<strong>' . htmlspecialchars($nombre_class) . '</strong> ';
                             echo '<p>' . htmlspecialchars($row['mensaje']) . '</p>';
@@ -406,7 +406,13 @@
                                 style="margin-right: 1.5rem; border-radius:50%; width:2rem; height:2rem;  object-fit: cover; background-color:white;"
                                 class="profile">
                             <div class="media-body">
-                            <h5 class="truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;"><?php echo $usuario["nombre"] ?> <?php echo $usuario["apellido"] ?></h5><h5 style="color: red"><?php if ($usuario["estado"] == 1){ echo "Sin entregar";}?></h5><h5 style="color:green"><?php if ($usuario["estado"] == 2){ echo "Entregado";} ?></h5>
+                                <h5 class="truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;"><?php echo $usuario["nombre"] ?> <?php echo $usuario["apellido"] ?></h5>
+                                <h5 style="color: red"><?php if ($usuario["estado"] == 1) {
+                                                            echo "Sin entregar";
+                                                        } ?></h5>
+                                <h5 style="color:green"><?php if ($usuario["estado"] == 2) {
+                                                            echo "Entregado";
+                                                        } ?></h5>
                             </div>
                         </div>
                     </div>
@@ -450,7 +456,7 @@
                                         data-person="<?php echo $general[$i]["name"]; ?>">
                                         <?php echo $general[$i]["name"]; ?>
                                     </li>
-                                    <?php
+                            <?php
                                     $usados[] = $general[$i]["id"];
                                 }
                             } ?>
@@ -475,52 +481,50 @@
 
             <script>
                 actual = 0;
-                let comments = {
+                let comments = [
                     <?php
                     $usados = array();
                     for ($i = 0; $i < count($general); $i++) {
-                        if (!in_array($general[$i]["id"], $usados)) { ?>
-                                                                                    "<?php echo $general[$i]["name"] ?>": [
+                        if (!in_array($general[$i]["id"], $usados)) { ?> "<?php echo $general[$i]["name"] ?>": [
                                 <?php
-                                echo $general[$i]["bandera"].",";
+                                echo $general[$i]["bandera"] . ",";
                                 for ($j = 0; $j < count($general); $j++) {
-                                    if ($general[$j]["id"] == $general[$i]["id"]) { ?>
-                                                                                                                    '<?php echo $general[$j]["mensaje"]; ?>',
+                                    if ($general[$j]["id"] == $general[$i]["id"]) { ?> '<?php echo $general[$j]["mensaje"]; ?>',
                                     <?php } ?>
-                                                        
-                                                                                        <?php } ?>
+
+                                <?php } ?>
                             ],
-                            <?php
+                    <?php
                             $usados[] = $general[$i]["id"];
                         }
                     } ?>
-                };
+                    ];
 
-                $('.list-group-item').on('click', function () {
+                $('.list-group-item').on('click', function() {
                     let personName = $(this).data('person');
                     actual = $(this).data('id');
-                    $('#personName').text('Comentarios para ' + personName );
+                    $('#personName').text('Comentarios para ' + personName);
                     $('#commentsList').empty();
 
                     if (comments[personName].length > 0) {
                         bandera = true;
                         comments[personName].forEach(comment => {
-                            if(bandera == true){
+                            if (bandera == true) {
                                 bandera = false;
                                 return
                             }
                             opcion = "right"
-                            if(comments[personName][0] == true){
+                            if (comments[personName][0] == true) {
                                 opcion = "left"
                             }
-                            $('#commentsList').append(`<div class="comment-item" style="text-align:`+opcion+`;" >${comment}</div>`);
+                            $('#commentsList').append(`<div class="comment-item" style="text-align:` + opcion + `;" >${comment}</div>`);
                         });
                     } else {
                         $('#commentsList').append('<div class="comment-item">No hay comentarios.</div>');
                     }
                 });
 
-                $('#addComment').on('click', function () {
+                $('#addComment').on('click', function() {
                     let personName = $('#personName').text().replace('Comentarios para ', '');
                     let newComment = $('#newComment').val();
 
@@ -533,14 +537,14 @@
                                 'nmensaje': newComment,
                                 'id': actual
                             },
-                            success: function (response) {
-                                console.log("exito pe: "+personName);
+                            success: function(response) {
+                                console.log("exito pe: " + personName);
                                 console.log(comments[personName]);
                                 comments[personName].push(newComment);
                                 $('#commentsList').append(`<div class="comment-item">${newComment}</div>`);
                                 $('#newComment').val('');
                             },
-                            error: function (xhr, status, error) {
+                            error: function(xhr, status, error) {
                                 $('#response').html('<div class="alert alert-danger">Error: ' + error + '</div>');
                             }
                         });
@@ -556,7 +560,7 @@
         document.querySelector("iframe").style.display = "block";
         document.querySelector("#close-button").style.display = "block";
     }
-    document.getElementById('close-button').addEventListener('click', function () {
+    document.getElementById('close-button').addEventListener('click', function() {
         document.querySelector("iframe").style.display = 'none';
         this.style.display = 'none'; // Oculta el botón también
     });

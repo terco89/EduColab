@@ -141,7 +141,7 @@ if (isset($_POST['eliminar'])) {
         echo "Fallo consulta: " . mysqli_error($link);
         exit();
     }
-    header('Location: clases.php');
+    header('Location: clase.php?id='.$_GET['id']);
 }
 if (isset($_FILES["archivoEntrega"])) {
     $sql = "INSERT INTO entregas(tarea_id,usuario_id,fecha_entrega) VALUES(" . $_GET["tid"] . "," . $_SESSION['usuario']['id'] . ",NOW())";
