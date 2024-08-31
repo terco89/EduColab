@@ -1,0 +1,43 @@
+.list-group-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    margin-bottom: 10px; 
+  }
+
+  .list-group-item img {
+    border-radius: 50%;
+    margin-right: 15px;
+    width: 50px; 
+    height: 50px;
+    object-fit: cover; 
+  }
+
+  .list-group-item .name {
+    font-size: 1.25rem;
+    font-weight: 500;
+    flex-grow: 1; 
+  }
+
+  .profe-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .btn-copy, .btn-copy-code {
+    margin-left: 10px;
+  }
+
+  .btn-copy-code {
+    background-color: #e1e1e1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 0.875rem;
+    cursor: pointer;
+  }
+
+  .btn-copy-code:hover {
+    background-color: #d3d3d3;
+  }
