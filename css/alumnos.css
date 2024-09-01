@@ -59,4 +59,11 @@
   .email-container .btn {
     flex-shrink: 0; /* Asegura que el botón no se reduzca */
   }
+  .btn-container {
+    margin-left: auto;
+  }
+  
+  .btn-container .btn {
+    margin-left: 10px; /* Ajusta el espacio entre los botones si es necesario */
+  }
   
