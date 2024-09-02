@@ -6,14 +6,19 @@
   <!-- Mostrar a los Profesores -->
   <div class="d-flex justify-content-between align-items-center">
     <h3 class="profe-header">Profesores</h3>
-    <div class="btn-container d-flex">
-      <button class="btn btn-outline-success mr-2" data-toggle="modal" data-target="#addProfessorModal">
-        <i class="fa-solid fa-user-plus"></i>
-      </button>
-      <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteUserClassModal">
-        <i class="fa-solid fa-user-minus"></i>
-      </button>
-    </div>
+    <?php foreach ($profesores as $profesor):
+      if ($profesor['id'] == $_SESSION["usuario"]["id"]):
+    ?>
+        <div class="btn-container d-flex">
+          <button class="btn btn-outline-success mr-2" data-toggle="modal" data-target="#addProfessorModal">
+            <i class="fa-solid fa-user-plus"></i>
+          </button>
+          <button class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteUserClassModal">
+            <i class="fa-solid fa-user-minus"></i>
+          </button>
+        </div>
+    <?php endif;
+    endforeach; ?>
   </div>
   <ul class="list-group">
     <?php foreach ($profesores as $profesor): ?>
@@ -134,24 +139,24 @@
         </button>
       </div>
       <div class="modal-body">
-      <form method="POST" action="clase_alumnos.php?id=<?php echo $id_clase; ?>">
-    <input type="hidden" name="operation_type" value="delete">
-    <div class="form-group">
-        <select class="form-control" name="delete_user" id="deleteUserDropdown">
-            <option value="">Seleccionar Integrante</option>
-            <?php foreach ($usuarios as $usuario): ?>
-                <?php if ($usuario['id'] != $id_profesor_creador): ?>
-                    <option value="<?php echo htmlspecialchars($usuario['id']); ?>">
-                        <?php echo htmlspecialchars($usuario['nombre']) . ' ' . htmlspecialchars($usuario['apellido']); ?>
-                    </option>
+        <form method="POST" action="clase_alumnos.php?id=<?php echo $id_clase; ?>">
+          <input type="hidden" name="operation_type" value="delete">
+          <div class="form-group">
+            <select class="form-control" name="delete_user" id="deleteUserDropdown">
+              <option value="">Seleccionar Integrante</option>
+              <?php foreach ($usuarios as $usuario): ?>
+                <?php if ($usuario['id'] != $_SESSION["usuario"]["id"]): ?>
+                  <option value="<?php echo htmlspecialchars($usuario['id']); ?>">
+                    <?php echo htmlspecialchars($usuario['nombre']) . ' ' . htmlspecialchars($usuario['apellido']); ?>
+                  </option>
                 <?php endif; ?>
-            <?php endforeach; ?>
-            
-        </select>
-    </div>
-    <button type="submit" class="btn btn-danger">Sí, quiero eliminar a este integrante</button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-</form>
+              <?php endforeach; ?>
+
+            </select>
+          </div>
+          <button type="submit" class="btn btn-danger">Sí, quiero eliminar a este integrante</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </form>
       </div>
     </div>
   </div>

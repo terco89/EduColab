@@ -85,7 +85,9 @@
         <div class="row">
             <?php if (count($clases) == 0) { ?>
                 <h2 class="text-center">Aún no tienes clases</h2>
-                <?php } else {
+                <?php } else {echo '<pre>';
+print_r($clases);
+echo '</pre>';
                 foreach ($clases as $clase) { ?>
                     <div class="col-md-4 mb-4">
                         <a href="clase.php?id=<?php echo $clase['id']; ?>" class="card-link">

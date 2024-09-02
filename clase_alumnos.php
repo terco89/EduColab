@@ -33,9 +33,9 @@ $id_profesor_creador = $result['id_usuario_creador'];
 $sql = "SELECT usuarios.* 
         FROM clase_usuario 
         INNER JOIN usuarios ON clase_usuario.id_usuario = usuarios.id 
-        WHERE clase_usuario.id_clase = ? AND usuarios.id != ?";
+        WHERE clase_usuario.id_clase = ? ";
 $stmt = $link->prepare($sql);
-$stmt->bind_param("ii", $id_clase, $id_profesor_creador);
+$stmt->bind_param("i", $id_clase);
 $stmt->execute();
 $result1 = $stmt->get_result();
 $usuarios = $result1->fetch_all(MYSQLI_ASSOC);
@@ -79,34 +79,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } elseif ($operation_type === 'newUser' && isset($_POST['newUserName'])) {
         $nombre_usuario = trim($_POST['newUserName']);
+    
         $sql = "SELECT id FROM usuarios WHERE name = ?";
         $stmt = $link->prepare($sql);
         $stmt->bind_param("s", $nombre_usuario);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
-
+    
         if ($result) {
             $nuevo_profesor_id = $result['id'];
+    
             $sql = "INSERT INTO clase_profesor (id_clase, id_usuario) VALUES (?, ?)";
             $stmt = $link->prepare($sql);
             $stmt->bind_param("ii", $id_clase, $nuevo_profesor_id);
             $stmt->execute();
+    
+            $estado = "activa";  
+            $sql1 = "INSERT INTO clase_usuario (id_clase, id_usuario, estado) VALUES (?, ?, ?)";
+            $stmt1 = $link->prepare($sql1);
+            $stmt1->bind_param("iis", $id_clase, $nuevo_profesor_id, $estado);  
+            $stmt1->execute();
+    
+            
+        } else {
+            echo "El nombre de usuario no existe.";
         }
-
-        header("Location: clase_alumnos.php?id=" . $id_clase);
-        exit();
-    } elseif ($operation_type === 'delete' && isset($_POST['delete_user'])) {
+    
+        $stmt->close();
+        if (isset($stmt1)) {
+            $stmt1->close();
+        }
+    }
+    elseif ($operation_type === 'delete' && isset($_POST['delete_user'])) {
         $id_usuario = intval($_POST['delete_user']);
-        echo "ID del usuario a eliminar: " . $id_usuario; // Para depuración
+        echo "ID del usuario a eliminar: " . $id_usuario;
+    
         $sql = "DELETE FROM clase_usuario WHERE id_usuario = ? AND id_clase = ?";
         $stmt = $link->prepare($sql);
         $stmt->bind_param("ii", $id_usuario, $id_clase);
-        if ($stmt->execute()) {
+        $delete_clase_usuario = $stmt->execute();
+    
+        $sql1 = "DELETE FROM clase_profesor WHERE id_usuario = ? AND id_clase = ?";
+        $stmt1 = $link->prepare($sql1);
+        $stmt1->bind_param("ii", $id_usuario, $id_clase);
+        $delete_clase_profesor = $stmt1->execute();
+    
+        if ($delete_clase_usuario && $delete_clase_profesor) {
             header("Location: clase_alumnos.php?id=" . $id_clase);
             exit();
         } else {
-            echo "Error al eliminar al integrante: " . $stmt->error;
+            if (!$delete_clase_usuario) {
+                echo "Error al eliminar al integrante de la clase_usuario: " . $stmt->error;
+            }
+            if (!$delete_clase_profesor) {
+                echo "Error al eliminar al profesor de clase_profesor: " . $stmt1->error;
+            }
         }
+    
+        $stmt->close();
+        $stmt1->close();
     }
 }
 
