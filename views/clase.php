@@ -36,39 +36,52 @@
             </div>
             <!-- modal para el edit de banner -->
             <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editPhotoLabel">Editar foto o color</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPhotoLabel">Editar foto o color</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="bgForm">
+                    <!-- Navbar para seleccionar entre Fondo y Color -->
+                    <ul class="nav nav-tabs mb-3" id="bgTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="background-tab" data-toggle="tab" href="#background" role="tab" aria-controls="background" aria-selected="true">Fondo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="color-tab" data-toggle="tab" href="#color" role="tab" aria-controls="color" aria-selected="false">Color</a>
+                        </li>
+                    </ul>
+
+                    <!-- Contenido del Tab -->
+                    <div class="tab-content" id="bgTabContent">
+                        <!-- Selección de Fondos -->
+                        <div class="tab-pane fade show active" id="background" role="tabpanel" aria-labelledby="background-tab">
+                            <div id="backgroundSelector">
+                                <select id="bgDropdown" name="bg"></select>
+                                <div id="bgPreview" style="margin-top: 10px; width: 100%; height: 200px; border: 1px solid #ccc;"></div>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <form method="post" id="bgForm">
-                                <div>
-                                    <input type="radio" id="optionBackground" name="bgOption" value="background" checked>
-                                    <label for="optionBackground">Fondo</label>
-                                    <input type="radio" id="optionColor" name="bgOption" value="color">
-                                    <label for="optionColor">Color</label>
-                                </div>
 
-                                <div id="backgroundSelector">
-                                    <select id="bgDropdown" name="bg"></select>
-                                    <div id="bgPreview" style="margin-top: 10px; width: 100%; height: 200px; border: 1px solid #ccc;"></div>
-                                </div>
-
-                                <div id="colorSelector" style="display: none;">
-                                    <input type="color" id="colorPicker" name="color" value="#ffffff">
-                                    <div id="colorPreview" style="margin-top: 10px; width: 100%; height: 200px; border: 1px solid #ccc; background-color: #ffffff;"></div>
-                                </div>
-
-                                <input type="submit" name="sub" value="Guardar">
-                            </form>
+                        <!-- Selección de Colores -->
+                        <div class="tab-pane fade" id="color" role="tabpanel" aria-labelledby="color-tab">
+                            <div id="colorSelector">
+                                <input type="color" id="colorPicker" name="color" value="#ffffff">
+                                <div id="colorPreview" style="margin-top: 10px; width: 100%; height: 200px; border: 1px solid #ccc; background-color: #ffffff;"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <input type="submit" name="sub" value="Guardar" class="btn btn-primary mt-3">
+                </form>
             </div>
+        </div>
+    </div>
+</div>
+
 
             <!-- modal para Arcguvar clase -->
             <?php if ($fondo['estado'] == "activa") { ?>
