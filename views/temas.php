@@ -7,8 +7,8 @@
     <?php else: ?>
         <li><a href="clases.php">Clases</a></li>
     <?php endif; ?>
-    <li><a  href="clase.php?id=<?php echo $result["id"] ?>">"<?php echo $result['nombre']; ?>"</a></li>
-    <li><a class="active"href="temas.php?id=<?php echo $result["id"] ?>">Temas</a></li>
+    <li><a href="clase.php?id=<?php echo $result["id"] ?>">"<?php echo $result['nombre']; ?>"</a></li>
+    <li><a class="active" href="temas.php?id=<?php echo $result["id"] ?>">Temas</a></li>
 
 </ul>
 <?php require_once "views/clase_navbar.php"; ?>
@@ -40,79 +40,82 @@
     <div class="jumbotron">
         <h1 class="display-4">Temas</h1>
         <p class="lead">Aquí encontrarás todos tus temas asignados.</p>
-        <?php if ($_SESSION['usuario']['id'] == $result["id_usuario_creador"]) { ?>
-            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#submitModal">Crear tema</a>
-            <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="POST" enctype="multipart/form-data">
-                                <div class="form-group">
-                                    <h4>Titulo</h4>
-                                    <input type="text" class="form-control" name="titulo" maxlength="50" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="instruccion">Instrucciones</label>
-                                    <textarea class="form-control" name="instruccion" rows="4" maxlength="250" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="archivo">Selecciona un archivo:</label>
-                                    <input type="file" id="archivo" name="archivo" accept=".pdf, .doc, .docx, .txt" onchange="mostrarVistaPrevia()">
-                                    <div id="vista_previa" class="preview-container" onclick="cambiarArchivo()">
-                                        <img id="imagen_previa" class="preview" src="#" alt="Vista previa del archivo seleccionado">
-                                        <div id="info_archivo" class="file-info" style="pointer-events: none;">Nombre del archivo: </div>
+        <?php foreach ($profesores as $profesor):
+            if ($profesor['id'] == $_SESSION['usuario']['id']):  ?>
+
+                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#submitModal">Crear tema</a>
+                <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <h4>Titulo</h4>
+                                        <input type="text" class="form-control" name="titulo" maxlength="50" required>
                                     </div>
-                                </div>
-                                <button type="submit" class="btn btn-secondary">Crear Tema</button>
-                            </form>
-                            <script>
-                                function mostrarVistaPrevia() {
-                                    var archivo = document.getElementById('archivo').files[0];
-                                    var vistaPrevContainer = document.getElementById('vista_previa');
-                                    var imagen_previa = document.getElementById('imagen_previa');
-                                    var info_archivo = document.getElementById('info_archivo');
+                                    <div class="form-group">
+                                        <label for="instruccion">Instrucciones</label>
+                                        <textarea class="form-control" name="instruccion" rows="4" maxlength="250" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="archivo">Selecciona un archivo:</label>
+                                        <input type="file" id="archivo" name="archivo" accept=".pdf, .doc, .docx, .txt" onchange="mostrarVistaPrevia()">
+                                        <div id="vista_previa" class="preview-container" onclick="cambiarArchivo()">
+                                            <img id="imagen_previa" class="preview" src="#" alt="Vista previa del archivo seleccionado">
+                                            <div id="info_archivo" class="file-info" style="pointer-events: none;">Nombre del archivo: </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-secondary">Crear Tema</button>
+                                </form>
+                                <script>
+                                    function mostrarVistaPrevia() {
+                                        var archivo = document.getElementById('archivo').files[0];
+                                        var vistaPrevContainer = document.getElementById('vista_previa');
+                                        var imagen_previa = document.getElementById('imagen_previa');
+                                        var info_archivo = document.getElementById('info_archivo');
 
-                                    // Limpiar vista previa anterior
-                                    imagen_previa.src = "";
-                                    info_archivo.textContent = "Nombre del archivo: ";
+                                        // Limpiar vista previa anterior
+                                        imagen_previa.src = "";
+                                        info_archivo.textContent = "Nombre del archivo: ";
 
-                                    if (archivo) {
-                                        var lector = new FileReader();
-                                        lector.onload = function(e) {
-                                            vistaPrevContainer.style.display = 'flex';
-                                            document.getElementById('archivo').style.display = 'none'; // Ocultar input de archivo
-                                            if (archivo.type.match('image.*')) {
-                                                // Mostrar miniatura de imagen
-                                                imagen_previa.src = e.target.result;
-                                            } else {
-                                                // Mostrar icono genérico para otros tipos de archivo
-                                                imagen_previa.src = 'img/literatura.jpg'; // Puedes poner una imagen genérica de archivo
-                                            }
-                                        };
-                                        lector.readAsDataURL(archivo);
+                                        if (archivo) {
+                                            var lector = new FileReader();
+                                            lector.onload = function(e) {
+                                                vistaPrevContainer.style.display = 'flex';
+                                                document.getElementById('archivo').style.display = 'none'; // Ocultar input de archivo
+                                                if (archivo.type.match('image.*')) {
+                                                    // Mostrar miniatura de imagen
+                                                    imagen_previa.src = e.target.result;
+                                                } else {
+                                                    // Mostrar icono genérico para otros tipos de archivo
+                                                    imagen_previa.src = 'img/literatura.jpg'; // Puedes poner una imagen genérica de archivo
+                                                }
+                                            };
+                                            lector.readAsDataURL(archivo);
 
-                                        // Mostrar nombre del archivo
-                                        info_archivo.textContent += archivo.name;
+                                            // Mostrar nombre del archivo
+                                            info_archivo.textContent += archivo.name;
+                                        }
                                     }
-                                }
 
-                                function cambiarArchivo() {
-                                    var inputArchivo = document.getElementById('archivo');
-                                    inputArchivo.value = ''; // Limpiar el valor del input
-                                    document.getElementById('vista_previa').style.display = 'none'; // Ocultar la vista previa
-                                    inputArchivo.style.display = 'block'; // Mostrar el input de archivo
-                                }
-                            </script>
+                                    function cambiarArchivo() {
+                                        var inputArchivo = document.getElementById('archivo');
+                                        inputArchivo.value = ''; // Limpiar el valor del input
+                                        document.getElementById('vista_previa').style.display = 'none'; // Ocultar la vista previa
+                                        inputArchivo.style.display = 'block'; // Mostrar el input de archivo
+                                    }
+                                </script>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php } ?>
+        <?php endif;
+        endforeach; ?>
     </div>
     <!-- Material de Clase -->
     <?php for ($i = 0; $i < count($temas); $i++) { ?>

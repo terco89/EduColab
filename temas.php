@@ -74,6 +74,19 @@ if ($idEspacio) {
     $sqlEspacio = "SELECT nombre FROM Espacios WHERE id = $idEspacio";
     $espacio = mysqli_fetch_assoc(mysqli_query($link, $sqlEspacio));
 }
+$sql = "SELECT usuarios.id, usuarios.nombre,usuarios.apellido 
+        FROM clase_profesor 
+        JOIN usuarios ON clase_profesor.id_usuario = usuarios.id 
+        WHERE clase_profesor.id_clase = ?";
+$stmt = $link->prepare($sql);
+$stmt->bind_param('i', $id_clase);
+$stmt->execute();
+$result5 = $stmt->get_result();
+
+$profesores = [];
+while ($row = $result5->fetch_assoc()) {
+    $profesores[] = $row;
+}
 $view = "temas";
 
 require_once "views/layout.php";

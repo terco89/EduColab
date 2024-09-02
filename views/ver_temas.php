@@ -29,16 +29,18 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <?php if ($tema) { ?>
-                            <h5 class="card-title"><?php echo $tema["nombre"] ?></h5>
-                            <p class="card-text"><?php echo $tema["descripcion"] ?></p>
+                            <h5 class="card-title"><?php echo htmlspecialchars($tema["nombre"]); ?></h5>
+                            <p class="card-text"><?php echo htmlspecialchars($tema["descripcion"]); ?></p>
                         <?php } ?>
+
+                        <!-- Mostrar los recursos si existen -->
                         <?php if (isset($recursos) && count($recursos) > 0) {
                             for ($i = 0; $i < count($recursos); $i += 2) { ?>
                                 <div class="resource-card">
                                     <div class="card">
                                         <div class="card-body">
                                             <h6 class="card-subtitle mb-2 text-muted">Archivo Adjunto</h6>
-                                            <p class="card-text">Nombre del archivo: <a href="#"><?php echo $recursos[$i] . $recursos[$i + 1] ?></a></p>
+                                            <p class="card-text">Nombre del archivo: <a href="#"><?php echo htmlspecialchars($recursos[$i]) . '.' . htmlspecialchars($recursos[$i + 1]); ?></a></p>
                                             <p class="card-text">
                                                 <i class="far fa-file-pdf fa-2x"></i> <!-- Icono de archivo PDF -->
                                             </p>
@@ -48,66 +50,76 @@
                         <?php }
                         } ?>
 
-                        <!-- Botones de acción -->
-                        <?php if ($clase["id_usuario_creador"] == $_SESSION["usuario"]["id"]) { ?>
+                        <!-- Botones de acción solo visibles para profesores -->
+                        <?php if ($esProfesor): ?>
                             <div class="mt-4">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editTema"><i class="fas fa-trash-alt"></i> Editar</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editTema"><i class="fas fa-edit"></i> Editar</button>
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarTema"><i class="fas fa-trash-alt"></i> Eliminar</button>
                             </div>
-                        <?php } ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- modal para editar temas -->
-        <div class="modal fade" id="editTema" tabindex="1" role="dialog" aria-labelledby="editTema" aria-hidden="true">
+
+        <!-- Modales para editar y eliminar -->
+        <!-- Modal para editar temas -->
+        <div class="modal fade" id="editTema" tabindex="-1" role="dialog" aria-labelledby="editTemaLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editTema">Editar Tema</h5>
+                        <h5 class="modal-title" id="editTemaLabel">Editar Tema</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <form method="POST">
                             <input type="hidden" name="id_tema_editar" value="<?php echo $_GET["tid"]; ?>">
                             <div class="form-group">
-                                <label for="nombre">Nombre: </label> <br><input type="text" name="nombre" value="<?php echo $tema['nombre']; ?>">
+                                <label for="nombre">Nombre: </label>
+                                <input type="text" name="nombre" class="form-control" value="<?php echo htmlspecialchars($tema['nombre']); ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <textarea name="descripcion" id="descripcion" class="form-control" required><?php echo $tema["descripcion"]; ?></textarea>
+                                <textarea name="descripcion" id="descripcion" class="form-control" required><?php echo htmlspecialchars($tema["descripcion"]); ?></textarea>
                             </div>
-                            <button type="submit" class="btn btn-danger">Actualizar</button>
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- modal para eliminar temas -->
-        <div class="modal fade" id="eliminarTema" tabindex="2" role="dialog" aria-labelledby="eliminarTema" aria-hidden="true">
+
+        <!-- Modal para eliminar temas -->
+        <div class="modal fade" id="eliminarTema" tabindex="-1" role="dialog" aria-labelledby="eliminarTemaLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="eliminarTema">¿Desea eliminar este tema?</h5>
+                        <h5 class="modal-title" id="eliminarTemaLabel">¿Desea eliminar este tema?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <form method="POST">
                             <input type="hidden" name="id_tema_eliminar" value="<?php echo $_GET["tid"]; ?>">
-                            <button type="submit" class="btn btn-danger">Si, quiero eliminarlo</button>
+                            <button type="submit" class="btn btn-danger">Sí, quiero eliminarlo</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Columna para la sección de comentarios -->
-        <?php if ($clase["id_usuario_creador"] != $_SESSION["usuario"]["id"]) { ?>
 
+        <!-- Columna para la sección de comentarios -->
+        <?php if ($clase["id_usuario_creador"] != $usuarioId) { ?>
             <div class="col-md-6">
                 <div class="comments-section">
                     <h2 class="mb-4">Comentarios</h2>
 
-                    <!-- Formulario para Agregar Comentario -->
+                    <!-- Formulario para agregar comentario -->
                     <form>
                         <div class="form-group">
                             <label for="commentContent">Comentario:</label>

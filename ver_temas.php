@@ -6,13 +6,33 @@ if (!isset($_SESSION["usuario"])) {
     header("Location: index.php");
     exit();
 }
+
+// Obtener el ID del usuario logueado
+$usuarioId = $_SESSION['usuario']['id'];
+
+// Verificar si el usuario es un profesor en la clase
+$id_clase = intval($_GET["id"]); // Asegúrate de que este ID esté disponible en tu contexto actual
+
+$sql = "SELECT 1 FROM clase_profesor WHERE id_clase = ? AND id_usuario = ?";
+$stmt = $link->prepare($sql);
+$stmt->bind_param('ii', $id_clase, $usuarioId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Verifica si el usuario logueado es profesor
+$esProfesor = $result->num_rows > 0;
+
+// Continuar con la lógica existente para obtener la clase, tema, y recursos...
 if (isset($_GET["tid"])) {
     // Obtener información del tema
-    $sql = "SELECT * FROM temas WHERE id = " . intval($_GET["tid"]);
-    $resultado_tema = mysqli_query($link, $sql);
+    $sql = "SELECT * FROM temas WHERE id = ?";
+    $stmt = $link->prepare($sql);
+    $stmt->bind_param('i', $_GET["tid"]);
+    $stmt->execute();
+    $resultado_tema = $stmt->get_result();
 
-    if ($resultado_tema && mysqli_num_rows($resultado_tema) > 0) {
-        $tema = mysqli_fetch_assoc($resultado_tema);
+    if ($resultado_tema && $resultado_tema->num_rows > 0) {
+        $tema = $resultado_tema->fetch_assoc();
     } else {
         $tema = null; // Definir tema como null si no se encuentra
     }
@@ -34,48 +54,22 @@ if (isset($_GET["tid"])) {
     }
 }
 
-
 // Obtener información de la clase
 $sql_clase = "SELECT *
              FROM ClasesEscolares 
              INNER JOIN usuarios ON ClasesEscolares.id_usuario_creador = usuarios.id 
-             WHERE ClasesEscolares.id = " . intval($_GET["id"]);
-$resultado_clase = mysqli_query($link, $sql_clase);
+             WHERE ClasesEscolares.id = ?";
+$stmt = $link->prepare($sql_clase);
+$stmt->bind_param('i', $id_clase);
+$stmt->execute();
+$resultado_clase = $stmt->get_result();
 
-if ($resultado_clase && mysqli_num_rows($resultado_clase) > 0) {
-    $clase = mysqli_fetch_assoc($resultado_clase); // Deberías usar mysqli_fetch_assoc() para obtener un array asociativo
+if ($resultado_clase && $resultado_clase->num_rows > 0) {
+    $clase = $resultado_clase->fetch_assoc(); 
 } else {
     $clase = null; // Definir clase como null si no se encuentra
 }
 
-
-////tema eliminar, ya borren esta madre
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_tema_eliminar"])) {
-
-    $id_tema_eliminar = intval($_POST["id_tema_eliminar"]);
-
-    $stmt = $link->prepare("DELETE FROM tema_usuario WHERE tema_id = ?");
-    $stmt->bind_param("i", $id_tema_eliminar);
-    $stmt->execute();
-    $stmt = $link->prepare("DELETE FROM temas WHERE id = ?");
-    $stmt->bind_param("i", $id_tema_eliminar);
-    if ($stmt->execute()) {
-        header("Location: clase.php?id=".$_GET["id"]);
-        exit();
-    } else {
-        echo "Error al eliminar la clase: " . $stmt->error;
-    }
-}
-////ediare tmea
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["nombre"]) && isset($_POST["descripcion"]) && isset($_POST["id_tema_editar"])) {
-    $id_edit_tema = intval($_POST["id_tema_editar"]);
-    $nombre = $_POST["nombre"];
-    $descripcion = $_POST["descripcion"];
-    $stmt = $link->prepare("UPDATE temas SET nombre= ? ,descripcion = ? WHERE id= ? ");
-    $stmt->bind_param("ssi", $nombre, $descripcion, $id_edit_tema);
-    if ($stmt->execute()) {
-        header("Location: ver_temas.php?id=" . $_GET["id"] . "&tid=" . $_GET["tid"]);
-    }
-}
+// Define la vista y otros parámetros
 $view = "ver_temas";
 require_once "views/layout.php";

@@ -149,13 +149,13 @@
             </div>
 
             <h1 class="display-4"><strong><?php echo $result["nombre"]; ?></strong></h1>
-            
-            <?php foreach ($profesores as $profesor):
-                    if ($profesor['id'] == $_SESSION['usuario']['id']):  ?>
-                <p class="lead">Código de la clase: <?php echo $result["codigo"]; ?></p>
 
-                <?php endif;
-                endforeach; ?>
+            <?php foreach ($profesores as $profesor):
+                if ($profesor['id'] == $_SESSION['usuario']['id']):  ?>
+                    <p class="lead">Código de la clase: <?php echo $result["codigo"]; ?></p>
+
+            <?php endif;
+            endforeach; ?>
             <hr class="my-4">
             <h4>Profesores de la Clase</h4>
             <ul>
