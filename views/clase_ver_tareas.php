@@ -168,7 +168,7 @@
                             } ?>
 
                             <!-- Botones de acción -->
-                            <?php if ($clase["id_usuario_creador"] != $_SESSION["usuario"]["id"]) { ?>
+                            <?php if (!$esProfesor) { ?>
                                 <div class="mt-4 d-flex justify-content-start">
                                     <?php if (!isset($entrega)) { ?><a href="#" class="btn btn-primary mr-2"
                                             data-toggle="modal" data-target="#submitModal"><i

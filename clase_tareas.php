@@ -47,5 +47,18 @@ if ($idEspacio) {
     $sqlEspacio = "SELECT nombre FROM Espacios WHERE id = $idEspacio";
     $espacio = mysqli_fetch_assoc(mysqli_query($link, $sqlEspacio));
 }
+// Verificar si el usuario es un profesor en la clase
+$id_clase = intval($_GET["id"]); // Asegúrate de que este ID esté disponible en tu contexto actual
+$usuarioId = $_SESSION['usuario']['id'];
+
+$sql = "SELECT 1 FROM clase_profesor WHERE id_clase = ? AND id_usuario = ?";
+$stmt = $link->prepare($sql);
+$stmt->bind_param('ii', $id_clase, $usuarioId);
+$stmt->execute();
+$result5 = $stmt->get_result();
+
+// Verifica si el usuario logueado es profesor
+$esProfesor = $result5->num_rows > 0;
+
 $view = "clase_tareas";
 require_once "views/layout.php";

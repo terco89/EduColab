@@ -93,7 +93,19 @@ if($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"] && isset($_POST["n
     }
 }
 
+$usuarioId = $_SESSION['usuario']['id'];
 
+// Verificar si el usuario es un profesor en la clase
+$id_clase = intval($_GET["id"]); // Asegúrate de que este ID esté disponible en tu contexto actual
+
+$sql = "SELECT 1 FROM clase_profesor WHERE id_clase = ? AND id_usuario = ?";
+$stmt = $link->prepare($sql);
+$stmt->bind_param('ii', $id_clase, $usuarioId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Verifica si el usuario logueado es profesor
+$esProfesor = $result->num_rows > 0;
 if (isset($_POST['titulo'])) {
     $sql = "UPDATE tareas SET nombre = '" . $_POST['titulo'] . "', descripcion = '" . $_POST['instruccion'] . "', fecha_subida = NOW(), fecha_entrega = '" . $_POST['fecha_limite'] . "', clase_id = '" . $clase["id"] . "' WHERE id = " . $_GET["tid"];
     $query = mysqli_query($link, $sql);
@@ -111,12 +123,15 @@ if (isset($_POST['titulo'])) {
         }
     }
     for ($i = 0; $i < count($ids); $i++) {
+        if (!$esProfesor) {
+            
+        
         $sql = "INSERT INTO tarea_usuario(tarea_id,usuario_id,estado) VALUES($tid," . $ids[$i]["id_usuario"] . ",1)";
         $query = mysqli_query($link, $sql);
         if (!$query) {
             echo "Fallo consulta: " . mysqli_error($link);
             exit();
-        }
+        }}
     }
 
     if (isset($_SESSION['usuario']) && isset($_FILES['archivo']) && $_FILES['archivo']['error'] == 0) {

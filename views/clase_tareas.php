@@ -41,7 +41,7 @@
     <div class="jumbotron">
         <h1 class="display-4">Tareas</h1>
         <p class="lead">Aquí encontrarás todas las tareas asignadas y podrás enviar tus trabajos.</p>
-        <?php if ($_SESSION['usuario']['id'] == $result["id_usuario_creador"]) { ?>
+        <?php if ($esProfesor) { ?>
             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#submitModal">Crear tarea</a>
             <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
