@@ -63,7 +63,20 @@ $stmt = $link->prepare($sql);
 $stmt->bind_param("i", $result["id"]);
 $stmt->execute();
 $horarios = $stmt->get_result();
+///traer profes
+$sql = "SELECT usuarios.id, usuarios.nombre,usuarios.apellido 
+        FROM clase_profesor 
+        JOIN usuarios ON clase_profesor.id_usuario = usuarios.id 
+        WHERE clase_profesor.id_clase = ?";
+$stmt = $link->prepare($sql);
+$stmt->bind_param('i', $id_clase);
+$stmt->execute();
+$result5 = $stmt->get_result();
 
+$profesores = [];
+while ($row = $result5->fetch_assoc()) {
+    $profesores[] = $row;
+}
 // Borrar la classe
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_clase_eliminar"])) {
     $id_clase_eliminar = intval($_POST["id_clase_eliminar"]);

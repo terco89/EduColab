@@ -31,8 +31,15 @@
             <?php } ?>
             <div style="position: absolute; top: 10px; right: 10px; z-index: 1;">
                 <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#archivarClase"><i class="fa-solid fa-box-archive"></i></button>
-                <?php if ($_SESSION["usuario"]['id'] == $result['id_usuario_creador']) { ?><button class="btn btn-outline-danger" data-toggle="modal" data-target="#eliminarClase"><i class="fa-solid fa-trash"></i></button><?php } ?>
                 <button class="btn btn-outline-primary" data-toggle="modal" data-target="#editPhoto"><i class="fa-solid fa-pen-to-square"></i></button>
+
+
+                <?php foreach ($profesores as $profesor):
+                    if ($profesor['id'] == $_SESSION['usuario']['id']):  ?>
+                        <button class="btn btn-outline-danger" data-toggle="modal" data-target="#eliminarClase"><i class="fa-solid fa-trash"></i></button>
+
+                <?php endif;
+                endforeach; ?>
             </div>
             <!-- modal para el edit de banner -->
             <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="editPhotoLabel" aria-hidden="true">
@@ -142,11 +149,20 @@
             </div>
 
             <h1 class="display-4"><strong><?php echo $result["nombre"]; ?></strong></h1>
-            <?php if ($_SESSION['usuario']['id'] == $result["id_usuario_creador"]) { ?>
+            
+            <?php foreach ($profesores as $profesor):
+                    if ($profesor['id'] == $_SESSION['usuario']['id']):  ?>
                 <p class="lead">Código de la clase: <?php echo $result["codigo"]; ?></p>
-            <?php } ?>
+
+                <?php endif;
+                endforeach; ?>
             <hr class="my-4">
-            <p>Profesor: <?php echo $result["profe_apellido"] . " " . $result["profe_nombre"]; ?></p>
+            <h4>Profesores de la Clase</h4>
+            <ul>
+                <?php foreach ($profesores as $profesor): ?>
+                    <li><?php echo $profesor['nombre'] . " " . htmlspecialchars($profesor['apellido']) ?></li>
+                <?php endforeach; ?>
+            </ul>
             </div>
 
             <!-- Horarios -->
