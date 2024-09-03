@@ -35,7 +35,19 @@
   </ul>
 
   <!-- Mostrar a los Alumnos y la cantidad -->
-  <h3 class="profe-header">Alumnos (<?php echo $total_alumnos; ?>)</h3>
+  <div class="d-flex justify-content-between align-items-center">
+    <h3 class="profe-header">Alumnos (<?php echo $total_alumnos; ?>)</h3>
+    <?php foreach ($profesores as $profesor):
+      if ($profesor['id'] == $_SESSION["usuario"]["id"]):
+    ?>
+        <div class="btn-container d-flex">
+          <button class="btn btn-outline-success mr-2" data-toggle="modal" data-target="#addStudent">
+            <i class="fa-solid fa-user-plus"></i>
+          </button>
+        </div>
+    <?php endif;
+    endforeach; ?>
+  </div>
   <ul class="list-group">
     <?php foreach ($solo_alumnos as $alumno): ?>
       <li class="list-group-item">
@@ -49,8 +61,31 @@
       </li>
     <?php endforeach; ?>
   </ul>
-</div>
 
+</div>
+<!-- modal agregar alumno -->
+<div class="modal fade" id="addStudent" tabindex="-3" role="dialog" aria-labelledby="addStudentLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addStudentLabel">Añadir Alumno</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body">
+          <form action="clase_alumnos.php?id=<?php echo $id_clase; ?>" method="post">
+            <input type="hidden" name="operation_type" value="addStudent">
+            <div class="form-group">
+                <input type="text" class="form-control" name="addNewStudent" id="addNewStudent" placeholder="Nombre del usuario del alumno">
+              </div>
+              <button type="submit" class="btn btn-primary">Añadir Usuario</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Modal email -->
 <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -115,7 +150,7 @@
             <form action="clase_alumnos.php?id=<?php echo $id_clase; ?>" method="POST">
               <input type="hidden" name="operation_type" value="newUser">
               <div class="form-group">
-                <input type="text" class="form-control" name="newUserName" id="newUserName" placeholder="Nombre del Nuevo Usuario">
+                <input type="text" class="form-control" name="newUserName" id="newUserName" placeholder="Nombre del usuario del profesor">
               </div>
               <button type="submit" class="btn btn-primary">Añadir Usuario</button>
             </form>

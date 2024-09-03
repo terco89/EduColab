@@ -21,11 +21,11 @@ $stmt = $link->prepare($sql);
 $stmt->bind_param("i", $id_clase);
 $stmt->execute();
 $result = $stmt->get_result()->fetch_assoc();
-$nombre_clase = $result["nombre"];
 if (!$result) {
     header("Location: clases.php");
     exit();
 }
+$nombre_clase = $result["nombre"];
 
 $id_profesor_creador = $result['id_usuario_creador']; 
 
@@ -138,6 +138,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
         $stmt->close();
         $stmt1->close();
+    }elseif ($operation_type=="addStudent" && isset($_POST['addNewStudent'])) {
+        $nombre_usuario = trim($_POST['addNewStudent']);
+    
+        $sql = "SELECT id FROM usuarios WHERE usuarios.name = ?";
+        $stmt = $link->prepare($sql);
+        $stmt->bind_param("s", $nombre_usuario);
+        $stmt->execute();
+        $result7 = $stmt->get_result()->fetch_assoc();
+    
+        if ($result7) {
+            $Id_student = $result7['id'];  
+            $estado = "activa";  
+            $sql1 = "INSERT INTO clase_usuario (id_clase, id_usuario, estado) VALUES (?, ?, ?)";
+            $stmt1 = $link->prepare($sql1);
+            $stmt1->bind_param("iis", $id_clase, $Id_student, $estado);  
+            $stmt1->execute();
+    
+            
+        } else {
+            echo "El nombre de usuario no existe.";
+        }
+    
+        $stmt->close();
+        if (isset($stmt1)) {
+            $stmt1->close();
+        }
     }
 }
 
