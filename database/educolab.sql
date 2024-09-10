@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-08-2024 a las 20:56:26
+-- Tiempo de generación: 10-09-2024 a las 03:49:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -53,8 +53,30 @@ CREATE TABLE `clasesescolares` (
 
 INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `codigo`, `id_usuario_creador`) VALUES
 (51, 'clase1', '', 'vuvqS6', 14),
-(53, 'clase3', '', 'TwBhve', 13),
-(54, 'lolo', '', '3ZqGRF', 14);
+(54, 'lolo', '', '3ZqGRF', 14),
+(61, 'clase3', '', 'p1rtjE', 14),
+(62, 'Sebastian', '', 'h7YU7B', 14),
+(63, 'clase1', '', 'IPYFGX', 14),
+(64, 'clase1', '', 'Y1uRMZ', 14),
+(66, 'clase1', '', 'FNF8d3', 14);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `clase_profesor`
+--
+
+CREATE TABLE `clase_profesor` (
+  `id_usuario` int(255) NOT NULL,
+  `id_clase` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `clase_profesor`
+--
+
+INSERT INTO `clase_profesor` (`id_usuario`, `id_clase`) VALUES
+(14, 66);
 
 -- --------------------------------------------------------
 
@@ -74,13 +96,10 @@ CREATE TABLE `clase_usuario` (
 --
 
 INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`, `estado`) VALUES
-(14, 48, 'bg6.jpg', 'activa'),
-(14, 49, '#61e58d', 'activa'),
-(14, 50, '', 'activa'),
-(14, 51, 'bg3.jpg', 'activa'),
-(14, 52, 'bg5.jpg', 'archivada'),
-(13, 53, '', 'activa'),
-(14, 54, '#cd1313', 'archivada');
+(14, 65, '', 'activa'),
+(14, 66, '', 'activa'),
+(12, 66, '', 'activa'),
+(8, 66, '', 'activa');
 
 -- --------------------------------------------------------
 
@@ -118,7 +137,8 @@ INSERT INTO `discusiones` (`id`, `id_alumno`, `id_clase`, `tema`, `contenido`, `
 (1, 4, 1, 'Duda sobre el uso de \"used to\"', 'Tengo una pregunta sobre el uso de \"used to\" y \"would\" en inglés para hablar sobre hábitos pasados. He leído algunas explicaciones, pero aún no estoy seguro de cuándo debería usar uno u otro. ¿Podrían explicarme las diferencias y darme ejemplos para cada uno?', '2024-07-04 12:40:42'),
 (2, 3, 35, 'trtdftg', 'gfdydytdydtyt', '2024-07-04 16:18:52'),
 (3, 14, 51, 'qw3e', 'qwe', '2024-08-26 14:37:00'),
-(4, 14, 51, '', 'asd', '2024-08-26 14:38:17');
+(4, 14, 51, '', 'asd', '2024-08-26 14:38:17'),
+(5, 14, 55, 'xczz', 'xcz', '2024-08-28 15:03:04');
 
 -- --------------------------------------------------------
 
@@ -140,7 +160,24 @@ CREATE TABLE `entregas` (
 INSERT INTO `entregas` (`tarea_id`, `usuario_id`, `fecha_entrega`, `calificacion`) VALUES
 (59, 4, '2024-08-01 15:56:15', NULL),
 (60, 4, '2024-08-20 14:43:16', NULL),
-(51, 12, '2024-08-22 13:55:52', NULL);
+(51, 12, '2024-08-22 13:55:52', NULL),
+(66, 13, '2024-08-28 15:11:41', NULL),
+(67, 14, '2024-08-28 15:41:04', NULL),
+(67, 14, '2024-08-28 15:45:17', NULL),
+(67, 14, '2024-08-28 15:45:18', NULL),
+(67, 14, '2024-08-28 15:45:19', NULL),
+(67, 14, '2024-08-28 15:45:19', NULL),
+(67, 14, '2024-08-28 15:45:20', NULL),
+(67, 14, '2024-08-28 15:45:20', NULL),
+(67, 13, '2024-08-28 15:45:44', NULL),
+(67, 13, '2024-08-28 15:45:44', NULL),
+(67, 13, '2024-08-28 15:45:45', NULL),
+(67, 13, '2024-08-28 15:45:45', NULL),
+(67, 13, '2024-08-28 15:45:45', NULL),
+(67, 13, '2024-08-28 15:45:57', NULL),
+(68, 13, '2024-08-28 15:56:17', NULL),
+(68, 13, '2024-08-28 15:56:21', NULL),
+(69, 13, '2024-08-31 12:37:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -160,7 +197,9 @@ CREATE TABLE `espacios` (
 --
 
 INSERT INTO `espacios` (`id`, `nombre`, `curso_division`, `id_usuario`) VALUES
-(1, 'TCI', '3°', 14);
+(1, 'TCI', '3°', 14),
+(2, 'Sebastian', 'asd', 13),
+(3, 'asd', 'asda', 13);
 
 -- --------------------------------------------------------
 
@@ -179,7 +218,10 @@ CREATE TABLE `espacios_clases` (
 
 INSERT INTO `espacios_clases` (`id_espacio`, `id_clase`) VALUES
 (1, 51),
-(1, 52);
+(1, 52),
+(2, 53),
+(3, 53),
+(3, 59);
 
 -- --------------------------------------------------------
 
@@ -201,9 +243,10 @@ CREATE TABLE `horarios` (
 --
 
 INSERT INTO `horarios` (`id_horario`, `id_clase`, `nombre_clase`, `dia_semana`, `hora_inicio`, `hora_fin`) VALUES
-(1, 51, 'clase1', 'Lunes', '13:00:00', '13:01:00'),
-(4, 53, 'clase3', 'Martes', '15:01:00', '15:01:00'),
-(5, 54, 'lolo', 'Lunes', '14:49:00', '16:48:00');
+(1, 62, 'Sebastian', 'Martes', '22:28:00', '11:11:00'),
+(2, 63, 'clase1', 'Lunes', '11:11:00', '11:11:00'),
+(3, 64, 'clase1', 'Lunes', '11:11:00', '11:11:00'),
+(5, 66, 'clase1', 'Martes', '12:31:00', '12:23:00');
 
 -- --------------------------------------------------------
 
@@ -274,7 +317,30 @@ INSERT INTO `mensajes_privado` (`id`, `tarea_id`, `usuario_id`, `mensaje`, `fech
 (15, 60, 11, 'fdsfdsfdsdsfg', '2024-08-20 17:21:00', 1),
 (16, 51, 12, 'sad', '2024-08-22 14:04:24', 1),
 (17, 51, 12, 'asd', '2024-08-22 14:04:26', 1),
-(18, 51, 12, 'asada', '2024-08-22 14:04:27', 1);
+(18, 51, 12, 'asada', '2024-08-22 14:04:27', 1),
+(19, 66, 14, 'si aaja ¿¿¿¿', '2024-08-28 15:11:13', 1),
+(20, 66, 13, 'asdasd', '2024-08-28 15:11:24', 1),
+(21, 66, 14, 'asd', '2024-08-28 15:32:05', 1),
+(22, 66, 14, 'asd', '2024-08-28 15:32:13', 1),
+(23, 66, 14, 'ewqwe', '2024-08-28 15:40:21', 1),
+(24, 66, 14, 'wqeqw', '2024-08-28 15:40:25', 1),
+(25, 67, 14, 'sada', '2024-08-28 15:41:00', 1),
+(26, 68, 14, 'sfsdf', '2024-08-28 15:55:43', 1),
+(27, 69, 13, 'asd', '2024-08-31 12:42:39', 1),
+(28, 71, 13, 'sada', '2024-09-02 13:17:26', 1),
+(29, 71, 14, 'asd', '2024-09-02 13:17:31', 1),
+(30, 71, 14, 'asadasd', '2024-09-02 13:17:34', 1),
+(31, 71, 13, 'asdd', '2024-09-02 13:17:39', 1),
+(32, 71, 14, 'spy ppwep', '2024-09-02 13:18:10', 1),
+(33, 72, 13, 'asda', '2024-09-02 13:24:47', 1),
+(34, 72, 14, 'asd', '2024-09-02 13:25:01', 1),
+(35, 72, 14, 'sddgtf', '2024-09-02 13:28:03', 1),
+(36, 72, 13, 'fsdfsdfsds', '2024-09-02 13:28:17', 1),
+(37, 73, 13, 'asd', '2024-09-02 13:28:40', 1),
+(38, 73, 13, 'dasd', '2024-09-02 13:28:42', 1),
+(39, 73, 13, 'adadasd', '2024-09-02 13:28:44', 1),
+(40, 73, 13, 'asdasd', '2024-09-02 13:28:46', 1),
+(41, 73, 13, 'sadsdsa', '2024-09-02 13:28:47', 1);
 
 -- --------------------------------------------------------
 
@@ -329,7 +395,11 @@ INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_subida`, `fecha_entr
 (56, 'Revolucion Industrial', 'hacer la tarea', '2024-07-10 06:36:04', '2024-07-11 09:39:00', 35),
 (59, 'xd', 'xd', '2024-08-01 14:36:58', '2024-08-28 14:36:00', 36),
 (60, 'tarea', 'tarea', '2024-08-20 14:42:51', '2024-08-02 14:42:00', 36),
-(63, 'sadsad', 'asdsadasd', '2024-08-24 20:52:47', '2024-08-20 20:52:00', 45);
+(63, 'sadsad', 'asdsadasd', '2024-08-24 20:52:47', '2024-08-20 20:52:00', 45),
+(65, 'zxc', 'zxcz', '2024-08-28 15:02:46', '2024-09-06 15:02:00', 57),
+(69, 'tarea prueba', '', '2024-08-28 15:57:08', '0000-00-00 00:00:00', 58),
+(72, 'tarea prueba', 'ver naruto', '2024-09-02 13:24:42', '2024-09-26 13:24:00', 66),
+(73, 'asdas', 'dasdasd', '2024-09-02 13:28:36', '2024-10-03 13:28:00', 66);
 
 -- --------------------------------------------------------
 
@@ -379,7 +449,10 @@ INSERT INTO `tarea_usuario` (`tarea_id`, `usuario_id`, `estado`) VALUES
 (59, 4, 1),
 (0, 4, 1),
 (60, 4, 1),
-(59, 11, 1);
+(59, 11, 1),
+(73, 14, 1),
+(72, 13, 1),
+(73, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -400,11 +473,8 @@ CREATE TABLE `temas` (
 --
 
 INSERT INTO `temas` (`id`, `nombre`, `descripcion`, `fecha_alta`, `id_clase`) VALUES
-(4, 'sjdns', 'jsdnjsd', '2024-07-10', 35),
-(5, 'smds', 'mdmsds', '2024-07-10', 35),
-(6, 'Por fin carajo', 'uwu', '2024-07-10', 35),
-(7, 'sd', 'asda', '2024-08-24', 45),
-(8, 'tarea prueba', 'sz', '2024-08-26', 51);
+(3, 'asd', 'asd', '2024-08-28', 55),
+(4, 'tema prueba', 'si', '2024-09-02', 66);
 
 -- --------------------------------------------------------
 
@@ -422,14 +492,9 @@ CREATE TABLE `tema_usuario` (
 --
 
 INSERT INTO `tema_usuario` (`tema_id`, `usuario_id`) VALUES
-(4, 3),
-(4, 1),
-(5, 3),
-(5, 1),
-(6, 3),
-(6, 1),
-(7, 13),
-(8, 14);
+(3, 14),
+(4, 14),
+(4, 13);
 
 -- --------------------------------------------------------
 
@@ -468,7 +533,7 @@ INSERT INTO `usuarios` (`id`, `name`, `password`, `email`, `rol`, `img`, `edad`,
 (11, 'xd', '9de355443f2000d9e076248b317f73b8', 'xd@xd.xd', 'alumno', 'alumno.jpg', 19, 'xd', 'xd', '', ''),
 (12, 'laydo', '202cb962ac59075b964b07152d234b70', 'sebastian.pardo.scp@gmail.com', 'alumno', 'alumno.jpg', 17, 'Sebastian', 'Pardo', '', ''),
 (13, 'Alumno_usuario', '202cb962ac59075b964b07152d234b70', 'alumno@gmail.com', 'alumno', 'alumno.jpg', 16, 'Alumno_nombre', 'Alumno_apellido', '', ''),
-(14, 'Profesor_usuario', '202cb962ac59075b964b07152d234b70', 'profesor@gmail.com', 'profesor', 'alumno.jpg', 44, 'Profesor_nombre', 'Profesor_apellido', '', '');
+(14, 'Profesor_usuario', '202cb962ac59075b964b07152d234b70', 'profesor@gmail.com', 'profesor', 'profesor.jpg', 44, 'Profesor_nombre', 'Profesor_apellido', '', '');
 
 -- --------------------------------------------------------
 
@@ -550,19 +615,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clasesescolares`
 --
 ALTER TABLE `clasesescolares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT de la tabla `discusiones`
 --
 ALTER TABLE `discusiones`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `espacios`
 --
 ALTER TABLE `espacios`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`
@@ -580,19 +645,19 @@ ALTER TABLE `mensajes`
 -- AUTO_INCREMENT de la tabla `mensajes_privado`
 --
 ALTER TABLE `mensajes_privado`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT de la tabla `temas`
 --
 ALTER TABLE `temas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
