@@ -481,24 +481,24 @@
 
             <script>
                 actual = 0;
-                let comments = [
+                let comments = {
                     <?php
                     $usados = array();
                     for ($i = 0; $i < count($general); $i++) {
                         if (!in_array($general[$i]["id"], $usados)) { ?> "<?php echo $general[$i]["name"] ?>": [
                                 <?php
-                                echo $general[$i]["bandera"] . ",";
-                                for ($j = 0; $j < count($general); $j++) {
-                                    if ($general[$j]["id"] == $general[$i]["id"]) { ?> '<?php echo $general[$j]["mensaje"]; ?>',
+                                for ($j = 0; $j < count($general); $j++) { ?>
+                                [
+                                    <?php if ($general[$j]["id"] == $general[$i]["id"]) { ?> <?php echo $general[$j]["bandera"]; ?>,'<?php echo $general[$j]["mensaje"]; ?>'
                                     <?php } ?>
-
+                                    ],
                                 <?php } ?>
                             ],
                     <?php
                             $usados[] = $general[$i]["id"];
                         }
                     } ?>
-                    ];
+                };
 
                 $('.list-group-item').on('click', function() {
                     let personName = $(this).data('person');
@@ -507,17 +507,12 @@
                     $('#commentsList').empty();
 
                     if (comments[personName].length > 0) {
-                        bandera = true;
                         comments[personName].forEach(comment => {
-                            if (bandera == true) {
-                                bandera = false;
-                                return
-                            }
                             opcion = "right"
-                            if (comments[personName][0] == true) {
+                            if (comment[0] == 0) {
                                 opcion = "left"
                             }
-                            $('#commentsList').append(`<div class="comment-item" style="text-align:` + opcion + `;" >${comment}</div>`);
+                            $('#commentsList').append(`<div class="comment-item" style="text-align:` + opcion + `;" >${comment[1]}</div>`);
                         });
                     } else {
                         $('#commentsList').append('<div class="comment-item">No hay comentarios.</div>');

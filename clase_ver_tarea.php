@@ -188,6 +188,7 @@ if($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]){
         }
     }
 }
+print_r($general);
 
 $view = "clase_ver_tareas";
 require_once "views/layout.php";
