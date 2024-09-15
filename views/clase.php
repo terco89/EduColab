@@ -18,7 +18,7 @@
 <div class="container mt-5">
     <!-- Header -->
     <?php if ($fondo['estado'] == "activa") { ?>
-        <div class="jumbotron" style="<?php if (preg_match('/\.(jpg|png)$/i', $fondo['fondo'])): ?>background-image: url('img/fondos/<?php echo $fondo['fondo']; ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;<?php else: ?>background-color: <?php echo htmlspecialchars($fondo['fondo']); ?>;<?php endif; ?>width: 100%; height: auto; position: relative;">
+        <div class="jumbotron" style="<?php if (preg_match('/\.(jpg|png)$/i', $fondo['fondo'])): ?>background-image: url('img/fondos/<?php echo $fondo['fondo']; ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;<?php else: ?>background-color: <?php echo $fondo['fondo']; ?>;<?php endif; ?>width: 100%; height: auto; position: relative;">
         <?php } else { ?>
             <style>
                 .si {
@@ -26,7 +26,7 @@
                     background-size: 10px 10px;
                 }
             </style>
-            <div class="jumbotron si" style="<?php if (preg_match('/\.(jpg|png)$/i', $fondo['fondo'])): ?>background-image: url('img/fondos/<?php echo $fondo['fondo']; ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;<?php else: ?>background-color: <?php echo htmlspecialchars($fondo['fondo']); ?>;<?php endif; ?>width: 100%; height: auto; position: relative;">
+            <div class="jumbotron si" style="<?php if (preg_match('/\.(jpg|png)$/i', $fondo['fondo'])): ?>background-image: url('img/fondos/<?php echo $fondo['fondo']; ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;<?php else: ?>background-color: <?php echo $fondo['fondo']; ?>;<?php endif; ?>width: 100%; height: auto; position: relative;">
 
             <?php } ?>
             <div style="position: absolute; top: 10px; right: 10px; z-index: 1;">
@@ -53,13 +53,17 @@
                         </div>
                         <div class="modal-body">
                             <form method="post" id="bgForm">
+                                <input type="hidden" id="bgOption" name="bgOption" value="background"> <!-- Valor por defecto -->
+
                                 <!-- Navbar para seleccionar entre Fondo y Color -->
                                 <ul class="nav nav-tabs mb-3" id="bgTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="background-tab" data-toggle="tab" href="#background" role="tab" aria-controls="background" aria-selected="true">Fondo</a>
+                                        <a class="nav-link active" id="background-tab" data-toggle="tab" href="#background" role="tab"
+                                            aria-controls="background" aria-selected="true" onclick="setBgOption('background')">Fondo</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="color-tab" data-toggle="tab" href="#color" role="tab" aria-controls="color" aria-selected="false">Color</a>
+                                        <a class="nav-link" id="color-tab" data-toggle="tab" href="#color" role="tab"
+                                            aria-controls="color" aria-selected="false" onclick="setBgOption('color')">Color</a>
                                     </li>
                                 </ul>
 
@@ -68,16 +72,22 @@
                                     <!-- Selección de Fondos -->
                                     <div class="tab-pane fade show active" id="background" role="tabpanel" aria-labelledby="background-tab">
                                         <div id="backgroundSelector">
-                                            <select id="bgDropdown" name="bg"></select>
-                                            <div id="bgPreview" style="margin-top: 10px; width: 100%; height: 200px; border: 1px solid #ccc;"></div>
+                                            <select id="bgDropdown" name="bg" class="form-control">
+                                                <!-- Opciones generadas dinámicamente por JavaScript -->
+                                            </select>
+                                            <div id="bgPreview"
+                                                style="margin-top: 10px; width: 100%; height: 200px; border: 1px solid #ccc;">
+                                            </div>
                                         </div>
                                     </div>
 
                                     <!-- Selección de Colores -->
                                     <div class="tab-pane fade" id="color" role="tabpanel" aria-labelledby="color-tab">
                                         <div id="colorSelector">
-                                            <input type="color" id="colorPicker" name="color" value="#ffffff">
-                                            <div id="colorPreview" style="margin-top: 10px; width: 100%; height: 200px; border: 1px solid #ccc; background-color: #ffffff;"></div>
+                                            <input type="color" id="colorPicker" name="color" value="#ffffff" class="form-control">
+                                            <div id="colorPreview"
+                                                style="margin-top: 10px; width: 100%; height: 200px; border: 1px solid #ccc; background-color: #ffffff;">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -88,6 +98,7 @@
                     </div>
                 </div>
             </div>
+
 
 
             <!-- modal para Arcguvar clase -->
@@ -230,104 +241,80 @@
 
 
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const imagenes = [{
-                        nombre: "Fondo 1",
-                        archivo: "bg1.jpg"
-                    },
-                    {
-                        nombre: "Fondo 2",
-                        archivo: "bg2.jpg"
-                    },
-                    {
-                        nombre: "Fondo 3",
-                        archivo: "bg3.jpg"
-                    },
-                    {
-                        nombre: "Fondo 4",
-                        archivo: "bg4.jpg"
-                    },
-                    {
-                        nombre: "Fondo 5",
-                        archivo: "bg5.jpg"
-                    },
-                    {
-                        nombre: "Fondo 6",
-                        archivo: "bg6.jpg"
-                    },
-                    {
-                        nombre: "Fondo 7",
-                        archivo: "bg7.jpg"
-                    },
-                    {
-                        nombre: "Fondo 8",
-                        archivo: "bg8.jpg"
-                    },
-                    {
-                        nombre: "Fondo 9",
-                        archivo: "bg9.jpg"
-                    },
-                    {
-                        nombre: "Fondo 10",
-                        archivo: "bg10.jpg"
-                    }
-                ];
+            function setBgOption(option) {
+    document.getElementById('bgOption').value = option;
+}
 
-                const dropdown = document.getElementById('bgDropdown');
-                const preview = document.getElementById('bgPreview');
-                const bgOptionBackground = document.getElementById('optionBackground');
-                const bgOptionColor = document.getElementById('optionColor');
-                const backgroundSelector = document.getElementById('backgroundSelector');
-                const colorSelector = document.getElementById('colorSelector');
-                const colorPicker = document.getElementById('colorPicker');
-                const colorPreview = document.getElementById('colorPreview');
+document.addEventListener('DOMContentLoaded', function() {
+    const imagenes = [
+        { nombre: "Fondo 1", archivo: "bg1.jpg" },
+        { nombre: "Fondo 2", archivo: "bg2.jpg" },
+        { nombre: "Fondo 3", archivo: "bg3.jpg" },
+        { nombre: "Fondo 4", archivo: "bg4.jpg" },
+        { nombre: "Fondo 5", archivo: "bg5.jpg" },
+        { nombre: "Fondo 6", archivo: "bg6.jpg" },
+        { nombre: "Fondo 7", archivo: "bg7.jpg" },
+        { nombre: "Fondo 8", archivo: "bg8.jpg" },
+        { nombre: "Fondo 9", archivo: "bg9.jpg" },
+        { nombre: "Fondo 10", archivo: "bg10.jpg" }
+    ];
 
-                imagenes.forEach(imagen => {
-                    const option = document.createElement('option');
-                    option.value = imagen.archivo;
-                    option.textContent = imagen.nombre;
-                    dropdown.appendChild(option);
-                });
+    const dropdown = document.getElementById('bgDropdown');
+    const preview = document.getElementById('bgPreview');
+    const backgroundSelector = document.getElementById('backgroundSelector');
+    const colorSelector = document.getElementById('colorSelector');
+    const colorPicker = document.getElementById('colorPicker');
+    const colorPreview = document.getElementById('colorPreview');
 
-                let imagenSeleccionada = '';
+    imagenes.forEach(imagen => {
+        const option = document.createElement('option');
+        option.value = imagen.archivo;
+        option.textContent = imagen.nombre;
+        dropdown.appendChild(option);
+    });
 
-                dropdown.addEventListener('change', function() {
-                    const archivoSeleccionado = this.value;
-                    imagenSeleccionada = archivoSeleccionado;
-                    preview.style.backgroundImage = `url('img/fondos/${archivoSeleccionado}')`;
-                    preview.style.backgroundSize = 'cover';
-                });
+    let imagenSeleccionada = '';
 
-                dropdown.addEventListener('mouseover', function(event) {
-                    const archivoSeleccionado = event.target.value;
-                    if (archivoSeleccionado) {
-                        preview.style.backgroundImage = `url('img/fondos/${archivoSeleccionado}')`;
-                        preview.style.backgroundSize = 'cover';
-                    }
-                });
+    dropdown.addEventListener('change', function() {
+        const archivoSeleccionado = this.value;
+        imagenSeleccionada = archivoSeleccionado;
+        preview.style.backgroundImage = `url('img/fondos/${archivoSeleccionado}')`;
+        preview.style.backgroundSize = 'cover';
+    });
 
-                dropdown.addEventListener('mouseout', function() {
-                    if (imagenSeleccionada) {
-                        preview.style.backgroundImage = `url('img/fondos/${imagenSeleccionada}')`;
-                        preview.style.backgroundSize = 'cover';
-                    } else {
-                        preview.style.backgroundImage = '';
-                    }
-                });
+    dropdown.addEventListener('mouseover', function(event) {
+        const archivoSeleccionado = event.target.value;
+        if (archivoSeleccionado) {
+            preview.style.backgroundImage = `url('img/fondos/${archivoSeleccionado}')`;
+            preview.style.backgroundSize = 'cover';
+        }
+    });
 
-                bgOptionBackground.addEventListener('change', function() {
-                    backgroundSelector.style.display = 'block';
-                    colorSelector.style.display = 'none';
-                });
+    dropdown.addEventListener('mouseout', function() {
+        if (imagenSeleccionada) {
+            preview.style.backgroundImage = `url('img/fondos/${imagenSeleccionada}')`;
+            preview.style.backgroundSize = 'cover';
+        } else {
+            preview.style.backgroundImage = '';
+        }
+    });
 
-                bgOptionColor.addEventListener('change', function() {
-                    backgroundSelector.style.display = 'none';
-                    colorSelector.style.display = 'block';
-                });
+    document.getElementById('background-tab').addEventListener('click', function() {
+        backgroundSelector.style.display = 'block';
+        colorSelector.style.display = 'none';
+        setBgOption('background');
+    });
 
-                colorPicker.addEventListener('input', function() {
-                    const color = this.value;
-                    colorPreview.style.backgroundColor = color;
-                });
-            });
+    document.getElementById('color-tab').addEventListener('click', function() {
+        backgroundSelector.style.display = 'none';
+        colorSelector.style.display = 'block';
+        setBgOption('color');
+    });
+
+    colorPicker.addEventListener('input', function() {
+        const color = this.value;
+        colorPreview.style.backgroundColor = color;
+    });
+});
+
         </script>
