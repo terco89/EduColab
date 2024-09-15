@@ -77,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo "Error al ascender al alumno.";
         }
+        //añadir a un nuevo profe
     } elseif ($operation_type === 'newUser' && isset($_POST['newUserName'])) {
         $nombre_usuario = trim($_POST['newUserName']);
     
@@ -99,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt1 = $link->prepare($sql1);
             $stmt1->bind_param("iis", $id_clase, $nuevo_profesor_id, $estado);  
             $stmt1->execute();
-    
+            header("Location: clase_alumnos.php?id=".$id_clase);
             
         } else {
             echo "El nombre de usuario no existe.";
@@ -110,6 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt1->close();
         }
     }
+    ///eliminar alumnos o usuarios
     elseif ($operation_type === 'delete' && isset($_POST['delete_user'])) {
         $id_usuario = intval($_POST['delete_user']);
         echo "ID del usuario a eliminar: " . $id_usuario;
@@ -138,6 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
         $stmt->close();
         $stmt1->close();
+        ///añadir alumno
     }elseif ($operation_type=="addStudent" && isset($_POST['addNewStudent'])) {
         $nombre_usuario = trim($_POST['addNewStudent']);
     
@@ -154,7 +157,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt1 = $link->prepare($sql1);
             $stmt1->bind_param("iis", $id_clase, $Id_student, $estado);  
             $stmt1->execute();
-    
+            header("Location: clase_alumnos.php?id=".$id_clase);
+
             
         } else {
             echo "El nombre de usuario no existe.";
