@@ -1,4 +1,12 @@
 <link rel="stylesheet" href="css/login.css">
+<style>
+    .login-image{
+        display: block;
+        margin: 0 auto;
+        max-width: 50%;
+        height: auto;
+    }
+</style>
 <form method="POST">
 
 <div class="login-container-wrapper">
@@ -13,6 +21,7 @@
             <?php endif; ?>
         </div>
         <div class="login-container">
+        <img src ="img/fondos/confesuiza.jpeg" alt = "logo" class = "login-image">
             <h2>Registrate</h2>
             <form method="POST" action="register.php">
                 <div class="row">

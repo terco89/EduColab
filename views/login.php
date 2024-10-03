@@ -1,4 +1,12 @@
 <link rel="stylesheet" href="css/login.css">
+<style>
+    .login-image{
+        display: block;
+        margin: 0 auto;
+        max-width: 50%;
+        height: auto;
+    }
+</style>
 <div class="login-container-wrapper">
         <div class="alert-container">
             <?php if (!empty($errors)): ?>
@@ -11,6 +19,7 @@
             <?php endif; ?>
         </div>
         <div class="login-container">
+        <img src ="img/fondos/confesuiza.jpeg" alt = "logo" class = "login-image">
             <h2>Inicia Sesión</h2>
             <form method="POST" action="login.php">
                 <div class="row">
