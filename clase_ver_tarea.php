@@ -1,7 +1,9 @@
 <?php
 require_once "includes/config.php";
 session_start();
-
+$sql="SELECT * FROM tareas WHERE id='".$_GET['tid']."'";
+$query=mysqli_query($link, $sql);
+$fecha=mysqli_fetch_assoc($query);
 if (!isset($_SESSION["usuario"])) {
     header("Location: index.php");
     exit();
@@ -107,6 +109,8 @@ $result = $stmt->get_result();
 // Verifica si el usuario logueado es profesor
 $esProfesor = $result->num_rows > 0;
 if (isset($_POST['titulo'])) {
+    $id=$_GET['id'];
+    $tt=$_GET['tid'];
     $sql = "UPDATE tareas SET nombre = '" . $_POST['titulo'] . "', descripcion = '" . $_POST['instruccion'] . "', fecha_subida = NOW(), fecha_entrega = '" . $_POST['fecha_limite'] . "', clase_id = '" . $clase["id"] . "' WHERE id = " . $_GET["tid"];
     $query = mysqli_query($link, $sql);
     if (!$query) {
@@ -145,9 +149,12 @@ if (isset($_POST['titulo'])) {
         } else {
             echo "Error al subir el archivo.";
         }
+        
     }
-    echo '<script>window.location.href = "clase_ver_tarea.php?id=' . $result["id"] . '&tid=' . $tid . '";</script>';
-    exit();
+    
+    //echo '<script>window.location.href = "clase_ver_tarea.php?id=' . $result["id"] . '&tid=' . $tid . '";</script>';
+    //exit();
+    header("Location:clase_ver_tarea.php?id=" . $id . "&tid=" . $tt);
 }
 if (isset($_POST['eliminar'])) {
     $sql = "DELETE FROM tareas WHERE id = " . $_GET["tid"];

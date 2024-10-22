@@ -147,7 +147,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $tarea["nombre"] ?></h5>
                             <p class="card-text"><?php echo $tarea["descripcion"] ?></p>
-                            <p class="card-text"><strong>Fecha límite:</strong> <?php echo $tarea["fecha_entrega"] ?>
+                            <p class="card-text"><strong>Fecha límite:</strong> <?php echo $fecha['fecha_entrega'] ?>
                             </p>
                             <?php if (isset($recursos) && count($recursos) > 0) {
                                 for ($i = 0; $i < count($recursos); $i += 2) { ?>

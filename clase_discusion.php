@@ -3,7 +3,8 @@ session_start();
 if(!isset($_SESSION["usuario"])){
     header("Location: index.php");
 }
-
+$id_clase = intval($_GET['id']); 
+$idEspacio = isset($_GET['espacio']) ? intval($_GET['espacio']) : null;
 
 require_once "includes/config.php";
 
