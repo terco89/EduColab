@@ -8,7 +8,7 @@ if (!isset($_SESSION["usuario"]) || !isset($_GET['id']) || !is_numeric($_GET['id
     exit();
 }
 
-$id_clase = intval($_GET['id']); 
+$id_clase = intval($_GET['id']);
 $idEspacio = isset($_GET['espacio']) ? intval($_GET['espacio']) : null;
 
 // Obtener información de la clase y del profesor
@@ -27,7 +27,7 @@ if (!$result) {
 }
 $nombre_clase = $result["nombre"];
 
-$id_profesor_creador = $result['id_usuario_creador']; 
+$id_profesor_creador = $result['id_usuario_creador'];
 
 // Obtener todos los usuarios (profesores y alumnos) de la clase, excluyendo al creador
 $sql = "SELECT usuarios.* 
@@ -52,7 +52,7 @@ $result_profesores = $stmt_profesores->get_result();
 $profesores = $result_profesores->fetch_all(MYSQLI_ASSOC);
 
 // Separar a los alumnos
-$solo_alumnos = array_filter($usuarios, function($usuario) use ($profesores) {
+$solo_alumnos = array_filter($usuarios, function ($usuario) use ($profesores) {
     foreach ($profesores as $profesor) {
         if ($usuario['id'] == $profesor['id']) {
             return false; // Excluir los profesores
@@ -80,32 +80,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //añadir a un nuevo profe
     } elseif ($operation_type === 'newUser' && isset($_POST['newUserName'])) {
         $nombre_usuario = trim($_POST['newUserName']);
-    
+
         $sql = "SELECT id FROM usuarios WHERE name = ?";
         $stmt = $link->prepare($sql);
         $stmt->bind_param("s", $nombre_usuario);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
-    
+
         if ($result) {
             $nuevo_profesor_id = $result['id'];
-    
+
             $sql = "INSERT INTO clase_profesor (id_clase, id_usuario) VALUES (?, ?)";
             $stmt = $link->prepare($sql);
             $stmt->bind_param("ii", $id_clase, $nuevo_profesor_id);
             $stmt->execute();
-    
-            $estado = "activa";  
+
+            $estado = "activa";
             $sql1 = "INSERT INTO clase_usuario (id_clase, id_usuario, estado) VALUES (?, ?, ?)";
             $stmt1 = $link->prepare($sql1);
-            $stmt1->bind_param("iis", $id_clase, $nuevo_profesor_id, $estado);  
+            $stmt1->bind_param("iis", $id_clase, $nuevo_profesor_id, $estado);
             $stmt1->execute();
-            header("Location: clase_alumnos.php?id=".$id_clase);
-            
+            header("Location: clase_alumnos.php?id=" . $id_clase);
         } else {
-            echo "El nombre de usuario no existe.";
+            echo '
+    <div id="errorModal" style="display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;">
+        <div style="background: white; margin: 15% auto; padding: 20px; border-radius: 5px; width: 300px; position: relative;">
+            <span onclick="closeModal()" style="position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 20px;">&times;</span>
+            <p style="color: red; font-size: 17px;">El nombre de usuario no existe</p>
+            <p style="font-size: 16px;">Por favor, verifica e intenta de nuevo.</p>
+        </div>
+    </div>
+    <script>
+        function closeModal() {
+            document.getElementById("errorModal").style.display = "none";
         }
-    
+    </script>
+    ';
+        }
+
         $stmt->close();
         if (isset($stmt1)) {
             $stmt1->close();
@@ -115,17 +127,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     elseif ($operation_type === 'delete' && isset($_POST['delete_user'])) {
         $id_usuario = intval($_POST['delete_user']);
         echo "ID del usuario a eliminar: " . $id_usuario;
-    
+
         $sql = "DELETE FROM clase_usuario WHERE id_usuario = ? AND id_clase = ?";
         $stmt = $link->prepare($sql);
         $stmt->bind_param("ii", $id_usuario, $id_clase);
         $delete_clase_usuario = $stmt->execute();
-    
+
         $sql1 = "DELETE FROM clase_profesor WHERE id_usuario = ? AND id_clase = ?";
         $stmt1 = $link->prepare($sql1);
         $stmt1->bind_param("ii", $id_usuario, $id_clase);
         $delete_clase_profesor = $stmt1->execute();
-    
+
         if ($delete_clase_usuario && $delete_clase_profesor) {
             header("Location: clase_alumnos.php?id=" . $id_clase);
             exit();
@@ -137,33 +149,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "Error al eliminar al profesor de clase_profesor: " . $stmt1->error;
             }
         }
-    
+
         $stmt->close();
         $stmt1->close();
         ///añadir alumno
-    }elseif ($operation_type=="addStudent" && isset($_POST['addNewStudent'])) {
+    } elseif ($operation_type == "addStudent" && isset($_POST['addNewStudent'])) {
         $nombre_usuario = trim($_POST['addNewStudent']);
-    
+
         $sql = "SELECT id FROM usuarios WHERE usuarios.name = ?";
         $stmt = $link->prepare($sql);
         $stmt->bind_param("s", $nombre_usuario);
         $stmt->execute();
         $result7 = $stmt->get_result()->fetch_assoc();
-    
+
         if ($result7) {
-            $Id_student = $result7['id'];  
-            $estado = "activa";  
+            $Id_student = $result7['id'];
+            $estado = "activa";
             $sql1 = "INSERT INTO clase_usuario (id_clase, id_usuario, estado) VALUES (?, ?, ?)";
             $stmt1 = $link->prepare($sql1);
-            $stmt1->bind_param("iis", $id_clase, $Id_student, $estado);  
+            $stmt1->bind_param("iis", $id_clase, $Id_student, $estado);
             $stmt1->execute();
-            header("Location: clase_alumnos.php?id=".$id_clase);
-
-            
+            header("Location: clase_alumnos.php?id=" . $id_clase);
         } else {
-            echo "El nombre de usuario no existe.";
+            echo '
+    <div id="errorModal" style="display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;">
+        <div style="background: white; margin: 15% auto; padding: 20px; border-radius: 5px; width: 300px; position: relative;">
+            <span onclick="closeModal()" style="position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 20px;">&times;</span>
+            <p style="color: red; font-size: 17px;">El nombre de usuario no existe</p>
+            <p style="font-size: 16px;">Por favor, verifica e intenta de nuevo.</p>
+        </div>
+    </div>
+    <script>
+        function closeModal() {
+            document.getElementById("errorModal").style.display = "none";
         }
-    
+    </script>
+    ';
+        }
+
         $stmt->close();
         if (isset($stmt1)) {
             $stmt1->close();
@@ -184,4 +207,3 @@ if ($idEspacio) {
 
 $view = "clase_alumnos";
 require_once "views/layout.php";
-?>

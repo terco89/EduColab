@@ -15,7 +15,7 @@ if (isset($_POST["codigoClase"])) {
         $row = mysqli_fetch_assoc($result);
         $id_clase = $row["id"];
 
-        $sql_insert = "INSERT INTO clase_usuario (id_usuario, id_clase) VALUES ('" . $_SESSION["usuario"]["id"] . "', '$id_clase')";
+        $sql_insert = "INSERT INTO clase_usuario (id_usuario, id_clase, estado) VALUES ('" . $_SESSION["usuario"]["id"] . "', '$id_clase', 'activa')";
 
         if (mysqli_query($link, $sql_insert)) {
             $sql = "select id from tareas WHERE clase_id = " . $id_clase . " AND fecha_entrega > NOW()";
@@ -44,7 +44,20 @@ if (isset($_POST["codigoClase"])) {
             echo "Error: " . $sql_insert . "<br>" . mysqli_error($link);
         }
     } else {
-        echo "No se encontró ninguna clase con ese código.";
+        echo '
+    <div id="errorModal" style="display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;">
+        <div style="background: white; margin: 15% auto; padding: 20px; border-radius: 5px; width: 300px; position: relative;">
+            <span onclick="closeModal()" style="position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 20px;">&times;</span>
+            <p style="color: red; font-size: 17px;">Error</p>
+            <p style="font-size: 16px;">No se encontró ninguna clase con ese código.</p>
+        </div>
+    </div>
+    <script>
+        function closeModal() {
+            document.getElementById("errorModal").style.display = "none";
+        }
+    </script>
+    ';
     }
 }
 
