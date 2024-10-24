@@ -349,7 +349,7 @@
             </div>
 
             <!-- Columna para la sección de comentarios -->
-
+             <?php if($_SESSION["usuario"]["id"] != $clase["id_usuario_creador"]){ ?>
             <div class="col-md-6">
                 <div class="comments-section">
                     <h2 class="mb-4">Comentarios</h2>
@@ -393,6 +393,7 @@
                     ?>
                 </div>
             </div>
+            <?php } ?>
         </div>
     </div>
     <div class="content hidden" id="content2">
@@ -481,42 +482,37 @@
 
             <script>
                 actual = 0;
-                let comments = {
-                    <?php
-                    $usados = array();
-                    for ($i = 0; $i < count($general); $i++) {
-                        if (!in_array($general[$i]["id"], $usados)) { ?> "<?php echo $general[$i]["name"] ?>": [
-                                <?php
-                                for ($j = 0; $j < count($general); $j++) { ?>
-                                [
-                                    <?php if ($general[$j]["id"] == $general[$i]["id"]) { ?> <?php echo $general[$j]["bandera"]; ?>,'<?php echo $general[$j]["mensaje"]; ?>'
-                                    <?php } ?>
-                                    ],
-                                <?php } ?>
-                            ],
-                    <?php
-                            $usados[] = $general[$i]["id"];
-                        }
-                    } ?>
-                };
 
                 $('.list-group-item').on('click', function() {
                     let personName = $(this).data('person');
                     actual = $(this).data('id');
+                    var comments = [];
                     $('#personName').text('Comentarios para ' + personName);
                     $('#commentsList').empty();
-
-                    if (comments[personName].length > 0) {
-                        comments[personName].forEach(comment => {
-                            opcion = "right"
-                            if (comment[0] == 0) {
-                                opcion = "left"
+                    $.ajax({
+                        url: 'clase_ver_tarea.php?id=<?php echo $_GET["id"] ?>&tid=<?php echo $_GET["tid"] ?>', // URL de la API
+                        method: 'POST', // Método de la solicitud
+                        data: {
+                            id_priv: actual
+                        },
+                        success: function(data) {
+                            comments = JSON.parse(data);
+                            if (comments.length > 0) {
+                                comments.forEach(comment => {
+                                    opcion = "right"
+                                    if (comment.bandera == 0) {
+                                        opcion = "left"
+                                    }
+                                    $('#commentsList').append(`<div class="comment-item" style="text-align:` + opcion + `;" >${comment.mensaje}</div>`);
+                                });
+                            } else {
+                                $('#commentsList').append('<div class="comment-item">No hay comentarios.</div>');
                             }
-                            $('#commentsList').append(`<div class="comment-item" style="text-align:` + opcion + `;" >${comment[1]}</div>`);
-                        });
-                    } else {
-                        $('#commentsList').append('<div class="comment-item">No hay comentarios.</div>');
-                    }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.error('Error en la solicitud: ' + textStatus, errorThrown);
+                        }
+                    });
                 });
 
                 $('#addComment').on('click', function() {
@@ -533,9 +529,6 @@
                                 'id': actual
                             },
                             success: function(response) {
-                                console.log("exito pe: " + personName);
-                                console.log(comments[personName]);
-                                comments[personName].push(newComment);
                                 $('#commentsList').append(`<div class="comment-item">${newComment}</div>`);
                                 $('#newComment').val('');
                             },

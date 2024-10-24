@@ -21,6 +21,18 @@ if(isset($_POST["comentario"]) && strlen($_POST["comentario"]) > 0){
         header("Location: clase_ver_tarea.php?id=".$_GET["id"]."&tid=".$_GET["tid"]);
     }
 }
+if(isset($_POST["id_priv"])){
+    $sql = "select * from mensajes_privado where (usuario_id = ".$_POST["id_priv"]." or usuario_id = ".$_SESSION["usuario"]["id"].") and tarea_id = ".$_GET["tid"];
+    $query = mysqli_query($link, $sql);
+    $general = array();
+    if (mysqli_num_rows($query) > 0) {
+        while ($row = mysqli_fetch_assoc($query)) {
+            $general[] = $row;
+        }
+    }
+    echo json_encode($general);
+    die;
+}
 
 // Obtener información de la tarea
 $sql = "SELECT * FROM tareas WHERE id = " . $_GET["tid"];
@@ -186,7 +198,8 @@ if (isset($_FILES["archivoEntrega"])) {
 }
 
 if($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]){
-    $sql = "SELECT usuarios.id, name, mensaje,bandera FROM mensajes_privado INNER JOIN usuarios ON mensajes_privado.usuario_id = usuarios.id WHERE tarea_id = ".$_GET["tid"];
+    //$sql = "SELECT usuarios.id, name, mensaje,bandera FROM mensajes_privado INNER JOIN usuarios ON mensajes_privado.usuario_id = usuarios.id WHERE tarea_id = ".$_GET["tid"];
+    $sql = "SELECT usuarios.id, name FROM clase_usuario INNER JOIN usuarios ON clase_usuario.id_usuario = usuarios.id WHERE clase_usuario.id_clase = ".$_GET["id"] ." AND clase_usuario.id_usuario != ".$_SESSION["usuario"]["id"];
     $query = mysqli_query($link, $sql);
     $general = array();
     if (mysqli_num_rows($query) > 0) {
@@ -195,7 +208,6 @@ if($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]){
         }
     }
 }
-print_r($general);
 
 $view = "clase_ver_tareas";
 require_once "views/layout.php";
