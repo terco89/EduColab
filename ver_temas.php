@@ -69,7 +69,25 @@ if ($resultado_clase && $resultado_clase->num_rows > 0) {
 } else {
     $clase = null; // Definir clase como null si no se encuentra
 }
-
+if (isset($_POST['id_tema_editar'])) {
+    $sql = "UPDATE temas SET nombre = '" . $_POST['nombre'] . "', descripcion = '" . $_POST['descripcion'] . "', fecha_alta = NOW(), id_clase = $id_clase WHERE id = " . $_GET["tid"];
+    $query = mysqli_query($link, $sql);
+    if (!$query) {
+        echo "Fallo consulta: " . mysqli_error($link);
+        exit();
+    }
+    header("Location: clases.php");
+    exit();
+}
+if (isset($_POST['id_tema_eliminar'])) {
+    $sql = "DELETE FROM temas WHERE id = " . $_GET["tid"];
+    $query = mysqli_query($link, $sql);
+    if (!$query) {
+        echo "Fallo consulta: " . mysqli_error($link);
+        exit();
+    }
+    header('Location: clase.php?id='.$_GET['id']);
+}
 // Define la vista y otros parámetros
 $view = "ver_temas";
 require_once "views/layout.php";

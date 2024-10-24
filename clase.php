@@ -7,7 +7,8 @@ if (!isset($_SESSION["usuario"]) || !isset($_GET['id']) || !is_numeric($_GET['id
     exit();
 }
 
-$id_clase = intval($_GET['id']); 
+$id_usuario = $_SESSION["usuario"]["id"];
+$id_clase = intval($_GET['id']);
 $idEspacio = isset($_GET['espacio']) ? intval($_GET['espacio']) : null;
 
 // Cambiar fondo
@@ -93,8 +94,36 @@ if ($idEspacio) {
     $sqlEspacio = "SELECT nombre FROM Espacios WHERE id = $idEspacio";
     $espacio = mysqli_fetch_assoc(mysqli_query($link, $sqlEspacio));
 }
-
+if (isset($_POST['id_clase_archivar'])) {
+    $sql = "UPDATE clase_usuario SET estado = 'archivada' WHERE id_clase = $id_clase AND id_usuario = $id_usuario";
+    $res = mysqli_query($link, $sql);
+    if (!$res) {
+        echo "Fallo consulta: " . mysqli_error($link);
+        exit();
+    }else{
+        header("location: clases.php");
+    }
+}
+if (isset($_POST['id_clase_desarchivar'])) {
+    $sql = "UPDATE clase_usuario SET estado = 'activa' WHERE id_clase = $id_clase AND id_usuario = $id_usuario";
+    $res = mysqli_query($link, $sql);
+    if (!$res) {
+        echo "Fallo consulta: " . mysqli_error($link);
+        exit();
+    }else{
+        header("location: clases.php");
+    }
+}
+if (isset($_POST['id_clase_eliminar'])) {
+    $sql = "UPDATE clase_usuario SET estado = 'inactiva' WHERE id_clase = $id_clase AND id_usuario = $id_usuario";
+    $res = mysqli_query($link, $sql);
+    if (!$res) {
+        echo "Fallo consulta: " . mysqli_error($link);
+        exit();
+    }else{
+        header("location: clases.php");
+    }
+}
 // Cargar vista
 $view = "clase";
 require_once "views/layout.php";
-?>
