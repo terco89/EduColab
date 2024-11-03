@@ -64,7 +64,7 @@ h3 {
 }
 
 .card-link {
-  margin: 0 ; /* Esto forzará la eliminación del margen */
+  margin: 0 ; 
 }
 
 .card-clase {
