@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $errors[] = "La contraseña es incorrecta.";
                 } else {
                     $_SESSION['usuario'] = $user;
-                    header('Location: index.php');
+                    header('Location: clases.php');
                     exit();
                 }
             }

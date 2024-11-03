@@ -50,7 +50,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])
                 $errors[] = "Fallo consulta: " . mysqli_error($link);
             } else if (mysqli_num_rows($result) == 1) {
                 $_SESSION['usuario'] = mysqli_fetch_assoc($result);
-                header('Location: index.php');
+                header('Location: clases.php');
                 exit();
             }
         }
