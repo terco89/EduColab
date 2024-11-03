@@ -10,14 +10,15 @@ h3 {
 .card-title {
   text-overflow: ellipsis;
 }
-.card-banner
-{
+
+.card-banner {
   background-size: cover;
-  background-position: center; 
-  position: relative; 
-  padding: 20px; 
+  background-position: center;
+  position: relative;
+  padding: 20px;
   height: 100%;
 }
+
 .image-striped {
   position: relative;
   display: inline-block;
@@ -37,6 +38,66 @@ h3 {
   pointer-events: none;
 }
 
-.no-clases{
-  background-color: red;
+.no-clases {
+  width: 100%;
+  height: 70vh;
+  align-content: center;
+  text-align: center;
+}
+
+.no-clases h5 {
+  margin: 2%;
+}
+
+.clases-botones {
+  display: flex;
+  justify-content: center;
+}
+
+.clases-botones .btn-light {
+  margin: 1%;
+  transition: .5s;
+}
+
+.clases-botones .btn-light:hover {
+  transform: scale(1.1);
+}
+
+.card-clase {
+  border-radius: 20px;
+  overflow: hidden;
+  transition: .3s;
+}
+
+.card-clase:hover {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-body.card-banner .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #32418b7a;
+  pointer-events: none;
+}
+
+.card-clase .card-horarios {
+  padding: 5% 5% 1% 5%;
+  height: 100px;
+}
+
+.card-clase .card-title {
+  color: white;
+  margin-bottom: 20%;
+  position: relative;
+}
+
+.card-clase .card-subtitle {
+  color: white;
+  position: relative;
 }

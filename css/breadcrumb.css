@@ -3,7 +3,7 @@ ul.breadcrumb {
 
     padding: 8px 16px;
     list-style: none;
-    background-color: #eee;
+    background-color: #cfd4ee;
 }
 
 ul.breadcrumb li {
@@ -12,19 +12,22 @@ ul.breadcrumb li {
 
 ul.breadcrumb li+li:before {
     padding: 8px;
-    color: black;
+    color: #32418B;
     content: "/\00a0";
 }
 
 ul.breadcrumb a:link,
 ul.breadcrumb a:visited {
     text-decoration: none;
-    color: black;
+    color: #32418B;
 }
 
 ul.breadcrumb li a.active {
-    color: #007bff;
     font-weight: bold;
+    color: transparent;
+    background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
 ul.breadcrumb li a.active:hover {
