@@ -84,7 +84,9 @@
     <div class="container">
         <div class="row">
             <?php if (count($clases) == 0) { ?>
-                <h2 class="text-center">Aún no tienes clases</h2>
+                <div class="no-clases">
+                    <img src="../img/books.png" alt="">
+                </div>
                 <?php } else {
                 foreach ($clases as $clase) { ?>
                     <div class="col-md-4 mb-4">

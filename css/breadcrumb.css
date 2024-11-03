@@ -5,14 +5,20 @@ ul.breadcrumb {
     list-style: none;
     background-color: #eee;
 }
-ul.breadcrumb li {display: inline;}
+
+ul.breadcrumb li {
+    display: inline;
+}
+
 ul.breadcrumb li+li:before {
     padding: 8px;
     color: black;
     content: "/\00a0";
 }
-ul.breadcrumb a:link, ul.breadcrumb a:visited {
-    text-decoration:none;
+
+ul.breadcrumb a:link,
+ul.breadcrumb a:visited {
+    text-decoration: none;
     color: black;
 }
 
@@ -20,7 +26,39 @@ ul.breadcrumb li a.active {
     color: #007bff;
     font-weight: bold;
 }
+
 ul.breadcrumb li a.active:hover {
     color: #007bff;
     font-weight: bold;
+}
+
+/*NAVBAR*/
+
+.navbar-educolab {
+    background-color: #32418B;
+    box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-educolab .nav-link {
+    color: white !important;
+}
+
+.navbar-educolab .nav-link.active{
+    color: transparent !important;
+    background-image: linear-gradient(to right, #929DF8, #DDBBFF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-weight: 700;
+}
+
+.btn-light{
+    background-image: linear-gradient(to right, #929DF8, #DDBBFF);
+    color: white;
+    border: none;
+    transition: .5s;
+}
+
+.btn-light:hover{
+    color: white;
+    transform: scale(1.05);
 }

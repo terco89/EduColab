@@ -36,3 +36,7 @@ h3 {
   background-size: 10px 10px;
   pointer-events: none;
 }
+
+.no-clases{
+  background-color: red;
+}
