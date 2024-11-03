@@ -63,10 +63,16 @@ h3 {
   transform: scale(1.1);
 }
 
+.card-link {
+  margin: 0 ; /* Esto forzará la eliminación del margen */
+}
+
 .card-clase {
   border-radius: 20px;
   overflow: hidden;
   transition: .3s;
+  min-width: 340px;
+  margin: 10%;
 }
 
 .card-clase:hover {
@@ -100,4 +106,10 @@ h3 {
 .card-clase .card-subtitle {
   color: white;
   position: relative;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

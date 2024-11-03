@@ -91,14 +91,13 @@
                 </div>
                 <?php } else {
                 foreach ($clases as $clase) { ?>
-                    <div class="col-md-4 mb-4">
                         <a href="clase.php?id=<?php echo $clase['id']; ?>" class="card-link">
                             <div class="card card-clase">
 
                                 <div class="card-body card-banner" style="<?php if (preg_match('/\.(jpg|png)$/i', $clase['fondo'])): ?>background-image: url('img/fondos/<?php echo $clase['fondo']; ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;<?php else: ?>background-color: <?php echo htmlspecialchars($clase['fondo']); ?>;<?php endif; ?>;">
                                     <div class="overlay"></div>
                                     <h3 class="card-title"><?php echo $clase["nombre"] ?></h3>
-                                    <h6 class="card-subtitle mb-2 ">
+                                    <h6 class="card-subtitle ">
                                         Profesor: <?php echo ($clase['id_usuario_creador'] != $_SESSION['usuario']['id']) ? $clase["nombre_profesor"] . " " . $clase["apellido_profesor"] : "tú"; ?>
                                     </h6>
                                 </div>
@@ -120,7 +119,6 @@
                                 </div>
                             </div>
                         </a>
-                    </div>
 
 
             <?php }
