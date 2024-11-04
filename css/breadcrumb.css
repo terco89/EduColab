@@ -57,7 +57,9 @@ ul.breadcrumb li a.active:hover {
 .btn-light {
     background-image: linear-gradient(to right, #929DF8, #DDBBFF);
     color: white;
-    border: none;
+    border: 3px solid transparent;
+    border-image: linear-gradient(45deg,#32418B, #A09AE5, #BA8CE9, #D598DA);
+    border-image-slice: 1;
     transition: .3s;
 }
 

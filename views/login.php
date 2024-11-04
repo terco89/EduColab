@@ -19,7 +19,7 @@
             <?php endif; ?>
         </div>
         <div class="login-container">
-        <img src ="img/fondos/confesuiza.jpeg" alt = "logo" class = "login-image">
+        <img src ="img/fondos/confesuiza.png" alt = "logo" class = "login-image">
             <h2>Inicia Sesión</h2>
             <form method="POST" action="login.php">
                 <div class="row">
