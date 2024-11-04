@@ -1,25 +1,4 @@
-<style>
-    body {
-        background-color: #f8f9fa;
-    }
-
-    .container {
-        margin-top: 50px;
-    }
-
-    hr {
-        background-color: rgb(14, 129, 133);
-        border-width: 3px;
-    }
-
-    h3 {
-        color: rgb(14, 129, 133);
-    }
-
-    .card-title {
-        text-overflow: ellipsis;
-    }
-</style>
+<link rel="stylesheet" href="./css/clases.css">
 </head>
 
 <body>
@@ -46,20 +25,27 @@
                     ?>
                     <div class="col-md-4 mb-4">
                         <a href="clase.php?id=<?php echo htmlspecialchars($clase['id']); ?>&espacio=<?php echo htmlspecialchars($idEspacio); ?>" class="card-link">
-                            <div class="card" style="height: 200px;">
-                                <div class="card-body card-banner" style="<?php if ($fondo && preg_match('/\.(jpg|png)$/i', $fondo)): ?>background-image: url('img/fondos/<?php echo htmlspecialchars($fondo); ?>');background-size: cover;background-position: center;background-repeat: no-repeat;
-                                    <?php else: ?>
-                                        background-color: <?php echo htmlspecialchars($fondo ?? '#ffffff'); ?>;
-                                    <?php endif; ?>
-                                ">
+                            <div class="card card-clase">
+                                <div class="card-body card-banner" style="<?php if ($fondo && preg_match('/\.(jpg|png)$/i', $fondo)): ?>background-image: url('img/fondos/<?php echo htmlspecialchars($fondo); ?>');background-size: cover;background-position: center;background-repeat: no-repeat;<?php else: ?>background-color: <?php echo htmlspecialchars($fondo ?? '#ffffff'); ?>;<?php endif; ?>">
+                                    <div class="overlay"></div>
                                     <h3 class="card-title"><?php echo htmlspecialchars($clase["nombre"]); ?></h3>
-                                    <h6 class="card-subtitle mb-2 text-muted">Profesor: <?php echo htmlspecialchars($clase["nombre_profesor"] . ' ' . $clase["apellido_profesor"]); ?></h6>
-                                    <hr>
-                                    <ul>
-                                        <?php foreach ($clase['horarios'] as $horario): ?>
-                                            <li style='color:#6c757d;'><?php echo "{$horario['dia_semana']} de " . date('H:i', strtotime($horario['hora_inicio'])) . " a " . date('H:i', strtotime($horario['hora_fin'])); ?></li>
-                                        <?php endforeach; ?>
-                                    </ul>
+                                    <h6 class="card-subtitle">Profesor: <?php echo htmlspecialchars($clase["nombre_profesor"] . ' ' . $clase["apellido_profesor"]); ?></h6>
+                                </div>
+                                <div class="card-horarios">
+                                <?php
+                                    $horarios = $clase['horarios'];
+                                    $numHorarios = count($horarios);
+                                    $maxHorarios = 2;
+                                    $mostrarMas = $numHorarios > $maxHorarios;
+                                    for ($i = 0; $i < ($mostrarMas ? $maxHorarios : $numHorarios); $i++) {
+                                        $hora_inicio = date('H:i', strtotime($horarios[$i]["hora_inicio"]));
+                                        $hora_fin = date('H:i', strtotime($horarios[$i]["hora_fin"]));
+                                        echo "<p style=color:#6c757d;>" . $horarios[$i]["dia_semana"] . " de " . $hora_inicio . " a " . $hora_fin . "</p>";
+                                    }
+                                    if ($mostrarMas) {
+                                        echo "<p style=color:#6c757d;>...</p>";
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </a>
