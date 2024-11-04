@@ -1,9 +1,9 @@
 ul.breadcrumb {
     font-family: Arial, sans-serif;
-
     padding: 8px 16px;
     list-style: none;
     background-color: #cfd4ee;
+    margin-bottom: 0;
 }
 
 ul.breadcrumb li {
@@ -46,7 +46,7 @@ ul.breadcrumb li a.active:hover {
     color: white !important;
 }
 
-.navbar-educolab .nav-link.active{
+.navbar-educolab .nav-link.active {
     color: transparent !important;
     background-image: linear-gradient(to right, #929DF8, #DDBBFF);
     -webkit-background-clip: text;
@@ -54,14 +54,147 @@ ul.breadcrumb li a.active:hover {
     font-weight: 700;
 }
 
-.btn-light{
+.btn-light {
     background-image: linear-gradient(to right, #929DF8, #DDBBFF);
     color: white;
     border: none;
-    transition: .5s;
+    transition: .3s;
 }
 
-.btn-light:hover{
+.btn-light:hover {
     color: white;
-    transform: scale(1.05);
+    transform: scale(.95);
+}
+
+/*NAVBAR CLASE*/
+
+nav.navbar.nvc {
+    background-color: #e7e9f6;
+}
+
+nav.navbar.nvc a,
+nav.navbar.nvc .nav-item .nav-link {
+    color: #32418B;
+}
+
+nav.navbar.nvc .navbar-brand,
+nav.navbar.nvc .nav-item .nav-link.active {
+    font-weight: 700;
+}
+
+.btn-pink,
+.btn-lila,
+.btn-skyblue {
+    color: white;
+    transition: 0.3s;
+}
+
+.btn-pink {
+    background-color: #d598da;
+}
+
+.btn-lila {
+    background-color: #929df8;
+}
+
+.btn-skyblue {
+    background-color: #5a8fdd;
+}
+
+.btn-pink:hover,
+.btn-lila:hover,
+.btn-skyblue:hover {
+    color: white;
+}
+
+.btn-pink:hover {
+    background-color: #be61c6;
+}
+
+.btn-lila:hover {
+    background-color: #475af3;
+}
+
+.btn-skyblue:hover {
+    background-color: #2a6cce;
+}
+
+/*CLASE*/
+
+.jumbotron {
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.jumbotron .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #32418b7a;
+    pointer-events: none;
+}
+
+.jumbotron .title,
+.jumbotron .lead,
+.jumbotron .profe,
+hr {
+    color: white;
+    position: relative;
+}
+
+.jumbotron .title{
+    font-weight: 700;
+}
+
+hr{
+    background-color: white;
+    height: 1px;
+}
+
+.cards-clase, .jumbotron{
+    box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.1);
+    margin: 3% 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cards-clase .card-header{
+    background-color: #32418b;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.card-unirse, .card-unirse form{
+    border: 1px solid rgba(0, 0, 0, 0.338);
+    border-radius: 10px;
+    padding: 1%;
+}
+.card-unirse .card-title{
+    margin-bottom: 10%;
+    font-weight: 700;
+    font-size: 1.5em;
+    color: #32418b;
+}
+
+.card-unirse form{
+    padding: 5%;
+}
+
+.card-unirse b{
+    color: #32418b;
+}
+.btn-unirse{
+    background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);
+    border: none;
+    transition: .3s;
+}
+
+.btn-unirse:hover{
+    transform: scale(.95);
 }
