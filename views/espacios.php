@@ -62,9 +62,9 @@
             <?php while ($row = $result->fetch_assoc()): ?>
                 <div class="col-md-4">
                     <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo htmlspecialchars($row['nombre']); ?></h5>
-                            <p class="card-text"><?php echo htmlspecialchars($row['curso_division']); ?></p>
+                        <div class="card-body" style="background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);">
+                            <h5 class="card-title" style="color:white"><?php echo htmlspecialchars($row['nombre']); ?></h5>
+                            <p class="card-text" style="color:white"><?php echo htmlspecialchars($row['curso_division']); ?></p>
                             <a href="espacio.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary">Ver Espacio</a>
                         </div>
                     </div>
