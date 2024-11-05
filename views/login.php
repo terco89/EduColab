@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="css/login.css">
 <style>
-    .login-image{
-        display: block;
-        margin: 0 auto;
-        max-width: 50%;
+.login-image{
+
+        margin-left: 50px;
+        max-width: 34%;
         height: auto;
     }
 </style>
@@ -20,6 +20,7 @@
         </div>
         <div class="login-container">
         <img src ="img/fondos/confesuiza.png" alt = "logo" class = "login-image">
+        <img src ="img/fondos/EduCollab.png" alt = "logo" class = "login-image">
             <h2>Inicia Sesión</h2>
             
             <form method="POST" action="login.php">
