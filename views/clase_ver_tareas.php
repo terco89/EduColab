@@ -35,6 +35,7 @@
         z-index: 9999;
     }
 
+
     #close-button {
         position: absolute;
         /* Posiciona el botón en relación al iframe */
@@ -111,8 +112,8 @@
                     <li class="nav-item">
                         <button onclick="showContent('content3')">Comentarios del estudiante</button>
                     </li>
-            </ul>
-        <?php } ?>
+                </ul>
+            <?php } ?>
         </div>
     </nav>
 <?php } ?>
@@ -121,7 +122,7 @@
     function showContent(contentId) {
         // Ocultar todos los contenidos
         var contents = document.querySelectorAll('.content');
-        contents.forEach(function(content) {
+        contents.forEach(function (content) {
             content.classList.add('hidden');
         });
 
@@ -131,7 +132,7 @@
     }
 
     // Mostrar el primer contenido por defecto
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         showContent('content1'); // Aquí defines cuál contenido mostrar por defecto
     });
 </script>
@@ -164,7 +165,7 @@
                                             </div>
                                         </div>
                                     </div>
-                            <?php }
+                                <?php }
                             } ?>
 
                             <!-- Botones de acción -->
@@ -203,7 +204,8 @@
                                                                     style="pointer-events: none;">Nombre del archivo: </div>
                                                             </div>
                                                         </div>
-                                                        <button type="submit" name="submit" class="btn btn-secondary">Listo!</button>
+                                                        <button type="submit" name="submit"
+                                                            class="btn btn-secondary">Listo!</button>
                                                     </form>
                                                     <script>
                                                         function VistaPrevia() {
@@ -218,7 +220,7 @@
 
                                                             if (archivo) {
                                                                 var lector = new FileReader();
-                                                                lector.onload = function(e) {
+                                                                lector.onload = function (e) {
                                                                     vistaPrevContainer.style.display = 'flex';
                                                                     document.getElementById('archivo').style.display = 'none'; // Ocultar input de archivo
                                                                     if (archivo.type.match('image.*')) {
@@ -308,7 +310,7 @@
 
                                                             if (archivo) {
                                                                 var lector = new FileReader();
-                                                                lector.onload = function(e) {
+                                                                lector.onload = function (e) {
                                                                     vistaPrevContainer.style.display = 'flex';
                                                                     document.getElementById('archivo').style.display = 'none'; // Ocultar input de archivo
                                                                     if (archivo.type.match('image.*')) {
@@ -349,50 +351,50 @@
             </div>
 
             <!-- Columna para la sección de comentarios -->
-             <?php if($_SESSION["usuario"]["id"] != $clase["id_usuario_creador"]){ ?>
-            <div class="col-md-6">
-                <div class="comments-section">
-                    <h2 class="mb-4">Comentarios</h2>
+            <?php if ($_SESSION["usuario"]["id"] != $clase["id_usuario_creador"]) { ?>
+                <div class="col-md-6">
+                    <div class="comments-section">
+                        <h2 class="mb-4">Comentarios</h2>
 
-                    <!-- Formulario para Agregar Comentario -->
-                    <form method="POST"
-                        action="clase_ver_tarea.php?id=<?php echo $_GET["id"]; ?>&tid=<?php echo $_GET["tid"]; ?>">
-                        <div class="form-group">
-                            <label for="commentContent">Comentario:</label>
-                            <textarea class="form-control" name="comentario" id="commentContent" rows="3"
-                                placeholder="Escribe tu comentario" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-comment"></i> Añadir
-                            Comentario</button>
-                    </form>
-                </div>
-                <div class="comment-box border p-3 mb-3">
-                    <?php
+                        <!-- Formulario para Agregar Comentario -->
+                        <form method="POST"
+                            action="clase_ver_tarea.php?id=<?php echo $_GET["id"]; ?>&tid=<?php echo $_GET["tid"]; ?>">
+                            <div class="form-group">
+                                <label for="commentContent">Comentario:</label>
+                                <textarea class="form-control" name="comentario" id="commentContent" rows="3"
+                                    placeholder="Escribe tu comentario" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-comment"></i> Añadir
+                                Comentario</button>
+                        </form>
+                    </div>
+                    <div class="comment-box border p-3 mb-3">
+                        <?php
 
-                    $query = "SELECT * FROM mensajes_privado WHERE tarea_id = " . $_GET["tid"] . " AND (usuario_id = " . $_SESSION["usuario"]["id"] . " OR usuario_id = " . $clase["id_usuario_creador"] . ") ORDER BY fecha_creacion ASC";
-                    $result = mysqli_query($link, $query);
-                    $nombre = mysqli_fetch_assoc(mysqli_query($link, "SELECT name FROM usuarios WHere id = " . $clase["id_usuario_creador"]));
+                        $query = "SELECT * FROM mensajes_privado WHERE tarea_id = " . $_GET["tid"] . " AND (usuario_id = " . $_SESSION["usuario"]["id"] . " OR usuario_id = " . $clase["id_usuario_creador"] . ") ORDER BY fecha_creacion ASC";
+                        $result = mysqli_query($link, $query);
+                        $nombre = mysqli_fetch_assoc(mysqli_query($link, "SELECT name FROM usuarios WHere id = " . $clase["id_usuario_creador"]));
 
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            // Determinar la clase basada en el usuario
-                            $user_class = ($row['bandera'] == false) ? 'left' : 'right';
-                            $container_class = ($row['bandera'] == false) ? 'left' : 'right';
-                            $nombre_class = ($row['bandera'] == true) ? $_SESSION["usuario"]["name"] : $nombre["name"];
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                // Determinar la clase basada en el usuario
+                                $user_class = ($row['bandera'] == false) ? 'left' : 'right';
+                                $container_class = ($row['bandera'] == false) ? 'left' : 'right';
+                                $nombre_class = ($row['bandera'] == true) ? $_SESSION["usuario"]["name"] : $nombre["name"];
 
-                            echo '<div class="comment-container ' . $container_class . '" style="text-align:' . $container_class . ';" >';
-                            echo '<div class="comment ' . $user_class . '">';
-                            echo '<strong>' . htmlspecialchars($nombre_class) . '</strong> ';
-                            echo '<p>' . htmlspecialchars($row['mensaje']) . '</p>';
-                            echo '</div>';
-                            echo '</div>';
+                                echo '<div class="comment-container ' . $container_class . '" style="text-align:' . $container_class . ';" >';
+                                echo '<div class="comment ' . $user_class . '">';
+                                echo '<strong>' . htmlspecialchars($nombre_class) . '</strong> ';
+                                echo '<p>' . htmlspecialchars($row['mensaje']) . '</p>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<p>No hay comentarios aún.</p>';
                         }
-                    } else {
-                        echo '<p>No hay comentarios aún.</p>';
-                    }
-                    ?>
+                        ?>
+                    </div>
                 </div>
-            </div>
             <?php } ?>
         </div>
     </div>
@@ -407,13 +409,34 @@
                                 style="margin-right: 1.5rem; border-radius:50%; width:2rem; height:2rem;  object-fit: cover; background-color:white;"
                                 class="profile">
                             <div class="media-body">
-                                <h5 class="truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;"><?php echo $usuario["nombre"] ?> <?php echo $usuario["apellido"] ?></h5>
+                                <h5 class="truncate"
+                                    style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;">
+                                    <?php echo $usuario["nombre"] ?>     <?php echo $usuario["apellido"] ?></h5>
                                 <h5 style="color: red"><?php if ($usuario["estado"] == 1) {
-                                                            echo "Sin entregar";
-                                                        } ?></h5>
+                                    echo "Sin entregar";
+                                } ?></h5>
                                 <h5 style="color:green"><?php if ($usuario["estado"] == 2) {
-                                                            echo "Entregado";
-                                                        } ?></h5>
+                                    echo "Entregado";
+                                } ?></h5>
+                                <?php if (isset($recursos2)) {
+                                    foreach($recursos as $r){
+                                        if($r[0] == $usuario["id"]){ ?>
+                                        <div class="resource-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h6 class="card-subtitle mb-2 text-muted">Archivo Adjunto</h6>
+                                                <p class="card-text">Nombre del archivo: <a href="#"
+                                                        onclick="cargarPdf('<?php echo $r[1] ?>')"><?php echo $r[1] ?></a>
+                                                </p>
+                                                <p class="card-text">
+                                                    <i class="far fa-file-pdf fa-2x"></i> <!-- Icono de archivo PDF -->
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <?php }
+                                    }
+                                } ?>
                             </div>
                         </div>
                     </div>
@@ -457,7 +480,7 @@
                                         data-person="<?php echo $general[$i]["name"]; ?>">
                                         <?php echo $general[$i]["name"]; ?>
                                     </li>
-                            <?php
+                                    <?php
                                     $usados[] = $general[$i]["id"];
                                 }
                             } ?>
@@ -483,7 +506,7 @@
             <script>
                 actual = 0;
 
-                $('.list-group-item').on('click', function() {
+                $('.list-group-item').on('click', function () {
                     let personName = $(this).data('person');
                     actual = $(this).data('id');
                     var comments = [];
@@ -495,7 +518,7 @@
                         data: {
                             id_priv: actual
                         },
-                        success: function(data) {
+                        success: function (data) {
                             comments = JSON.parse(data);
                             if (comments.length > 0) {
                                 comments.forEach(comment => {
@@ -509,13 +532,13 @@
                                 $('#commentsList').append('<div class="comment-item">No hay comentarios.</div>');
                             }
                         },
-                        error: function(jqXHR, textStatus, errorThrown) {
+                        error: function (jqXHR, textStatus, errorThrown) {
                             console.error('Error en la solicitud: ' + textStatus, errorThrown);
                         }
                     });
                 });
 
-                $('#addComment').on('click', function() {
+                $('#addComment').on('click', function () {
                     let personName = $('#personName').text().replace('Comentarios para ', '');
                     let newComment = $('#newComment').val();
 
@@ -528,11 +551,11 @@
                                 'nmensaje': newComment,
                                 'id': actual
                             },
-                            success: function(response) {
+                            success: function (response) {
                                 $('#commentsList').append(`<div class="comment-item">${newComment}</div>`);
                                 $('#newComment').val('');
                             },
-                            error: function(xhr, status, error) {
+                            error: function (xhr, status, error) {
                                 $('#response').html('<div class="alert alert-danger">Error: ' + error + '</div>');
                             }
                         });
@@ -548,7 +571,7 @@
         document.querySelector("iframe").style.display = "block";
         document.querySelector("#close-button").style.display = "block";
     }
-    document.getElementById('close-button').addEventListener('click', function() {
+    document.getElementById('close-button').addEventListener('click', function () {
         document.querySelector("iframe").style.display = 'none';
         this.style.display = 'none'; // Oculta el botón también
     });

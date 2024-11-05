@@ -1,9 +1,9 @@
 <?php
 require_once "includes/config.php";
 session_start();
-$sql="SELECT * FROM tareas WHERE id='".$_GET['tid']."'";
-$query=mysqli_query($link, $sql);
-$fecha=mysqli_fetch_assoc($query);
+$sql = "SELECT * FROM tareas WHERE id='" . $_GET['tid'] . "'";
+$query = mysqli_query($link, $sql);
+$fecha = mysqli_fetch_assoc($query);
 if (!isset($_SESSION["usuario"])) {
     header("Location: index.php");
     exit();
@@ -14,15 +14,15 @@ if (!isset($_GET["id"]) || !isset($_GET["tid"])) {
     exit();
 }
 
-if(isset($_POST["comentario"]) && strlen($_POST["comentario"]) > 0){
-    $sql = "INSERT INTo mensajes_privado(tarea_id,usuario_id,mensaje,fecha_creacion,bandera) VALUES(".$_GET["tid"].",".$_SESSION["usuario"]["id"].",'".$_POST["comentario"]."',NOW(),true)";
-    $result = mysqli_query($link,$sql);
-    if($result){
-        header("Location: clase_ver_tarea.php?id=".$_GET["id"]."&tid=".$_GET["tid"]);
+if (isset($_POST["comentario"]) && strlen($_POST["comentario"]) > 0) {
+    $sql = "INSERT INTo mensajes_privado(tarea_id,usuario_id,mensaje,fecha_creacion,bandera) VALUES(" . $_GET["tid"] . "," . $_SESSION["usuario"]["id"] . ",'" . $_POST["comentario"] . "',NOW(),true)";
+    $result = mysqli_query($link, $sql);
+    if ($result) {
+        header("Location: clase_ver_tarea.php?id=" . $_GET["id"] . "&tid=" . $_GET["tid"]);
     }
 }
-if(isset($_POST["id_priv"])){
-    $sql = "select * from mensajes_privado where (usuario_id = ".$_POST["id_priv"]." or usuario_id = ".$_SESSION["usuario"]["id"].") and tarea_id = ".$_GET["tid"];
+if (isset($_POST["id_priv"])) {
+    $sql = "select * from mensajes_privado where (usuario_id = " . $_POST["id_priv"] . " or usuario_id = " . $_SESSION["usuario"]["id"] . ") and tarea_id = " . $_GET["tid"];
     $query = mysqli_query($link, $sql);
     $general = array();
     if (mysqli_num_rows($query) > 0) {
@@ -59,7 +59,7 @@ if (!$clase) {
     exit();
 }
 // Obtener información de los usuarios
-$sql_clases = "SELECT DISTINCT tarea_usuario.estado, usuarios.nombre, usuarios.apellido, usuarios.img 
+$sql_clases = "SELECT DISTINCT tarea_usuario.estado, usuarios.nombre, usuarios.apellido, usuarios.img ,usuarios.id
              FROM tarea_usuario INNER JOIN usuarios ON tarea_usuario.usuario_id = usuarios.id
              INNER JOIN clase_usuario ON usuarios.id = clase_usuario.id_usuario INNER JOIN clasesescolares ON clase_usuario.id_clase = clasesescolares.id
              WHERE tarea_id = " . $_GET["tid"];
@@ -74,8 +74,10 @@ if (!$clase) {
     exit();
 }
 
-if (isset($_POST['submit'])){
-    $sqlll="UPDATE tarea_usuario SET estado = '2' WHERE usuario_id = ".$_SESSION["usuario"]["id"]; " AND tarea_id = ". $_GET["tid"];  ;
+if (isset($_POST['submit'])) {
+    $sqlll = "UPDATE tarea_usuario SET estado = '2' WHERE usuario_id = " . $_SESSION["usuario"]["id"];
+    " AND tarea_id = " . $_GET["tid"];
+    ;
     $quuery = mysqli_query($link, $sqlll);
     if (!$quuery) {
         echo "Fallo consulta: " . mysqli_error($link);
@@ -99,10 +101,10 @@ if (file_exists("img/tareas/" . $_GET["tid"]) && is_dir("img/tareas/" . $_GET["t
 }
 
 
-if($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"] && isset($_POST["nmensaje"]) && isset($_POST["id"])){
-    $sql = "INSERT INto mensajes_privado(tarea_id,usuario_id,mensaje,fecha_creacion,bandera) VALUES(".$_GET["tid"].",".$_POST["id"].",'".$_POST["nmensaje"]."',NOW(),false)";
-    $result = mysqli_query($link,$sql);
-    if($result){
+if ($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"] && isset($_POST["nmensaje"]) && isset($_POST["id"])) {
+    $sql = "INSERT INto mensajes_privado(tarea_id,usuario_id,mensaje,fecha_creacion,bandera) VALUES(" . $_GET["tid"] . "," . $_POST["id"] . ",'" . $_POST["nmensaje"] . "',NOW(),false)";
+    $result = mysqli_query($link, $sql);
+    if ($result) {
         echo "exito pe";
     }
 }
@@ -121,8 +123,8 @@ $result = $stmt->get_result();
 // Verifica si el usuario logueado es profesor
 $esProfesor = $result->num_rows > 0;
 if (isset($_POST['titulo'])) {
-    $id=$_GET['id'];
-    $tt=$_GET['tid'];
+    $id = $_GET['id'];
+    $tt = $_GET['tid'];
     $sql = "UPDATE tareas SET nombre = '" . $_POST['titulo'] . "', descripcion = '" . $_POST['instruccion'] . "', fecha_subida = NOW(), fecha_entrega = '" . $_POST['fecha_limite'] . "', clase_id = '" . $clase["id"] . "' WHERE id = " . $_GET["tid"];
     $query = mysqli_query($link, $sql);
     if (!$query) {
@@ -140,14 +142,15 @@ if (isset($_POST['titulo'])) {
     }
     for ($i = 0; $i < count($ids); $i++) {
         if (!$esProfesor) {
-            
-        
-        $sql = "INSERT INTO tarea_usuario(tarea_id,usuario_id,estado) VALUES($tid," . $ids[$i]["id_usuario"] . ",1)";
-        $query = mysqli_query($link, $sql);
-        if (!$query) {
-            echo "Fallo consulta: " . mysqli_error($link);
-            exit();
-        }}
+
+
+            $sql = "INSERT INTO tarea_usuario(tarea_id,usuario_id,estado) VALUES($tid," . $ids[$i]["id_usuario"] . ",1)";
+            $query = mysqli_query($link, $sql);
+            if (!$query) {
+                echo "Fallo consulta: " . mysqli_error($link);
+                exit();
+            }
+        }
     }
 
     if (isset($_SESSION['usuario']) && isset($_FILES['archivo']) && $_FILES['archivo']['error'] == 0) {
@@ -161,9 +164,9 @@ if (isset($_POST['titulo'])) {
         } else {
             echo "Error al subir el archivo.";
         }
-        
+
     }
-    
+
     //echo '<script>window.location.href = "clase_ver_tarea.php?id=' . $result["id"] . '&tid=' . $tid . '";</script>';
     //exit();
     header("Location:clase_ver_tarea.php?id=" . $id . "&tid=" . $tt);
@@ -175,7 +178,7 @@ if (isset($_POST['eliminar'])) {
         echo "Fallo consulta: " . mysqli_error($link);
         exit();
     }
-    header('Location: clase.php?id='.$_GET['id']);
+    header('Location: clase.php?id=' . $_GET['id']);
 }
 if (isset($_FILES["archivoEntrega"])) {
     $sql = "INSERT INTO entregas(tarea_id,usuario_id,fecha_entrega) VALUES(" . $_GET["tid"] . "," . $_SESSION['usuario']['id'] . ",NOW())";
@@ -197,14 +200,41 @@ if (isset($_FILES["archivoEntrega"])) {
     header('Location: clase_ver_tarea.php?id=' . $_GET["id"] . '&tid=' . $_GET["tid"]);
 }
 
-if($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]){
+if ($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]) {
     //$sql = "SELECT usuarios.id, name, mensaje,bandera FROM mensajes_privado INNER JOIN usuarios ON mensajes_privado.usuario_id = usuarios.id WHERE tarea_id = ".$_GET["tid"];
-    $sql = "SELECT usuarios.id, name FROM clase_usuario INNER JOIN usuarios ON clase_usuario.id_usuario = usuarios.id WHERE clase_usuario.id_clase = ".$_GET["id"] ." AND clase_usuario.id_usuario != ".$_SESSION["usuario"]["id"];
+    $sql = "SELECT usuarios.id, name FROM clase_usuario INNER JOIN usuarios ON clase_usuario.id_usuario = usuarios.id WHERE clase_usuario.id_clase = " . $_GET["id"] . " AND clase_usuario.id_usuario != " . $_SESSION["usuario"]["id"];
     $query = mysqli_query($link, $sql);
     $general = array();
     if (mysqli_num_rows($query) > 0) {
         while ($row = mysqli_fetch_assoc($query)) {
             $general[] = $row;
+        }
+    }
+
+    $sql = "select usuario_id from entregas where tarea_id = ".$_GET["tid"];
+    $query = mysqli_query($link, $sql);
+    $dirs = array();
+    if (mysqli_num_rows($query) > 0) {
+        while ($row = mysqli_fetch_assoc($query)) {
+            $dirs[] = $row;
+        }
+        $i = 0;
+        $recursos2 = array();
+        foreach($dirs as $d){
+            
+            $archivos = scandir("img/entregas/" . $_GET["tid"]."&".$d["usuario_id"]);
+            $recursos[$i] = array();
+            array_push($recursos[$i],$d["usuario_id"]);
+            foreach ($archivos as $archivo) {
+                if ($archivo != '.' && $archivo != '..') {
+                    $info_archivo = pathinfo($archivo);
+                    $nombre = $info_archivo['filename'];
+                    $extension = isset($info_archivo['extension']) ? $info_archivo['extension'] : '';
+                    
+                    array_push($recursos[$i],$nombre.$extension);
+                }
+            }
+            $i++;
         }
     }
 }
