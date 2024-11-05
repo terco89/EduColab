@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="./css/clases.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <ul class="breadcrumb">
     <li><a href="index.php">Home</a></li>
     <?php if ($espacio): ?>
@@ -40,7 +42,7 @@
     <!-- Header -->
     <div class="jumbotron">
         <h1 class="display-4">Tareas</h1>
-        <p class="lead">Aquí encontrarás todas las tareas asignadas y podrás enviar tus trabajos.</p>
+        <p style="color: black;" class="lead">Aquí encontrarás todas las tareas asignadas y podrás enviar tus trabajos.</p>
         <?php if ($esProfesor) { ?>
             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#submitModal">Crear tarea</a>
             <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
@@ -163,7 +165,12 @@
             </div>
         <?php } ?>
     </div>
-
+    <?php if (count($tareas) == 0) { ?>
+                <div style="margin-top:-150px;" class="no-clases">
+                    <img src="./img/books.png" alt="">
+                    <h5>Aún no tienes tareas</h5>
+                </div>
+                <?php } else { ?>
     <!-- Lista de Tareas -->
     <?php for ($i = 0; $i < count($tareas); $i++) { ?>
 
@@ -182,7 +189,7 @@
                 </div>
         </div>
     </div>
-    <?php } ?>
+    <?php } }?>
 
 </div>
 
