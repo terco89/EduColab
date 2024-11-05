@@ -93,7 +93,6 @@
                 foreach ($clases as $clase) { ?>
                         <a href="clase.php?id=<?php echo $clase['id']; ?>" class="card-link">
                             <div class="card card-clase">
-
                                 <div class="card-body card-banner" style="<?php if (preg_match('/\.(jpg|png)$/i', $clase['fondo'])): ?>background-image: url('img/fondos/<?php echo $clase['fondo']; ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;<?php else: ?>background-color: <?php echo htmlspecialchars($clase['fondo']); ?>;<?php endif; ?>;">
                                     <div class="overlay"></div>
                                     <h3 class="card-title"><?php echo $clase["nombre"] ?></h3>

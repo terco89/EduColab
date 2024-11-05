@@ -6,7 +6,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #10b5c1cb;
+  background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);
 }
 
 .login-container-wrapper {
@@ -15,6 +15,7 @@ body {
   align-items: center;
   width: 100%;
   max-width: 460px;
+  
 }
 
 .alert-container {
@@ -49,8 +50,8 @@ body {
 
 .login-container input[type="submit"] {
   width: 100%;
-  background-color: #10b5c1f7;
-  color: #fff;
+  background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);
+    color: #fff;
   border: none;
   padding: 12px 20px;
   border-radius: 4px;
