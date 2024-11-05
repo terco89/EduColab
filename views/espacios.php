@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="./css/clases.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <ul class="breadcrumb">
-  <li><a href="index.php">Home</a></li>
-  <li><a class="active" href="espacios.php">Espacios</a></li>
+    <li><a href="index.php">Home</a></li>
+    <li><a class="active" href="espacios.php">Espacios</a></li>
 </ul>
 
 <div  class="container">
@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group">
                             <label for="cursoDivision">Curso y división</label>
-                            <input type="text" class="form-control" id="cursoDivision" name="curso_division" placeholder="Curso y división"required>
+                            <input type="text" class="form-control" id="cursoDivision" name="curso_division" placeholder="Curso y división" required>
                         </div>
                         <div class="form-group">
                             <label for="clases">Clases a agrupar</label>
@@ -61,13 +61,12 @@
         <?php if ($result->num_rows > 0): ?>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body" style="background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);">
+                    <a href="espacio.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="card-link">
+                        <div class="card-body" style="background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA); border-radius: 20px; height:150px">
                             <h5 class="card-title" style="color:white"><?php echo htmlspecialchars($row['nombre']); ?></h5>
                             <p class="card-text" style="color:white"><?php echo htmlspecialchars($row['curso_division']); ?></p>
-                            <a href="espacio.php?id=<?php echo htmlspecialchars($row['id']); ?>" class="btn btn-primary">Ver Espacio</a>
                         </div>
-                    </div>
+                    </a>
                 </div>
             <?php endwhile; ?>
         <?php else: ?> <div class="no-clases">
