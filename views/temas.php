@@ -12,6 +12,8 @@
 
 </ul>
 <?php require_once "views/clase_navbar.php"; ?>
+<link rel="stylesheet" href="./css/clases.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
     .preview-container {
         display: none;
@@ -40,7 +42,9 @@
     <div class="jumbotron">
         <h1 class="display-4">Temas</h1>
         <p class="lead">Aquí encontrarás todos tus temas asignados.</p>
+        
         <?php foreach ($profesores as $profesor):
+        
             if ($profesor['id'] == $_SESSION['usuario']['id']):  ?>
 
                 <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#submitModal">Crear tema</a>
@@ -116,7 +120,12 @@
                 </div>
         <?php endif;
         endforeach; ?>
-    </div>
+    </div> <?php if (count($temas) == 0) { ?>
+                <div style="margin-top:-150px;" class="no-clases">
+                    <img src="./img/books.png" alt="">
+                    <h5>Aún no tienes temas</h5>
+                </div>
+                <?php } else { ?>
     <!-- Material de Clase -->
     <?php for ($i = 0; $i < count($temas); $i++) { ?>
         <div class="card mb-4">
@@ -134,4 +143,4 @@
                 </div>
             </div>
         </div>
-    <?php } ?>
+    <?php } }?>

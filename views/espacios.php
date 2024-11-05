@@ -1,11 +1,15 @@
+<link rel="stylesheet" href="./css/clases.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <ul class="breadcrumb">
   <li><a href="index.php">Home</a></li>
   <li><a class="active" href="espacios.php">Espacios</a></li>
 </ul>
-<div class="container">
-    <h1>Espacios</h1>
-    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#submitModal">Crear un espacio</button>
 
+<div  class="container">
+
+    <h1  >Espacios</h1><br>
+    <button   type="button" class="btn btn-light" data-toggle="modal" data-target="#submitModal">Crear un espacio</button>
+    
     <!-- Modal -->
     <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -66,8 +70,10 @@
                     </div>
                 </div>
             <?php endwhile; ?>
-        <?php else: ?>
-            <p>No hay espacios disponibles.</p>
+        <?php else: ?> <div class="no-clases">
+                    <img src="./img/books.png" alt="">
+                    <h5>Aún no tienes espacios</h5>
+                </div>
         <?php endif; ?>
     </div>
 </div>
