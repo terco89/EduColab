@@ -419,14 +419,14 @@
                                     echo "Entregado";
                                 } ?></h5>
                                 <?php if (isset($recursos2)) {
-                                    foreach($recursos as $r){
+                                    foreach($recursos2 as $r){
                                         if($r[0] == $usuario["id"]){ ?>
                                         <div class="resource-card">
                                         <div class="card">
                                             <div class="card-body">
                                                 <h6 class="card-subtitle mb-2 text-muted">Archivo Adjunto</h6>
                                                 <p class="card-text">Nombre del archivo: <a href="#"
-                                                        onclick="cargarPdf('<?php echo $r[1] ?>')"><?php echo $r[1] ?></a>
+                                                        onclick="cargarPdf2('<?php echo $r[1] ?>','<?php echo $r[0]?>')"><?php echo $r[1] ?></a>
                                                 </p>
                                                 <p class="card-text">
                                                     <i class="far fa-file-pdf fa-2x"></i> <!-- Icono de archivo PDF -->
@@ -567,7 +567,13 @@
 </div>
 <script>
     function cargarPdf(nom) {
-        document.querySelector("iframe").src = "xd.php?tid=<?php echo $tarea["id"]; ?>&nom=" + nom;
+        document.querySelector("iframe").src = "xd.php?tid=<?php echo $tarea["id"]."&" ?>&nom=" + nom;
+        document.querySelector("iframe").style.display = "block";
+        document.querySelector("#close-button").style.display = "block";
+    }
+    function cargarPdf2(nom,si) {
+        document.querySelector("iframe").src = "zd.php?tid=<?php echo $tarea["id"]; ?>!"+si+"&nom=" + nom;
+        console.log("zd.php?tid=<?php echo $tarea["id"]; ?>\&"+si+"&nom=" + nom);
         document.querySelector("iframe").style.display = "block";
         document.querySelector("#close-button").style.display = "block";
     }

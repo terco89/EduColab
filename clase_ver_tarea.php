@@ -189,7 +189,7 @@ if (isset($_FILES["archivoEntrega"])) {
     }
     $archivo_nombre = $_FILES['archivoEntrega']['name'];
     $archivo_temporal = $_FILES['archivoEntrega']['tmp_name'];
-    $nombre = $_GET["tid"] . "&" . $_SESSION["usuario"]["id"];
+    $nombre = $_GET["tid"] . "!" . $_SESSION["usuario"]["id"];
     mkdir("img/entregas/" . $nombre . "");
     $ruta = "img/entregas/" . $nombre . "/" . $archivo_nombre;
     if (move_uploaded_file($archivo_temporal, $ruta)) {
@@ -222,16 +222,15 @@ if ($_SESSION["usuario"]["id"] == $clase["id_usuario_creador"]) {
         $recursos2 = array();
         foreach($dirs as $d){
             
-            $archivos = scandir("img/entregas/" . $_GET["tid"]."&".$d["usuario_id"]);
-            $recursos[$i] = array();
-            array_push($recursos[$i],$d["usuario_id"]);
+            $archivos = scandir("img/entregas/" . $_GET["tid"]."!".$d["usuario_id"]);
+            $recursos2[$i] = array();
+            $recursos2[$i][] = $d["usuario_id"];
             foreach ($archivos as $archivo) {
                 if ($archivo != '.' && $archivo != '..') {
                     $info_archivo = pathinfo($archivo);
                     $nombre = $info_archivo['filename'];
                     $extension = isset($info_archivo['extension']) ? $info_archivo['extension'] : '';
-                    
-                    array_push($recursos[$i],$nombre.$extension);
+                    $recursos2[$i][]=$nombre.".".$extension;
                 }
             }
             $i++;
