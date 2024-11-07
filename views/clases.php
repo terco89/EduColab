@@ -79,7 +79,7 @@
                         </script>
 
                     </div>
-                    <div class="modal-footer"> <input type="submit" class="btn btn-primary" value="Crear">
+                    <div class="modal-footer"> <input type="submit" class="btn btn-secondary"style="background-color: #32418B;" value="Crear">
                     </div>
                 </div>
             </div>

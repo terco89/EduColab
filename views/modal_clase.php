@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editPhotoLabel">Editar foto o color</h5>
+                <h5 class="modal-title" id="editPhotoLabel"style="font-weight: 700;font-size: 1.5em;color: #32418b;">Editar foto o color</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -49,8 +49,11 @@
                         </div>
                     </div>
 
-                    <input type="submit" name="sub" value="Guardar" class="btn btn-primary mt-3">
                 </form>
+            </div>
+            <div class="modal-footer">
+            <input type="submit" name="sub" value="Guardar" class="btn btn-secondary mt-3" style="background-color: #32418B;">
+
             </div>
         </div>
     </div>
@@ -64,13 +67,18 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="archivarClaseLabel">¿Desea archivar esta clase?</h5>
+                    <h5 class="modal-title" id="archivarClaseLabel"style="font-weight: 700;font-size: 1.5em;color: #32418b;">¿Desea archivar esta clase?</h5>
                 </div>
                 <div class="modal-body">
+                    <p>Al archivar esta clase, no aparecerá en la lista activa de clases, pero podrá restaurarla en cualquier momento desde el archivo.</p>
+                    <br><p style="text-align: end; margin:0;">¿Está seguro de que desea continuar?</p>
+
+                </div>
+                <div class="modal-footer">
                     <form method="POST">
                         <input type="hidden" name="id_clase_archivar" value="<?php echo $_GET['id']; ?>">
-                        <button type="submit" class="btn btn-danger">Si, quiero archivar</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Si, quiero archivar</button>
+                        <button type="button" class="btn btn-secondary" style="background-color: #32418B;" data-dismiss="modal">Cancelar</button>
                     </form>
                 </div>
             </div>
@@ -81,13 +89,17 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="archivarClaseLabel">¿Desea desarchivar esta clase?</h5>
+                    <h5 class="modal-title" id="archivarClaseLabel"style="font-weight: 700;font-size: 1.5em;color: #32418b;">¿Desea desarchivar esta clase?</h5>
                 </div>
                 <div class="modal-body">
+                    <p>Al desarchivar esta clase, volverá a aparecer en la lista de clases activas.</p>
+                    <p style="text-align: end; margin:0;">¿Está seguro de que desea continuar?</p>
+                </div>
+                <div class="modal-footer">
                     <form method="POST">
                         <input type="hidden" name="id_clase_desarchivar" value="<?php echo $_GET['id']; ?>">
-                        <button type="submit" class="btn btn-danger">Si, quiero desarchivar</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Si, quiero desarchivar</button>
+                        <button type="button" class="btn btn-secondary" style="background-color: #32418B;"data-dismiss="modal">Cancelar</button>
                     </form>
                 </div>
             </div>
@@ -104,8 +116,8 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="eliminarClaseLabel"style="font-weight: 700;font-size: 1.5em;color: #32418b;">¿Desea eliminar esta clase?</h5>
-           
+                <h5 class="modal-title" id="eliminarClaseLabel" style="font-weight: 700;font-size: 1.5em;color: #32418b;">¿Desea eliminar esta clase?</h5>
+
             </div>
             <!-- Modal Body -->
             <div class="modal-body">
@@ -118,20 +130,27 @@
                     <!-- Confirm Deletion Button -->
                     <button type="submit" class="btn btn-primary">Sí, quiero eliminarla</button>
                     <!-- Cancel Button -->
-                    <button type="button" class="btn btn-secondary" style="background-color: #32418b;"data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" style="background-color: #32418b;" data-dismiss="modal">Cancelar</button>
                 </form>
             </div>
         </div>
-    </div><style>
-    .btn-primary {
-        background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);
-        border: none;
-        transition: .5s;
-    }
+    </div>
+    <style>
+        .btn-primary {
+            background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);
+            border: none;
+            transition: .5s;
+        }
 
-    .btn-primary:hover {
-        transform: scale(1.1);
-        background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);
-    }
-</style>
+        .btn-primary:hover {
+            transform: scale(1.1);
+            background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);
+        }
+        .nav-tabs .nav-link.active{
+           color: #32418B;
+        }
+        .nav-link{
+            color: gray;
+        }
+    </style>
 </div>
