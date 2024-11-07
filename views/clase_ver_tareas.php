@@ -1,10 +1,50 @@
 <iframe src="clases.php" style="display:none;" width="100%" height="1000px"></iframe>
+
+    <!-- Modal de visualización -->
+    <div id="modal">
+        <span class="cerrar" onclick="cerrarModal()">×</span>
+        <img id="imagenModal" src="" alt="Imagen">
+    </div>
 <button id="close-button" style="display:none;">Cerrar</button>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome (para los iconos) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
     /* Estilos adicionales para personalizar la apariencia */
+    #modal {
+            display: none; /* Oculto inicialmente */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Asegura que esté sobre otros elementos */
+        }
+
+        /* Estilo de la imagen dentro del modal */
+        #modal img {
+            max-width: 90%; /* Ajusta el ancho máximo */
+            max-height: 80%; /* Ajusta la altura máxima */
+            border-radius: 8px;
+        }
+
+        /* Botón de cierre */
+        .cerrar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2em;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
     .task-details {
         max-width: 600px;
         margin: auto;
@@ -113,8 +153,8 @@
                     <li class="nav-item">
                         <button onclick="showContent('content3')">Comentarios del estudiante</button>
                     </li>
-                </ul>
-            <?php } ?>
+            </ul>
+        <?php } ?>
         </div>
     </nav>
 <?php } ?>
@@ -123,7 +163,7 @@
     function showContent(contentId) {
         // Ocultar todos los contenidos
         var contents = document.querySelectorAll('.content');
-        contents.forEach(function (content) {
+        contents.forEach(function(content) {
             content.classList.add('hidden');
         });
 
@@ -133,7 +173,7 @@
     }
 
     // Mostrar el primer contenido por defecto
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         showContent('content1'); // Aquí defines cuál contenido mostrar por defecto
     });
 </script>
@@ -166,7 +206,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                <?php }
+                            <?php }
                             } ?>
 
                             <!-- Botones de acción -->
@@ -221,7 +261,7 @@
 
                                                             if (archivo) {
                                                                 var lector = new FileReader();
-                                                                lector.onload = function (e) {
+                                                                lector.onload = function(e) {
                                                                     vistaPrevContainer.style.display = 'flex';
                                                                     document.getElementById('archivo').style.display = 'none'; // Ocultar input de archivo
                                                                     if (archivo.type.match('image.*')) {
@@ -311,7 +351,7 @@
 
                                                             if (archivo) {
                                                                 var lector = new FileReader();
-                                                                lector.onload = function (e) {
+                                                                lector.onload = function(e) {
                                                                     vistaPrevContainer.style.display = 'flex';
                                                                     document.getElementById('archivo').style.display = 'none'; // Ocultar input de archivo
                                                                     if (archivo.type.match('image.*')) {
@@ -412,30 +452,35 @@
                             <div class="media-body">
                                 <h5 class="truncate"
                                     style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 350px;">
-                                    <?php echo $usuario["nombre"] ?>     <?php echo $usuario["apellido"] ?></h5>
+                                    <?php echo $usuario["nombre"] ?> <?php echo $usuario["apellido"] ?></h5>
                                 <h5 style="color: red"><?php if ($usuario["estado"] == 1) {
-                                    echo "Sin entregar";
-                                } ?></h5>
+                                                            echo "Sin entregar";
+                                                        } ?></h5>
                                 <h5 style="color:green"><?php if ($usuario["estado"] == 2) {
-                                    echo "Entregado";
-                                } ?></h5>
+                                                            echo "Entregado";
+                                                        } ?></h5>
                                 <?php if (isset($recursos2)) {
-                                    foreach($recursos2 as $r){
-                                        if($r[0] == $usuario["id"]){ ?>
-                                        <div class="resource-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h6 class="card-subtitle mb-2 text-muted">Archivo Adjunto</h6>
-                                                <p class="card-text">Nombre del archivo: <a href="#"
-                                                        onclick="cargarPdf2('<?php echo $r[1] ?>','<?php echo $r[0]?>')"><?php echo $r[1] ?></a>
-                                                </p>
-                                                <p class="card-text">
-                                                    <i class="far fa-file-pdf fa-2x"></i> <!-- Icono de archivo PDF -->
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                        <?php }
+                                    foreach ($recursos2 as $r) {
+                                        for ($i = 1; $i < count($r); $i++) {
+                                            if ($r[0] == $usuario["id"]) { ?>
+                                                <div class="resource-card">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h6 class="card-subtitle mb-2 text-muted">Archivo Adjunto</h6>
+                                                            <?php if(!(str_ends_with($r[$i],".png") || str_ends_with($r[$i],".jpeg") || str_ends_with($r[$i],".jpg") || str_ends_with($r[$i],".gif"))){ ?>
+                                                                <p class="card-text">Nombre del archivo: <a href="#" onclick="cargarPdf2('<?php echo $r[$i] ?>','<?php echo $r[0] ?>')"><?php echo $r[$i] ?></a></p>
+                                                                    <?php }
+                                                                    else{ ?>
+                                                                    <p class="card-text">Nombre del archivo: <a href="#" onclick="abrirModal('<?php echo $r[$i] ?>','<?php echo $r[0] ?>')"><?php echo $r[$i] ?></a></p>
+                                                                    <?php } ?>
+                                                            <p class="card-text">
+                                                                <i class="far fa-file-pdf fa-2x"></i> <!-- Icono de archivo PDF -->
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                <?php }
+                                        }
                                     }
                                 } ?>
                             </div>
@@ -481,7 +526,7 @@
                                         data-person="<?php echo $general[$i]["name"]; ?>">
                                         <?php echo $general[$i]["name"]; ?>
                                     </li>
-                                    <?php
+                            <?php
                                     $usados[] = $general[$i]["id"];
                                 }
                             } ?>
@@ -507,7 +552,7 @@
             <script>
                 actual = 0;
 
-                $('.list-group-item').on('click', function () {
+                $('.list-group-item').on('click', function() {
                     let personName = $(this).data('person');
                     actual = $(this).data('id');
                     var comments = [];
@@ -519,7 +564,7 @@
                         data: {
                             id_priv: actual
                         },
-                        success: function (data) {
+                        success: function(data) {
                             comments = JSON.parse(data);
                             if (comments.length > 0) {
                                 comments.forEach(comment => {
@@ -533,13 +578,13 @@
                                 $('#commentsList').append('<div class="comment-item">No hay comentarios.</div>');
                             }
                         },
-                        error: function (jqXHR, textStatus, errorThrown) {
+                        error: function(jqXHR, textStatus, errorThrown) {
                             console.error('Error en la solicitud: ' + textStatus, errorThrown);
                         }
                     });
                 });
 
-                $('#addComment').on('click', function () {
+                $('#addComment').on('click', function() {
                     let personName = $('#personName').text().replace('Comentarios para ', '');
                     let newComment = $('#newComment').val();
 
@@ -552,11 +597,11 @@
                                 'nmensaje': newComment,
                                 'id': actual
                             },
-                            success: function (response) {
+                            success: function(response) {
                                 $('#commentsList').append(`<div class="comment-item">${newComment}</div>`);
                                 $('#newComment').val('');
                             },
-                            error: function (xhr, status, error) {
+                            error: function(xhr, status, error) {
                                 $('#response').html('<div class="alert alert-danger">Error: ' + error + '</div>');
                             }
                         });
@@ -568,18 +613,40 @@
 </div>
 <script>
     function cargarPdf(nom) {
-        document.querySelector("iframe").src = "xd.php?tid=<?php echo $tarea["id"]."&" ?>&nom=" + nom;
+        document.querySelector("iframe").src = "xd.php?tid=<?php echo $tarea["id"] . "&" ?>&nom=" + nom;
         document.querySelector("iframe").style.display = "block";
         document.querySelector("#close-button").style.display = "block";
     }
-    function cargarPdf2(nom,si) {
-        document.querySelector("iframe").src = "zd.php?tid=<?php echo $tarea["id"]; ?>!"+si+"&nom=" + nom;
-        console.log("zd.php?tid=<?php echo $tarea["id"]; ?>\&"+si+"&nom=" + nom);
+
+    function cargarPdf2(nom, si) {
+        document.querySelector("iframe").src = "zd.php?tid=<?php echo $tarea["id"]; ?>!" + si + "&nom=" + nom;
+        console.log("zd.php?tid=<?php echo $tarea["id"]; ?>\&" + si + "&nom=" + nom);
         document.querySelector("iframe").style.display = "block";
         document.querySelector("#close-button").style.display = "block";
     }
-    document.getElementById('close-button').addEventListener('click', function () {
+
+    function cargarImg(nom, si) {
+        document.querySelector("iframe").src = "td.php?tid=<?php echo $tarea["id"]; ?>!" + si + "&nom=" + nom;
+        console.log("td.php?tid=<?php echo $tarea["id"]; ?>\&" + si + "&nom=" + nom);
+        document.querySelector("iframe").style.display = "block";
+        document.querySelector("#close-button").style.display = "block";
+    }
+
+    document.getElementById('close-button').addEventListener('click', function() {
         document.querySelector("iframe").style.display = 'none';
         this.style.display = 'none'; // Oculta el botón también
     });
 </script>
+<script>
+        // Función para abrir el modal y cargar la imagen
+        function abrirModal(nom,si) {
+            document.getElementById('modal').style.display = "flex";
+            document.getElementById('imagenModal').src = "td.php?tid=<?php echo $tarea["id"]; ?>!" + si + "&nom=" + nom; // Ajusta el nombre de la imagen aquí
+        }
+
+        // Función para cerrar el modal
+        function cerrarModal() {
+            document.getElementById('modal').style.display = "none";
+            document.getElementById('imagenModal').src = ""; // Limpia el src para evitar recargas innecesarias
+        }
+    </script>
