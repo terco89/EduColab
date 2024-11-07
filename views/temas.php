@@ -121,6 +121,7 @@
         <?php endif;
         endforeach; ?>
     </div> <?php if (count($temas) == 0) { ?>
+        <br><br><br><br><br>
                 <div style="margin-top:-150px;" class="no-clases">
                     <img src="./img/books.png" alt="">
                     <h5>Aún no tienes temas</h5>

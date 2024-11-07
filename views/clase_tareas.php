@@ -166,6 +166,7 @@
         <?php } ?>
     </div>
     <?php if (count($tareas) == 0) { ?>
+        <br><br><br><br><br>
                 <div style="margin-top:-150px;" class="no-clases">
                     <img src="./img/books.png" alt="">
                     <h5>Aún no tienes tareas</h5>

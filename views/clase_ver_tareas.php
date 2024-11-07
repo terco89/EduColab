@@ -97,6 +97,7 @@
         display: none;
     }
 </style>
+
 <?php if ($clase["id_usuario_creador"] == $_SESSION["usuario"]["id"]) { ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNav">

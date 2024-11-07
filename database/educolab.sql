@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-11-2024 a las 04:23:15
+-- Tiempo de generación: 07-11-2024 a las 17:02:51
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -52,7 +52,8 @@ CREATE TABLE `clasesescolares` (
 --
 
 INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `codigo`, `id_usuario_creador`) VALUES
-(67, 'clase1', '', 'jm94gI', 14);
+(1, 'asdasd', '', 'yOQ2gg', 14),
+(2, 'werw', '', 'uJhFmY', 14);
 
 -- --------------------------------------------------------
 
@@ -70,7 +71,8 @@ CREATE TABLE `clase_profesor` (
 --
 
 INSERT INTO `clase_profesor` (`id_usuario`, `id_clase`) VALUES
-(14, 67);
+(14, 1),
+(14, 2);
 
 -- --------------------------------------------------------
 
@@ -90,7 +92,8 @@ CREATE TABLE `clase_usuario` (
 --
 
 INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`, `estado`) VALUES
-(14, 67, '', 'activa');
+(14, 1, '', 'inactiva'),
+(14, 2, '', 'inactiva');
 
 -- --------------------------------------------------------
 
@@ -177,7 +180,9 @@ CREATE TABLE `horarios` (
 --
 
 INSERT INTO `horarios` (`id_horario`, `id_clase`, `nombre_clase`, `dia_semana`, `hora_inicio`, `hora_fin`) VALUES
-(1, 67, 'clase1', 'Lunes', '07:45:00', '13:00:00');
+(1, 1, 'asdasd', 'Lunes', '12:55:00', '13:55:00'),
+(2, 2, 'werw', 'Lunes', '13:58:00', '14:58:00'),
+(3, 2, 'werw', 'Lunes', '13:59:00', '15:59:00');
 
 -- --------------------------------------------------------
 
@@ -310,7 +315,7 @@ INSERT INTO `usuarios` (`id`, `name`, `password`, `email`, `rol`, `img`, `edad`,
 (11, 'xd', '9de355443f2000d9e076248b317f73b8', 'xd@xd.xd', 'alumno', 'alumno.jpg', 19, 'xd', 'xd', '', ''),
 (12, 'laydo', '202cb962ac59075b964b07152d234b70', 'sebastian.pardo.scp@gmail.com', 'alumno', 'alumno.jpg', 17, 'Sebastian', 'Pardo', '', ''),
 (13, 'Alumno_usuario', '202cb962ac59075b964b07152d234b70', 'alumno@gmail.com', 'alumno', 'alumno.jpg', 16, 'Alumno_nombre', 'Alumno_apellido', '', ''),
-(14, 'Profesor_usuario', '202cb962ac59075b964b07152d234b70', 'profesor@gmail.com', 'profesor', 'profesor.jpg', 44, 'Profesor_nombre', 'Profesor_apellido', '', '');
+(14, 'Profesor_usuario', '202cb962ac59075b964b07152d234b70', 'profesor@gmail.com', 'profesor', 'none.jpg', 44, 'Profesor_nombre', 'Profesor_apellido', '', '');
 
 -- --------------------------------------------------------
 
@@ -351,8 +356,7 @@ ALTER TABLE `espacios`
 -- Indices de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  ADD PRIMARY KEY (`id_horario`),
-  ADD KEY `id_clase` (`id_clase`);
+  ADD PRIMARY KEY (`id_horario`);
 
 --
 -- Indices de la tabla `mensajes`
@@ -392,7 +396,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clasesescolares`
 --
 ALTER TABLE `clasesescolares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `discusiones`
@@ -410,7 +414,7 @@ ALTER TABLE `espacios`
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes`
@@ -441,16 +445,6 @@ ALTER TABLE `temas`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `horarios`
---
-ALTER TABLE `horarios`
-  ADD CONSTRAINT `horarios_ibfk_1` FOREIGN KEY (`id_clase`) REFERENCES `clasesescolares` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

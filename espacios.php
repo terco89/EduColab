@@ -41,7 +41,7 @@ if (!$result) {
     die("Fallo consulta 3: " . $link->error);
 }
 
-$sqlClases = "SELECT * FROM clasesescolares WHERE id_usuario_creador= $id_usuario";
+$sqlClases = "SELECT * FROM clasesescolares AS c INNER JOIN clase_usuario AS cu ON c.id = cu.id_clase WHERE id_usuario_creador= $id_usuario AND cu.estado !='inactiva'";
 $resultClases = $link->query($sqlClases);
 if (!$resultClases) {
     die("Fallo consulta 4: " . $link->error);

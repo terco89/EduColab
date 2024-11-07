@@ -23,7 +23,7 @@
                     <a class="nav-link <?php if ($view == "clase_alumnos") echo "active" ?>" href="clase_alumnos.php?id=<?php echo $_GET['id']?>&espacio=<?php echo $idEspacio; ?>">Alumnos</a>
                 </li>
                 <li class="nav-item">
-                    <a hidden class="nav-link <?php if ($view == "clase_notas") echo "active" ?>" href="clase_notas.php?id=<?php echo $_GET['id']?>"&espacio=<?php echo $idEspacio; ?>>Notas</a>
+                    <a hidden class="nav-link <?php if ($view == "clase_notas") echo "active" ?>" href="clase_notas.php?id=<?php echo $_GET['id']?>&espacio=<?php echo $idEspacio; ?>">Notas</a>
                 </li>
             </ul>
         </div>
