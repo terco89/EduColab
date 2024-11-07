@@ -85,15 +85,7 @@
                     <p class="card-text">Participen en el foro para discutir sobre las obras estudiadas.</p>
                     <a href="#" class="btn btn-light">Ir al Foro</a>
                 </div>
-            </div>
-            <div class="card mb-4 cards-clase">
-                <div class="card-header">Notas</div>
-                <div class="card-body">
-                    <h5 class="card-title">Calificaciones Recientes</h5>
-                    <p class="card-text">Consulta tus últimas calificaciones en el siguiente enlace.</p>
-                    <a href="#" class="btn btn-light">Ver Notas</a>
-                </div>
-            </div>
+                        </div>
         </div>
 </div>
 <?php require_once "views/modal_clase.php"; ?>
