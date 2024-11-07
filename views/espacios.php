@@ -15,7 +15,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="submitModalLabel">Crear un espacio</h5>
+                    <h5 class="modal-title" id="submitModalLabel" style="font-weight: 700;font-size: 1.5em;color: #32418b;">Crear un espacio</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -23,15 +23,15 @@
                 <div class="modal-body">
                     <form action="espacios.php" method="POST">
                         <div class="form-group">
-                            <label for="nombreEspacio">Nombre del espacio</label>
+                            <label for="nombreEspacio" style="color: #32418b;"><strong>Nombre del espacio</strong></label>
                             <input type="text" class="form-control" id="nombreEspacio" name="nombre" placeholder="Nombre del espacio" required>
                         </div>
                         <div class="form-group">
-                            <label for="cursoDivision">Curso y división</label>
+                            <label for="cursoDivision" style="color: #32418b;"><strong>Curso y división</strong></label>
                             <input type="text" class="form-control" id="cursoDivision" name="curso_division" placeholder="Curso y división" required>
                         </div>
                         <div class="form-group">
-                            <label for="clases">Clases a agrupar</label>
+                            <label for="clases"style="color: #32418b;"><strong>Clases a agrupar</strong></label>
                             <div id="clases">
                                 <?php
                                 if ($resultClases->num_rows <= 0) { ?>
@@ -49,8 +49,11 @@
                                 } ?>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success">Subir</button>
-                    </form>
+                       
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-secondary"style="background-color: #32418B;">Subir</button>
+                </form>
                 </div>
             </div>
         </div>
