@@ -90,4 +90,7 @@
         </div>
     </div>
 </div>
-    <?php require_once "views/modal_perfil.php"; ?>
+<div style="width: 100%;" align="center">
+<img src="./img/fondos/zi.jpg" alt="">
+<?php require_once "views/modal_perfil.php"; ?>
+</div>
