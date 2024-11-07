@@ -90,5 +90,4 @@
         </div>
     </div>
 </div>
-
     <?php require_once "views/modal_perfil.php"; ?>
