@@ -49,7 +49,7 @@
                                         <input type="time" name="hora_fin[]" required>
                                     </div>
                                 </div><br>
-                                <button type="button" class="btn btn-primary" onclick="addSchedule()">Agregar Horario</button>
+                                <button type="button" class="btn btn-light" onclick="addSchedule()">Agregar Horario</button>
                             </div>
                         </form>
 

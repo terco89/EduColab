@@ -77,7 +77,7 @@
                 <div class="modal-footer">
                     <form method="POST">
                         <input type="hidden" name="id_clase_archivar" value="<?php echo $_GET['id']; ?>">
-                        <button type="submit" class="btn btn-primary">Si, quiero archivar</button>
+                        <button type="submit" class="btn btn-light">Si, quiero archivar</button>
                         <button type="button" class="btn btn-secondary" style="background-color: #32418B;" data-dismiss="modal">Cancelar</button>
                     </form>
                 </div>
@@ -98,7 +98,7 @@
                 <div class="modal-footer">
                     <form method="POST">
                         <input type="hidden" name="id_clase_desarchivar" value="<?php echo $_GET['id']; ?>">
-                        <button type="submit" class="btn btn-primary">Si, quiero desarchivar</button>
+                        <button type="submit" class="btn btn-light">Si, quiero desarchivar</button>
                         <button type="button" class="btn btn-secondary" style="background-color: #32418B;"data-dismiss="modal">Cancelar</button>
                     </form>
                 </div>
@@ -128,7 +128,7 @@
                 <form method="POST">
                     <input type="hidden" name="id_clase_eliminar" value="<?php echo htmlspecialchars($_GET['id']); ?>">
                     <!-- Confirm Deletion Button -->
-                    <button type="submit" class="btn btn-primary">Sí, quiero eliminarla</button>
+                    <button type="submit" class="btn btn-light">Sí, quiero eliminarla</button>
                     <!-- Cancel Button -->
                     <button type="button" class="btn btn-secondary" style="background-color: #32418b;" data-dismiss="modal">Cancelar</button>
                 </form>

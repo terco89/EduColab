@@ -68,30 +68,33 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addStudentLabel">Añadir Alumno</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title" id="addStudentLabel"style="font-weight: 700;font-size: 1.5em;color: #32418b;">Añadir Alumno</h5>
+
       </div>
-        <div class="modal-body">
-          <form action="clase_alumnos.php?id=<?php echo $id_clase; ?>" method="post">
-            <input type="hidden" name="operation_type" value="addStudent">
-            <div class="form-group">
-                <input type="text" class="form-control" name="addNewStudent" id="addNewStudent" placeholder="Nombre del usuario del alumno">
-              </div>
-              <button type="submit" class="btn btn-primary">Añadir Usuario</button>
-          </form>
-        </div>
+      <div class="modal-body">
+        <form action="clase_alumnos.php?id=<?php echo $id_clase; ?>" method="post">
+          <input type="hidden" name="operation_type" value="addStudent">
+          <div class="form-group">
+            <input type="text" class="form-control" name="addNewStudent" id="addNewStudent" placeholder="Nombre del usuario del alumno">
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-light">Añadir Usuario</button>
+        <button type="button" class="btn btn-secondary" style="background-color: #32418B;" data-dismiss="modal">Cancelar</button>
+
+        </form>
       </div>
     </div>
   </div>
+</div>
 </div>
 <!-- Modal email -->
 <div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="emailModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="emailModalLabel">Email</h5>
+        <h5 class="modal-title" id="emailModalLabel"style="font-weight: 700;font-size: 1.5em;color: #32418b;">Email</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -99,7 +102,7 @@
       <div class="modal-body">
         <div class="email-container">
           <p id="emailText"></p>
-          <button type="button" class="btn btn-outline-secondary" id="copyEmail"><i class="fa-solid fa-copy"></i></button>
+          <button type="button" class="btn btn-secondary" style="background-color: #32418B;"id="copyEmail"><i class="fa-solid fa-copy"></i></button>
         </div>
       </div>
     </div>
@@ -111,10 +114,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addProfessorModalLabel">Añadir Profesor</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title" id="addProfessorModalLabel" style="font-weight: 700;font-size: 1.5em;color: #32418b;">Añadir Profesor</h5>
+
       </div>
       <div class="modal-body">
         <!-- Tabs -->
@@ -130,7 +131,7 @@
         <div class="tab-content" id="addProfessorTabContent"><br>
           <!-- Ascender Alumno -->
           <div class="tab-pane fade show active" id="selectStudent" role="tabpanel" aria-labelledby="selectStudent-tab">
-            <h6>Seleccionar un Alumno para Ascender</h6>
+            <h6 style="color: #32418b;">Seleccionar un Alumno para Ascender</h6>
             <form action="clase_alumnos.php?id=<?php echo $id_clase; ?>" method="POST">
               <input type="hidden" name="operation_type" value="ascender">
               <div class="form-group">
@@ -141,24 +142,24 @@
                   <?php endforeach; ?>
                 </select>
               </div>
-              <button type="submit" class="btn btn-primary">Ascender Alumno</button>
+              <button type="submit" class="btn btn-light">Ascender Alumno</button>
             </form>
           </div>
           <!-- Nuevo Usuario -->
           <div class="tab-pane fade" id="newUser" role="tabpanel" aria-labelledby="newUser-tab">
-            <h6>O Añadir un Usuario Nuevo</h6>
+            <h6 style="color: #32418b;">O Añadir un Usuario Nuevo</h6>
             <form action="clase_alumnos.php?id=<?php echo $id_clase; ?>" method="POST">
               <input type="hidden" name="operation_type" value="newUser">
               <div class="form-group">
                 <input type="text" class="form-control" name="newUserName" id="newUserName" placeholder="Nombre del usuario del profesor">
               </div>
-              <button type="submit" class="btn btn-primary">Añadir Usuario</button>
+              <button type="submit" class="btn btn-light">Añadir Usuario</button>
             </form>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary" style="background-color: #32418B;" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -168,7 +169,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteUserClassModalLabel">¿Desea eliminar a un integrante de la Clase?</h5>
+        <h5 class="modal-title" id="deleteUserClassModalLabel" style="font-weight: 700;font-size: 1.5em;color: #32418b;">¿Desea eliminar a un integrante de la Clase?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -189,8 +190,10 @@
 
             </select>
           </div>
-          <button type="submit" class="btn btn-danger">Sí, quiero eliminar a este integrante</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+      </div>
+      <div class="modal-footer"><button type="submit" class="btn btn-light">Sí, quiero eliminar a este integrante</button>
+        <button type="button" class="btn btn-secondary" style="background-color: #32418B;" data-dismiss="modal">Cancelar</button>
         </form>
       </div>
     </div>
@@ -221,3 +224,12 @@
     });
   });
 </script>
+<style>
+  .nav-tabs .nav-link.active {
+    color: #32418B;
+  }
+
+  .nav-link {
+    color: gray;
+  }
+</style>
