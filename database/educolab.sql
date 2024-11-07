@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-09-2024 a las 03:49:11
+-- Tiempo de generación: 07-11-2024 a las 04:23:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -52,13 +52,7 @@ CREATE TABLE `clasesescolares` (
 --
 
 INSERT INTO `clasesescolares` (`id`, `nombre`, `descripcion`, `codigo`, `id_usuario_creador`) VALUES
-(51, 'clase1', '', 'vuvqS6', 14),
-(54, 'lolo', '', '3ZqGRF', 14),
-(61, 'clase3', '', 'p1rtjE', 14),
-(62, 'Sebastian', '', 'h7YU7B', 14),
-(63, 'clase1', '', 'IPYFGX', 14),
-(64, 'clase1', '', 'Y1uRMZ', 14),
-(66, 'clase1', '', 'FNF8d3', 14);
+(67, 'clase1', '', 'jm94gI', 14);
 
 -- --------------------------------------------------------
 
@@ -76,7 +70,7 @@ CREATE TABLE `clase_profesor` (
 --
 
 INSERT INTO `clase_profesor` (`id_usuario`, `id_clase`) VALUES
-(14, 66);
+(14, 67);
 
 -- --------------------------------------------------------
 
@@ -96,10 +90,7 @@ CREATE TABLE `clase_usuario` (
 --
 
 INSERT INTO `clase_usuario` (`id_usuario`, `id_clase`, `fondo`, `estado`) VALUES
-(14, 65, '', 'activa'),
-(14, 66, '', 'activa'),
-(12, 66, '', 'activa'),
-(8, 66, '', 'activa');
+(14, 67, '', 'activa');
 
 -- --------------------------------------------------------
 
@@ -129,17 +120,6 @@ CREATE TABLE `discusiones` (
   `fecha_creacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `discusiones`
---
-
-INSERT INTO `discusiones` (`id`, `id_alumno`, `id_clase`, `tema`, `contenido`, `fecha_creacion`) VALUES
-(1, 4, 1, 'Duda sobre el uso de \"used to\"', 'Tengo una pregunta sobre el uso de \"used to\" y \"would\" en inglés para hablar sobre hábitos pasados. He leído algunas explicaciones, pero aún no estoy seguro de cuándo debería usar uno u otro. ¿Podrían explicarme las diferencias y darme ejemplos para cada uno?', '2024-07-04 12:40:42'),
-(2, 3, 35, 'trtdftg', 'gfdydytdydtyt', '2024-07-04 16:18:52'),
-(3, 14, 51, 'qw3e', 'qwe', '2024-08-26 14:37:00'),
-(4, 14, 51, '', 'asd', '2024-08-26 14:38:17'),
-(5, 14, 55, 'xczz', 'xcz', '2024-08-28 15:03:04');
-
 -- --------------------------------------------------------
 
 --
@@ -152,32 +132,6 @@ CREATE TABLE `entregas` (
   `fecha_entrega` datetime NOT NULL,
   `calificacion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `entregas`
---
-
-INSERT INTO `entregas` (`tarea_id`, `usuario_id`, `fecha_entrega`, `calificacion`) VALUES
-(59, 4, '2024-08-01 15:56:15', NULL),
-(60, 4, '2024-08-20 14:43:16', NULL),
-(51, 12, '2024-08-22 13:55:52', NULL),
-(66, 13, '2024-08-28 15:11:41', NULL),
-(67, 14, '2024-08-28 15:41:04', NULL),
-(67, 14, '2024-08-28 15:45:17', NULL),
-(67, 14, '2024-08-28 15:45:18', NULL),
-(67, 14, '2024-08-28 15:45:19', NULL),
-(67, 14, '2024-08-28 15:45:19', NULL),
-(67, 14, '2024-08-28 15:45:20', NULL),
-(67, 14, '2024-08-28 15:45:20', NULL),
-(67, 13, '2024-08-28 15:45:44', NULL),
-(67, 13, '2024-08-28 15:45:44', NULL),
-(67, 13, '2024-08-28 15:45:45', NULL),
-(67, 13, '2024-08-28 15:45:45', NULL),
-(67, 13, '2024-08-28 15:45:45', NULL),
-(67, 13, '2024-08-28 15:45:57', NULL),
-(68, 13, '2024-08-28 15:56:17', NULL),
-(68, 13, '2024-08-28 15:56:21', NULL),
-(69, 13, '2024-08-31 12:37:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -192,15 +146,6 @@ CREATE TABLE `espacios` (
   `id_usuario` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `espacios`
---
-
-INSERT INTO `espacios` (`id`, `nombre`, `curso_division`, `id_usuario`) VALUES
-(1, 'TCI', '3°', 14),
-(2, 'Sebastian', 'asd', 13),
-(3, 'asd', 'asda', 13);
-
 -- --------------------------------------------------------
 
 --
@@ -211,17 +156,6 @@ CREATE TABLE `espacios_clases` (
   `id_espacio` int(11) NOT NULL,
   `id_clase` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `espacios_clases`
---
-
-INSERT INTO `espacios_clases` (`id_espacio`, `id_clase`) VALUES
-(1, 51),
-(1, 52),
-(2, 53),
-(3, 53),
-(3, 59);
 
 -- --------------------------------------------------------
 
@@ -243,10 +177,7 @@ CREATE TABLE `horarios` (
 --
 
 INSERT INTO `horarios` (`id_horario`, `id_clase`, `nombre_clase`, `dia_semana`, `hora_inicio`, `hora_fin`) VALUES
-(1, 62, 'Sebastian', 'Martes', '22:28:00', '11:11:00'),
-(2, 63, 'clase1', 'Lunes', '11:11:00', '11:11:00'),
-(3, 64, 'clase1', 'Lunes', '11:11:00', '11:11:00'),
-(5, 66, 'clase1', 'Martes', '12:31:00', '12:23:00');
+(1, 67, 'clase1', 'Lunes', '07:45:00', '13:00:00');
 
 -- --------------------------------------------------------
 
@@ -275,19 +206,6 @@ CREATE TABLE `mensajes` (
   `fecha_creacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `mensajes`
---
-
-INSERT INTO `mensajes` (`id`, `id_usuario`, `id_discusion`, `mensaje`, `fecha_creacion`) VALUES
-(1, 4, 1, 'nose', '2024-07-04 13:09:30'),
-(2, 4, 1, 'a', '2024-07-04 13:26:43'),
-(3, 4, 1, 'xd', '2024-07-04 13:26:52'),
-(4, 3, 2, 'gsgsgdsdg', '2024-07-04 16:20:41'),
-(5, 14, 3, 'qwe', '2024-08-26 14:37:07'),
-(6, 14, 3, 'qweqwe', '2024-08-26 14:37:08'),
-(7, 14, 3, 'qweqweqwewqeqweqweqwe', '2024-08-26 14:37:10');
-
 -- --------------------------------------------------------
 
 --
@@ -302,45 +220,6 @@ CREATE TABLE `mensajes_privado` (
   `fecha_creacion` datetime NOT NULL,
   `bandera` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `mensajes_privado`
---
-
-INSERT INTO `mensajes_privado` (`id`, `tarea_id`, `usuario_id`, `mensaje`, `fecha_creacion`, `bandera`) VALUES
-(9, 60, 11, 'fsafsdafda', '2024-08-20 17:01:51', 1),
-(10, 60, 11, 'ggggg', '2024-08-20 17:04:17', 0),
-(11, 60, 11, 'noooooo', '2024-08-20 17:04:38', 0),
-(12, 60, 11, 'fdssfdgsd', '2024-08-20 17:09:17', 0),
-(13, 60, 11, 'jkllkñ{{kl', '2024-08-20 17:10:34', 0),
-(14, 60, 11, 'dfghgjkhh', '2024-08-20 17:11:21', 0),
-(15, 60, 11, 'fdsfdsfdsdsfg', '2024-08-20 17:21:00', 1),
-(16, 51, 12, 'sad', '2024-08-22 14:04:24', 1),
-(17, 51, 12, 'asd', '2024-08-22 14:04:26', 1),
-(18, 51, 12, 'asada', '2024-08-22 14:04:27', 1),
-(19, 66, 14, 'si aaja ¿¿¿¿', '2024-08-28 15:11:13', 1),
-(20, 66, 13, 'asdasd', '2024-08-28 15:11:24', 1),
-(21, 66, 14, 'asd', '2024-08-28 15:32:05', 1),
-(22, 66, 14, 'asd', '2024-08-28 15:32:13', 1),
-(23, 66, 14, 'ewqwe', '2024-08-28 15:40:21', 1),
-(24, 66, 14, 'wqeqw', '2024-08-28 15:40:25', 1),
-(25, 67, 14, 'sada', '2024-08-28 15:41:00', 1),
-(26, 68, 14, 'sfsdf', '2024-08-28 15:55:43', 1),
-(27, 69, 13, 'asd', '2024-08-31 12:42:39', 1),
-(28, 71, 13, 'sada', '2024-09-02 13:17:26', 1),
-(29, 71, 14, 'asd', '2024-09-02 13:17:31', 1),
-(30, 71, 14, 'asadasd', '2024-09-02 13:17:34', 1),
-(31, 71, 13, 'asdd', '2024-09-02 13:17:39', 1),
-(32, 71, 14, 'spy ppwep', '2024-09-02 13:18:10', 1),
-(33, 72, 13, 'asda', '2024-09-02 13:24:47', 1),
-(34, 72, 14, 'asd', '2024-09-02 13:25:01', 1),
-(35, 72, 14, 'sddgtf', '2024-09-02 13:28:03', 1),
-(36, 72, 13, 'fsdfsdfsds', '2024-09-02 13:28:17', 1),
-(37, 73, 13, 'asd', '2024-09-02 13:28:40', 1),
-(38, 73, 13, 'dasd', '2024-09-02 13:28:42', 1),
-(39, 73, 13, 'adadasd', '2024-09-02 13:28:44', 1),
-(40, 73, 13, 'asdasd', '2024-09-02 13:28:46', 1),
-(41, 73, 13, 'sadsdsa', '2024-09-02 13:28:47', 1);
 
 -- --------------------------------------------------------
 
@@ -357,50 +236,6 @@ CREATE TABLE `tareas` (
   `clase_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `tareas`
---
-
-INSERT INTO `tareas` (`id`, `nombre`, `descripcion`, `fecha_subida`, `fecha_entrega`, `clase_id`) VALUES
-(26, 'Ensayo Revolución Industrial', 'Realizar un ensayo sobre la Revolución Industrial', '2024-06-01 08:00:00', '2024-06-15 23:59:59', 1),
-(27, 'Ejercicios Matemáticas', 'Resolver los ejercicios del capítulo 5 de Matemáticas', '2024-06-02 10:30:00', '2024-06-09 18:00:00', 2),
-(28, 'Presentación Sistema Solar', 'Preparar una presentación sobre el sistema solar', '2024-06-03 14:00:00', '2024-06-17 12:00:00', 3),
-(29, 'Examen Historia del Arte', 'Estudiar para el examen de Historia del arte', '2024-06-04 09:00:00', '2024-06-10 09:00:00', 4),
-(30, 'Investigación Guerra Fría', 'Realizar una investigación sobre la Guerra Fría', '2024-06-05 11:30:00', '2024-06-19 15:30:00', 5),
-(31, 'Química Laboratorio', 'Resolver los problemas de química del laboratorio', '2024-06-06 13:45:00', '2024-06-12 16:45:00', 6),
-(32, 'Leer Libro Literatura', 'Leer el libro asignado para literatura', '2024-06-07 07:00:00', '2024-06-14 23:00:00', 7),
-(33, 'Conjugación Francés', 'Practicar la conjugación de los verbos en francés', '2024-06-08 16:30:00', '2024-06-18 19:30:00', 8),
-(34, 'Investigación Albert Einstein', 'Investigar sobre la biografía de Albert Einstein', '2024-06-09 12:15:00', '2024-06-20 10:15:00', 9),
-(35, 'Física Cuaderno', 'Resolver los problemas de física del cuaderno', '2024-06-10 10:00:00', '2024-06-16 14:00:00', 10),
-(36, 'Dibujo Flora y Fauna', 'Realizar un dibujo sobre la flora y fauna local', '2024-06-11 15:00:00', '2024-06-25 08:00:00', 11),
-(37, 'Examen Geografía Mundial', 'Estudiar para el examen de geografía mundial', '2024-06-12 11:00:00', '2024-06-23 16:00:00', 12),
-(38, 'Programación Python', 'Resolver los ejercicios de programación en Python', '2024-06-13 09:30:00', '2024-06-21 11:30:00', 13),
-(39, 'Presentación Primera Guerra Mu', 'Realizar una presentación oral sobre la Primera Guerra Mundial', '2024-06-14 08:45:00', '2024-06-22 13:45:00', 14),
-(40, 'Vida de Miguel de Cervantes', 'Investigar sobre la vida y obra de Miguel de Cervantes', '2024-06-15 12:00:00', '2024-06-24 15:00:00', 15),
-(41, 'Álgebra Libro', 'Resolver los problemas de álgebra del libro', '2024-06-16 14:30:00', '2024-06-26 17:30:00', 16),
-(42, 'Experimento Ley de la Conserva', 'Realizar un experimento sobre la ley de la conservación de la energía', '2024-06-17 10:00:00', '2024-06-28 12:00:00', 17),
-(43, 'Dramatización Edad Media', 'Preparar una dramatización sobre la vida en la Edad Media', '2024-06-18 13:20:00', '2024-06-29 15:20:00', 18),
-(44, 'Trigonometría Cuaderno', 'Resolver los ejercicios de trigonometría del cuaderno', '2024-06-19 09:15:00', '2024-06-27 11:15:00', 19),
-(45, 'Ensayo Globalización', 'Realizar un ensayo sobre el impacto de la globalización', '2024-06-20 08:30:00', '2024-07-03 10:30:00', 20),
-(46, 'Ensayo Influencia del Cine', 'Escribir un ensayo sobre la influencia del cine en la cultura popular', '2024-06-21 10:00:00', '2024-07-05 12:00:00', 1),
-(47, 'Presentación Gramática Pasado ', 'Realizar una presentación sobre la gramática del pasado simple', '2024-06-22 09:30:00', '2024-07-06 11:30:00', 1),
-(48, 'Dramatización Shakespeare', 'Preparar una dramatización de una escena de una obra de Shakespeare', '2024-06-23 08:45:00', '2024-07-07 10:45:00', 1),
-(49, 'Vocabulario Tecnología', 'Estudiar vocabulario relacionado con la tecnología moderna', '2024-06-24 12:00:00', '2024-07-08 14:00:00', 1),
-(50, 'Comprensión Lectora', 'Resolver los ejercicios de comprensión lectora del libro de texto', '2024-06-25 14:30:00', '2024-07-09 16:30:00', 1),
-(51, 'wefwefwefef', 'fwef', '2024-07-04 15:34:37', '2024-07-04 17:34:00', 33),
-(52, 'ososjdfosdf', 'gdsfgsdfgsdf', '2024-07-04 15:57:04', '2024-07-10 17:59:00', 35),
-(53, 'Hola', 'Chau', '2024-07-10 03:20:43', '2024-07-19 06:20:00', 35),
-(54, 'wudised', '238e23e', '2024-07-10 04:28:41', '2024-07-05 06:30:00', 35),
-(55, 'msd', 'msd', '2024-07-10 06:15:13', '2024-07-13 09:18:00', 35),
-(56, 'Revolucion Industrial', 'hacer la tarea', '2024-07-10 06:36:04', '2024-07-11 09:39:00', 35),
-(59, 'xd', 'xd', '2024-08-01 14:36:58', '2024-08-28 14:36:00', 36),
-(60, 'tarea', 'tarea', '2024-08-20 14:42:51', '2024-08-02 14:42:00', 36),
-(63, 'sadsad', 'asdsadasd', '2024-08-24 20:52:47', '2024-08-20 20:52:00', 45),
-(65, 'zxc', 'zxcz', '2024-08-28 15:02:46', '2024-09-06 15:02:00', 57),
-(69, 'tarea prueba', '', '2024-08-28 15:57:08', '0000-00-00 00:00:00', 58),
-(72, 'tarea prueba', 'ver naruto', '2024-09-02 13:24:42', '2024-09-26 13:24:00', 66),
-(73, 'asdas', 'dasdasd', '2024-09-02 13:28:36', '2024-10-03 13:28:00', 66);
-
 -- --------------------------------------------------------
 
 --
@@ -412,47 +247,6 @@ CREATE TABLE `tarea_usuario` (
   `usuario_id` int(11) NOT NULL,
   `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `tarea_usuario`
---
-
-INSERT INTO `tarea_usuario` (`tarea_id`, `usuario_id`, `estado`) VALUES
-(23, 7, 3),
-(7, 3, 1),
-(14, 8, 2),
-(32, 4, 4),
-(10, 6, 1),
-(41, 1, 3),
-(18, 9, 2),
-(29, 2, 4),
-(5, 10, 3),
-(37, 5, 1),
-(12, 7, 2),
-(3, 2, 4),
-(28, 4, 1),
-(9, 1, 3),
-(20, 8, 2),
-(16, 3, 4),
-(8, 6, 1),
-(25, 10, 2),
-(48, 5, 3),
-(2, 9, 4),
-(53, 3, 1),
-(54, 3, 1),
-(55, 3, 1),
-(55, 1, 1),
-(56, 3, 1),
-(56, 1, 1),
-(57, 4, 1),
-(58, 4, 1),
-(59, 4, 1),
-(0, 4, 1),
-(60, 4, 1),
-(59, 11, 1),
-(73, 14, 1),
-(72, 13, 1),
-(73, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -468,14 +262,6 @@ CREATE TABLE `temas` (
   `id_clase` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `temas`
---
-
-INSERT INTO `temas` (`id`, `nombre`, `descripcion`, `fecha_alta`, `id_clase`) VALUES
-(3, 'asd', 'asd', '2024-08-28', 55),
-(4, 'tema prueba', 'si', '2024-09-02', 66);
-
 -- --------------------------------------------------------
 
 --
@@ -486,15 +272,6 @@ CREATE TABLE `tema_usuario` (
   `tema_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `tema_usuario`
---
-
-INSERT INTO `tema_usuario` (`tema_id`, `usuario_id`) VALUES
-(3, 14),
-(4, 14),
-(4, 13);
 
 -- --------------------------------------------------------
 
@@ -615,49 +392,49 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `clasesescolares`
 --
 ALTER TABLE `clasesescolares`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de la tabla `discusiones`
 --
 ALTER TABLE `discusiones`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `espacios`
 --
 ALTER TABLE `espacios`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `horarios`
 --
 ALTER TABLE `horarios`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes_privado`
 --
 ALTER TABLE `mensajes_privado`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `temas`
 --
 ALTER TABLE `temas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

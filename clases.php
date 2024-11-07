@@ -11,7 +11,7 @@ $id_usuario = $_SESSION["usuario"]["id"];
 
 // Clases activas con profesores ascendidos
 $sqlActivas = "
-    SELECT c.id, c.nombre AS nombre_clase, c.codigo, c.id_usuario_creador, h.dia_semana, h.hora_inicio, h.hora_fin, 
+    SELECT c.id, cu.estado,c.nombre AS nombre_clase, c.codigo, c.id_usuario_creador, h.dia_semana, h.hora_inicio, h.hora_fin, 
            COALESCE(pu.nombre, u.nombre) AS nombre_profesor, COALESCE(pu.apellido, u.apellido) AS apellido_profesor, 
            cu.fondo
     FROM clasesescolares c
@@ -32,7 +32,7 @@ if (!$resultActivas) {
 
 // Clases archivadas con profesores ascendidos
 $sqlArchivada = "
-    SELECT c.id, c.nombre AS nombre_clase, c.codigo, c.id_usuario_creador, h.dia_semana, h.hora_inicio, h.hora_fin, 
+    SELECT cu.estado ,c.id, c.nombre AS nombre_clase, c.codigo, c.id_usuario_creador, h.dia_semana, h.hora_inicio, h.hora_fin, 
            COALESCE(pu.nombre, u.nombre) AS nombre_profesor, COALESCE(pu.apellido, u.apellido) AS apellido_profesor, 
            cu.fondo
     FROM clasesescolares c
@@ -65,7 +65,8 @@ while ($row = mysqli_fetch_assoc($resultActivas)) {
             'nombre_profesor' => $row['nombre_profesor'],
             'apellido_profesor' => $row['apellido_profesor'],
             'fondo' => $row['fondo'],
-            'horarios' => []
+            'horarios' => [],
+            'estado'=>$row['estado']
         ];
     }
 
