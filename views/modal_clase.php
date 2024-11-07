@@ -49,11 +49,11 @@
                         </div>
                     </div>
 
-                </form>
+              
             </div>
             <div class="modal-footer">
             <input type="submit" name="sub" value="Guardar" class="btn btn-secondary mt-3" style="background-color: #32418B;">
-
+            </form>
             </div>
         </div>
     </div>
