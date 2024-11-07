@@ -3,11 +3,18 @@
         <h1 class="display-4">¡Bienvenido a EduCollab!</h1>
         <p class="lead">Aquí podrás gestionar tus clases, asignar tareas, organizar tu calendario y más.</p>
         <hr class="my-4">
-        <p>¿Listo para empezar?</p>
-        <a class="btn btn-primary btn-lg" href="login.php" style=" background-color: #56c6b7; border-color:#56c6b7;">Inicia sesion</a>
+        <?php if (!isset($_SESSION['usuario'])) { ?>
+            <p>¿Listo para empezar?</p>
+            <a class="btn btn-primary btn-lg" href="login.php" style=" background-color: #56c6b7; border-color:#56c6b7;">Inicia sesion</a>
+
+        <?php }else{ ?>
+            <p>¿Listo para empezar? ¡¡<span class="gradient-text">Crea</span> o <span class="gradient-text">Unite</span> a una Clase!!</p>
+            <a class="btn btn-primary btn-lg" href="clases.php" style=" background-color: #56c6b7; border-color:#56c6b7;">Ir a Clases</a>
+
+        <?php } ?>
     </div>
-    <div class="row">
-        
+    <div class="row jumbotron">
+
         <div class="col-md-6">
             <h2>Tutorial rápido</h2>
             <p>Aprende cómo empezar a usar EduCollab con nuestro tutorial paso a paso. ¡Es fácil y rápido!</p>
@@ -41,6 +48,12 @@
         text-transform: uppercase;
         font-size: 2.5em !important;
     }
+    .jumbotron h2 {
+        color: #8691EC;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        font-size: 2.5em !important;
+    }
 
     .jumbotron p {
         color: white;
@@ -56,13 +69,16 @@
         transition: .5s;
     }
 
-    .btn-primary:hover{
+    .btn-primary:hover {
         transform: scale(1.1);
         background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);
     }
 
-    .jumbotron hr{
+    .jumbotron hr {
         background-color: #8691EC;
         height: 1px;
     }
-</style>
+    .gradient-text {
+        color: #8691EC;
+        font-weight: 700 !important;
+    }</style>

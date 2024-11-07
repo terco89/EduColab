@@ -14,26 +14,23 @@
 <div class="container">
     <div class="row">
         <?php if (count($clases) == 0) { ?>
-            <h2 class="text-center">Aún no tienes clases</h2>
+            <div class="no-clases">
+
+            <img src="./img/books.png" alt="">
+
+            <h5 class="text-center">Aún no tienes clases archivadas</h5></div>
             <?php } else {
             foreach ($clases as $clase) { ?>
-                <div class="col-md-4 mb-4">
-                    <a href="clase.php?id=<?php echo $clase['id']; ?>" class="card-link">
-                        <div class="card" style="height: 200px;">
-                            <style>
-                                .si {
-                                    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.5) 75%, transparent 75%, transparent);
-                                    background-size: 10px 10px;
-                                }
-                            </style>
-                            <div class="card-body card-banner si" style="<?php if (preg_match('/\.(jpg|png)$/i', $clase['fondo'])): ?>background-image: url('img/fondos/<?php echo $clase['fondo']; ?>'); background-size: cover; background-position: center;  opacity: 0.5;
- background-repeat: no-repeat;<?php else: ?>background-color: <?php echo htmlspecialchars($clase['fondo']); ?>;<?php endif; ?>;">
-
+                <a href="clase.php?id=<?php echo $clase['id']; ?>" class="card-link">
+                        <div class="card card-clase">
+                            <div class="card-body card-banner" style="<?php if (preg_match('/\.(jpg|png)$/i', $clase['fondo'])): ?>background-image: url('img/fondos/<?php echo $clase['fondo']; ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;<?php else: ?>background-color: <?php echo htmlspecialchars($clase['fondo']); ?>;<?php endif; ?>;">
+                                <div class="overlay"></div>
                                 <h3 class="card-title"><?php echo $clase["nombre"] ?></h3>
-                                <h6 class="card-subtitle mb-2 text-muted">
+                                <h6 class="card-subtitle ">
                                     Profesor: <?php echo ($clase['id_usuario_creador'] != $_SESSION['usuario']['id']) ? $clase["nombre_profesor"] . " " . $clase["apellido_profesor"] : "tú"; ?>
                                 </h6>
-                                <hr>
+                            </div>
+                            <div class="card-horarios">
                                 <?php
                                 $horarios = $clase['horarios'];
                                 $numHorarios = count($horarios);
@@ -42,16 +39,15 @@
                                 for ($i = 0; $i < ($mostrarMas ? $maxHorarios : $numHorarios); $i++) {
                                     $hora_inicio = date('H:i', strtotime($horarios[$i]["hora_inicio"]));
                                     $hora_fin = date('H:i', strtotime($horarios[$i]["hora_fin"]));
-                                    echo "<li style=color:#6c757d;>" . $horarios[$i]["dia_semana"] . " de " . $hora_inicio . " a " . $hora_fin . "</li>";
+                                    echo "<p style=color:#6c757d;>" . $horarios[$i]["dia_semana"] . " de " . $hora_inicio . " a " . $hora_fin . "</p>";
                                 }
                                 if ($mostrarMas) {
-                                    echo "<li style=color:#6c757d;>...</li>";
+                                    echo "<p style=color:#6c757d;>...</p>";
                                 }
                                 ?>
                             </div>
                         </div>
                     </a>
-                </div>
 
 
         <?php }

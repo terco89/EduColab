@@ -12,7 +12,7 @@
           <form method="POST" class="">
             <div class="form-group">
               <b>
-                <label for="codigoClase">Código de la Clase:</label>
+                <label for="">Código de la Clase:</label>
               </b>
               <p>Pídele a tu profesor el código de clase e introdúcelo aquí.</p>
               <input type="text" class="form-control" id="codigoClase" name="codigoClase" placeholder="Introduce el código de la clase">

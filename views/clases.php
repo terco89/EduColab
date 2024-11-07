@@ -15,7 +15,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="submitModalLabel">Crear una clase</h5>
+                        <h5 class="modal-title" id="submitModalLabel" style="font-weight: 700;font-size: 1.5em;color: #32418b;">Crear una clase</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -23,11 +23,14 @@
                     <div class="modal-body">
                         <form method="POST" action="crear_clase.php">
                             <div class="form-group">
-                                <h4>Nombre de la clase</h4>
-                                <input type="text" class="form-control" name="nombre" placeholder="Nombre de la clase" required>
+                                <b>
+                                    <label style="color: #32418b;">Código de la Clase:</label>
+                                </b> <input type="text" class="form-control" name="nombre" placeholder="Nombre de la clase" required>
                             </div>
                             <div class="form-group">
-                                <h4>Días y Horarios</h4>
+                                <b>
+                                    <label style="color: #32418b;">Código de la Clase:</label>
+                                </b>
                                 <div id="schedule-container">
                                     <div class="schedule-item">
                                         <label>Día:</label>
@@ -45,10 +48,9 @@
                                         <label>Hasta:</label>
                                         <input type="time" name="hora_fin[]" required>
                                     </div>
-                                </div>
-                                <button type="button" onclick="addSchedule()">Agregar Horario</button>
+                                </div><br>
+                                <button type="button" class="btn btn-primary" onclick="addSchedule()">Agregar Horario</button>
                             </div>
-                            <input type="submit" class="btn btn-success" value="Subir" style="background-color:#10b5c1f7;border-color:#10b5c1f7;">
                         </form>
 
                         <script>
@@ -77,6 +79,8 @@
                         </script>
 
                     </div>
+                    <div class="modal-footer"> <input type="submit" class="btn btn-primary" value="Crear">
+                    </div>
                 </div>
             </div>
         </div>
@@ -91,34 +95,34 @@
                 </div>
                 <?php } else {
                 foreach ($clases as $clase) {  ?>
-                
-                        <a href="clase.php?id=<?php echo $clase['id']; ?>" class="card-link">
-                            <div class="card card-clase">
-                                <div class="card-body card-banner" style="<?php if (preg_match('/\.(jpg|png)$/i', $clase['fondo'])): ?>background-image: url('img/fondos/<?php echo $clase['fondo']; ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;<?php else: ?>background-color: <?php echo htmlspecialchars($clase['fondo']); ?>;<?php endif; ?>;">
-                                    <div class="overlay"></div>
-                                    <h3 class="card-title"><?php echo $clase["nombre"] ?></h3>
-                                    <h6 class="card-subtitle ">
-                                        Profesor: <?php echo ($clase['id_usuario_creador'] != $_SESSION['usuario']['id']) ? $clase["nombre_profesor"] . " " . $clase["apellido_profesor"] : "tú"; ?>
-                                    </h6>
-                                </div>
-                                <div class="card-horarios">
-                                    <?php
-                                    $horarios = $clase['horarios'];
-                                    $numHorarios = count($horarios);
-                                    $maxHorarios = 2;
-                                    $mostrarMas = $numHorarios > $maxHorarios;
-                                    for ($i = 0; $i < ($mostrarMas ? $maxHorarios : $numHorarios); $i++) {
-                                        $hora_inicio = date('H:i', strtotime($horarios[$i]["hora_inicio"]));
-                                        $hora_fin = date('H:i', strtotime($horarios[$i]["hora_fin"]));
-                                        echo "<p style=color:#6c757d;>" . $horarios[$i]["dia_semana"] . " de " . $hora_inicio . " a " . $hora_fin . "</p>";
-                                    }
-                                    if ($mostrarMas) {
-                                        echo "<p style=color:#6c757d;>...</p>";
-                                    }
-                                    ?>
-                                </div>
+
+                    <a href="clase.php?id=<?php echo $clase['id']; ?>" class="card-link">
+                        <div class="card card-clase">
+                            <div class="card-body card-banner" style="<?php if (preg_match('/\.(jpg|png)$/i', $clase['fondo'])): ?>background-image: url('img/fondos/<?php echo $clase['fondo']; ?>'); background-size: cover; background-position: center; background-repeat: no-repeat;<?php else: ?>background-color: <?php echo htmlspecialchars($clase['fondo']); ?>;<?php endif; ?>;">
+                                <div class="overlay"></div>
+                                <h3 class="card-title"><?php echo $clase["nombre"] ?></h3>
+                                <h6 class="card-subtitle ">
+                                    Profesor: <?php echo ($clase['id_usuario_creador'] != $_SESSION['usuario']['id']) ? $clase["nombre_profesor"] . " " . $clase["apellido_profesor"] : "tú"; ?>
+                                </h6>
                             </div>
-                        </a>
+                            <div class="card-horarios">
+                                <?php
+                                $horarios = $clase['horarios'];
+                                $numHorarios = count($horarios);
+                                $maxHorarios = 2;
+                                $mostrarMas = $numHorarios > $maxHorarios;
+                                for ($i = 0; $i < ($mostrarMas ? $maxHorarios : $numHorarios); $i++) {
+                                    $hora_inicio = date('H:i', strtotime($horarios[$i]["hora_inicio"]));
+                                    $hora_fin = date('H:i', strtotime($horarios[$i]["hora_fin"]));
+                                    echo "<p style=color:#6c757d;>" . $horarios[$i]["dia_semana"] . " de " . $hora_inicio . " a " . $hora_fin . "</p>";
+                                }
+                                if ($mostrarMas) {
+                                    echo "<p style=color:#6c757d;>...</p>";
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </a>
 
 
             <?php }
@@ -126,3 +130,15 @@
         </div>
     </div>
 </div>
+<style>
+    .btn-primary {
+        background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);
+        border: none;
+        transition: .5s;
+    }
+
+    .btn-primary:hover {
+        transform: scale(1.1);
+        background-image: linear-gradient(to right, #32418B, #A09AE5, #BA8CE9, #D598DA);
+    }
+</style>
