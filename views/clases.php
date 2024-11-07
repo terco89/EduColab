@@ -24,12 +24,12 @@
                         <form method="POST" action="crear_clase.php">
                             <div class="form-group">
                                 <b>
-                                    <label style="color: #32418b;">Código de la Clase:</label>
+                                    <label style="color: #32418b;">Nombre:</label>
                                 </b> <input type="text" class="form-control" name="nombre" placeholder="Nombre de la clase" required>
                             </div>
                             <div class="form-group">
                                 <b>
-                                    <label style="color: #32418b;">Código de la Clase:</label>
+                                    <label style="color: #32418b;">Horarios:</label>
                                 </b>
                                 <div id="schedule-container">
                                     <div class="schedule-item">
